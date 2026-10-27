@@ -614,3 +614,35 @@ main:not(.vigus-experience) .page-head .container{max-width:var(--content-ui);ma
 @media(prefers-reduced-motion:reduce){
  .vigus-experience .vigus-orbit-car-frames .vigus-orbit-frame{filter:none}
 }
+
+
+/* Homepage Vigus model preview: use the approved editorial image as edge-to-edge photography.
+   Avoid placing an opaque photographic background over a separate gradient panel. */
+.catalogue-feature .vehicle-preview-visual:has(.home-vigus-product){
+ background:#dedfe1;
+ min-height:435px;
+ display:block;
+ isolation:isolate;
+}
+.catalogue-feature .vehicle-preview-visual .home-vigus-product{
+ position:absolute;
+ inset:0;
+ width:100%;
+ height:100%;
+ max-height:none;
+ display:block;
+ object-fit:cover;
+ object-position:55% center;
+ filter:none;
+ z-index:1;
+}
+.catalogue-feature .vehicle-preview-visual:has(.home-vigus-product)::before,
+.catalogue-feature .vehicle-preview-visual:has(.home-vigus-product)::after{display:none}
+@media(max-width:950px){
+ .catalogue-feature .vehicle-preview-visual:has(.home-vigus-product){min-height:360px}
+ .catalogue-feature .vehicle-preview-visual .home-vigus-product{object-position:center center}
+}
+@media(max-width:720px){
+ .catalogue-feature .vehicle-preview-visual:has(.home-vigus-product){min-height:0;aspect-ratio:16/10}
+ .catalogue-feature .vehicle-preview-visual .home-vigus-product{object-position:center center}
+}
