@@ -53,7 +53,7 @@ const highlights=[
 export function VigusHighlights(){
  const [current,setCurrent]=useState(0);
  const h=highlights[current];
- return <div className="vigus-highlight-experience"><div className="vigus-highlight-stage" key={h.file}><img src={'src' in h ? h.src : `/images/vigus/${h.file}.webp`} alt={h.name} loading="lazy"/></div><div className="vigus-highlight-info"><div className="vigus-highlight-options" role="tablist" aria-label="ავტომობილის გამორჩეული დეტალები">{highlights.map((item,i)=><button type="button" role="tab" aria-selected={i===current} className={i===current?'selected':''} key={item.file} onClick={()=>setCurrent(i)}><span>{String(i+1).padStart(2,'0')}</span>{item.name}</button>)}</div><div className="vigus-highlight-caption" role="tabpanel"><span className="vigus-eyebrow">{h.label}</span><h3>{h.name}</h3><p>{h.description}</p></div></div></div>;
+ return <div className="vigus-highlight-experience"><div className="vigus-highlight-stage" key={h.file}><img src={h.src} alt={h.name} loading="lazy"/></div><div className="vigus-highlight-info"><div className="vigus-highlight-options" role="tablist" aria-label="ავტომობილის გამორჩეული დეტალები">{highlights.map((item,i)=><button type="button" role="tab" aria-selected={i===current} className={i===current?'selected':''} key={item.file} onClick={()=>setCurrent(i)}><span>{String(i+1).padStart(2,'0')}</span>{item.name}</button>)}</div><div className="vigus-highlight-caption" role="tabpanel"><span className="vigus-eyebrow">{h.label}</span><h3>{h.name}</h3><p>{h.description}</p></div></div></div>;
 }
 export function VigusTrimSelector({trims}:{trims:Trim[]}){
  const [id,setId]=useState(trims[0]?.id??'');
