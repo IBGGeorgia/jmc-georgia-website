@@ -1,8 +1,8 @@
 'use client';
 import {useCallback,useEffect,useRef,useState} from 'react';
 const slides=[
- {file:'side',src:'/images/vigus/side.webp',label:'პროფილი'},
- {file:'rear',src:'/images/vigus/rear.webp',label:'უკანა ხედი'},
+ {file:'side',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_211343_e9481f3d-bb08-4230-b096-19b006d2d965.png',label:'პროფილი'},
+ {file:'rear',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_211343_66a1d102-179e-4ce5-b30c-40b9397bdfa7.png',label:'უკანა ხედი'},
  {file:'dashboard',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_204632_cf828e84-aba1-4738-95c8-787dcf4de144.png',label:'მაჩვენებლების პანელი'},
  {file:'console',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_204632_27133b50-4de5-4f20-b6da-dc049f5648ee.png',label:'კონსოლი'},
  {file:'adventure-3',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_204634_5ca9001e-9bdf-4055-97f8-77a1f9f7753b.png',label:'მოძრაობაში'}
