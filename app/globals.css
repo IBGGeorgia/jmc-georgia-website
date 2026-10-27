@@ -600,3 +600,17 @@ main:not(.vigus-experience) .page-head .container{max-width:var(--content-ui);ma
 @media(prefers-reduced-motion:reduce){
  .vigus-experience .vigus-orbit-car-frames .vigus-orbit-frame{transition:none;transform:none}
 }
+
+
+/* True cutout display: no baked-on dark/studio backdrop */
+.vigus-experience .vigus-orbit-stage,
+.vigus-experience .vigus-orbit-fullscreen .vigus-orbit-stage{
+  background:#f3f5f7;
+}
+.vigus-experience .vigus-orbit-car-frames{overflow:visible}
+.vigus-experience .vigus-orbit-car-frames .vigus-orbit-frame{
+ object-fit:contain;filter:drop-shadow(0 18px 14px rgba(23,30,38,.10));
+}
+@media(prefers-reduced-motion:reduce){
+ .vigus-experience .vigus-orbit-car-frames .vigus-orbit-frame{filter:none}
+}
