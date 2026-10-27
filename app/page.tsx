@@ -15,19 +15,19 @@ export default function Home() {
         <p className="eyebrow light">JMC GEORGIA <span className="eyebrow-rule" /> ოფიციალური წარმომადგენლობა</p>
         <h1 id="hero-title">შენი გზა.<br/><span>ახალი შესაძლებლობები.</span></h1>
         <p className="lead">აღმოაჩინე JMC საქართველოში — გაეცანი ავტომობილებს, შეადარე კომპლექტაციები და დაგეგმე მომავალი ტესტ-დრაივი.</p>
-        <div className="actions"><Link href="/vehicles" className="button">აღმოაჩინე ავტომობილები <span aria-hidden="true">↗</span></Link><Link href="/test-drive" className="button button-ghost">ტესტ-დრაივი <span aria-hidden="true">→</span></Link></div>
+        <div className="actions"><Link href="/vehicles/vigus" className="button">აღმოაჩინე Vigus <span aria-hidden="true">↗</span></Link><Link href="/test-drive" className="button button-ghost">ტესტ-დრაივი <span aria-hidden="true">→</span></Link></div>
       </div>
       <div className="hero-bottom"><div className="container hero-bottom-inner"><span>JMC / GEORGIA</span><span>QUALITY · TECHNOLOGY · SERVICE</span><a href="#discover" aria-label="გადადით შემდეგ სექციაზე">აღმოაჩინე ↓</a></div></div>
     </section>
 
     <section id="discover" className="section introduction"><div className="container intro-grid">
       <div><p className="eyebrow">აღმოაჩინე JMC</p><h2>ავტომობილი, რომელიც შენს გეგმებს ერგება.</h2></div>
-      <div className="intro-copy"><p>ყოველდღიური მარშრუტებიდან ახალ გამოწვევებამდე — JMC Georgia-ს საიტზე შეძლებ მოდელების გაცნობას, კომპლექტაციების შედარებას და გადაწყვეტილების მიღებისთვის საჭირო ინფორმაციის მიღებას.</p><Link href="/vehicles" className="text-link">გაეცანი კატალოგს <span aria-hidden="true">↗</span></Link></div>
+      <div className="intro-copy"><p>ყოველდღიური მარშრუტებიდან ახალ გამოწვევებამდე — JMC Georgia-ს საიტზე შეძლებ მოდელების გაცნობას, კომპლექტაციების შედარებას და გადაწყვეტილების მიღებისთვის საჭირო ინფორმაციის მიღებას.</p><Link href="/vehicles/vigus" className="text-link">გაეცანი JMC Vigus-ს <span aria-hidden="true">↗</span></Link></div>
     </div></section>
 
     <section className="section catalogue-feature"><div className="container">
-      <div className="section-head"><div><p className="eyebrow">JMC-ის ავტომობილები</p><h2>აღმოაჩინე მოდელების ხაზი</h2><p className="section-sub">საქართველოსთვის განკუთვნილი მოდელების დეტალური კატალოგი მალე დაემატება.</p></div><Link href="/vehicles" className="text-link">კატალოგის ნახვა ↗</Link></div>
-      <div className="vehicle-preview"><div className="vehicle-preview-visual" aria-hidden="true"><div className="vehicle-preview-line"/><span>JMC</span></div><div className="vehicle-preview-copy"><span className="preview-index">01 / MODEL LINEUP</span><h3>გაეცანი ყველა კომპლექტაციას ერთ სივრცეში.</h3><p>ფოტოები, აღჭურვილობა, მახასიათებლები და Trim Comparison — ერთიანი ციფრული კატალოგი არჩევანის გასამარტივებლად.</p><Link href="/vehicles" className="button">მოდელების გვერდი <span aria-hidden="true">↗</span></Link><small>ავტომობილების საბოლოო სია და ვიზუალური მასალა გამოქვეყნდება დადასტურების შემდეგ.</small></div></div>
+      <div className="section-head"><div><p className="eyebrow">JMC-ის ავტომობილები</p><h2>აღმოაჩინე მოდელების ხაზი</h2><p className="section-sub">პირველი მოდელი საქართველოში — JMC Vigus. გაიგე მეტი მისი შესაძლებლობებისა და კომპლექტაციების შესახებ.</p></div><Link href="/vehicles/vigus" className="text-link">JMC Vigus ↗</Link></div>
+      <div className="vehicle-preview"><div className="vehicle-preview-visual"><img src="/images/vigus/hero.webp" alt="JMC Vigus პიკაპი" loading="lazy" className="home-vigus-product"/></div><div className="vehicle-preview-copy"><span className="preview-index">01 / MODEL LINEUP</span><h3>JMC Vigus — აღმოაჩინე დეტალები.</h3><p>ფოტოები, აღჭურვილობა, მახასიათებლები და Trim Comparison — ერთიანი ციფრული კატალოგი არჩევანის გასამარტივებლად.</p><Link href="/vehicles/vigus" className="button">აღმოაჩინე Vigus <span aria-hidden="true">↗</span></Link><small>ორი კომპლექტაცია — AT და MT.</small></div></div>
     </div></section>
 
     <section className="section steps-section"><div className="container"><div className="section-head"><div><p className="eyebrow">მარტივი პროცესი</p><h2>არჩევანიდან პირველ შეხვედრამდე</h2></div></div><div className="steps-grid">{steps.map(step=><article className="step" key={step.id}><span className="step-num">{step.id}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></article>)}</div></div></section>
