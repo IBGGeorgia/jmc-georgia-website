@@ -1,0 +1,3 @@
+import type {Metadata} from 'next';import Link from 'next/link';import {Header,Footer} from '../site-components';
+export const metadata:Metadata={title:'ავტომობილები'};
+export default function Vehicles(){return <><Header/><main className="container"><div className="page-head"><p className="eyebrow">კატალოგი</p><h1>ავტომობილები</h1><p className="muted">JMC Georgia-ს მოდელებისა და კომპლექტაციების კატალოგი. ადგილობრივი ასორტიმენტი და ფასები დაემატება ოფიციალური მონაცემების დადასტურების შემდეგ.</p></div><div className="empty"><h2>მოდელების კატალოგი მზადდება</h2><p>შევიტანთ მოდელის ფოტოებს, აღწერას, კომპლექტაციებს და შედარების ცხრილებს.</p><Link className="button" href="/contact">მოითხოვე ინფორმაცია</Link></div></main><Footer/></>}
