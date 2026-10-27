@@ -328,3 +328,60 @@ html,body{width:100%;min-width:0}
  .vigus-trim-cards img{height:230px}
  .vigus-final h2{font-size:clamp(38px,9vw,56px)}
 }
+
+
+/* JMC navigation 2026 — symmetric brand placement, drawer navigation */
+.jmc-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-bottom:1px solid #ececee}
+.jmc-header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:82px;gap:16px}
+.jmc-centered-logo{grid-column:2;display:flex;align-items:center;justify-content:center;min-width:0}
+.jmc-centered-logo img{width:clamp(96px,9vw,130px);height:auto;display:block}
+.jmc-menu-trigger{grid-column:1;grid-row:1;justify-self:start;background:none;border:0;color:#212121;display:flex;align-items:center;gap:13px;font-weight:700;font-size:13px;min-height:48px;padding:5px;cursor:pointer}
+.jmc-menu-icon{width:24px;height:24px;display:flex;flex-direction:column;gap:6px;justify-content:center}
+.jmc-menu-icon i{width:23px;height:2px;background:currentColor;display:block;transition:transform .2s}
+.jmc-menu-icon.is-open i:first-child{transform:translateY(4px) rotate(45deg)}
+.jmc-menu-icon.is-open i:last-child{transform:translateY(-4px) rotate(-45deg)}
+.jmc-header-drive{grid-column:3;grid-row:1;justify-self:end;min-height:44px;border-radius:100px;padding:12px 22px;font-size:12px;white-space:nowrap}
+.jmc-drawer-shell{position:fixed;inset:0;z-index:100;display:flex}
+.jmc-drawer-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.49);border:0;cursor:pointer}
+.jmc-drawer{position:relative;z-index:1;flex:0 1 480px;width:min(480px,100%);height:100%;overflow-y:auto;background:#fff;padding:clamp(25px,3vw,46px);display:flex;flex-direction:column;box-shadow:14px 0 40px #0002}
+.jmc-drawer-top{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.jmc-drawer-top img{display:block;height:auto}
+.jmc-drawer-close{width:46px;height:46px;border:1px solid #ddd;background:#f5f5f6;border-radius:50%;font-size:30px;line-height:1}
+.jmc-drawer-eyebrow{margin:clamp(52px,8vh,100px) 0 26px;color:#58585a;letter-spacing:.14em;font-size:11px;font-weight:700}
+.jmc-drawer-links{display:flex;flex-direction:column}
+.jmc-drawer-links a{display:grid;grid-template-columns:30px 1fr 24px;gap:15px;align-items:center;border-top:1px solid #ededee;min-height:76px;font-weight:650;font-size:clamp(21px,2vw,30px);letter-spacing:-.025em}
+.jmc-drawer-links a:last-child{border-bottom:1px solid #ededee}
+.jmc-drawer-links a span:first-child{font:600 10px var(--font-latin);color:#a0a0a0}
+.jmc-drawer-links a span:last-child{font-size:17px}
+.jmc-drawer-links a:hover{color:#e50012}
+.jmc-drawer-drive{align-self:stretch;margin-top:30px;border-radius:12px;justify-content:space-between}
+.jmc-drawer-foot{font:600 9px var(--font-latin);color:#999;letter-spacing:.11em;margin:auto 0 0;padding-top:65px}
+.footer-brand{display:flex;align-items:center;gap:15px}
+.footer-brand img{height:auto;width:130px;object-fit:contain;display:block}
+@media(max-width:700px){
+ .jmc-header-inner{min-height:68px}
+ .jmc-menu-trigger{min-width:44px;justify-content:flex-start}
+ .jmc-menu-text{display:none}
+ .jmc-centered-logo img{width:100px}
+ .jmc-header-drive{display:none}
+ .jmc-drawer{width:100%;flex-basis:100%;padding:26px}
+ .jmc-drawer-links a{min-height:70px}
+ .jmc-header .container{padding-inline:18px}
+}
+/* Explore Vigus — controlled gallery, mouse wheel and drag affordance */
+.vigus-gallery-component{width:100%;min-width:0}
+.vigus-gallery-controls{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:24px}
+.vigus-gallery-index{font:650 13px var(--font-latin);color:#212121;letter-spacing:.06em}
+.vigus-gallery-index span{color:#aaa}
+.vigus-gallery-controls>div{display:flex;align-items:center;gap:10px}
+.vigus-gallery-controls button{width:48px;height:48px;border:1px solid #b9b9bc;border-radius:50%;background:#fff;color:#212121;font-size:21px;display:grid;place-items:center;transition:background .18s,color .18s}
+.vigus-gallery-controls button:not(:disabled):hover{background:#212121;color:#fff}
+.vigus-gallery-controls button:disabled{opacity:.3;cursor:default}
+.vigus-gallery-interactive{cursor:grab;user-select:none;overscroll-behavior-inline:contain;scrollbar-width:none;scroll-snap-type:x mandatory}
+.vigus-gallery-interactive:active{cursor:grabbing}
+.vigus-gallery-interactive::-webkit-scrollbar{display:none}
+.vigus-gallery-interactive figure{scroll-snap-align:start}
+.vigus-gallery-interactive img{pointer-events:none}
+.vigus-gallery-hint{margin:16px 0 0;font-size:12px;color:#777}
+@media(max-width:700px){.vigus-gallery-controls{margin-bottom:17px}.vigus-gallery-controls button{width:44px;height:44px}.vigus-gallery-hint{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.jmc-menu-icon i,.vigus-gallery-controls button{transition:none}}
