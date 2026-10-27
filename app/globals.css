@@ -878,3 +878,123 @@ button,input,select,textarea{font-family:inherit}
 .vigus-experience .vigus-section-heading p,
 .vigus-experience .vigus-comparison>h3,
 .vigus-experience .vigus-story-note p{font-family:var(--font-ka)}
+
+
+/* JMC typography system v6 — HIG-informed web adaptation
+   Switzer provides Latin glyphs; Google Sans fills Georgian glyphs.
+   The sequence must stay Latin-first because most content shares lang="ka".
+   Do not force uppercase on Georgian prose or navigation. */
+:root{
+ --font-latin:"Switzer","Google Sans",Arial,sans-serif;
+ --font-ka:"Switzer","Google Sans","Noto Sans Georgian",sans-serif;
+ --type-display:clamp(3.25rem,8vw,8.75rem);
+ --type-h1:clamp(2.5rem,5.3vw,5.5rem);
+ --type-h2:clamp(2rem,3.6vw,3.9rem);
+ --type-h3:clamp(1.45rem,2.1vw,2.4rem);
+ --type-body:1rem;
+ --type-small:.875rem;
+ --label-primary:rgba(0,0,0,.88);
+ --label-secondary:rgba(0,0,0,.66);
+ --label-tertiary:rgba(0,0,0,.54);
+ --label-primary-inverse:rgba(255,255,255,.96);
+ --label-secondary-inverse:rgba(255,255,255,.78);
+ --label-tertiary-inverse:rgba(255,255,255,.62);
+ --text-primary:var(--label-primary);
+ --text-secondary:var(--label-secondary);
+ --text-tertiary:var(--label-tertiary);
+}
+html{font-size:100%;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body,:lang(ka),:lang(en),:lang(en-US),:lang(en-GB){
+ font-family:var(--font-ka);
+}
+body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-height:1.6;letter-spacing:0;overflow-wrap:break-word}
+:where(h1,h2,h3,h4,h5,h6){font-family:var(--font-ka);font-synthesis:none;color:inherit;text-transform:none;text-wrap:balance}
+:where(h1){font-weight:700;line-height:1.08;letter-spacing:-.04em}
+:where(h2){font-weight:650;line-height:1.14;letter-spacing:-.03em}
+:where(h3,h4){font-weight:600;line-height:1.25;letter-spacing:-.018em}
+:where(p,li,dd,dt,blockquote){line-height:1.65}
+:where(small,figcaption){line-height:1.5}
+:where(button,input,textarea,select){font-family:var(--font-ka);letter-spacing:normal}
+:where(a,button,[role="button"]){-webkit-tap-highlight-color:rgba(0,0,0,.08)}
+::placeholder{color:var(--label-tertiary);opacity:1}
+/* Semantic type colors; foreground alpha only, never opacity on parent containers */
+.section-sub,.intro-copy p,.vehicle-preview-copy p,.vigus-section-heading p,
+.vigus-experience .vigus-orbit-info>p:not(.vigus-eyebrow),
+.vigus-experience .vigus-highlight-caption p,
+.vigus-experience .vigus-selector-details>p:not(.vigus-eyebrow),
+.vigus-compare-intro,.vigus-compare-meta,.vigus-compare-card dt{
+ color:var(--label-secondary);
+}
+.vigus-selector-car small,.vigus-experience .vigus-orbit-disclosure,
+.vigus-compare-legend,.vigus-compare-card-head span{line-height:1.55}
+.vigus-selector-car small,.vigus-experience .vigus-orbit-disclosure,
+.vigus-compare-legend{color:var(--label-tertiary)}
+/* Title Case / sentence case: existing Georgian strings are never transformed.
+   Small brand/category eyebrows are the only regular all-caps UI treatment. */
+.nav,.footer-nav,.jmc-drawer-links,.vigus-local-nav,.vehicle-preview-copy h3,
+.vigus-section-heading h2,.vigus-comparison>h3,
+.vigus-selector-details h3,.vigus-compare-card h4{
+ text-transform:none;letter-spacing:normal;
+}
+.eyebrow,.vigus-eyebrow,.vigus-kicker,.preview-index,
+.jmc-drawer-eyebrow,.vigus-cinema-overlay>span,
+.vigus-story-note>span{
+ text-transform:uppercase;letter-spacing:.12em;
+ font-weight:650;font-size:clamp(.6875rem,.8vw,.75rem);line-height:1.4;
+}
+.vigus-experience .vigus-hero-bottom .vigus-eyebrow{
+ letter-spacing:.16em;
+}
+.vigus-experience .vigus-hero-bottom h1{
+ font-family:var(--font-latin);font-weight:700;
+ font-size:var(--type-display);line-height:.96;letter-spacing:-.055em;
+}
+.vigus-experience .vigus-hero-bottom>p:not(.vigus-eyebrow){
+ font-family:var(--font-ka);font-weight:600;
+ font-size:clamp(1.375rem,2.45vw,2.5rem);line-height:1.35;letter-spacing:-.025em;
+ color:var(--label-primary);
+}
+.vigus-experience .vigus-section-heading h2{
+ font-family:var(--font-ka);font-weight:650;font-size:var(--type-h2);
+ line-height:1.16;letter-spacing:-.033em;
+}
+.vigus-experience .vigus-section-heading p{
+ font-family:var(--font-ka);font-size:clamp(1rem,1.13vw,1.125rem);
+ line-height:1.72;font-weight:400;
+}
+.vigus-experience .vigus-comparison>h3,
+.vigus-experience .vigus-highlight-caption h3,
+.vigus-experience .vigus-orbit-info h3{
+ font-family:var(--font-ka);font-weight:650;letter-spacing:-.026em;
+ line-height:1.25;
+}
+.vigus-compare-ui .comparison tbody th,.vigus-compare-ui .comparison tbody td,
+.vigus-compare-card dt,.vigus-compare-card dd{
+ font-family:var(--font-ka);line-height:1.58;
+}
+.vigus-compare-ui .comparison tbody th,.vigus-compare-card dt{color:var(--label-secondary)}
+.vigus-compare-ui .comparison tbody td,.vigus-compare-card dd{color:var(--label-primary)}
+.vigus-compare-ui .comparison tbody td.comparison-different,.vigus-compare-card dl>div.is-different dd{
+ color:#a20e18;
+}
+/* Preserve strong contrast on actual dark surfaces */
+.hero,.vigus-final,.footer,.jmc-drawer,.action-banner,.vigus-cinema,
+.vigus-compare-card-head{
+ --label-primary:var(--label-primary-inverse);
+ --label-secondary:var(--label-secondary-inverse);
+ --label-tertiary:var(--label-tertiary-inverse);
+}
+.hero h1,.vigus-final h2,.vigus-cinema-overlay h2,.action-banner h2{color:var(--label-primary-inverse)}
+.hero .lead,.vigus-final p,.action-banner p:not(.eyebrow){color:var(--label-secondary-inverse)}
+/* Legibility at smaller viewports and browser zoom */
+@media(max-width:760px){
+ :root{--type-display:clamp(3.75rem,17vw,7.25rem);--type-h2:clamp(1.875rem,7vw,2.75rem)}
+ .vigus-experience .vigus-section-heading h2{font-size:var(--type-h2);line-height:1.2}
+ .vigus-experience .vigus-hero-bottom>p:not(.vigus-eyebrow){font-size:clamp(1.3125rem,5vw,1.875rem);line-height:1.45}
+ .vigus-experience .vigus-hero-bottom h1{font-size:var(--type-display)}
+ .vigus-compare-ui .comparison tbody th,.vigus-compare-card dt{font-size:.8125rem}
+ .vigus-compare-card dd{font-size:.875rem}
+}
+@media(max-width:380px){
+ .vigus-experience .vigus-hero-bottom h1{font-size:clamp(3.5rem,16vw,4.25rem)}
+}
