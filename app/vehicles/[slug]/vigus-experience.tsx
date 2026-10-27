@@ -8,18 +8,6 @@ const views=[
  {id:'side',name:'გვერდი',file:'side',alt:'JMC Vigus — გვერდითი ხედი'},
  {id:'rear',name:'უკანა',file:'rear',alt:'JMC Vigus — უკანა ხედი'}
 ] as const;
-export function VigusViewer(){
- const [selected,setSelected]=useState(0);
- const [fullscreen,setFullscreen]=useState(false);
- useEffect(()=>{if(!fullscreen)return;const close=(e:KeyboardEvent)=>{if(e.key==='Escape')setFullscreen(false)};document.addEventListener('keydown',close);const prev=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.removeEventListener('keydown',close);document.body.style.overflow=prev}},[fullscreen]);
- const v=views[selected];
- return <div className="vigus-viewer">
-  <div className="vigus-viewer-stage" key={v.id}><img src={`/images/vigus/${v.file}.webp`} alt={v.alt}/><button type="button" className="vigus-viewer-expand" onClick={()=>setFullscreen(true)} aria-label="ფოტოს სრულ ეკრანზე ნახვა">⛶ <span>სრული ეკრანი</span></button></div>
-  <div className="vigus-viewer-options" role="group" aria-label="ავტომობილის რაკურსი">{views.map((item,i)=><button type="button" key={item.id} className={i===selected?'is-active':''} aria-pressed={i===selected} onClick={()=>setSelected(i)}><img src={`/images/vigus/${item.file}.webp`} alt=""/><span>{item.name}</span></button>)}</div>
-  <p className="vigus-viewer-disclaimer">ავტომობილის ფოტოები საილუსტრაციოა. კომპლექტაციის ვიზუალური დეტალები შესაძლოა განსხვავდებოდეს.</p>
-  {fullscreen&&<div className="vigus-lightbox" role="dialog" aria-modal="true" aria-label={v.alt}><button type="button" className="vigus-lightbox-close" onClick={()=>setFullscreen(false)} aria-label="დახურვა">×</button><img src={`/images/vigus/${v.file}.webp`} alt={v.alt}/><div><button type="button" onClick={()=>setSelected(x=>(x+views.length-1)%views.length)} aria-label="წინა რაკურსი">←</button><span>{v.name}</span><button type="button" onClick={()=>setSelected(x=>(x+1)%views.length)} aria-label="შემდეგი რაკურსი">→</button></div></div>}
- </div>;
-}
 /* Four genuine exterior photos form a stepped orbit, not a synthetic 360-degree render.
    Missing rear-three-quarter and opposite-side frames are never fabricated. */
 const orbit=[
@@ -28,7 +16,7 @@ const orbit=[
  {file:'side',name:'პროფილი',angle:'გვერდი',alt:'JMC Vigus — გვერდითი პროფილი'},
  {file:'rear',name:'უკანა',angle:'უკანა',alt:'JMC Vigus — უკანა ხედი'}
 ];
-export function VigusHighlights(){
+export function VigusViewer(){
  const [index,setIndex]=useState(0);
  const [expanded,setExpanded]=useState(false);
  const gesture=useRef<{x:number;last:number;active:boolean}>({x:0,last:0,active:false});
@@ -55,6 +43,17 @@ export function VigusHighlights(){
  <p className="vigus-orbit-disclosure">ეს არის 4 რეალური ფოტოს ინტერაქციული დათვალიერება და არა უწყვეტი 360° გადაღება.</p></div></div>
  {expanded&&<div className="vigus-orbit-fullscreen" role="dialog" aria-modal="true" aria-label="Vigus-ის რაკურსები სრულ ეკრანზე"><button ref={fullscreenClose} type="button" className="vigus-orbit-exit" onClick={()=>setExpanded(false)} aria-label="დახურვა">×</button>{orbitStage}<div className="vigus-orbit-full-controls"><button type="button" disabled={index===0} onClick={()=>step(-1)} aria-label="წინა ფოტო">←</button><span>{current.name}</span><button type="button" disabled={index===orbit.length-1} onClick={()=>step(1)} aria-label="შემდეგი ფოტო">→</button></div></div>}
  </div>;
+}
+const highlights=[
+ {name:'გამოკვეთილი დიზაინი',description:'JMC-ის დამახასიათებელი წინა ნაწილი და პრაქტიკული პიკაპის პროპორციები.',file:'front',label:'EXTERIOR'},
+ {name:'მართვის სივრცე',description:'მძღოლის სამუშაო სივრცის ფუნქციური განლაგება.',file:'cockpit',label:'INTERIOR'},
+ {name:'დეტალებზე ყურადღება',description:'სავარძლების ფორმა, გამოყენებული მასალები და სალონის პრაქტიკული გადაწყვეტილებები.',file:'seats',label:'COMFORT'},
+ {name:'კონტროლი ერთი შეხედვით',description:'მაჩვენებლების პანელი და მართვისთვის საჭირო ინფორმაცია.',file:'dashboard',label:'DETAILS'}
+];
+export function VigusHighlights(){
+ const [current,setCurrent]=useState(0);
+ const h=highlights[current];
+ return <div className="vigus-highlight-experience"><div className="vigus-highlight-stage" key={h.file}><img src={`/images/vigus/${h.file}.webp`} alt={h.name} loading="lazy"/></div><div className="vigus-highlight-info"><div className="vigus-highlight-options" role="tablist" aria-label="ავტომობილის გამორჩეული დეტალები">{highlights.map((item,i)=><button type="button" role="tab" aria-selected={i===current} className={i===current?'selected':''} key={item.file} onClick={()=>setCurrent(i)}><span>{String(i+1).padStart(2,'0')}</span>{item.name}</button>)}</div><div className="vigus-highlight-caption" role="tabpanel"><span className="vigus-eyebrow">{h.label}</span><h3>{h.name}</h3><p>{h.description}</p></div></div></div>;
 }
 export function VigusTrimSelector({trims}:{trims:Trim[]}){
  const [id,setId]=useState(trims[0]?.id??'');
