@@ -385,3 +385,13 @@ html,body{width:100%;min-width:0}
 .vigus-gallery-hint{margin:16px 0 0;font-size:12px;color:#777}
 @media(max-width:700px){.vigus-gallery-controls{margin-bottom:17px}.vigus-gallery-controls button{width:44px;height:44px}.vigus-gallery-hint{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.jmc-menu-icon i,.vigus-gallery-controls button{transition:none}}
+
+
+/* Model-first IA / hero card + icon-only navigation */
+.jmc-menu-trigger{width:48px;height:48px;justify-content:center;gap:0}
+.jmc-menu-trigger .jmc-menu-icon{flex:none}
+.home-vigus-product{width:95%;height:auto;max-height:560px;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 22px 28px rgba(0,0,0,.15))}
+.vehicle-preview-visual:has(.home-vigus-product){background:linear-gradient(140deg,#f4f5f6,#dfe1e4);min-height:300px}
+.vehicle-preview-visual:has(.home-vigus-product)::before,.vehicle-preview-visual:has(.home-vigus-product)::after{display:none}
+.vigus-gallery-interactive{scroll-snap-type:none;scroll-behavior:auto;overscroll-behavior-x:contain}
+@media(max-width:700px){.jmc-menu-trigger{width:44px;height:44px}.home-vigus-product{width:100%}}
