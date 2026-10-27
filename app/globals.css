@@ -395,3 +395,49 @@ html,body{width:100%;min-width:0}
 .vehicle-preview-visual:has(.home-vigus-product)::before,.vehicle-preview-visual:has(.home-vigus-product)::after{display:none}
 .vigus-gallery-interactive{scroll-snap-type:none;scroll-behavior:auto;overscroll-behavior-x:contain}
 @media(max-width:700px){.jmc-menu-trigger{width:44px;height:44px}.home-vigus-product{width:100%}}
+
+
+/* Vigus interaction suite — fluid, accessible, JMC CI */
+.vigus-viewer-section{background:#f7f7f8}
+.vigus-viewer-stage{height:clamp(300px,49vw,900px);position:relative;display:grid;place-items:center;background:linear-gradient(140deg,#eff0f2,#e3e4e6);border-radius:22px;overflow:hidden;animation:vigusReveal .3s ease-out}
+.vigus-viewer-stage>img{height:95%;width:95%;object-fit:contain}
+.vigus-viewer-expand{position:absolute;bottom:22px;right:22px;background:#fff;border:1px solid #ddd;border-radius:99px;padding:11px 20px;font-size:13px;display:flex;gap:12px;align-items:center}
+.vigus-viewer-options{display:flex;justify-content:center;gap:13px;flex-wrap:wrap;margin-top:28px}
+.vigus-viewer-options button{width:clamp(95px,11vw,170px);padding:10px;background:#fff;border:1px solid #ddd;border-radius:13px;color:#212121;font-size:12px;font-weight:650}
+.vigus-viewer-options button.is-active{border:2px solid #e50012}
+.vigus-viewer-options img{width:100%;height:80px;object-fit:contain;display:block}
+.vigus-viewer-disclaimer{font-size:11px;color:#777;text-align:center;margin-top:18px}
+.vigus-lightbox{position:fixed;inset:0;z-index:200;background:#111;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 20px}
+.vigus-lightbox>img{width:100%;height:min(76vh,1000px);object-fit:contain}
+.vigus-lightbox-close{position:absolute;right:25px;top:23px;width:48px;height:48px;border-radius:50%;border:1px solid #888;background:#222;color:#fff;font-size:29px}
+.vigus-lightbox>div{display:flex;gap:40px;align-items:center}
+.vigus-lightbox>div button{width:47px;height:47px;border-radius:50%;background:#333;color:#fff;border:1px solid #888;font-size:21px}
+.vigus-highlight-experience{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.55fr);gap:clamp(24px,3vw,65px);align-items:stretch}
+.vigus-highlight-stage{background:#e9e9ea;border-radius:20px;overflow:hidden;min-height:clamp(360px,44vw,780px);animation:vigusReveal .3s ease-out}
+.vigus-highlight-stage img{width:100%;height:100%;object-fit:cover;display:block}
+.vigus-highlight-info{display:flex;flex-direction:column;justify-content:space-between;gap:35px}
+.vigus-highlight-options{display:flex;flex-direction:column}
+.vigus-highlight-options button{text-align:left;background:none;border:0;border-top:1px solid #d4d4d6;min-height:76px;font-size:clamp(14px,1.18vw,21px);font-weight:600;color:#646464;display:flex;gap:17px;align-items:center;cursor:pointer}
+.vigus-highlight-options button:last-child{border-bottom:1px solid #d4d4d6}
+.vigus-highlight-options button.selected{color:#212121}
+.vigus-highlight-options button.selected:before{content:'';width:3px;height:30px;background:#e50012}
+.vigus-highlight-options button span{font:600 11px var(--font-latin);color:#999}
+.vigus-highlight-caption h3{font-size:clamp(23px,2.2vw,43px);letter-spacing:-.04em}
+.vigus-highlight-caption p{color:#58585a;font-size:clamp(13px,1vw,18px)}
+.vigus-selector{background:#fff;border-radius:23px;padding:clamp(22px,3vw,58px)}
+.vigus-selector-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+.vigus-selector-controls button{padding:13px 22px;border-radius:99px;border:1px solid #ccc;background:#f6f6f7;font:650 13px var(--font-latin)}
+.vigus-selector-controls button.selected{background:#212121;border-color:#212121;color:white}
+.vigus-selector-layout{display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:clamp(25px,4vw,90px)}
+.vigus-selector-car{display:flex;flex-direction:column;gap:15px}
+.vigus-selector-car img{height:clamp(250px,26vw,570px);width:100%;object-fit:contain}
+.vigus-selector-car small{font-size:11px;color:#777}
+.vigus-selector-details h3{font:750 clamp(32px,3.2vw,66px) var(--font-latin);letter-spacing:-.055em;margin-bottom:8px}
+.vigus-selector-details>p:not(.vigus-eyebrow){color:#58585a}
+.vigus-selector-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:30px 0}
+.vigus-selector-stats>div{border-top:1px solid #ddd;padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.vigus-selector-stats span{font-size:11px;color:#777}.vigus-selector-stats strong{font:750 clamp(16px,1.6vw,29px) var(--font-latin)}
+@keyframes vigusReveal{from{opacity:.65;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:960px){.vigus-highlight-experience,.vigus-selector-layout{grid-template-columns:1fr}.vigus-highlight-stage{min-height:350px}.vigus-highlight-options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.vigus-highlight-options button{border-bottom:1px solid #ddd}}
+@media(max-width:600px){.vigus-viewer-stage{height:320px}.vigus-viewer-expand span{display:none}.vigus-viewer-options{gap:7px}.vigus-viewer-options button{width:calc(25% - 7px);padding:5px;font-size:10px}.vigus-viewer-options img{height:50px}.vigus-highlight-stage{min-height:250px}.vigus-highlight-options{grid-template-columns:1fr}.vigus-selector-stats{gap:9px}.vigus-selector-stats strong{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.vigus-viewer-stage,.vigus-highlight-stage{animation:none}}
