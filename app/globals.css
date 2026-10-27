@@ -16,8 +16,8 @@ h1,h2,h3,p{margin-top:0}h2{font-size:clamp(30px,3.6vw,49px);line-height:1.35;let
 /* JMC Georgia Design System v1 — Apple HIG principles adapted to JMC branding.
    FiraGO for Georgian; Inter for Latin, numerals and model designations. */
 :root {
-  --font-ka: "FiraGO", sans-serif;
-  --font-latin: "Inter", sans-serif;
+  --font-ka: "Google Sans", "Noto Sans Georgian", sans-serif;
+  --font-latin: "Switzer", "Google Sans", sans-serif;
   --surface: #ffffff;
   --surface-subtle: #f5f5f7;
   --text-primary: #212121;
@@ -856,3 +856,25 @@ main:not(.vigus-experience) .steps-grid{gap:clamp(16px,2.2vw,32px)}
  .vigus-compare-card dl>div{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);padding-inline:12px}
 }
 @media(prefers-reduced-motion:reduce){.vigus-compare-ui .filter-chip{transition:none}}
+
+
+/* JMC brand typography: Switzer (Latin), Google Sans (Georgian) */
+:root{
+ --font-ka:"Google Sans","Noto Sans Georgian",sans-serif;
+ --font-latin:"Switzer","Google Sans",sans-serif;
+}
+html,body{font-family:var(--font-latin);font-synthesis:none}
+body{font-family:"Switzer","Google Sans",sans-serif;line-height:1.65}
+:lang(ka){font-family:"Switzer","Google Sans",sans-serif}
+:lang(en),:lang(en-US),:lang(en-GB),:lang(fr),:lang(de),:lang(es){font-family:var(--font-latin)}
+button,input,select,textarea{font-family:inherit}
+.brand-word,.footer-brand,.vigus-local-title,.vigus-hero-bottom h1,
+.vigus-quick-specs strong,.vigus-capabilities-grid strong,
+.vigus-selector-details h3,.vigus-compare-card-head h4,
+.vigus-trim-cards h3,.vigus-orbit-controls span,
+.preview-index,.step-num{font-family:var(--font-latin)}
+.vigus-experience .vigus-hero-bottom>p:not(.vigus-eyebrow),
+.vigus-experience .vigus-section-heading h2,
+.vigus-experience .vigus-section-heading p,
+.vigus-experience .vigus-comparison>h3,
+.vigus-experience .vigus-story-note p{font-family:var(--font-ka)}
