@@ -14,7 +14,7 @@ const orbit=[
  {file:'hero',name:'წინა ¾',angle:'¾',alt:'JMC Vigus — წინა სამი მეოთხედის ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_210239_e704b7f4-6959-42d2-98bc-560e6d257b29.png'},
  {file:'front',name:'წინა',angle:'წინა',alt:'JMC Vigus — პირდაპირი წინა ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_210239_157d21be-e243-4d02-be84-e6cf23168015.png'},
  {file:'side',name:'პროფილი',angle:'გვერდი',alt:'JMC Vigus — გვერდითი პროფილი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_210239_62f09045-448b-43cb-8125-43439a26b439.png'},
- {file:'rear',name:'უკანა',angle:'უკანა',alt:'JMC Vigus — უკანა ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_210238_63ff4c3e-32bb-4ef8-a0fc-44a198978bf5.png'}
+ {file:'rear',name:'უკანა',angle:'უკანა',alt:'JMC Vigus — უკანა ხედი',src:'/images/vigus/rear.webp'}
 ];
 export function VigusViewer(){
  const [index,setIndex]=useState(0);
