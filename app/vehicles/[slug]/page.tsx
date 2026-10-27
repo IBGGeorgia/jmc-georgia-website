@@ -25,14 +25,14 @@ export default async function VehiclePage({params}:{params:Promise<{slug:string}
  <p className="eyebrow">JMC GEORGIA / {categoryLabels[v.category]}</p>
  <h1>{v.name}</h1><p>{v.description}</p>
  <div className="actions"><Link href="/test-drive" className="button">ტესტ-დრაივი ↗</Link><a href="#trims" className="button outline">კომპლექტაციების შედარება ↓</a></div>
- </div>{isVigus&&<div className="model-image-frame"><img src="/images/vigus/hero.webp" alt="JMC VIGUS — წინა სამი მეოთხედის რაკურსი" /></div>}</div></section>
+ </div>{isVigus&&<div className="model-image-frame model-photo-stage" role="img" aria-label="JMC VIGUS — წინა სამი მეოთხედის რაკურსი" style={{backgroundImage:"url('/images/vigus/hero.webp')"}}><span className="model-photo-caption">VIGUS / EXTERIOR</span></div>}</div></section>
  {isVigus&&<><section className="container section" id="gallery">
  <div className="section-head"><div><p className="eyebrow">დეტალებში</p><h2>აღმოაჩინე VIGUS</h2></div></div>
- <div className="model-gallery">{images.slice(1).map((im,i)=><figure className={i===3?'model-gallery-wide':''} key={im.src}><img src={im.src} alt={im.label} loading="lazy"/><figcaption>{im.title}</figcaption></figure>)}</div></section>
+ <div className="model-gallery">{images.slice(1).map((im,i)=><figure className={i===3?'model-gallery-wide':''} key={im.src}><div className="model-gallery-photo" role="img" aria-label={im.label} style={{backgroundImage:`url('${im.src}')`}}/><figcaption>{im.title}</figcaption></figure>)}</div></section>
  <section className="section soft"><div className="container model-spec-highlights">
  <div><p className="eyebrow">ტექნიკური მონაცემები</p><h2>შექმნილი ყოველდღიური ამოცანებისთვის</h2></div>
  <div className="model-highlight-grid"><div><strong>2.5 L</strong><span>დიზელის ძრავა</span></div><div><strong>167 hp</strong><span>სიმძლავრე</span></div><div><strong>4×4</strong><span>ამძრავი</span></div><div><strong>210 mm</strong><span>კლირენსი</span></div></div>
- </div></section></>}
+ </div></section><section className="section editorial-section"><div className="container editorial-grid"><div className="editorial-text"><p className="eyebrow">VIGUS / ექსტერიერი</p><h2>მზადყოფნა ყველა მარშრუტისთვის.</h2><p>კარგად ნაცნობ გზებზე თუ რთულ რელიეფზე, VIGUS აერთიანებს პიკაპის პრაქტიკულობასა და 4×4 ამძრავის შესაძლებლობებს.</p><a href="#trims" className="text-link">კომპლექტაციები ↗</a></div><div className="editorial-photo" role="img" aria-label="VIGUS ბუნებრივ გარემოში" style={{backgroundImage:"url('/images/vigus/adventure-1.webp')"}}/></div></section><section className="section editorial-section editorial-dark"><div className="container editorial-grid"><div className="editorial-photo" role="img" aria-label="JMC VIGUS-ის ინტერიერის პანორამა" style={{backgroundImage:"url('/images/vigus/cockpit.webp')"}}/><div className="editorial-text"><p className="eyebrow">VIGUS / ინტერიერი</p><h2>დეტალები ყოველდღიური კომფორტისთვის.</h2><p>მძღოლის სივრცე, სავარძლების დიზაინი და მართვის მნიშვნელოვანი ელემენტები — შეისწავლე ინტერიერის დეტალები გალერეაში.</p><a href="#gallery" className="text-link">ფოტოების ნახვა ↗</a></div></div></section></>}
  <section id="trims" className="container section"><p className="eyebrow">VIGUS / კომპლექტაციები</p><h2>შეადარე კომპლექტაციები</h2>
  <p className="muted">მახასიათებლები აღებულია JMC Georgia-სთვის მოწოდებული 2026 წლის ბროშურის მონაცემებიდან. ფასები დაზუსტდება.</p>
  <TrimComparison trims={v.trims}/></section>
