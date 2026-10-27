@@ -235,3 +235,96 @@ html,body{width:100%;min-width:0}
  .vigus-cinema-overlay{left:var(--page-gutter)}
  .vigus-local-inner{gap:12px}
 }
+
+
+/* VIGUS REVISION 02 — photo-led, full-bleed and intentionally quiet.
+   No page canvas max width; adaptive edges & typographic measure only. */
+.vigus-experience{--vigus-space:clamp(80px,8vw,190px);--vigus-gutter:clamp(20px,4.1vw,108px);background:#fff}
+.vigus-experience .container{padding-inline:var(--vigus-gutter)}
+.vigus-experience .vigus-local-nav{position:sticky;top:0;z-index:52;background:rgba(255,255,255,.94);border-bottom:1px solid rgba(33,33,33,.07);backdrop-filter:blur(18px)}
+.vigus-local-inner{min-height:64px}
+.vigus-local-inner>div a{color:#58585a;transition:color .16s}
+.vigus-local-inner>div a:hover{color:#212121}
+.vigus-local-cta{border-bottom:none;background:#212121;color:#fff!important;padding:10px 18px;border-radius:999px}
+.vigus-local-cta:hover{background:#e50012}
+.vigus-hero{padding:clamp(16px,2.5vw,42px) 0 clamp(65px,6vw,120px);background:linear-gradient(180deg,#fbfbfc,#eceef0 59%,#fff 100%)}
+.vigus-kicker{color:#58585a;font-size:11px}
+.vigus-hero-image{height:clamp(310px,38vw,900px);margin-top:clamp(-15px,-1.1vw,-4px)}
+.vigus-hero-image img{object-fit:contain;width:100%;height:100%;filter:drop-shadow(0 26px 30px rgba(26,31,36,.13))}
+.vigus-hero-bottom h1{font:750 clamp(60px,8vw,180px)/.96 var(--font-latin);letter-spacing:-.075em;margin:8px 0 15px}
+.vigus-hero-bottom>p:not(.vigus-eyebrow){font-size:clamp(15px,1.1vw,20px);font-weight:500;margin-bottom:28px}
+.vigus-hero-actions{gap:12px}
+.vigus-pill{min-height:48px;border-radius:999px;padding:12px 26px}
+.vigus-pill-light{background:rgba(255,255,255,.6);border:1px solid #d5d6d8}
+.vigus-scroll-cue{display:inline-flex;gap:12px;align-items:center;margin-top:clamp(32px,4vw,80px);font-size:12px;color:#58585a;font-weight:600}
+.vigus-scroll-cue span{font-size:18px}
+.vigus-quick-specs{padding-block:clamp(66px,7vw,145px);border-bottom:1px solid #e6e6e7}
+.vigus-quick-specs>div{gap:14px}
+.vigus-quick-specs strong{font:700 clamp(34px,3.8vw,80px)/1.05 var(--font-latin);letter-spacing:-.06em}
+.vigus-quick-specs span{font-size:clamp(12px,.86vw,16px)}
+.vigus-section{padding-block:var(--vigus-space)}
+.vigus-section-heading{margin-bottom:clamp(46px,5vw,105px)}
+.vigus-section-heading h2{font-size:clamp(38px,4.65vw,96px);font-weight:650;letter-spacing:-.055em;line-height:1.15;margin:20px auto 22px}
+.vigus-section-heading p{font-size:clamp(14px,1.04vw,19px);line-height:1.8}
+.vigus-story-mosaic{gap:clamp(12px,2vw,36px);grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr)}
+.vigus-story-mosaic figure,.vigus-story-note{border-radius:clamp(12px,1.2vw,24px)}
+.vigus-story-note{background:#f5f5f6}
+.vigus-story-note p{font-size:clamp(20px,2vw,44px);line-height:1.35}
+.vigus-cinema{min-height:560px;height:min(62vw,1080px)}
+.vigus-cinema>img{object-position:center 54%}
+.vigus-cinema:after{background:linear-gradient(0deg,rgba(0,0,0,.65),transparent 62%)}
+.vigus-cinema-overlay{left:var(--vigus-gutter)!important;bottom:clamp(50px,7vw,140px)}
+.vigus-cinema-overlay h2{font-size:clamp(42px,5vw,105px);font-weight:650;letter-spacing:-.055em;line-height:1.16}
+.vigus-highlights .vigus-highlight-grid{gap:clamp(16px,2.2vw,44px)}
+.vigus-highlight-grid article{border:0;border-radius:clamp(13px,1.2vw,24px);background:#f4f4f5}
+.vigus-highlight-grid img{aspect-ratio:4/4.5;object-fit:cover}
+.vigus-highlight-grid article>div{padding:clamp(20px,2vw,42px)}
+.vigus-highlight-grid h3{font-size:clamp(21px,1.7vw,36px);letter-spacing:-.035em;font-weight:650}
+.vigus-highlight-grid p{font-size:clamp(13px,.9vw,17px)}
+.vigus-gallery-section{background:#f7f7f8}
+.vigus-gallery-strip{gap:clamp(14px,1.6vw,32px);scrollbar-width:thin;scroll-padding-inline:var(--vigus-gutter)}
+.vigus-gallery-strip figure{flex-basis:clamp(310px,35vw,860px);border-radius:clamp(12px,1.2vw,24px)}
+.vigus-gallery-strip img{aspect-ratio:16/10}
+.vigus-gallery-strip figcaption{padding:clamp(16px,1.4vw,30px);font-size:clamp(12px,.9vw,16px)}
+.vigus-capabilities-grid{gap:clamp(20px,2.2vw,60px)}
+.vigus-capabilities-grid strong{font-size:clamp(30px,3.5vw,72px);letter-spacing:-.055em}
+.vigus-capabilities-grid span{font-size:clamp(13px,.95vw,17px)}
+.vigus-trims{background:#f6f6f7}
+.vigus-trim-cards{gap:clamp(20px,2.6vw,58px)}
+.vigus-trim-cards article{border:1px solid #e9e9eb;border-radius:clamp(14px,1.3vw,26px);padding:clamp(22px,2.4vw,52px);display:flex;flex-direction:column}
+.vigus-trim-topline{display:flex;justify-content:space-between;gap:10px;font:650 11px var(--font-latin);letter-spacing:.12em;color:#858589}
+.vigus-trim-cards img{height:clamp(220px,22vw,490px);object-fit:contain;padding-block:15px}
+.vigus-trim-cards h3{font-size:clamp(23px,2.2vw,45px);letter-spacing:-.04em}
+.vigus-trim-cards p{font-size:clamp(13px,.95vw,17px)}
+.vigus-trim-cards article>a{margin-top:auto;display:inline-flex;align-self:start;min-height:44px;align-items:center}
+.vigus-comparison{margin-top:clamp(70px,7vw,145px)}
+.vigus-comparison h3{font-size:clamp(25px,2.2vw,46px);letter-spacing:-.035em}
+.vigus-final{padding-block:clamp(115px,10vw,220px)}
+.vigus-final h2{font-size:clamp(45px,5.4vw,115px);font-weight:650;letter-spacing:-.055em}
+.vigus-final p{font-size:clamp(14px,1.1vw,20px)}
+.vigus-experience [id]{scroll-margin-top:85px}
+@media(max-width:900px){
+ .vigus-experience{--vigus-space:80px;--vigus-gutter:clamp(20px,3vw,36px)}
+ .vigus-hero-image{height:clamp(280px,56vw,570px)}
+ .vigus-cinema{min-height:420px}
+ .vigus-highlight-grid img{aspect-ratio:4/3}
+}
+@media(max-width:700px){
+ .vigus-experience{--vigus-space:70px;--vigus-gutter:18px}
+ .vigus-local-inner>div{display:none}
+ .vigus-local-cta{padding:9px 14px;font-size:11px}
+ .vigus-hero-image{height:clamp(230px,67vw,400px)}
+ .vigus-hero-bottom h1{font-size:clamp(58px,14vw,90px)}
+ .vigus-quick-specs{gap:28px 16px}
+ .vigus-quick-specs strong{font-size:clamp(28px,7vw,42px)}
+ .vigus-story-mosaic{grid-template-rows:220px 170px;gap:12px}
+ .vigus-story-note{padding:16px}
+ .vigus-story-note p{font-size:15px}
+ .vigus-cinema{height:90vw;min-height:350px}
+ .vigus-cinema-overlay{bottom:34px}
+ .vigus-cinema-overlay h2{font-size:clamp(32px,8vw,48px)}
+ .vigus-highlight-grid img{aspect-ratio:5/4}
+ .vigus-gallery-strip figure{flex-basis:82vw}
+ .vigus-trim-cards img{height:230px}
+ .vigus-final h2{font-size:clamp(38px,9vw,56px)}
+}
