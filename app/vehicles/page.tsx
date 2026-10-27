@@ -1,5 +1,2 @@
-import type {Metadata} from 'next';
-import {Header,Footer} from '../site-components';
-import {CatalogueExplorer} from './catalogue-explorer';
-export const metadata:Metadata={title:'ავტომობილები',description:'JMC Georgia-ს ავტომობილების ოფიციალური კატალოგი და კომპლექტაციები'};
-export default function Vehicles(){return <><Header/><main><section className="catalogue-page-head"><div className="container"><p className="eyebrow">JMC GEORGIA / MODEL LINEUP</p><h1>აღმოაჩინე ავტომობილები</h1><p>აირჩიე ავტომობილი, გაეცანი კომპლექტაციებს და შეადარე მახასიათებლები. კატალოგის მონაცემები გამოქვეყნდება ოფიციალური დადასტურების შემდეგ.</p></div></section><section className="container section"><CatalogueExplorer/></section><section className="container section catalogue-contact"><div className="action-banner"><div><p className="eyebrow light">კონსულტაცია</p><h2>გჭირდება მეტი ინფორმაცია?</h2><p>დაგვიკავშირდი სასურველ ავტომობილზე დამატებითი ინფორმაციის მისაღებად.</p></div><a className="button" href="/contact">კონტაქტი ↗</a></div></section></main><Footer/></>}
+import {redirect} from 'next/navigation';
+export default function LegacyVehiclesRoute(){redirect('/vehicles/vigus');}
