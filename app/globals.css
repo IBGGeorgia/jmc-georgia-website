@@ -565,3 +565,38 @@ main:not(.vigus-experience) .page-head .container{max-width:var(--content-ui);ma
  .vigus-experience .vigus-hero-image-editorial{height:clamp(260px,73vw,420px);border-radius:12px}
  .vigus-experience .vigus-hero-image-editorial img{object-position:50% 50%}
 }
+
+
+/* Vigus visual view selector: transparent car cutouts and smooth transitions */
+.vigus-experience .vigus-orbit-stage{
+ background:radial-gradient(ellipse at 51% 48%,#fbfcfd 0%,#f0f2f4 68%,#e9edf1 100%);
+ isolation:isolate;
+}
+.vigus-experience .vigus-orbit-car-frames{
+ position:relative;width:96%;height:clamp(310px,34vw,680px);
+ display:block;pointer-events:none;overflow:hidden;
+}
+.vigus-experience .vigus-orbit-car-frames .vigus-orbit-frame{
+ position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;
+ opacity:0;transform:scale(.985);animation:none;transition:opacity .42s ease,transform .55s cubic-bezier(.2,.8,.2,1);
+ pointer-events:none;will-change:opacity;
+}
+.vigus-experience .vigus-orbit-car-frames .vigus-orbit-frame.is-active{
+ opacity:1;transform:scale(1);
+}
+.vigus-experience .vigus-orbit-fullscreen .vigus-orbit-stage{
+ background:radial-gradient(ellipse at center,#f7f9fa,#e6eaed);
+}
+.vigus-experience .vigus-orbit-fullscreen .vigus-orbit-car-frames{
+ width:100%;height:min(75vh,980px);
+}
+@media(max-width:1000px){
+ .vigus-experience .vigus-orbit-car-frames{height:360px}
+}
+@media(max-width:700px){
+ .vigus-experience .vigus-orbit-car-frames{height:290px}
+ .vigus-experience .vigus-orbit-fullscreen .vigus-orbit-car-frames{height:70vh}
+}
+@media(prefers-reduced-motion:reduce){
+ .vigus-experience .vigus-orbit-car-frames .vigus-orbit-frame{transition:none;transform:none}
+}
