@@ -3,9 +3,9 @@ import {useCallback,useEffect,useRef,useState} from 'react';
 const slides=[
  {file:'side',label:'პროფილი'},
  {file:'rear',label:'უკანა ხედი'},
- {file:'dashboard',label:'მაჩვენებლების პანელი'},
- {file:'console',label:'კონსოლი'},
- {file:'adventure-3',label:'მოძრაობაში'}
+ {file:'dashboard',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_204632_cf828e84-aba1-4738-95c8-787dcf4de144.png',label:'მაჩვენებლების პანელი'},
+ {file:'console',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_204632_27133b50-4de5-4f20-b6da-dc049f5648ee.png',label:'კონსოლი'},
+ {file:'adventure-3',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_204634_5ca9001e-9bdf-4055-97f8-77a1f9f7753b.png',label:'მოძრაობაში'}
 ];
 export function VigusGallery(){
  const rail=useRef<HTMLDivElement>(null);
@@ -53,6 +53,6 @@ export function VigusGallery(){
  onPointerMove={event=>{if(!drag.current.active||!rail.current)return;rail.current.scrollLeft=drag.current.scroll-(event.clientX-drag.current.x)}}
  onPointerUp={event=>{drag.current.active=false;if(rail.current?.hasPointerCapture(event.pointerId))rail.current.releasePointerCapture(event.pointerId)}}
  onPointerCancel={()=>{drag.current.active=false}}>
- {slides.map(s=><figure key={s.file}><img src={`/images/vigus/${s.file}.webp`} alt={`JMC Vigus — ${s.label}`} draggable={false} loading="lazy"/><figcaption>{s.label}</figcaption></figure>)}
+ {slides.map(s=><figure key={s.file}><img src={'src' in s ? s.src : `/images/vigus/${s.file}.webp`} alt={`JMC Vigus — ${s.label}`} draggable={false} loading="lazy"/><figcaption>{s.label}</figcaption></figure>)}
  </div><p className="vigus-gallery-hint">დაათვალიერე ისრებით ან გადაადგილდი მაუსით</p></div>;
 }
