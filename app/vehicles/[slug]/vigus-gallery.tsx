@@ -17,7 +17,7 @@ export function VigusGallery(){
  const next=(direction:number)=>{const el=rail.current;if(!el)return;const item=el.querySelector('figure');el.scrollBy({left:direction*(item?.getBoundingClientRect().width??el.clientWidth*.8)+direction*20,behavior:'smooth'})};
  return <div className="vigus-gallery-component">
  <div className="vigus-gallery-controls"><span className="vigus-gallery-index" aria-live="polite">{String(current+1).padStart(2,'0')} <span>/ {String(slides.length).padStart(2,'0')}</span></span><div><button type="button" aria-label="წინა ფოტო" disabled={!canPrev} onClick={()=>next(-1)}>←</button><button type="button" aria-label="შემდეგი ფოტო" disabled={!canNext} onClick={()=>next(1)}>→</button></div></div>
- <div ref={rail} className="vigus-gallery-strip vigus-gallery-interactive" tabIndex={0} role="region" aria-label="Vigus-ის ფოტოების გალერეა" onScroll={sync}}
+ <div ref={rail} className="vigus-gallery-strip vigus-gallery-interactive" tabIndex={0} role="region" aria-label="Vigus-ის ფოტოების გალერეა" onScroll={sync}
  onPointerDown={event=>{if(event.pointerType==='mouse'&&event.button===0){const el=rail.current;if(!el)return;drag.current={x:event.clientX,scroll:el.scrollLeft,active:true};el.setPointerCapture(event.pointerId)}}}
  onPointerMove={event=>{if(!drag.current.active||!rail.current)return;rail.current.scrollLeft=drag.current.scroll-(event.clientX-drag.current.x)}}
  onPointerUp={event=>{drag.current.active=false;if(rail.current?.hasPointerCapture(event.pointerId))rail.current.releasePointerCapture(event.pointerId)}}
