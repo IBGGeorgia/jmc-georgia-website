@@ -12,12 +12,12 @@ export default function Home() {
     <section className="hero hero-editorial" aria-labelledby="hero-title">
       <div className="hero-geometry" aria-hidden="true"><span/><span/><span/></div>
       <div className="container hero-content">
-        <p className="eyebrow light">JMC GEORGIA <span className="eyebrow-rule" /> ოფიციალური წარმომადგენლობა</p>
+        <p className="eyebrow light">JMC Georgia <span className="eyebrow-rule" /> ოფიციალური წარმომადგენლობა</p>
         <h1 id="hero-title">შენი გზა.<br/><span>ახალი შესაძლებლობები.</span></h1>
         <p className="lead">აღმოაჩინე JMC საქართველოში — გაეცანი ავტომობილებს, შეადარე კომპლექტაციები და დაგეგმე მომავალი ტესტ-დრაივი.</p>
         <div className="actions"><Link href="/vehicles/vigus" className="button">აღმოაჩინე Vigus <span aria-hidden="true">↗</span></Link><Link href="/test-drive" className="button button-ghost">ტესტ-დრაივი <span aria-hidden="true">→</span></Link></div>
       </div>
-      <div className="hero-bottom"><div className="container hero-bottom-inner"><span>JMC / GEORGIA</span><span>QUALITY · TECHNOLOGY · SERVICE</span><a href="#discover" aria-label="გადადით შემდეგ სექციაზე">აღმოაჩინე ↓</a></div></div>
+      <div className="hero-bottom"><div className="container hero-bottom-inner"><span>JMC / Georgia</span><span>Quality · Technology · Service</span><a href="#discover" aria-label="გადადით შემდეგ სექციაზე">აღმოაჩინე ↓</a></div></div>
     </section>
 
     <section id="discover" className="section introduction"><div className="container intro-grid">
@@ -32,6 +32,6 @@ export default function Home() {
 
     <section className="section steps-section"><div className="container"><div className="section-head"><div><p className="eyebrow">მარტივი პროცესი</p><h2>არჩევანიდან პირველ შეხვედრამდე</h2></div></div><div className="steps-grid">{steps.map(step=><article className="step" key={step.id}><span className="step-num">{step.id}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></article>)}</div></div></section>
 
-    <section className="section action-section"><div className="container"><div className="action-banner"><div><p className="eyebrow light">JMC GEORGIA</p><h2>გაქვს შეკითხვა?<br/>დავიწყოთ საუბარი.</h2><p>დაგვიკავშირდი სასურველი მოდელის, ხელმისაწვდომობის ან კომპლექტაციის შესახებ.</p></div><div className="action-banner-buttons"><Link href="/contact" className="button">დაგვიკავშირდი ↗</Link><Link href="/about" className="button button-ghost">ჩვენ შესახებ →</Link></div></div></div></section>
+    <section className="section action-section"><div className="container"><div className="action-banner"><div><p className="eyebrow light">JMC Georgia</p><h2>გაქვს შეკითხვა?<br/>დავიწყოთ საუბარი.</h2><p>დაგვიკავშირდი სასურველი მოდელის, ხელმისაწვდომობის ან კომპლექტაციის შესახებ.</p></div><div className="action-banner-buttons"><Link href="/contact" className="button">დაგვიკავშირდი ↗</Link><Link href="/about" className="button button-ghost">ჩვენ შესახებ →</Link></div></div></div></section>
   </main><Footer/></>;
 }
