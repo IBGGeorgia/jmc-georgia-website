@@ -191,3 +191,47 @@ h1,h2,h3 { text-wrap: balance; }
 @media(max-width:950px){.vigus-local-inner>div{gap:15px}.vigus-section{padding-block:75px}.vigus-story-mosaic{grid-template-rows:210px 190px}.vigus-highlight-grid{gap:12px}}
 @media(max-width:700px){.vigus-local-nav{top:0}.vigus-local-inner>div{display:none}.vigus-local-inner{min-height:53px}.vigus-hero{padding:25px 0 55px}.vigus-hero-image{height:310px}.vigus-quick-specs{grid-template-columns:repeat(2,1fr);padding-block:42px;gap:35px 12px}.vigus-story-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:230px 160px}.vigus-story-large{grid-column:span 2;grid-row:auto}.vigus-story-small{grid-column:1}.vigus-story-note{grid-column:2;padding:16px}.vigus-story-note p{font-size:15px}.vigus-highlight-grid{grid-template-columns:1fr}.vigus-highlight-grid img{aspect-ratio:4/3}.vigus-capabilities-grid{grid-template-columns:1fr;gap:20px}.vigus-trim-cards{grid-template-columns:1fr}.vigus-cinema-overlay{left:25px;bottom:38px}.vigus-cinema{min-height:340px}.vigus-section-heading{margin-bottom:35px}}
 @media(prefers-reduced-motion:reduce){.vigus-pill{transition:none}}
+
+
+/* Global fluid-layout contract: no fixed-width page canvas. Content spans the viewport.
+   Only adaptive edge gutters and responsive grids govern the composition. */
+:root{--page-gutter:clamp(18px,3.4vw,92px);--fluid-gap:clamp(18px,2vw,48px)}
+html,body{width:100%;min-width:0}
+.container{width:100%;max-width:none;margin-inline:0;padding-inline:var(--page-gutter)}
+.vigus-experience .container{width:100%;max-width:none}
+.vigus-experience :is(.vigus-section-heading,.vigus-section-heading p,.vigus-story-mosaic,.vigus-capabilities-grid,.vigus-trim-cards,.vigus-comparison,.vigus-final .container,.vigus-final p){max-width:none}
+.vigus-section-heading{width:100%}
+.vigus-section-heading p{width:100%}
+.vigus-story-mosaic{width:100%;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);grid-template-rows:clamp(240px,24vw,520px) clamp(220px,22vw,480px)}
+.vigus-highlight-grid{gap:var(--fluid-gap)}
+.vigus-gallery-strip figure{flex-basis:clamp(290px,32vw,680px)}
+.vigus-capabilities-grid,.vigus-trim-cards{width:100%}
+.vigus-hero-image{height:clamp(330px,42vw,850px)}
+.vigus-hero-content{width:100%}
+.vigus-final .container{width:100%}
+.vigus-quick-specs{gap:var(--fluid-gap)}
+.vigus-comparison{width:100%}
+.vigus-experience .vigus-cinema-overlay{left:var(--page-gutter)}
+.model-hero-layout,.editorial-grid,.model-spec-highlights{width:100%}
+.vehicle-card-grid{gap:var(--fluid-gap)}
+.catalogue-page-head h1,.catalogue-page-head p:not(.eyebrow),.catalogue-empty p,.page-head p,.section-sub,.form-wrap,.model-hero-copy>p:not(.eyebrow),.editorial-text p:not(.eyebrow){max-width:none}
+.search-label input{max-width:none}
+@media(min-width:1600px){
+ .vigus-section{padding-block:clamp(105px,7vw,180px)}
+ .vigus-highlight-grid img{aspect-ratio:5/4}
+ .vigus-hero-bottom h1{font-size:clamp(100px,7vw,180px)}
+ .vigus-story-note{padding:clamp(28px,3vw,74px)}
+ .vigus-story-note p{font-size:clamp(23px,1.6vw,38px)}
+}
+@media(max-width:950px){
+ :root{--page-gutter:clamp(18px,3vw,34px)}
+ .vigus-story-mosaic{grid-template-rows:clamp(220px,26vw,300px) clamp(175px,23vw,260px)}
+}
+@media(max-width:700px){
+ :root{--page-gutter:18px}
+ .vigus-story-mosaic{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:230px 160px}
+ .vigus-hero-image{height:clamp(270px,66vw,390px)}
+ .vigus-section-heading{padding-inline:0}
+ .vigus-cinema-overlay{left:var(--page-gutter)}
+ .vigus-local-inner{gap:12px}
+}
