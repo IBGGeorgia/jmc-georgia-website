@@ -1,0 +1,3 @@
+import type {Metadata} from 'next';import {Header,Footer} from '../site-components';
+export const metadata:Metadata={title:'ტესტ-დრაივი'};
+export default function TestDrive(){return <><Header/><main className="container"><div className="page-head"><p className="eyebrow">განაცხადი</p><h1>ტესტ-დრაივი</h1><p className="muted">დაჯავშნის ფორმა ჩაერთვება მას შემდეგ, რაც დადასტურდება მოდელები, საკონტაქტო არხი და განაცხადების უსაფრთხო შენახვის მექანიზმი.</p></div><div className="empty"><h2>განაცხადების მიღება ჯერ არ არის გააქტიურებული</h2><p>არ გთხოვთ პირადი მონაცემების შეყვანას, სანამ CRM-ისთვის უსაფრთხო მიღების პროცესი არ იქნება მზად.</p></div></main><Footer/></>}
