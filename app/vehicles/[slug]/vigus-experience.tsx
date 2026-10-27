@@ -11,58 +11,20 @@ const views=[
 /* Four genuine exterior photos form a stepped orbit, not a synthetic 360-degree render.
    Missing rear-three-quarter and opposite-side frames are never fabricated. */
 const orbit=[
- {file:'hero',name:'წინა ¾',angle:'¾',alt:'JMC Vigus — წინა სამი მეოთხედის ხედი'},
- {file:'front',name:'წინა',angle:'წინა',alt:'JMC Vigus — პირდაპირი წინა ხედი'},
- {file:'side',name:'პროფილი',angle:'გვერდი',alt:'JMC Vigus — გვერდითი პროფილი'},
- {file:'rear',name:'უკანა',angle:'უკანა',alt:'JMC Vigus — უკანა ხედი'}
+ {file:'hero',name:'წინა ¾',angle:'¾',alt:'JMC Vigus — წინა სამი მეოთხედის ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_205910_8b19b282-ea59-498b-84de-09ee776ed8c2.png'},
+ {file:'front',name:'წინა',angle:'წინა',alt:'JMC Vigus — პირდაპირი წინა ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_205910_d3f180fd-7881-4987-8da9-7469b5672863.png'},
+ {file:'side',name:'პროფილი',angle:'გვერდი',alt:'JMC Vigus — გვერდითი პროფილი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_205910_f3cabf1b-beac-4d87-a316-3615a3df8372.png'},
+ {file:'rear',name:'უკანა',angle:'უკანა',alt:'JMC Vigus — უკანა ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_205910_6eef8953-519c-497d-86a8-facde8e1a4d0.png'}
 ];
-/* Remove only near-black background connected to image edges; never recolor car pixels. */
-async function makeTransparentVigus(source:string):Promise<string>{
- const photo=new Image();photo.decoding='async';photo.src=source;await photo.decode();
- const scale=Math.min(1,1600/Math.max(photo.naturalWidth,photo.naturalHeight));
- const width=Math.max(1,Math.round(photo.naturalWidth*scale)),height=Math.max(1,Math.round(photo.naturalHeight*scale));
- const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
- const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)throw new Error('Canvas unavailable');
- ctx.drawImage(photo,0,0,width,height);
- const image=ctx.getImageData(0,0,width,height),pixels=image.data;
- const count=width*height,visited=new Uint8Array(count),stack=new Int32Array(count);let top=0,removed=0;
- const eligible=(p:number)=>{const i=p*4,r=pixels[i],g=pixels[i+1],b=pixels[i+2];return Math.max(r,g,b)<105 && Math.max(r,g,b)-Math.min(r,g,b)<46};
- const seed=(p:number)=>{if(!visited[p]&&eligible(p)){visited[p]=1;stack[top++]=p}};
- for(let x=0;x<width;x++){seed(x);seed((height-1)*width+x)}
- for(let y=0;y<height;y++){seed(y*width);seed(y*width+width-1)}
- while(top){
-  const p=stack[--top];pixels[p*4+3]=0;removed++;const x=p%width;
-  if(x>0)seed(p-1);if(x<width-1)seed(p+1);if(p>=width)seed(p-width);if(p<count-width)seed(p+width);
- }
- if(removed/count<.035)throw new Error('Background not detected safely');
- // Antialias pixels immediately inside the cut-out boundary without touching the body.
- const alpha=new Uint8Array(count);for(let p=0;p<count;p++)alpha[p]=pixels[p*4+3];
- for(let y=1;y<height-1;y++)for(let x=1;x<width-1;x++){
-  const p=y*width+x;if(!alpha[p])continue;
-  const transparentNeighbors=(alpha[p-1]===0?1:0)+(alpha[p+1]===0?1:0)+(alpha[p-width]===0?1:0)+(alpha[p+width]===0?1:0);
-  if(transparentNeighbors)pixels[p*4+3]=Math.max(130,255-transparentNeighbors*35);
- }
- ctx.putImageData(image,0,0);
- return canvas.toDataURL('image/png');
-}
-
 export function VigusViewer(){
  const [index,setIndex]=useState(0);
- const [cutouts,setCutouts]=useState<Record<string,string>>({});
  const [expanded,setExpanded]=useState(false);
  const gesture=useRef<{x:number;last:number;active:boolean}>({x:0,last:0,active:false});
  const fullscreenClose=useRef<HTMLButtonElement>(null);
  const fullscreenTrigger=useRef<HTMLButtonElement>(null);
  const current=orbit[index];
  const step=(delta:number)=>setIndex(i=>Math.max(0,Math.min(orbit.length-1,i+delta)));
- useEffect(()=>{
-  let cancelled=false;
-  Promise.allSettled(orbit.map(async item=>{
-   const src=await makeTransparentVigus(`/images/vigus/${item.file}.webp`);
-   if(!cancelled)setCutouts(prev=>({...prev,[item.file]:src}));
-  })).then(()=>{});
-  return()=>{cancelled=true};
- },[]);
+
 
  useEffect(()=>{if(!expanded)return;fullscreenClose.current?.focus();const fn=(event:KeyboardEvent)=>{if(event.key==='Escape')setExpanded(false);if(event.key==='ArrowLeft')step(-1);if(event.key==='ArrowRight')step(1);if(event.key==='Tab'){const buttons=[fullscreenClose.current,...Array.from(document.querySelectorAll<HTMLButtonElement>('.vigus-orbit-full-controls button'))].filter(Boolean) as HTMLButtonElement[];const first=buttons[0],last=buttons[buttons.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus()}}};document.addEventListener('keydown',fn);const overflow=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.removeEventListener('keydown',fn);document.body.style.overflow=overflow;fullscreenTrigger.current?.focus()}},[expanded]);
  const orbitStage=<div className="vigus-orbit-stage" role="group" aria-label="Vigus-ის რაკურსების ინტერაქციული დათვალიერება"
@@ -70,7 +32,7 @@ export function VigusViewer(){
  onPointerMove={e=>{if(!gesture.current.active)return;const dx=e.clientX-gesture.current.last;if(Math.abs(dx)>85){step(dx<0?1:-1);gesture.current.last=e.clientX}}}
  onPointerUp={e=>{gesture.current.active=false;if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId)}}
  onPointerCancel={()=>{gesture.current.active=false}}>
- <div className="vigus-orbit-car-frames">{orbit.map((v,i)=><img key={v.file} className={`vigus-orbit-frame vigus-orbit-layer${index===i?' is-active':''}`} src={cutouts[v.file]??`/images/vigus/${v.file}.webp`} alt={index===i?v.alt:''} aria-hidden={index!==i} draggable={false}/>)}</div>
+ <div className="vigus-orbit-car-frames">{orbit.map((v,i)=><img key={v.file} className={`vigus-orbit-frame vigus-orbit-layer${index===i?' is-active':''}`} src={v.src} alt={index===i?v.alt:''} aria-hidden={index!==i} draggable={false}/>)}</div>
  <div className="vigus-orbit-instruction">↔ გადააადგილე მაუსით ან თითით</div>
  </div>;
  return <div className="vigus-orbit">
