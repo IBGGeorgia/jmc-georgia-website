@@ -472,3 +472,74 @@ html,body{width:100%;min-width:0}
 @media(max-width:1000px){.vigus-orbit-layout{grid-template-columns:1fr}.vigus-orbit-stage{min-height:400px}.vigus-orbit-frame{height:400px}.vigus-orbit-info h3{font-size:32px}}
 @media(max-width:600px){.vigus-orbit-stage{min-height:290px}.vigus-orbit-frame{height:290px}.vigus-orbit-instruction{font-size:10px;bottom:14px}.vigus-orbit-fullscreen{padding-inline:12px}.vigus-orbit-fullscreen .vigus-orbit-frame{height:70vh}}
 @media(prefers-reduced-motion:reduce){.vigus-orbit-frame{animation:none}}
+
+
+/* Editorial width system v3 — full-bleed storytelling, measured reading and UI.
+   Do not cap the global .container: edge-to-edge artwork and color sections remain fluid. */
+:root{
+ --content-readable:740px;
+ --content-heading:1080px;
+ --content-wide:1480px;
+ --content-gallery:1680px;
+ --content-ui:1200px;
+}
+/* Site-wide navigation and standard page compositions */
+.site-header .head-inner,
+.jmc-header .jmc-header-inner,
+.footer>.container{max-width:var(--content-gallery);margin-inline:auto}
+main:not(.vigus-experience) .intro-grid,
+main:not(.vigus-experience) .vehicle-preview,
+main:not(.vigus-experience) .steps-grid,
+main:not(.vigus-experience) .action-banner,
+main:not(.vigus-experience) .section-head{max-width:var(--content-wide);margin-inline:auto}
+main:not(.vigus-experience) .hero-content{max-width:var(--content-wide);margin-inline:auto}
+main:not(.vigus-experience) .hero-content .lead,
+main:not(.vigus-experience) .intro-copy,
+main:not(.vigus-experience) .section-sub,
+main:not(.vigus-experience) .vehicle-preview-copy>p{max-width:var(--content-readable)}
+main:not(.vigus-experience) .hero-content h1,
+main:not(.vigus-experience) .introduction h2{max-width:var(--content-heading)}
+main:not(.vigus-experience) .section-head h2{max-width:900px}
+main:not(.vigus-experience) .form-wrap,
+main:not(.vigus-experience) .page-head .container{max-width:var(--content-ui);margin-inline:auto}
+/* Vigus: constrain reading and grouped controls but leave full-bleed cinema intact */
+.vigus-experience .vigus-section-heading{max-width:var(--content-wide);margin-inline:auto}
+.vigus-experience .vigus-section-heading h2{max-width:var(--content-heading)}
+.vigus-experience .vigus-section-heading p{max-width:var(--content-readable)}
+.vigus-experience .vigus-local-inner{max-width:var(--content-gallery);margin-inline:auto}
+.vigus-experience .vigus-hero-content{max-width:var(--content-gallery);margin-inline:auto}
+.vigus-experience .vigus-hero-bottom>p:not(.vigus-eyebrow){max-width:var(--content-readable)}
+.vigus-experience .vigus-quick-specs{max-width:var(--content-wide);margin-inline:auto}
+.vigus-experience .vigus-story-mosaic{max-width:var(--content-wide);margin-inline:auto}
+.vigus-experience .vigus-highlight-experience{max-width:var(--content-wide);margin-inline:auto}
+.vigus-experience .vigus-gallery-component{max-width:var(--content-gallery);margin-inline:auto}
+.vigus-experience .vigus-orbit-layout{max-width:var(--content-wide);margin-inline:auto}
+.vigus-experience .vigus-capabilities-grid{max-width:var(--content-wide);margin-inline:auto}
+.vigus-experience .vigus-selector{max-width:var(--content-wide);margin-inline:auto}
+.vigus-experience .vigus-comparison{max-width:var(--content-ui);margin-inline:auto}
+.vigus-experience .vigus-final .container{max-width:var(--content-wide);margin-inline:auto}
+.vigus-experience .vigus-final p{max-width:var(--content-readable)}
+/* Preserve intentional full-bleed gallery/cinema while capping content image magnification */
+.vigus-experience .vigus-cinema{width:100%}
+.vigus-experience .vigus-gallery-strip figure{flex-basis:clamp(310px,34vw,580px)}
+.vigus-experience .vigus-orbit-stage{min-height:clamp(340px,36vw,720px)}
+.vigus-experience .vigus-orbit-frame{height:clamp(310px,34vw,680px)}
+.vigus-experience .vigus-highlight-stage{min-height:clamp(360px,36vw,690px)}
+.vigus-experience .vigus-selector-car img{height:clamp(250px,26vw,490px)}
+/* Cards and responsive grids must be allowed to shrink */
+.vigus-experience :is(.vigus-story-mosaic,.vigus-highlight-experience,.vigus-orbit-layout,.vigus-selector-layout){min-width:0}
+@media(max-width:1000px){
+ .vigus-experience .vigus-orbit-stage{min-height:360px}
+ .vigus-experience .vigus-orbit-frame{height:360px}
+ .vigus-experience .vigus-highlight-stage{min-height:350px}
+}
+@media(max-width:700px){
+ :root{--content-readable:100%;--content-heading:100%}
+ .vigus-experience .vigus-section-heading,
+ .vigus-experience .vigus-section-heading h2,
+ .vigus-experience .vigus-section-heading p{max-width:100%}
+ .vigus-experience .vigus-orbit-stage{min-height:290px}
+ .vigus-experience .vigus-orbit-frame{height:290px}
+ .vigus-experience .vigus-highlight-stage{min-height:250px}
+ .vigus-experience .vigus-gallery-strip figure{flex-basis:82vw}
+}
