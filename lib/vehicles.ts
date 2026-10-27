@@ -12,7 +12,7 @@ const vigusSpecs:Feature[]=[
 export const vehicles:Vehicle[]=[{
  slug:'vigus',name:'VIGUS',category:'pickup',highlighted:true,
  description:'JMC VIGUS — ოთხივე წამყვანი თვლით აღჭურვილი პიკაპი, 2.5-ლიტრიანი დიზელის ძრავით. ხელმისაწვდომია ავტომატური და მექანიკური ტრანსმისიის კომპლექტაციებით.',
- heroImage:undefined,gallery:[],
+ heroImage:'/images/vigus/hero.webp',gallery:['/images/vigus/front.webp','/images/vigus/side.webp','/images/vigus/rear.webp','/images/vigus/cockpit.webp','/images/vigus/seats.webp'],
  trims:[
  {id:'vigus-at',name:'4X4 AT GL',powertrain:'2.5 L Diesel · 167 hp',drivetrain:'4×4',transmission:'8AT',features:[...vigusSpecs,{label:'დისკები და საბურავები',value:'17″ · 245/70 R17'}]},
  {id:'vigus-mt',name:'4X4 MT GL',powertrain:'2.5 L Diesel · 167 hp',drivetrain:'4×4',transmission:'6MT',features:[...vigusSpecs,{label:'დისკები და საბურავები',value:'17″ · 245/70 R17'}]}
