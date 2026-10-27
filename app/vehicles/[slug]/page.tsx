@@ -2,40 +2,31 @@ import {notFound} from 'next/navigation';
 import type {Metadata} from 'next';
 import Link from 'next/link';
 import {Header,Footer} from '../../site-components';
-import {getVehicle,vehicles,categoryLabels} from '../../../lib/vehicles';
+import {getVehicle,vehicles} from '../../../lib/vehicles';
 import {TrimComparison} from './trim-comparison';
-
 export function generateStaticParams(){return vehicles.map(v=>({slug:v.slug}));}
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
- const {slug}=await params;const v=getVehicle(slug);return {title:v?v.name:'მოდელი ვერ მოიძებნა',description:v?.description};
+ const {slug}=await params;const v=getVehicle(slug);return {title:v?`JMC ${v.name}`:'მოდელი ვერ მოიძებნა',description:v?.description};
 }
-const images=[
- {src:'/images/vigus/hero.webp',title:'ექსტერიერი',label:'VIGUS — წინა სამი მეოთხედის რაკურსი'},
- {src:'/images/vigus/front.webp',title:'წინა ხედი',label:'VIGUS — წინა ხედი'},
- {src:'/images/vigus/side.webp',title:'პროფილი',label:'VIGUS — გვერდითი ხედი'},
- {src:'/images/vigus/rear.webp',title:'უკანა ხედი',label:'VIGUS — უკანა ხედი'},
- {src:'/images/vigus/cockpit.webp',title:'სალონი',label:'VIGUS — სალონის საერთო ხედი'},
- {src:'/images/vigus/seats.webp',title:'სავარძლები',label:'VIGUS — წინა სავარძლები'}
-];
+const shot=(name:string)=>`/images/vigus/${name}.webp`;
 export default async function VehiclePage({params}:{params:Promise<{slug:string}>}){
- const {slug}=await params;const v=getVehicle(slug);if(!v)notFound();
- const isVigus=slug==='vigus';
- return <><Header/><main>
- <section className="model-hero"><div className="container model-hero-layout"><div className="model-hero-copy">
- <p className="eyebrow">JMC GEORGIA / {categoryLabels[v.category]}</p>
- <h1>{v.name}</h1><p>{v.description}</p>
- <div className="actions"><Link href="/test-drive" className="button">ტესტ-დრაივი ↗</Link><a href="#trims" className="button outline">კომპლექტაციების შედარება ↓</a></div>
- </div>{isVigus&&<div className="model-image-frame model-photo-stage" role="img" aria-label="JMC VIGUS — წინა სამი მეოთხედის რაკურსი" style={{backgroundImage:"url('/images/vigus/hero.webp')"}}><span className="model-photo-caption">VIGUS / EXTERIOR</span></div>}</div></section>
- {isVigus&&<><section className="container section" id="gallery">
- <div className="section-head"><div><p className="eyebrow">დეტალებში</p><h2>აღმოაჩინე VIGUS</h2></div></div>
- <div className="model-gallery">{images.slice(1).map((im,i)=><figure className={i===3?'model-gallery-wide':''} key={im.src}><div className="model-gallery-photo" role="img" aria-label={im.label} style={{backgroundImage:`url('${im.src}')`}}/><figcaption>{im.title}</figcaption></figure>)}</div></section>
- <section className="section soft"><div className="container model-spec-highlights">
- <div><p className="eyebrow">ტექნიკური მონაცემები</p><h2>შექმნილი ყოველდღიური ამოცანებისთვის</h2></div>
- <div className="model-highlight-grid"><div><strong>2.5 L</strong><span>დიზელის ძრავა</span></div><div><strong>167 hp</strong><span>სიმძლავრე</span></div><div><strong>4×4</strong><span>ამძრავი</span></div><div><strong>210 mm</strong><span>კლირენსი</span></div></div>
- </div></section><section className="section editorial-section"><div className="container editorial-grid"><div className="editorial-text"><p className="eyebrow">VIGUS / ექსტერიერი</p><h2>მზადყოფნა ყველა მარშრუტისთვის.</h2><p>კარგად ნაცნობ გზებზე თუ რთულ რელიეფზე, VIGUS აერთიანებს პიკაპის პრაქტიკულობასა და 4×4 ამძრავის შესაძლებლობებს.</p><a href="#trims" className="text-link">კომპლექტაციები ↗</a></div><div className="editorial-photo" role="img" aria-label="VIGUS ბუნებრივ გარემოში" style={{backgroundImage:"url('/images/vigus/adventure-1.webp')"}}/></div></section><section className="section editorial-section editorial-dark"><div className="container editorial-grid"><div className="editorial-photo" role="img" aria-label="JMC VIGUS-ის ინტერიერის პანორამა" style={{backgroundImage:"url('/images/vigus/cockpit.webp')"}}/><div className="editorial-text"><p className="eyebrow">VIGUS / ინტერიერი</p><h2>დეტალები ყოველდღიური კომფორტისთვის.</h2><p>მძღოლის სივრცე, სავარძლების დიზაინი და მართვის მნიშვნელოვანი ელემენტები — შეისწავლე ინტერიერის დეტალები გალერეაში.</p><a href="#gallery" className="text-link">ფოტოების ნახვა ↗</a></div></div></section></>}
- <section id="trims" className="container section"><p className="eyebrow">VIGUS / კომპლექტაციები</p><h2>შეადარე კომპლექტაციები</h2>
- <p className="muted">მახასიათებლები აღებულია JMC Georgia-სთვის მოწოდებული 2026 წლის ბროშურის მონაცემებიდან. ფასები დაზუსტდება.</p>
- <TrimComparison trims={v.trims}/></section>
- <section className="container section catalogue-contact"><div className="action-banner"><div><p className="eyebrow light">JMC GEORGIA</p><h2>გაინტერესებს {v.name}?</h2><p>დაგვიკავშირდი კომპლექტაციისა და ხელმისაწვდომობის შესახებ.</p></div><Link className="button" href="/contact">კონტაქტი ↗</Link></div></section>
+ const {slug}=await params;const vehicle=getVehicle(slug);if(!vehicle)notFound();
+ if(slug!=='vigus')return <><Header/><main className="container section"><h1>{vehicle.name}</h1><p>{vehicle.description}</p><TrimComparison trims={vehicle.trims}/></main><Footer/></>;
+ return <><Header/><main className="vigus-experience" id="top">
+ <nav className="vigus-local-nav" aria-label="Vigus-ის გვერდის ნავიგაცია"><div className="container vigus-local-inner"><a href="#top" className="vigus-local-title">VIGUS</a><div><a href="#story">აღმოაჩინე</a><a href="#design">დიზაინი</a><a href="#technology">შესაძლებლობები</a><a href="#trims">კომპლექტაციები</a></div><Link href="/contact" className="vigus-local-cta">ინფორმაციის მიღება ↗</Link></div></nav>
+ <section className="vigus-hero" aria-labelledby="vigus-title"><div className="container vigus-hero-content">
+ <p className="vigus-kicker">JMC / PICKUP</p>
+ <div className="vigus-hero-image"><img src={shot('hero')} alt="JMC Vigus — ვერცხლისფერი პიკაპი წინა სამი მეოთხედის რაკურსით" fetchPriority="high"/></div>
+ <div className="vigus-hero-bottom"><p className="vigus-eyebrow">ALL NEW VIGUS</p><h1 id="vigus-title">VIGUS</h1><p>მეტი შესაძლებლობა ყოველ გზაზე.</p><div className="vigus-hero-actions"><Link href="/test-drive" className="vigus-pill vigus-pill-dark">ტესტ-დრაივი ↗</Link><a href="#trims" className="vigus-pill vigus-pill-light">შეადარე კომპლექტაციები</a></div></div>
+ </div></section>
+ <section className="vigus-quick-specs container" aria-label="ძირითადი მონაცემები"><div><strong>2.5 <small>L</small></strong><span>დიზელის ძრავა</span></div><div><strong>167 <small>HP</small></strong><span>სიმძლავრე</span></div><div><strong>4×4</strong><span>ამძრავი</span></div><div><strong>210 <small>mm</small></strong><span>კლირენსი</span></div></section>
+ <section id="story" className="vigus-story vigus-section"><div className="container"><div className="vigus-section-heading"><span className="vigus-eyebrow">01 / CHARACTER</span><h2>შენი გზა.<br/>შენი შესაძლებლობები.</h2><p>Vigus აერთიანებს პიკაპის პრაქტიკულობას, ოთხივე წამყვანი თვლის შესაძლებლობას და ყოველდღიური გადაადგილებისთვის საჭირო კომფორტს.</p></div>
+ <div className="vigus-story-mosaic"><figure className="vigus-story-large"><img src={shot('adventure-1')} alt="JMC Vigus მთიან გარემოში" loading="lazy"/></figure><figure className="vigus-story-small"><img src={shot('adventure-4')} alt="JMC Vigus ბუნებრივ ლანდშაფტში" loading="lazy"/></figure><div className="vigus-story-note"><span>JMC VIGUS</span><p>მზადაა სამუშაო დღისთვის. მზადაა გზისთვის.</p></div></div></div></section>
+ <section className="vigus-cinema" aria-label="Vigus-ის ექსტერიერი"><img src={shot('adventure-2')} alt="JMC Vigus — ექსტერიერი ბუნებრივ გარემოში" loading="lazy"/><div className="vigus-cinema-overlay"><span>02 / EXTERIOR</span><h2>ფორმა, რომელსაც<br/>დანიშნულება აქვს.</h2></div></section>
+ <section id="design" className="vigus-highlights vigus-section"><div className="container"><div className="vigus-section-heading"><span className="vigus-eyebrow">DESIGN & COMFORT</span><h2>დეტალები, რომლებიც მნიშვნელოვანია.</h2></div><div className="vigus-highlight-grid"><article><img src={shot('front')} alt="Vigus-ის წინა ნაწილი და გრილი" loading="lazy"/><div><span>01 / DESIGN</span><h3>გამოკვეთილი ხასიათი</h3><p>მტკიცე წინა ნაწილი და გამორჩეული JMC-ის ვიზუალური იდენტობა.</p></div></article><article><img src={shot('cockpit')} alt="Vigus-ის სალონის პანორამა" loading="lazy"/><div><span>02 / INTERIOR</span><h3>მძღოლზე ორიენტირებული სივრცე</h3><p>ფუნქციური განლაგება და კომფორტზე გათვლილი ინტერიერი.</p></div></article><article><img src={shot('seats')} alt="Vigus-ის წინა სავარძლები" loading="lazy"/><div><span>03 / COMFORT</span><h3>კომფორტი ყოველდღე</h3><p>დახვეწილი სალონი და პრაქტიკული დეტალები.</p></div></article></div></div></section>
+ <section className="vigus-gallery-section vigus-section"><div className="container"><div className="vigus-section-heading"><span className="vigus-eyebrow">EXPLORE VIGUS</span><h2>აღმოაჩინე ყველა რაკურსი.</h2></div><div className="vigus-gallery-strip">{[{file:'side',label:'პროფილი'},{file:'rear',label:'უკანა ხედი'},{file:'dashboard',label:'მაჩვენებლების პანელი'},{file:'console',label:'კონსოლი'},{file:'adventure-3',label:'მოძრაობაში'}].map(x=><figure key={x.file}><img src={shot(x.file)} alt={`Vigus — ${x.label}`} loading="lazy"/><figcaption>{x.label}</figcaption></figure>)}</div></div></section>
+ <section id="technology" className="vigus-capabilities vigus-section"><div className="container"><div className="vigus-section-heading"><span className="vigus-eyebrow">CAPABILITY</span><h2>შესაძლებლობები, რომლებსაც ეყრდნობი.</h2><p>Vigus ხელმისაწვდომია ორი ტრანსმისიის ვარიანტით — 8-საფეხურიანი ავტომატური და 6-საფეხურიანი მექანიკური.</p></div><div className="vigus-capabilities-grid"><div><strong>8AT / 6MT</strong><span>ტრანსმისიის არჩევანი</span></div><div><strong>75 L</strong><span>საწვავის ავზი</span></div><div><strong>3150 mm</strong><span>თვლების ბაზა</span></div></div></div></section>
+ <section id="trims" className="vigus-trims vigus-section"><div className="container"><div className="vigus-section-heading"><span className="vigus-eyebrow">CHOOSE YOUR VIGUS</span><h2>რომელი Vigus შეეფერება შენს გეგმებს?</h2><p>ორი კომპლექტაცია. შეადარე ტექნიკური მონაცემები და შეარჩიე შენთვის შესაბამისი ტრანსმისია.</p></div><div className="vigus-trim-cards">{vehicle.trims.map(t=><article key={t.id}><img src={shot('hero')} alt="JMC Vigus" loading="lazy"/><h3>{t.name}</h3><p>{t.powertrain}</p><div><span>{t.transmission}</span><span>4×4</span></div><Link href="/contact">მოითხოვე ინფორმაცია ↗</Link></article>)}</div><div className="vigus-comparison"><h3>დეტალური შედარება</h3><TrimComparison trims={vehicle.trims}/></div></div></section>
+ <section className="vigus-final"><div className="container"><span className="vigus-eyebrow">JMC GEORGIA</span><h2>გაიცანი Vigus ახლოდან.</h2><p>დაგვიკავშირდი ხელმისაწვდომობის, პირობებისა და ტესტ-დრაივის შესახებ ინფორმაციისთვის.</p><div><Link href="/test-drive" className="vigus-pill vigus-pill-white">ტესტ-დრაივი ↗</Link><Link href="/contact" className="vigus-pill vigus-pill-outline">ინფორმაციის მოთხოვნა</Link></div></div></section>
  </main><Footer/></>;
 }
