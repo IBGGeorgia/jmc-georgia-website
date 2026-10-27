@@ -11,10 +11,10 @@ const views=[
 /* Four genuine exterior photos form a stepped orbit, not a synthetic 360-degree render.
    Missing rear-three-quarter and opposite-side frames are never fabricated. */
 const orbit=[
- {file:'hero',name:'წინა ¾',angle:'¾',alt:'JMC Vigus — წინა სამი მეოთხედის ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_205910_8b19b282-ea59-498b-84de-09ee776ed8c2.png'},
- {file:'front',name:'წინა',angle:'წინა',alt:'JMC Vigus — პირდაპირი წინა ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_205910_d3f180fd-7881-4987-8da9-7469b5672863.png'},
- {file:'side',name:'პროფილი',angle:'გვერდი',alt:'JMC Vigus — გვერდითი პროფილი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_205910_f3cabf1b-beac-4d87-a316-3615a3df8372.png'},
- {file:'rear',name:'უკანა',angle:'უკანა',alt:'JMC Vigus — უკანა ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_205910_6eef8953-519c-497d-86a8-facde8e1a4d0.png'}
+ {file:'hero',name:'წინა ¾',angle:'¾',alt:'JMC Vigus — წინა სამი მეოთხედის ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_210239_e704b7f4-6959-42d2-98bc-560e6d257b29.png'},
+ {file:'front',name:'წინა',angle:'წინა',alt:'JMC Vigus — პირდაპირი წინა ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_210239_157d21be-e243-4d02-be84-e6cf23168015.png'},
+ {file:'side',name:'პროფილი',angle:'გვერდი',alt:'JMC Vigus — გვერდითი პროფილი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_210239_62f09045-448b-43cb-8125-43439a26b439.png'},
+ {file:'rear',name:'უკანა',angle:'უკანა',alt:'JMC Vigus — უკანა ხედი',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_210238_63ff4c3e-32bb-4ef8-a0fc-44a198978bf5.png'}
 ];
 export function VigusViewer(){
  const [index,setIndex]=useState(0);
