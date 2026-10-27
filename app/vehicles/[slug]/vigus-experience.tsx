@@ -32,12 +32,15 @@ export function VigusHighlights(){
  const [index,setIndex]=useState(0);
  const [expanded,setExpanded]=useState(false);
  const gesture=useRef<{x:number;last:number;active:boolean}>({x:0,last:0,active:false});
+ const fullscreenClose=useRef<HTMLButtonElement>(null);
+ const fullscreenTrigger=useRef<HTMLButtonElement>(null);
  const current=orbit[index];
- const step=(delta:number)=>setIndex(i=>(i+delta+orbit.length)%orbit.length);
- useEffect(()=>{if(!expanded)return;const fn=(event:KeyboardEvent)=>{if(event.key==='Escape')setExpanded(false);if(event.key==='ArrowLeft')step(-1);if(event.key==='ArrowRight')step(1)};document.addEventListener('keydown',fn);const overflow=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.removeEventListener('keydown',fn);document.body.style.overflow=overflow}},[expanded]);
+ const step=(delta:number)=>setIndex(i=>Math.max(0,Math.min(orbit.length-1,i+delta)));
+ useEffect(()=>{orbit.forEach(item=>{const img=new Image();img.src=`/images/vigus/${item.file}.webp`})},[]);
+ useEffect(()=>{if(!expanded)return;fullscreenClose.current?.focus();const fn=(event:KeyboardEvent)=>{if(event.key==='Escape')setExpanded(false);if(event.key==='ArrowLeft')step(-1);if(event.key==='ArrowRight')step(1);if(event.key==='Tab'){const buttons=[fullscreenClose.current,...Array.from(document.querySelectorAll<HTMLButtonElement>('.vigus-orbit-full-controls button'))].filter(Boolean) as HTMLButtonElement[];const first=buttons[0],last=buttons[buttons.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus()}}};document.addEventListener('keydown',fn);const overflow=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.removeEventListener('keydown',fn);document.body.style.overflow=overflow;fullscreenTrigger.current?.focus()}},[expanded]);
  const orbitStage=<div className="vigus-orbit-stage" role="group" aria-label="Vigus-ის რაკურსების ინტერაქციული დათვალიერება"
  onPointerDown={e=>{if(e.pointerType==='mouse'&&e.button!==0)return;gesture.current={x:e.clientX,last:e.clientX,active:true};e.currentTarget.setPointerCapture(e.pointerId)}}
- onPointerMove={e=>{if(!gesture.current.active)return;const dx=e.clientX-gesture.current.last;if(Math.abs(dx)>75){step(dx<0?1:-1);gesture.current.last=e.clientX}}}
+ onPointerMove={e=>{if(!gesture.current.active)return;const dx=e.clientX-gesture.current.last;if(Math.abs(dx)>85){step(dx<0?1:-1);gesture.current.last=e.clientX}}}
  onPointerUp={e=>{gesture.current.active=false;if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId)}}
  onPointerCancel={()=>{gesture.current.active=false}}>
  <img key={current.file} className="vigus-orbit-frame" src={`/images/vigus/${current.file}.webp`} alt={current.alt} draggable={false}/>
@@ -46,11 +49,11 @@ export function VigusHighlights(){
  return <div className="vigus-orbit">
  <div className="vigus-orbit-layout"><div className="vigus-orbit-main">{orbitStage}</div>
  <div className="vigus-orbit-info"><p className="vigus-eyebrow">INTERACTIVE VIEW / VIGUS</p><h3>ყველა დეტალი სხვა რაკურსით.</h3><p>დაათვალიერე ავტომობილი არსებული რეალური ფოტოებით. გადაათრიე მარცხნივ ან მარჯვნივ, ან გამოიყენე ისრები.</p>
- <div className="vigus-orbit-controls"><button type="button" aria-label="წინა რაკურსი" onClick={()=>step(-1)}>←</button><span aria-live="polite">{String(index+1).padStart(2,'0')} / {String(orbit.length).padStart(2,'0')} · {current.name}</span><button type="button" aria-label="შემდეგი რაკურსი" onClick={()=>step(1)}>→</button></div>
+ <div className="vigus-orbit-controls"><button type="button" aria-label="წინა რაკურსი" disabled={index===0} onClick={()=>step(-1)}>←</button><span aria-live="polite">{String(index+1).padStart(2,'0')} / {String(orbit.length).padStart(2,'0')} · {current.name}</span><button type="button" aria-label="შემდეგი რაკურსი" disabled={index===orbit.length-1} onClick={()=>step(1)}>→</button></div>
  <div className="vigus-orbit-steps" role="group" aria-label="რაკურსების არჩევა">{orbit.map((v,i)=><button key={v.file} type="button" className={index===i?'selected':''} aria-pressed={index===i} onClick={()=>setIndex(i)}>{v.name}</button>)}</div>
- <button className="vigus-orbit-expand" type="button" onClick={()=>setExpanded(true)}>სრული ეკრანი ↗</button>
+ <button ref={fullscreenTrigger} className="vigus-orbit-expand" type="button" onClick={()=>setExpanded(true)}>სრული ეკრანი ↗</button>
  <p className="vigus-orbit-disclosure">ეს არის 4 რეალური ფოტოს ინტერაქციული დათვალიერება და არა უწყვეტი 360° გადაღება.</p></div></div>
- {expanded&&<div className="vigus-orbit-fullscreen" role="dialog" aria-modal="true" aria-label="Vigus-ის რაკურსები სრულ ეკრანზე"><button type="button" className="vigus-orbit-exit" onClick={()=>setExpanded(false)} aria-label="დახურვა">×</button>{orbitStage}<div className="vigus-orbit-full-controls"><button type="button" onClick={()=>step(-1)} aria-label="წინა ფოტო">←</button><span>{current.name}</span><button type="button" onClick={()=>step(1)} aria-label="შემდეგი ფოტო">→</button></div></div>}
+ {expanded&&<div className="vigus-orbit-fullscreen" role="dialog" aria-modal="true" aria-label="Vigus-ის რაკურსები სრულ ეკრანზე"><button ref={fullscreenClose} type="button" className="vigus-orbit-exit" onClick={()=>setExpanded(false)} aria-label="დახურვა">×</button>{orbitStage}<div className="vigus-orbit-full-controls"><button type="button" disabled={index===0} onClick={()=>step(-1)} aria-label="წინა ფოტო">←</button><span>{current.name}</span><button type="button" disabled={index===orbit.length-1} onClick={()=>step(1)} aria-label="შემდეგი ფოტო">→</button></div></div>}
  </div>;
 }
 export function VigusTrimSelector({trims}:{trims:Trim[]}){
