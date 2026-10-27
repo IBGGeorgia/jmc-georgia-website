@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: jmc-georgia
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
