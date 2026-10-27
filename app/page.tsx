@@ -1,3 +1,37 @@
 import Link from 'next/link';
 import { Header, Footer } from './site-components';
-export default function Home(){return <><Header/><main><section className="hero"><div className="container hero-content"><p className="eyebrow">JMC Georgia</p><h1>ახალი შესაძლებლობები შენს გზაზე.</h1><p className="lead">JMC-ის ავტომობილების ოფიციალური წარმომადგენლობა საქართველოში. აღმოაჩინე მოდელები, შეადარე კომპლექტაციები და დაგეგმე ტესტ-დრაივი.</p><div className="actions"><Link href="/vehicles" className="button">ავტომობილების ნახვა</Link><Link href="/test-drive" className="button outline" style={{color:'white',borderColor:'white'}}>ტესტ-დრაივი</Link></div></div></section><section className="section"><div className="container"><div className="section-head"><div><p className="eyebrow">გამოიკვლიე JMC</p><h2>იპოვე შენი ავტომობილი</h2></div><Link className="link" href="/vehicles">მოდელების კატალოგი →</Link></div><div className="grid"><article className="tile"><div><h3>მოდელები</h3><p>ყველა ხელმისაწვდომი მოდელი ერთ სივრცეში.</p></div><Link className="link" href="/vehicles">დათვალიერება →</Link></article><article className="tile"><div><h3>კომპლექტაციები</h3><p>შეადარე Trim-ები, მახასიათებლები და აღჭურვილობა.</p></div><Link className="link" href="/vehicles">შედარება →</Link></article><article className="tile"><div><h3>ტესტ-დრაივი</h3><p>გამოგვიგზავნე განაცხადი და ჩვენი გუნდი დაგიკავშირდება.</p></div><Link className="link" href="/test-drive">განაცხადი →</Link></article></div></div></section><section className="section soft"><div className="container panel"><div><p className="eyebrow">JMC Georgia</p><h2>გინდა მეტი ინფორმაცია?</h2><p>დაგვიკავშირდი და მიიღე კონსულტაცია სასურველ ავტომობილზე.</p></div><Link className="button" href="/contact">კონტაქტი</Link></div></section></main><Footer/></>}
+
+const steps = [
+  { id: '01', title: 'აირჩიე ავტომობილი', text: 'გაეცანი JMC-ის მოდელებს და შეარჩიე შენი საჭიროებების შესაბამისი ავტომობილი.' },
+  { id: '02', title: 'შეადარე კომპლექტაციები', text: 'ერთ სივრცეში შეადარე ტექნიკური მახასიათებლები და აღჭურვილობა.' },
+  { id: '03', title: 'დაგეგმე ტესტ-დრაივი', text: 'მოითხოვე შეხვედრა და გაეცანი ავტომობილს პირადად.' },
+];
+
+export default function Home() {
+  return <><Header /><main>
+    <section className="hero hero-editorial" aria-labelledby="hero-title">
+      <div className="hero-geometry" aria-hidden="true"><span/><span/><span/></div>
+      <div className="container hero-content">
+        <p className="eyebrow light">JMC GEORGIA <span className="eyebrow-rule" /> ოფიციალური წარმომადგენლობა</p>
+        <h1 id="hero-title">შენი გზა.<br/><span>ახალი შესაძლებლობები.</span></h1>
+        <p className="lead">აღმოაჩინე JMC საქართველოში — გაეცანი ავტომობილებს, შეადარე კომპლექტაციები და დაგეგმე მომავალი ტესტ-დრაივი.</p>
+        <div className="actions"><Link href="/vehicles" className="button">აღმოაჩინე ავტომობილები <span aria-hidden="true">↗</span></Link><Link href="/test-drive" className="button button-ghost">ტესტ-დრაივი <span aria-hidden="true">→</span></Link></div>
+      </div>
+      <div className="hero-bottom"><div className="container hero-bottom-inner"><span>JMC / GEORGIA</span><span>QUALITY · TECHNOLOGY · SERVICE</span><a href="#discover" aria-label="გადადით შემდეგ სექციაზე">აღმოაჩინე ↓</a></div></div>
+    </section>
+
+    <section id="discover" className="section introduction"><div className="container intro-grid">
+      <div><p className="eyebrow">აღმოაჩინე JMC</p><h2>ავტომობილი, რომელიც შენს გეგმებს ერგება.</h2></div>
+      <div className="intro-copy"><p>ყოველდღიური მარშრუტებიდან ახალ გამოწვევებამდე — JMC Georgia-ს საიტზე შეძლებ მოდელების გაცნობას, კომპლექტაციების შედარებას და გადაწყვეტილების მიღებისთვის საჭირო ინფორმაციის მიღებას.</p><Link href="/vehicles" className="text-link">გაეცანი კატალოგს <span aria-hidden="true">↗</span></Link></div>
+    </div></section>
+
+    <section className="section catalogue-feature"><div className="container">
+      <div className="section-head"><div><p className="eyebrow">JMC-ის ავტომობილები</p><h2>აღმოაჩინე მოდელების ხაზი</h2><p className="section-sub">საქართველოსთვის განკუთვნილი მოდელების დეტალური კატალოგი მალე დაემატება.</p></div><Link href="/vehicles" className="text-link">კატალოგის ნახვა ↗</Link></div>
+      <div className="vehicle-preview"><div className="vehicle-preview-visual" aria-hidden="true"><div className="vehicle-preview-line"/><span>JMC</span></div><div className="vehicle-preview-copy"><span className="preview-index">01 / MODEL LINEUP</span><h3>გაეცანი ყველა კომპლექტაციას ერთ სივრცეში.</h3><p>ფოტოები, აღჭურვილობა, მახასიათებლები და Trim Comparison — ერთიანი ციფრული კატალოგი არჩევანის გასამარტივებლად.</p><Link href="/vehicles" className="button">მოდელების გვერდი <span aria-hidden="true">↗</span></Link><small>ავტომობილების საბოლოო სია და ვიზუალური მასალა გამოქვეყნდება დადასტურების შემდეგ.</small></div></div>
+    </div></section>
+
+    <section className="section steps-section"><div className="container"><div className="section-head"><div><p className="eyebrow">მარტივი პროცესი</p><h2>არჩევანიდან პირველ შეხვედრამდე</h2></div></div><div className="steps-grid">{steps.map(step=><article className="step" key={step.id}><span className="step-num">{step.id}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></article>)}</div></div></section>
+
+    <section className="section action-section"><div className="container"><div className="action-banner"><div><p className="eyebrow light">JMC GEORGIA</p><h2>გაქვს შეკითხვა?<br/>დავიწყოთ საუბარი.</h2><p>დაგვიკავშირდი სასურველი მოდელის, ხელმისაწვდომობის ან კომპლექტაციის შესახებ.</p></div><div className="action-banner-buttons"><Link href="/contact" className="button">დაგვიკავშირდი ↗</Link><Link href="/about" className="button button-ghost">ჩვენ შესახებ →</Link></div></div></div></section>
+  </main><Footer/></>;
+}
