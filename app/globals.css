@@ -441,3 +441,34 @@ html,body{width:100%;min-width:0}
 @media(max-width:960px){.vigus-highlight-experience,.vigus-selector-layout{grid-template-columns:1fr}.vigus-highlight-stage{min-height:350px}.vigus-highlight-options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.vigus-highlight-options button{border-bottom:1px solid #ddd}}
 @media(max-width:600px){.vigus-viewer-stage{height:320px}.vigus-viewer-expand span{display:none}.vigus-viewer-options{gap:7px}.vigus-viewer-options button{width:calc(25% - 7px);padding:5px;font-size:10px}.vigus-viewer-options img{height:50px}.vigus-highlight-stage{min-height:250px}.vigus-highlight-options{grid-template-columns:1fr}.vigus-selector-stats{gap:9px}.vigus-selector-stats strong{font-size:16px}}
 @media(prefers-reduced-motion:reduce){.vigus-viewer-stage,.vigus-highlight-stage{animation:none}}
+
+
+/* Vigus interactive exterior: stepped orbit made from real supplied photographs */
+.vigus-orbit{width:100%;min-width:0}
+.vigus-orbit-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(310px,.5fr);align-items:center;gap:clamp(26px,4vw,95px)}
+.vigus-orbit-main{min-width:0}
+.vigus-orbit-stage{position:relative;display:grid;place-items:center;min-width:0;min-height:clamp(340px,47vw,880px);border-radius:clamp(14px,1.5vw,26px);background:radial-gradient(ellipse at center,#fafbfc,#e8e9ea);touch-action:pan-y;cursor:grab;user-select:none;overflow:hidden}
+.vigus-orbit-stage:active{cursor:grabbing}
+.vigus-orbit-frame{width:96%;height:clamp(310px,44vw,800px);object-fit:contain;display:block;pointer-events:none;animation:vigusOrbitReveal .18s ease-out}
+.vigus-orbit-instruction{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-size:12px;color:#58585a;white-space:nowrap;background:rgba(255,255,255,.88);padding:10px 16px;border-radius:40px}
+.vigus-orbit-info h3{font-size:clamp(28px,2.9vw,55px);line-height:1.22;letter-spacing:-.045em;margin:18px 0 21px}
+.vigus-orbit-info>p:not(.vigus-eyebrow){font-size:clamp(13px,.95vw,18px);color:#58585a;line-height:1.8}
+.vigus-orbit-controls{display:flex;gap:12px;align-items:center;margin:32px 0 20px}
+.vigus-orbit-controls button,.vigus-orbit-full-controls button{width:50px;height:50px;flex:none;border-radius:50%;border:1px solid #b3b4b6;background:#fff;color:#212121;font-size:22px}
+.vigus-orbit-controls button:hover,.vigus-orbit-full-controls button:hover{background:#212121;color:white}
+.vigus-orbit-controls span{font:650 12px var(--font-latin);text-align:center;flex:1}
+.vigus-orbit-steps{display:flex;flex-wrap:wrap;gap:7px}
+.vigus-orbit-steps button{min-height:44px;border:1px solid #d5d5d8;background:white;border-radius:99px;padding:9px 16px;font-size:12px}
+.vigus-orbit-steps button.selected{background:#212121;color:#fff;border-color:#212121}
+.vigus-orbit-expand{background:none;border:0;border-bottom:1px solid #212121;min-height:44px;margin-top:25px;font-size:13px;font-weight:700;padding:6px 0}
+.vigus-orbit-disclosure{font-size:11px!important;margin-top:18px;line-height:1.55!important}
+.vigus-orbit-fullscreen{position:fixed;inset:0;z-index:180;background:#111;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:70px 25px 30px}
+.vigus-orbit-fullscreen .vigus-orbit-stage{width:100%;flex:1;min-height:0;background:radial-gradient(#4b4b4b,#181818)}
+.vigus-orbit-fullscreen .vigus-orbit-frame{height:min(75vh,980px)}
+.vigus-orbit-fullscreen .vigus-orbit-instruction{color:#212121}
+.vigus-orbit-exit{position:absolute;right:30px;top:17px;width:50px;height:50px;border-radius:50%;background:#333;border:1px solid #888;color:#fff;font-size:30px}
+.vigus-orbit-full-controls{display:flex;align-items:center;gap:30px;padding-top:15px}
+@keyframes vigusOrbitReveal{from{opacity:.6}to{opacity:1}}
+@media(max-width:1000px){.vigus-orbit-layout{grid-template-columns:1fr}.vigus-orbit-stage{min-height:400px}.vigus-orbit-frame{height:400px}.vigus-orbit-info h3{font-size:32px}}
+@media(max-width:600px){.vigus-orbit-stage{min-height:290px}.vigus-orbit-frame{height:290px}.vigus-orbit-instruction{font-size:10px;bottom:14px}.vigus-orbit-fullscreen{padding-inline:12px}.vigus-orbit-fullscreen .vigus-orbit-frame{height:70vh}}
+@media(prefers-reduced-motion:reduce){.vigus-orbit-frame{animation:none}}
