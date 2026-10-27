@@ -802,3 +802,57 @@ main:not(.vigus-experience) .steps-grid{gap:clamp(16px,2.2vw,32px)}
  .vigus-experience .vigus-hero-actions{flex-direction:column;align-items:stretch;max-width:310px}
  .vigus-experience .vigus-hero-actions .vigus-pill{width:100%}
 }
+
+
+/* Vigus detailed trim comparison: premium table + readable mobile cards */
+.vigus-experience .vigus-comparison{margin-top:clamp(58px,7vw,112px);width:100%}
+.vigus-experience .vigus-comparison>h3{
+ font-size:clamp(28px,3.3vw,44px);line-height:1.2;letter-spacing:-.04em;
+ margin:0 0 clamp(20px,2.8vw,34px);text-wrap:balance;
+}
+.vigus-compare-ui{background:#fff;border:1px solid #e7e7e9;border-radius:clamp(14px,1.5vw,22px);padding:clamp(18px,2.6vw,36px);box-shadow:0 12px 40px rgba(20,24,30,.035)}
+.vigus-compare-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px 28px;flex-wrap:wrap;margin-bottom:clamp(18px,2.4vw,30px)}
+.vigus-compare-intro{font-size:clamp(13px,1vw,15px);line-height:1.7;color:#4b4d51;margin:0 0 6px}
+.vigus-compare-meta{font-size:12px;font-weight:650;color:#777;margin:0}
+.vigus-compare-ui .trim-switches{display:flex;gap:9px;flex-wrap:wrap}
+.vigus-compare-ui .filter-chip{border-radius:12px;min-height:46px;padding:11px 18px;transition:background .18s,border-color .18s}
+.vigus-compare-ui .filter-chip:has(input:checked){background:#222;color:#fff;border-color:#222}
+.vigus-compare-ui .filter-chip:focus-within{outline:2px solid #d00013;outline-offset:3px}
+.vigus-compare-ui .comparison-scroll{width:100%;border:1px solid #e8e8ea;border-radius:14px;overflow-x:auto;overflow-y:auto}
+.vigus-compare-ui .comparison{min-width:650px;width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;font-size:clamp(12px,1vw,14px)}
+.vigus-compare-ui .comparison th,.vigus-compare-ui .comparison td{border-bottom:1px solid #eeeeef;padding:clamp(15px,1.6vw,22px) clamp(13px,1.7vw,24px);vertical-align:middle;overflow-wrap:anywhere}
+.vigus-compare-ui .comparison thead th{position:sticky;top:0;background:#f5f6f7;color:#252628;font-size:13px;font-weight:750;z-index:2;border-bottom:1px solid #dcdde0}
+.vigus-compare-ui .comparison thead th:first-child{width:34%}
+.vigus-compare-ui .comparison tbody th{background:#fff;color:#4c4e52;font-size:13px;font-weight:600}
+.vigus-compare-ui .comparison tbody td{background:#fff;color:#222;font-weight:600}
+.vigus-compare-ui .comparison tbody td.comparison-different{background:#fff4f3;color:#a20e18;font-weight:750;box-shadow:inset 3px 0 #d62330}
+.vigus-compare-ui .comparison tbody tr:last-child th,.vigus-compare-ui .comparison tbody tr:last-child td{border-bottom:0}
+.vigus-compare-ui .comparison tbody tr:hover th,.vigus-compare-ui .comparison tbody tr:hover td:not(.comparison-different){background:#fafafb}
+.vigus-compare-mobile{display:none}
+.vigus-compare-legend{display:flex;gap:9px;align-items:center;color:#777;font-size:12px;line-height:1.5;margin:17px 0 0}
+.vigus-compare-legend span{display:block;width:10px;height:10px;background:#d62330;border-radius:3px;flex:none}
+@media(max-width:760px){
+ .vigus-experience .vigus-comparison{margin-top:56px}
+ .vigus-experience .vigus-comparison>h3{font-size:clamp(25px,7vw,35px);margin-bottom:18px}
+ .vigus-compare-ui{padding:15px;border-radius:16px}
+ .vigus-compare-toolbar{display:block;margin-bottom:18px}
+ .vigus-compare-ui .trim-switches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}
+ .vigus-compare-ui .filter-chip{padding:10px 8px;min-width:0;min-height:48px;text-align:center;font-size:12px}
+ .vigus-compare-ui .comparison-scroll{display:none}
+ .vigus-compare-mobile{display:grid;grid-template-columns:1fr;gap:16px}
+ .vigus-compare-card{border:1px solid #e4e5e8;border-radius:14px;overflow:hidden;min-width:0}
+ .vigus-compare-card-head{padding:17px 18px;background:#242426;color:#fff}
+ .vigus-compare-card-head span{display:block;color:#c6c6cb;font-size:10px;letter-spacing:.09em;margin-bottom:5px}
+ .vigus-compare-card-head h4{font:750 21px/1.25 var(--font-latin);margin:0}
+ .vigus-compare-card dl{margin:0}
+ .vigus-compare-card dl>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;padding:13px 16px;border-top:1px solid #ebebed;align-items:start}
+ .vigus-compare-card dt{font-size:12px;color:#65676d;line-height:1.5}
+ .vigus-compare-card dd{margin:0;font-size:13px;font-weight:650;color:#222;line-height:1.5;text-align:right;overflow-wrap:anywhere}
+ .vigus-compare-card dl>div.is-different{background:#fff3f2;border-left:3px solid #d62330;padding-left:13px}
+ .vigus-compare-card dl>div.is-different dd{color:#aa111b}
+}
+@media(max-width:380px){
+ .vigus-compare-ui .trim-switches{grid-template-columns:1fr}
+ .vigus-compare-card dl>div{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);padding-inline:12px}
+}
+@media(prefers-reduced-motion:reduce){.vigus-compare-ui .filter-chip{transition:none}}
