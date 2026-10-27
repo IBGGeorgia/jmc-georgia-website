@@ -1,5 +1,5 @@
 'use client';
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import Link from 'next/link';
 import type {Trim} from '../../../lib/vehicles';
 const views=[
@@ -20,16 +20,38 @@ export function VigusViewer(){
   {fullscreen&&<div className="vigus-lightbox" role="dialog" aria-modal="true" aria-label={v.alt}><button type="button" className="vigus-lightbox-close" onClick={()=>setFullscreen(false)} aria-label="დახურვა">×</button><img src={`/images/vigus/${v.file}.webp`} alt={v.alt}/><div><button type="button" onClick={()=>setSelected(x=>(x+views.length-1)%views.length)} aria-label="წინა რაკურსი">←</button><span>{v.name}</span><button type="button" onClick={()=>setSelected(x=>(x+1)%views.length)} aria-label="შემდეგი რაკურსი">→</button></div></div>}
  </div>;
 }
-const highlights=[
- {name:'გამოკვეთილი დიზაინი',description:'JMC-ის დამახასიათებელი წინა ნაწილი და პრაქტიკული პიკაპის პროპორციები.',file:'front',label:'EXTERIOR'},
- {name:'მართვის სივრცე',description:'მძღოლის სამუშაო სივრცის ფუნქციური განლაგება.',file:'cockpit',label:'INTERIOR'},
- {name:'დეტალებზე ყურადღება',description:'სავარძლების ფორმა, გამოყენებული მასალები და სალონის პრაქტიკული გადაწყვეტილებები.',file:'seats',label:'COMFORT'},
- {name:'კონტროლი ერთი შეხედვით',description:'მაჩვენებლების პანელი და მართვისთვის საჭირო ინფორმაცია.',file:'dashboard',label:'DETAILS'}
+/* Four genuine exterior photos form a stepped orbit, not a synthetic 360-degree render.
+   Missing rear-three-quarter and opposite-side frames are never fabricated. */
+const orbit=[
+ {file:'hero',name:'წინა ¾',angle:'¾',alt:'JMC Vigus — წინა სამი მეოთხედის ხედი'},
+ {file:'front',name:'წინა',angle:'წინა',alt:'JMC Vigus — პირდაპირი წინა ხედი'},
+ {file:'side',name:'პროფილი',angle:'გვერდი',alt:'JMC Vigus — გვერდითი პროფილი'},
+ {file:'rear',name:'უკანა',angle:'უკანა',alt:'JMC Vigus — უკანა ხედი'}
 ];
 export function VigusHighlights(){
- const [current,setCurrent]=useState(0);
- const h=highlights[current];
- return <div className="vigus-highlight-experience"><div className="vigus-highlight-stage" key={h.file}><img src={`/images/vigus/${h.file}.webp`} alt={h.name} loading="lazy"/></div><div className="vigus-highlight-info"><div className="vigus-highlight-options" role="tablist" aria-label="ავტომობილის გამორჩეული დეტალები">{highlights.map((item,i)=><button type="button" role="tab" aria-selected={i===current} className={i===current?'selected':''} key={item.file} onClick={()=>setCurrent(i)}><span>{String(i+1).padStart(2,'0')}</span>{item.name}</button>)}</div><div className="vigus-highlight-caption" role="tabpanel"><span className="vigus-eyebrow">{h.label}</span><h3>{h.name}</h3><p>{h.description}</p></div></div></div>;
+ const [index,setIndex]=useState(0);
+ const [expanded,setExpanded]=useState(false);
+ const gesture=useRef<{x:number;last:number;active:boolean}>({x:0,last:0,active:false});
+ const current=orbit[index];
+ const step=(delta:number)=>setIndex(i=>(i+delta+orbit.length)%orbit.length);
+ useEffect(()=>{if(!expanded)return;const fn=(event:KeyboardEvent)=>{if(event.key==='Escape')setExpanded(false);if(event.key==='ArrowLeft')step(-1);if(event.key==='ArrowRight')step(1)};document.addEventListener('keydown',fn);const overflow=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.removeEventListener('keydown',fn);document.body.style.overflow=overflow}},[expanded]);
+ const orbitStage=<div className="vigus-orbit-stage" role="group" aria-label="Vigus-ის რაკურსების ინტერაქციული დათვალიერება"
+ onPointerDown={e=>{if(e.pointerType==='mouse'&&e.button!==0)return;gesture.current={x:e.clientX,last:e.clientX,active:true};e.currentTarget.setPointerCapture(e.pointerId)}}
+ onPointerMove={e=>{if(!gesture.current.active)return;const dx=e.clientX-gesture.current.last;if(Math.abs(dx)>75){step(dx<0?1:-1);gesture.current.last=e.clientX}}}
+ onPointerUp={e=>{gesture.current.active=false;if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId)}}
+ onPointerCancel={()=>{gesture.current.active=false}}>
+ <img key={current.file} className="vigus-orbit-frame" src={`/images/vigus/${current.file}.webp`} alt={current.alt} draggable={false}/>
+ <div className="vigus-orbit-instruction">↔ გადააადგილე მაუსით ან თითით</div>
+ </div>;
+ return <div className="vigus-orbit">
+ <div className="vigus-orbit-layout"><div className="vigus-orbit-main">{orbitStage}</div>
+ <div className="vigus-orbit-info"><p className="vigus-eyebrow">INTERACTIVE VIEW / VIGUS</p><h3>ყველა დეტალი სხვა რაკურსით.</h3><p>დაათვალიერე ავტომობილი არსებული რეალური ფოტოებით. გადაათრიე მარცხნივ ან მარჯვნივ, ან გამოიყენე ისრები.</p>
+ <div className="vigus-orbit-controls"><button type="button" aria-label="წინა რაკურსი" onClick={()=>step(-1)}>←</button><span aria-live="polite">{String(index+1).padStart(2,'0')} / {String(orbit.length).padStart(2,'0')} · {current.name}</span><button type="button" aria-label="შემდეგი რაკურსი" onClick={()=>step(1)}>→</button></div>
+ <div className="vigus-orbit-steps" role="group" aria-label="რაკურსების არჩევა">{orbit.map((v,i)=><button key={v.file} type="button" className={index===i?'selected':''} aria-pressed={index===i} onClick={()=>setIndex(i)}>{v.name}</button>)}</div>
+ <button className="vigus-orbit-expand" type="button" onClick={()=>setExpanded(true)}>სრული ეკრანი ↗</button>
+ <p className="vigus-orbit-disclosure">ეს არის 4 რეალური ფოტოს ინტერაქციული დათვალიერება და არა უწყვეტი 360° გადაღება.</p></div></div>
+ {expanded&&<div className="vigus-orbit-fullscreen" role="dialog" aria-modal="true" aria-label="Vigus-ის რაკურსები სრულ ეკრანზე"><button type="button" className="vigus-orbit-exit" onClick={()=>setExpanded(false)} aria-label="დახურვა">×</button>{orbitStage}<div className="vigus-orbit-full-controls"><button type="button" onClick={()=>step(-1)} aria-label="წინა ფოტო">←</button><span>{current.name}</span><button type="button" onClick={()=>step(1)} aria-label="შემდეგი ფოტო">→</button></div></div>}
+ </div>;
 }
 export function VigusTrimSelector({trims}:{trims:Trim[]}){
  const [id,setId]=useState(trims[0]?.id??'');
