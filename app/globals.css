@@ -1011,3 +1011,37 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
 .nav,.footer-nav,.vigus-experience .vigus-section-heading h2{
  text-transform:none;
 }
+
+
+/* Sentence/Title-case micro typography scale — readable without uppercase */
+:root{
+ --type-eyebrow:clamp(.8125rem,.82vw,.9375rem);
+ --type-caption:clamp(.8125rem,.85vw,.9375rem);
+ --type-navigation:clamp(.875rem,1vw,1rem);
+}
+.eyebrow,.vigus-eyebrow,.vigus-kicker,.preview-index,.jmc-drawer-eyebrow,
+.vigus-cinema-overlay>span,.vigus-story-note>span,
+.vigus-experience .vigus-hero-bottom .vigus-eyebrow{
+ font-family:var(--font-ka);
+ font-size:var(--type-eyebrow);
+ font-weight:600;
+ line-height:1.5;
+ letter-spacing:0;
+ text-transform:none;
+}
+.vigus-experience .vigus-hero-bottom .vigus-eyebrow{
+ font-size:clamp(.875rem,1vw,1rem);
+ font-weight:600;letter-spacing:0;
+}
+.preview-index,.jmc-drawer-eyebrow{font-size:var(--type-caption)}
+.vigus-cinema-overlay>span,.vigus-story-note>span{font-size:var(--type-caption)}
+.vigus-local-nav,.footer-nav,.jmc-drawer-links{font-size:var(--type-navigation);line-height:1.5}
+.vigus-experience .vigus-local-title{font-size:1.0625rem;font-weight:700;letter-spacing:-.015em}
+.vigus-experience .vigus-hero-actions .vigus-pill{font-size:clamp(.875rem,.9vw,1rem);line-height:1.4}
+.vigus-experience .vigus-compare-intro{font-size:clamp(.9375rem,1vw,1rem)}
+.vigus-experience .vigus-compare-meta,.vigus-compare-legend{font-size:var(--type-caption)}
+@media(max-width:760px){
+ :root{--type-eyebrow:.8125rem;--type-caption:.8125rem;--type-navigation:.875rem}
+ .vigus-experience .vigus-hero-bottom .vigus-eyebrow{font-size:.875rem}
+ .vigus-experience .vigus-hero-actions .vigus-pill{font-size:.875rem}
+}
