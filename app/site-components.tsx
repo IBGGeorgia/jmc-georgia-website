@@ -53,7 +53,7 @@ export function Footer(){
    <div className="jmc-footer-bottom">
     <span>© {new Date().getFullYear()} JMC Georgia. ყველა უფლება დაცულია.</span>
     <Link href="/privacy">კონფიდენციალურობა</Link>
-    <span className="jmc-footer-signature">Driven by possibilities.</span>
+    <span className="jmc-footer-signature">JMC Georgia</span>
    </div>
   </div>
  </footer>;
