@@ -646,3 +646,94 @@ main:not(.vigus-experience) .page-head .container{max-width:var(--content-ui);ma
  .catalogue-feature .vehicle-preview-visual:has(.home-vigus-product){min-height:0;aspect-ratio:16/10}
  .catalogue-feature .vehicle-preview-visual .home-vigus-product{object-position:center center}
 }
+
+
+/* UI/UX audit v4: precise responsive layout, editorial rhythm and image protection */
+:root{--jmc-layout-gap:clamp(20px,3vw,48px);--jmc-block-radius:clamp(12px,1.2vw,22px)}
+html{scroll-padding-top:160px}
+.vigus-experience{overflow:clip}
+.vigus-experience .vigus-section{padding-block:clamp(66px,7vw,112px)}
+.vigus-experience .vigus-section-heading{max-width:min(100%,920px);margin:0 auto clamp(28px,4vw,62px)}
+.vigus-experience .vigus-section-heading h2{max-width:880px;line-height:1.13;text-wrap:balance}
+.vigus-experience .vigus-section-heading p{max-width:680px;line-height:1.75;text-wrap:pretty}
+.vigus-experience .vigus-quick-specs{column-gap:clamp(12px,2vw,34px);row-gap:26px;padding-block:clamp(32px,5vw,72px)}
+.vigus-experience .vigus-story-mosaic{
+ width:100%;max-width:min(100%,1320px);
+ grid-template-columns:minmax(0,1.45fr) minmax(0,.75fr);
+ grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(12px,1.5vw,22px);
+ aspect-ratio:2.13/1;
+}
+.vigus-experience .vigus-story-mosaic >*{min-width:0;min-height:0}
+.vigus-experience .vigus-story-large,.vigus-experience .vigus-story-small{height:100%}
+.vigus-experience .vigus-story-mosaic img{width:100%;height:100%;object-fit:cover}
+.vigus-experience .vigus-story-note{padding:clamp(18px,2.5vw,38px)}
+.vigus-experience .vigus-story-note p{font-size:clamp(16px,1.7vw,25px)}
+.vigus-experience .vigus-cinema{height:clamp(410px,45vw,740px)}
+.vigus-experience .vigus-cinema-overlay{left:max(5%,calc((100% - 1260px)/2));right:5%;bottom:clamp(35px,5vw,90px)}
+.vigus-experience .vigus-highlight-experience{gap:var(--jmc-layout-gap)}
+.vigus-experience .vigus-highlight-stage{overflow:hidden;border-radius:var(--jmc-block-radius)}
+.vigus-experience .vigus-gallery-strip{overscroll-behavior-inline:contain;scroll-padding-inline:2px}
+.vigus-experience .vigus-gallery-strip figure{border-radius:var(--jmc-block-radius)}
+.vigus-experience .vigus-gallery-strip img{aspect-ratio:16/11}
+.vigus-experience .vigus-selector-layout{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:var(--jmc-layout-gap)}
+.vigus-experience .vigus-selector-car img{max-width:100%;object-fit:contain}
+.vigus-experience .vigus-selector-details,.vigus-experience .vigus-highlight-info,.vigus-experience .vigus-orbit-info{min-width:0}
+.vigus-experience .vigus-local-inner>div{gap:clamp(12px,2vw,30px)}
+.vigus-experience .vigus-orbit-layout{gap:var(--jmc-layout-gap)}
+.vigus-experience .vigus-orbit-info h3{font-size:clamp(27px,2.7vw,48px)}
+.catalogue-feature .vehicle-preview{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+.catalogue-feature .vehicle-preview-visual{min-width:0}
+.catalogue-feature .vehicle-preview-copy{min-width:0;padding:clamp(28px,4vw,64px)}
+.catalogue-feature .vehicle-preview-copy h3{line-height:1.2;text-wrap:balance}
+main:not(.vigus-experience) .section-head{gap:clamp(20px,3vw,48px)}
+main:not(.vigus-experience) .steps-grid{gap:clamp(16px,2.2vw,32px)}
+@media(max-width:1100px){
+ .vigus-experience .vigus-local-inner>div{gap:13px}
+ .vigus-experience .vigus-selector-layout{grid-template-columns:1fr}
+ .vigus-experience .vigus-selector-car img{height:clamp(270px,39vw,480px)}
+}
+@media(max-width:760px){
+ html{scroll-padding-top:110px}
+ .vigus-experience .vigus-section{padding-block:clamp(52px,10vw,76px)}
+ .vigus-experience .vigus-section-heading{text-align:left;max-width:100%;margin-bottom:28px}
+ .vigus-experience .vigus-section-heading h2{font-size:clamp(30px,7.2vw,44px);margin:12px 0 14px}
+ .vigus-experience .vigus-section-heading p{margin-inline:0;font-size:14px}
+ .vigus-experience .vigus-story-mosaic{
+   aspect-ratio:auto;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+   grid-template-rows:auto auto;gap:12px;
+ }
+ .vigus-experience .vigus-story-large{grid-column:1/-1;grid-row:auto;aspect-ratio:16/10}
+ .vigus-experience .vigus-story-small{grid-column:1;grid-row:2;aspect-ratio:4/5}
+ .vigus-experience .vigus-story-note{grid-column:2;grid-row:2;padding:clamp(14px,3vw,24px)}
+ .vigus-experience .vigus-story-note p{font-size:clamp(14px,3.2vw,19px)}
+ .vigus-experience .vigus-cinema{height:clamp(370px,72vw,550px);min-height:0}
+ .vigus-experience .vigus-cinema>img{object-position:55% center}
+ .vigus-experience .vigus-cinema-overlay{left:20px;right:20px;bottom:35px}
+ .vigus-experience .vigus-cinema-overlay h2{font-size:clamp(31px,7vw,45px)}
+ .vigus-experience .vigus-quick-specs{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 10px}
+ .vigus-experience .vigus-quick-specs>div{padding-block:12px}
+ .vigus-experience .vigus-highlight-experience{grid-template-columns:minmax(0,1fr)}
+ .vigus-experience .vigus-highlight-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .vigus-experience .vigus-highlight-options button{min-height:64px;padding-inline:7px;font-size:13px}
+ .vigus-experience .vigus-highlight-info{gap:22px}
+ .vigus-experience .vigus-capabilities-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+ .vigus-experience .vigus-selector{padding:clamp(18px,4vw,30px);border-radius:14px}
+ .vigus-experience .vigus-selector-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+ .vigus-experience .vigus-selector-stats strong{font-size:clamp(15px,3vw,21px)}
+ .vigus-experience .vigus-orbit-controls{gap:8px}
+ .vigus-experience .vigus-orbit-steps button{font-size:11px;padding:8px 12px}
+ .vigus-experience .vigus-local-inner{min-height:52px;gap:12px}
+ .vigus-experience .vigus-local-inner>div{display:none}
+ .vigus-experience .vigus-local-cta{font-size:11px}
+ .catalogue-feature .vehicle-preview{grid-template-columns:minmax(0,1fr)}
+ .catalogue-feature .vehicle-preview-visual:has(.home-vigus-product){aspect-ratio:16/10;min-height:0}
+ .catalogue-feature .vehicle-preview-copy{padding:clamp(25px,6vw,40px)}
+}
+@media(max-width:440px){
+ .vigus-experience .vigus-highlight-options{grid-template-columns:minmax(0,1fr)}
+ .vigus-experience .vigus-highlight-options button{min-height:55px}
+ .vigus-experience .vigus-story-mosaic{gap:9px}
+ .vigus-experience .vigus-story-note span{font-size:10px}
+ .vigus-experience .vigus-selector-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .vigus-experience .vigus-hero-image-editorial{height:clamp(250px,67vw,330px)}
+}
