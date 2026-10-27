@@ -998,3 +998,16 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
 @media(max-width:380px){
  .vigus-experience .vigus-hero-bottom h1{font-size:clamp(3.5rem,16vw,4.25rem)}
 }
+
+
+/* No forced uppercase anywhere in editorial UI; preserve official logo imagery */
+.eyebrow,.vigus-eyebrow,.vigus-kicker,.preview-index,.jmc-drawer-eyebrow,
+.vigus-cinema-overlay>span,.vigus-story-note>span,
+.vigus-experience .vigus-hero-bottom .vigus-eyebrow{
+ text-transform:none;
+ letter-spacing:.015em;
+}
+.jmc-drawer-foot,.footer-bottom,.hero-bottom-inner,.vigus-local-nav,
+.nav,.footer-nav,.vigus-experience .vigus-section-heading h2{
+ text-transform:none;
+}
