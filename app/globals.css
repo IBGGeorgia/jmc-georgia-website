@@ -1106,10 +1106,6 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  font:500 clamp(15px,1.15vw,17px)/1.65 var(--font-ka);
  font-style:normal;overflow-wrap:break-word;
 }
-.jmc-footer-contact-note{
- margin:10px 0 0;color:var(--footer-tertiary);
- font-size:13px;line-height:1.6;
-}
 .jmc-footer-socials{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
 .jmc-social-icon{
  display:inline-flex;align-items:center;justify-content:center;
@@ -1127,7 +1123,6 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
 }
 .jmc-footer-bottom a{color:rgba(255,255,255,.84);text-decoration:none}
 .jmc-footer-bottom a:hover{color:#fff}
-.jmc-footer-signature{font-family:var(--font-latin)}
 @media(max-width:1180px){
  .jmc-footer-main{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 32px}
  .jmc-footer-brand-column{
@@ -1167,4 +1162,38 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
 }
 @media(prefers-reduced-motion:reduce){
  .jmc-footer-cta,.jmc-footer-column>a{transition:none}
+}
+
+
+/* Contact page: confirmed address, coherent with shared footer design */
+.jmc-contact-page{padding-bottom:clamp(72px,8vw,132px)}
+.jmc-contact-page .page-head{padding-bottom:clamp(24px,3vw,48px)}
+.jmc-contact-page .page-head p.muted{font-size:clamp(15px,1.1vw,17px);color:var(--label-secondary);line-height:1.65}
+.jmc-contact-location{
+ display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);
+ align-items:end;gap:28px 55px;
+ border:1px solid #e7e8ea;background:#f7f8f9;
+ border-radius:20px;padding:clamp(26px,4vw,56px);
+}
+.jmc-contact-location-label{
+ margin:0 0 19px;color:var(--label-secondary);
+ font-size:14px;font-weight:600;line-height:1.5;letter-spacing:0;
+}
+.jmc-contact-location-address{
+ display:block;color:var(--label-primary);
+ font-family:var(--font-ka);font-size:clamp(26px,2.8vw,43px);
+ font-weight:600;font-style:normal;line-height:1.35;
+ letter-spacing:-.025em;overflow-wrap:break-word;
+}
+.jmc-contact-location-note{
+ max-width:350px;margin:0;color:var(--label-secondary);
+ font-size:14px;line-height:1.7;
+}
+@media(max-width:760px){
+ .jmc-contact-location{grid-template-columns:minmax(0,1fr);gap:28px;border-radius:16px}
+ .jmc-contact-location-label{margin-bottom:12px}
+ .jmc-contact-location-address{font-size:clamp(25px,6vw,35px)}
+}
+@media(max-width:430px){
+ .jmc-contact-location{padding:24px 20px}
 }
