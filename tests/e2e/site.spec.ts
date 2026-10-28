@@ -367,3 +367,12 @@ test('Grand Avenue PRO cannot be reached on production-style public routing',asy
  const response=await page.goto('/vehicles/grand-avenue-pro',{waitUntil:'domcontentloaded'});
  expect(response?.status()).toBe(404);
 });
+
+test('PRO editorial draft stays disconnected from public pages and routing',async({page})=>{
+ const response=await page.goto('/vehicles/grand-avenue-pro',{waitUntil:'domcontentloaded'});
+ expect(response?.status()).toBe(404);
+ await page.goto('/vehicles',{waitUntil:'domcontentloaded'});
+ await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(0);
+ await page.goto('/test-drive',{waitUntil:'domcontentloaded'});
+ await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(0);
+});
