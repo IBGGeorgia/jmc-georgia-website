@@ -241,7 +241,10 @@ test('Grand Avenue draft: exact brochure trim, truthful fields and no premature 
  expect(grandAvenueEquipment.exterior.length).toBeGreaterThanOrEqual(5);
  expect(grandAvenueEquipment.interior).toHaveLength(18);
  expect(grandAvenueEquipment.safety).toHaveLength(20);
- expect(grandAvenueMedia.hero).toBeUndefined();
+ expect(Object.keys(grandAvenueMedia).sort()).toEqual(['capability','detail','exterior','front','hero','interior','rear','safety','side']);
+ for(const [slot,url] of Object.entries(grandAvenueMedia)){
+  expect(url,`${slot}: approved Higgsfield FLUX.2 image`).toMatch(/^https:\/\/d8j0ntlcm91z4\.cloudfront\.net\/.+\.png$/);
+ }
  expect(grandAvenue.gallery).toHaveLength(0);
  expect(vehicles.some(v=>v.slug==='grand-avenue')).toBe(false);
  const response=await page.goto('/vehicles/grand-avenue',{waitUntil:'domcontentloaded'});
