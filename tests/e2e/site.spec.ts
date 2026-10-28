@@ -1,8 +1,9 @@
 import {test, expect} from '@playwright/test';
+import {vehicles} from '../../lib/vehicles';
 
 const routes=[
  {path:'/',label:'home'},
- {path:'/vehicles/vigus',label:'vigus'},
+ ...vehicles.map(({slug})=>({path:`/vehicles/${slug}`,label:slug})),
  {path:'/about',label:'about'},
  {path:'/contact',label:'contact'},
  {path:'/test-drive',label:'test-drive'},
@@ -206,4 +207,18 @@ test('approved header and booking CTA layout, contact address in burger/footer',
   await expect(page).toHaveURL(/\/test-drive$/);
   await expect(page.getByText('ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება.',{exact:false})).toBeVisible();
  }
+});
+
+test('model publication: only approved records can become public routes',async({page})=>{
+ expect(vehicles.length).toBeGreaterThan(0);
+ expect(vehicles.every(vehicle=>vehicle.publicationStatus==='approved')).toBe(true);
+ expect(new Set(vehicles.map(vehicle=>vehicle.slug)).size).toBe(vehicles.length);
+ for(const model of vehicles){
+  expect(model.name.trim()).not.toBe('');
+  expect(model.description.trim()).not.toBe('');
+  expect(model.slug).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+  expect(model.gallery).toEqual(expect.arrayContaining([]));
+ }
+ const response=await page.goto('/vehicles/unapproved-model-for-qa',{waitUntil:'domcontentloaded'});
+ expect(response?.status()).toBe(404);
 });
