@@ -1,21 +1,47 @@
 # JMC Georgia Website
 
-Official JMC Georgia website (initial staging scaffold).
+Next.js App Router / React / TypeScript project for JMC Georgia. Deployed on Render at https://jmc-georgia.onrender.com/ (currently staged for content approval and `noindex`).
 
-## Stack
-Next.js App Router, React, TypeScript, CSS; deployed on Render in Frankfurt.
+## Mandatory design specification
 
-## Local development
+**Read `docs/JMC_DESIGN_SYSTEM.md` before every UI, content or model addition.**
+
+- Shared styles: `app/design-system.css` (imported after legacy `app/globals.css`)
+- Development guardrails: `AGENTS.md`
+- Model source data: `lib/vehicles.ts`
+- Vigus reference page: `app/vehicles/[slug]/page.tsx`
+- Motion system: `app/vehicles/[slug]/vigus-motion.tsx`
+- Approved asset notes: `docs/VIGUS_ASSET_INSTALL.md`
+
+The design direction is premium, minimal and HIG-informed. Keep Vigus's **red functional reading-progress bar** but do not add decorative red lines or red CTA buttons. Preserve original brand/logo assets and verified vehicle photographs.
+
+## Development
+
 ```bash
 npm install
 npm run dev
+npm run build
+npm run lint
+npm run audit
 ```
 
-## Planned next steps
-- Replace text logo placeholder with approved JMC vector file (brand guideline prohibits recreating logo).
-- Add officially confirmed local models, trims, prices, imagery and CMS-backed catalogue.
-- Implement validated, spam-protected test-drive and inquiry APIs and consent flow, then Zoho CRM integration.
-- Approve legal privacy policy and production SEO/indexing before launch.
-- Connect custom domain after staging review.
+## Current route and availability status
 
-Do not collect live leads in current scaffold; forms are intentionally disabled.
+- `/`: JMC home with Vigus.
+- `/vehicles/vigus`: model detail / animated editorial experience; awaiting final browser visual approval.
+- `/vehicles`: currently redirects to Vigus, since the wider catalogue is not yet published.
+- `/about`, `/contact`, `/test-drive`, `/privacy`: shared neutral editorial design.
+- Confirmed address: **თბილისი, ბელიაშვილის 115**.
+- Test-drive online submissions are disabled; a validated and spam-protected API and consent flow are not yet available.
+- Privacy policy is pending approval. No fake policy or live-lead promise should be introduced.
+- Facebook, Instagram and LinkedIn icons deliberately have no links.
+
+## Before public launch or additional models
+
+- Approve final browser-visible Vigus template and verify responsive/keyboard/touch motion behavior.
+- Obtain officially verified specifications, price availability, trims, model-specific photographs and rights for each new model.
+- Approve legal/consent, lead capture and CRM integrations before enabling online forms.
+- Verify SEO policy, custom domain and indexing permission.
+- Deploy and verify the exact GitHub commit on Render.
+
+**Do not describe a successful Build as equivalent to browser or visual QA.**
