@@ -145,7 +145,7 @@ test('Vigus: active CTAs are truthful, labels are Georgian and future routes rem
  await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
  await expect(page.locator('.vigus-hero-actions a[href="#trims"]')).toHaveCount(1);
  await expect(page.locator('.vigus-hero-actions a[href="/test-drive"]')).toHaveCount(0);
- await expect(page.locator('.model-final a[href="/contact"]')).toHaveCount(1);
+ await expect(page.locator('.model-final a[href="/test-drive"]')).toHaveCount(1);
  await expect(page.locator('.model-local-nav .vigus-scroll-progress-fill')).toHaveCount(1);
  await expect(page.locator('.model-section-heading')).toHaveCount(6);
  const copy=await page.locator('main').innerText();
