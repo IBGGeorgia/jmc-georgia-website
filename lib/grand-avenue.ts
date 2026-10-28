@@ -7,7 +7,7 @@ import type {Vehicle,Feature} from './vehicles';
  * The PRO LX/SLX petrol/diesel entries are a DIFFERENT future model.
  */
 /** User-approved Higgsfield FLUX.2 Flex 2K assets, 2026-10-28.
- * External CDN assets are intentionally draft-only pending production asset hosting QA.
+ * Optimized first-party WebP files, verified by GitHub Actions.
  */
 export const grandAvenueMedia:{
  hero?:string;exterior?:string;interior?:string;capability?:string;
@@ -122,8 +122,8 @@ export const grandAvenue:Vehicle={
  category:'pickup',
  publicationStatus:'draft',
  description:'JMC Grand Avenue — 4×4 პიკაპი 2.5-ლიტრიანი დიზელის ძრავით, 211 ც.ძ. სიმძლავრითა და 8-საფეხურიანი ავტომატური ტრანსმისიით.',
- // Intentionally no heroImage/gallery until the user's model-correct photographs arrive.
- gallery:[],
+ heroImage:grandAvenueMedia.hero,
+ gallery:[grandAvenueMedia.front!,grandAvenueMedia.side!,grandAvenueMedia.rear!,grandAvenueMedia.detail!],
  trims:[{
   id:'grand-avenue-4x4-at-gl',
   name:'4X4 AT GL · Diesel',
