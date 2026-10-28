@@ -22,3 +22,11 @@ Before any page, component, content, CSS, animation, or new-model change, read:
 - QA must include build, TypeScript, npm audit and the GitHub Actions Playwright browser suite (`npm run qa:browser`) covering 6 routes × 6 viewport widths, keyboard/touch simulations and reduced motion. Inspect the run artifact's screenshots. Confirm live Render deployment before claiming release.
 - Do not claim visual/browser QA unless a real browser actually tested the result.
 - Preserve existing working data, links, and APIs. Record remaining limitations precisely.
+
+
+## Latest approved navigation decision
+
+- Main header: burger menu + centered official logo only. No Vigus CTA.
+- Model sticky navigation: `დაჯავშნე Test Drive` -> `/test-drive`, with the Vigus red progress bar retained.
+- Address access: Contact, Footer, and Burger menu address block. Keep model-page actions oriented to verified content/test-drive information instead.
+- Booking is **not live**: the target page must clearly state applications are not accepted. No false confirmation or enabled lead form.
