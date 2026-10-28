@@ -19,6 +19,6 @@ Before any page, component, content, CSS, animation, or new-model change, read:
 ## Workflow
 - Prefer shared CSS and components over per-page styling patches. Do not keep piling overrides into legacy `app/globals.css`.
 - For new models follow chapter 8 of the canonical design document.
-- QA must include build, TypeScript, npm audit, responsive, keyboard/touch and reduced motion. Confirm live Render deployment before claiming release.
+- QA must include build, TypeScript, npm audit and the GitHub Actions Playwright browser suite (`npm run qa:browser`) covering 6 routes × 6 viewport widths, keyboard/touch simulations and reduced motion. Inspect the run artifact's screenshots. Confirm live Render deployment before claiming release.
 - Do not claim visual/browser QA unless a real browser actually tested the result.
 - Preserve existing working data, links, and APIs. Record remaining limitations precisely.
