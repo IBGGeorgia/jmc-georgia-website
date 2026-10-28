@@ -6,6 +6,7 @@ export function GrandGallery({photos}:{photos:Photo[]}){
  const closeRef=useRef<HTMLButtonElement>(null);
  const triggerRefs=useRef<(HTMLButtonElement|null)[]>([]);
  const originatingTrigger=useRef<number|null>(null);
+ const touchStart=useRef<number|null>(null);
  useEffect(()=>{if(active===null&&originatingTrigger.current!==null){triggerRefs.current[originatingTrigger.current]?.focus();originatingTrigger.current=null}},[active]);
  useEffect(()=>{
   if(active===null)return;
@@ -27,9 +28,9 @@ export function GrandGallery({photos}:{photos:Photo[]}){
     <span className="grand-gallery-zoom" aria-hidden="true">↗</span>
    </button><figcaption>{String(i+1).padStart(2,'0')} / {item.label}</figcaption>
   </figure>)}</div>
-  {active!==null&&<div className="grand-lightbox" role="dialog" aria-modal="true" aria-label="Grand Avenue — ფოტოგალერეა">
+  {active!==null&&<div className="grand-lightbox" role="dialog" aria-modal="true" aria-label="Grand Avenue — ფოტოგალერეა" onTouchStart={e=>{touchStart.current=e.touches[0]?.clientX??null}} onTouchEnd={e=>{if(touchStart.current===null)return;const distance=e.changedTouches[0].clientX-touchStart.current;if(Math.abs(distance)>65)setActive(i=>i===null?null:(i+(distance<0?1:photos.length-1))%photos.length);touchStart.current=null}}>
    <button ref={closeRef} type="button" className="grand-lightbox-close" onClick={()=>setActive(null)} aria-label="დახურვა">×</button>
-   <img src={photos[active].src} alt={`JMC Grand Avenue — ${photos[active].label}`}/>
+   <img draggable={false} src={photos[active].src} alt={`JMC Grand Avenue — ${photos[active].label}`}/>
    <div className="grand-lightbox-controls"><button type="button" onClick={()=>setActive((active+photos.length-1)%photos.length)} aria-label="წინა ფოტო">←</button>
     <span aria-live="polite">{String(active+1).padStart(2,'0')} / {String(photos.length).padStart(2,'0')} · {photos[active].label}</span>
     <button type="button" onClick={()=>setActive((active+1)%photos.length)} aria-label="შემდეგი ფოტო">→</button></div>
