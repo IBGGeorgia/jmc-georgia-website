@@ -470,3 +470,11 @@
   width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
  }
 }
+
+/* Height Bible v1.1: normalize the earlier PRO tablet-specific 720px hero. */
+@media(min-width:701px){
+ .pro-draft-page .pro-draft-hero{height:var(--jmc-hero-height-desktop);min-height:var(--jmc-hero-height-desktop);max-height:var(--jmc-hero-height-desktop)}
+}
+@media(max-width:700px){
+ .pro-draft-page .pro-draft-hero{height:var(--jmc-hero-height-mobile);min-height:var(--jmc-hero-height-mobile);max-height:var(--jmc-hero-height-mobile)}
+}
