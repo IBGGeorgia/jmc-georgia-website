@@ -5,7 +5,7 @@ import {vehicles} from '../../lib/vehicles';
 
 export const metadata:Metadata={
  title:'ტესტ-დრაივი',
- description:'JMC Georgia — ტესტ-დრაივის დაჯავშნის ინფორმაცია და JMC Vigus-ისა და Grand Avenue-ის გაცნობა.'
+ description:'JMC Georgia — ტესტ-დრაივის დაჯავშნის ინფორმაცია და JMC Vigus-ის, Grand Avenue-ისა და Grand Avenue PRO-ის გაცნობა.'
 };
 
 export default function TestDrive(){
