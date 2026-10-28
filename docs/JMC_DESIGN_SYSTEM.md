@@ -144,3 +144,12 @@ For every future UI request:
 - Record what was verified and what remains untested; never claim screenshots or browser QA without evidence.
 
 **Known technical debt:** `app/globals.css` contains historical layered styles (~110 KB). `app/design-system.css` is the canonical shared override layer; gradually consolidate legacy CSS without destructive large deletions or changing model imagery/functionality.
+
+## 11. Automated browser regression suite
+
+- Canonical suite: `tests/e2e/site.spec.ts`; runner config: `playwright.config.ts`.
+- Github Actions: `.github/workflows/browser-qa.yml`. Run on changes to pages, CSS, shared components or model data.
+- Screenshots and failure traces: downloadable artifact `jmc-browser-qa` from the selected GitHub Actions run.
+- Current automated route matrix: 6 public pages × viewport widths 1440, 1024, 768, 430, 390 and 320 px.
+- Additional checks: modal focus trap / Escape, inert background, Vigus reading-progress bar, 4-photo selector, trim controls, reduced-motion and real-scroll reveal assertions.
+- Interpret results correctly: Chromium automation can establish responsive/functional baselines, but cannot automatically approve aesthetics, iOS/Safari or all visual transitions. Review screenshots and obtain user approval for Vigus before adding the next model.
