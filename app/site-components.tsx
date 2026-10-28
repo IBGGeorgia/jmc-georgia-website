@@ -36,7 +36,7 @@ export function Footer(){
     </div>
     <div className="jmc-footer-column jmc-footer-social-column">
      <h2>სოციალური ქსელები</h2>
-     <div className="jmc-footer-socials" aria-label="სოციალური ქსელების ბმულები მოგვიანებით დაემატება">
+     <div className="jmc-footer-socials" role="group" aria-label="Facebook, Instagram და LinkedIn — ბმულების გარეშე">
       <span className="jmc-social-icon" role="img" aria-label="Facebook" title="Facebook">
        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M13.8 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.8V3.1c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.7v1.9H7.3v3.2h2.7V21h3.8Z"/></svg>
       </span>
