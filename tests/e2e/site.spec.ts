@@ -225,7 +225,7 @@ test('model publication: only approved records can become public routes',async({
   expect(Array.isArray(model.trims)).toBe(true);
  }
  const response=await page.goto('/vehicles/unapproved-model-for-qa',{waitUntil:'domcontentloaded'});
- expect(response?.status()).toBe(200);
+ expect(response?.status()).toBe(404);
 });
 
 test('Grand Avenue published: exact brochure trim and verified media',async({page})=>{
@@ -373,9 +373,9 @@ test('PRO is linked from catalogue and test drive',async({page})=>{
  const response=await page.goto('/vehicles/grand-avenue-pro',{waitUntil:'domcontentloaded'});
  expect(response?.status()).toBe(200);
  await page.goto('/vehicles',{waitUntil:'domcontentloaded'});
- await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(1);
+ await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(2);
  await page.goto('/test-drive',{waitUntil:'domcontentloaded'});
- await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(1);
+ await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(2);
 });
 
 test('PRO editorial media only points to original user photos, not AI candidate or other models',()=>{
