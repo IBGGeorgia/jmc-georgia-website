@@ -1,0 +1,146 @@
+# JMC Georgia — Design System & Product Page Standard
+
+**Status:** Canonical product/design standard (v1.0, 2026-10-28)
+**Scope:** All public pages, navigation, responsive components, future vehicle pages.
+**Approval note:** Direction and specific Vigus decisions reflect user-reviewed preferences. This document codifies them; it does **not** imply all pages have passed visual/browser acceptance.
+
+> **Source of truth for future development.** Before writing or editing UI, read this document, `app/design-system.css`, the target page and its data source. Follow the shared defaults unless a new explicit approval overrides a rule.
+
+## 1. Design intent
+
+- Product-first, restrained, confident, minimal, and editorial. Use Apple HIG as a usability **principle**, not as a license to reproduce Apple branding or ornamental UI.
+- Give automotive photography, typography, and real product data the visual priority. No unnecessary effects, stripes, floating red rules, decorative underlines, dramatic button shadows, or gratuitous gradients.
+- Keep existing Vigus motion storytelling, but make motion serve meaning. The confirmed **thin red scroll progress bar under Vigus's sticky local navigation** is deliberately retained.
+- Never substitute a flashy animation for a usable function; no fake 360-degree vehicle view from only four photos.
+
+## 2. Color and visual tokens
+
+Canonical implementation: `app/design-system.css` (loaded **after** `app/globals.css` in `app/layout.tsx`).
+
+| Role | Token | Value / intent |
+| --- | --- | --- |
+| Primary ink | `--jmc-ui-ink` | `#1d1d1f`, near-black |
+| Secondary text | `--jmc-ui-secondary` | `#626269` |
+| Supporting text | `--jmc-ui-tertiary` | `#818188` |
+| Soft surface | `--jmc-ui-surface` | `#f5f5f7` |
+| Hover surface | `--jmc-ui-surface-hover` | `#e9e9ed` |
+| Hairline divider | `--jmc-ui-border` | `rgba(29,29,31,.10)` |
+| Focus ring | `--jmc-ui-focus` | `#57575f` |
+| Card radius | `--jmc-ui-radius-card` | `20px` |
+| Control radius | `--jmc-ui-radius-control` | `999px` |
+| Brand red | `--jmc-red` | `#E50012`; **only approved logos and meaningful exceptions** |
+
+**Red exceptions:** Official JMC logo artwork stays red as supplied. The Vigus section-reading progress bar stays red, 2 px high. Do not add red decorative rules beneath numbers, tabs, titles, cards, trim selectors, or buttons. Any other red accent requires specific approval.
+
+The site may use dark photo panels, dark CTA panels, or a subtle dark hero gradient, but avoid decorative geometric stripes. Do not recolor or reconstruct the official logo.
+
+## 3. Typography and language
+
+- Georgian: currently `--font-ka` prefers Google Sans and falls back to Noto Sans Georgian / sans-serif in the project. Latin/model labels: `--font-latin` prefers Switzer. Preserve Unicode Georgian glyph shaping and correct line-height.
+- Human-readable Georgian. Sentence case and natural capitalization for titles and navigation; do not apply `text-transform:uppercase` to Georgian interface copy.
+- **Permitted exception:** `VIGUS` may remain uppercase in its approved hero/model identification. Original brand marks remain as supplied.
+- Editorial H1 and H2 should be large but clear, with line-height ~1.12–1.25; supporting copy usually 1.65–1.8.
+- Use one heading hierarchy per page, descriptive links, short CTA text, and copy grounded in actually enabled functions. No invented slogans, corporate history, warranty/prices, locations, partner claims or specifications.
+
+## 4. Buttons, links and interactive states
+
+Use shared `.button` for general pages; `.vigus-pill` is the model-story equivalent.
+
+| Role | Presentation | Behavior |
+| --- | --- | --- |
+| Primary CTA | Graphite fill / white type | Neutral hover; no red fill or raised shadow |
+| Secondary CTA | Soft gray fill / dark type | Subtle surface-hover |
+| CTA on a dark area | White fill / dark type | Secondary is translucent white |
+| Text link | Type + optional direction arrow | No decorative red underline |
+| Tabs/segmented controls | Soft neutral background; selected white/graphite | Do not add red rules |
+| Arrows/icon controls | Simple circular surface and icon | Minimum comfortable hit target |
+| Disabled states | Clearly disabled and unavailable | No fake navigation |
+
+- Interactive targets **44 × 44 px minimum** (48 px preferred for CTAs).
+- Focus must remain visible for keyboard users. Neutral focus ring on light surfaces, white ring on dark surfaces; never rely solely on background changes to signal focus.
+- Use `:hover` only as enhancement; all interactions must be possible by touch and keyboard.
+- Don't add links without confirmed targets. Footer social icons (Facebook, Instagram, LinkedIn) have **null URLs** and are **non-interactive** pending supplied official links.
+- An unimplemented form or feature must have a truthful status; no pretend booking or lead intake.
+
+## 5. Layout and responsive behavior
+
+- Preserve the existing content containers and generous whitespace; avoid unnecessary full-width text.
+- Use responsive grid/flex, `minmax(0,1fr)`, safe inline padding, and readable Georgian text.
+- Standard review breakpoints: **1440, 1024, 768, 430, 390, 320 px**.
+- Under ~850 px, split informational panels stack into one column. Under ~700 px, CTAs and content spacing simplify; do not allow horizontal overflow.
+- Header stays sticky, model-local navigation stays below header, mobile drawer remains a true modal with Escape, focus trap, focus return, inert background and scroll lock.
+- Footer has the confirmed address **თბილისი, ბელიაშვილის 115**, real model/contact/test-drive/about links and three decorative social icons with no URLs.
+
+## 6. Motion: Vigus is the reference implementation
+
+Reference components:
+- `app/vehicles/[slug]/page.tsx` — complete Vigus section composition.
+- `app/vehicles/[slug]/vigus-motion.tsx` — GSAP/ScrollTrigger/SplitText orchestration.
+- `app/vehicles/[slug]/vigus-experience.tsx` — photo view, tab/storytelling and trim selector.
+- `app/vehicles/[slug]/vigus-gallery.tsx` — drag/keyboard photo gallery.
+
+Approved pattern:
+1. Hero enters once; no excessive looping.
+2. Kinetic lines of text animate as whole lines; never split Georgian glyphs character-by-character.
+3. Cinematic photo reveal and quiet parallax/Scroll storytelling on capable desktop.
+4. Sticky story imagery transitions from **existing verified photographs**; mobile uses simpler switching.
+5. Numeric counters show **only source-verified values**, maintaining exact units/decimals.
+6. Real four-photo view is described as four angles, **not** full 360° capture.
+7. Trim selector/table updates use restrained transitions; all comparison data comes from `lib/vehicles.ts`.
+8. Vigus sticky-local-nav has a thin **red** progress line: functional reading progress; preserve it.
+9. `prefers-reduced-motion:reduce` must disable decorative animation without hiding content; JS failure must leave content readable.
+
+No blanket reuse of Vigus-specific animation on unrelated informational pages.
+
+## 7. Current page inventory and status
+
+| Route | Intended layout | Data/functional state |
+| --- | --- | --- |
+| `/` | Cinematic, minimal editorial hero; Vigus card; three-step explanation; neutral contact CTA | Vigus is only confirmed model; no invented catalogue data |
+| `/vehicles/vigus` | Reference model page with photos, chapters, views, comparison and scroll progress | **Awaiting final browser visual/interaction approval**, despite successful builds |
+| `/vehicles` | Redirect to `/vehicles/vigus` | Full catalogue not yet active |
+| `/about` | Shared informational page + truthful JMC/Vigus introduction | Corporate history pending officially approved text |
+| `/contact` | Shared page intro + address information card | Only confirmed address; phone/hours pending |
+| `/test-drive` | Shared informational page + disabled online booking status | No lead capture or live booking until approved API/consent exists |
+| `/privacy` | Shared informational page + pending-policy status | **Not** a substitute for an approved legal privacy policy |
+| Global header/footer | Consistent navigation / actions / neutral controls | Facebook/Instagram/LinkedIn intentionally not linked |
+
+`app/vehicles/catalogue-explorer.tsx` exists for later expansion but is **not** mounted at the current `/vehicles` route.
+
+## 8. Future model pages: required workflow
+
+**Do not create another model until Vigus is visually approved as template.**
+
+1. Intake: approved model name/slug/segment, variants, prices (or explicit *not available*), powertrain/specification source, brand assets, full photo set and permitted image use.
+2. Data: add model/trim/features to `lib/vehicles.ts`; preserve existing slugs/fields. Never copy Vigus specifications into a different model.
+3. Composition: reuse global Header/Footer, introductory hero, verified specs, editorial chapters, relevant galleries, trim selection/comparison and CTA states. Complex photo/360 interactions **only when source images actually support them**.
+4. Motion: reuse the approved GSAP philosophy, not necessarily identical timings for every model; respect `prefers-reduced-motion`.
+5. Functional truthfulness: no unsupported form, checkout, price, social URL, finance promise, test drive booking or location.
+6. SEO: title and description reflect confirmed model. Preserve current `robots:noindex` until authorized to launch.
+7. QA: build, type check, npm audit, desktop/tablet/mobile, keyboard/touch, image loading, sticky nav, in-page anchors, hover/focus, scrolling, accessibility and Render LIVE status.
+8. Obtain explicit user approval before declaring template finished or proceeding to another model.
+
+## 9. Definition of done & QA
+
+**Required:**
+- Static source audit confirms exact confirmed content; no placeholder CTA promises.
+- Successful `npm install`, `npm run build`, `npm run lint` (TS checks), `npm run audit`.
+- Visual acceptance on 1440 / 1024 / 768 / 430 / 390 / 320 px, including zoom and Georgian wrapping.
+- Test every link, CTA, dialog, gallery/trim control, keyboard Tab/Escape, screen-reader names, mobile touch and reduced-motion mode.
+- Confirm no image crop changes, Vigus 4-photo truthfulness and no invented model data.
+- Render service `srv-dbge2kflk1mc73dq4lpg` deployed to `https://jmc-georgia.onrender.com/`; record deployed commit and actual Render status.
+- User approval before finalizing the Vigus template.
+
+**Unverified unless explicitly tested:** Screenshot-level browser rendering, performance/Core Web Vitals, keyboard behavior in an actual browser, iOS Safari touch behavior, and legal policy content. A successful Build is **not** the same as visual QA.
+
+## 10. Change-control rule
+
+For every future UI request:
+- Read **this document + `app/design-system.css`** before touching components.
+- Prefer modifying shared tokens/components to copying overrides into individual pages.
+- Keep the design history and all approved media/data intact.
+- Do not add new red lines/buttons, unsupported marketing copy, or new animations without a clear functional purpose.
+- Test the impacted routes and publish to the existing production Render service.
+- Record what was verified and what remains untested; never claim screenshots or browser QA without evidence.
+
+**Known technical debt:** `app/globals.css` contains historical layered styles (~110 KB). `app/design-system.css` is the canonical shared override layer; gradually consolidate legacy CSS without destructive large deletions or changing model imagery/functionality.
