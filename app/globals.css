@@ -477,11 +477,11 @@ html,body{width:100%;min-width:0}
 /* Editorial width system v3 — full-bleed storytelling, measured reading and UI.
    Do not cap the global .container: edge-to-edge artwork and color sections remain fluid. */
 :root{
- --content-readable:740px;
+ --content-readable:760px;
  --content-heading:1080px;
- --content-wide:1480px;
+ --content-wide:1680px;
  --content-gallery:1680px;
- --content-ui:1200px;
+ --content-ui:1680px;
 }
 /* Site-wide navigation and standard page compositions */
 .site-header .head-inner,
@@ -2114,24 +2114,6 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  .vigus-experience .jmc-unified-hero .vigus-hero-actions{width:auto!important;max-width:100%;gap:0!important}
 }
 
-/* Shared model masthead frame: identical centered 1200px inner grid for all three.
-   Overrides earlier viewport-wide !important values on VIGUS / Grand Avenue. */
-.vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container,
-.vigus-experience .model-local-nav .vigus-local-inner.container,
-.vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
- width:min(1200px,calc(100% - 48px))!important;
- max-width:1200px!important;
- margin-inline:auto!important;
-}
-.vigus-experience .model-local-nav .vigus-local-inner.container{padding-inline:0!important}
-@media(max-width:700px){
- .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container,
- .vigus-experience .model-local-nav .vigus-local-inner.container,
- .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
-  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
- }
-}
-
 /* Model page alignment: match the actual lower editorial grid (1680px),
    not the earlier 1200px nav/hero constraint. */
 .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container,
@@ -2151,7 +2133,8 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  .vigus-experience .model-local-nav .vigus-local-inner.container,
  .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container,
  .jmc-header .jmc-header-inner.container{
-  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+  width:calc(100% - 2 * var(--jmc-gutter-mobile))!important;
+  max-width:calc(100% - 2 * var(--jmc-gutter-mobile))!important;
  }
 }
 
