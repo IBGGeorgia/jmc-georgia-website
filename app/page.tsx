@@ -25,21 +25,32 @@ export default function Home() {
       <div className="intro-copy"><p>ყოველდღიური მარშრუტებიდან ახალ გამოწვევებამდე — JMC Georgia-ს საიტზე შეძლებ მოდელების გაცნობას, კომპლექტაციების შედარებას და გადაწყვეტილების მიღებისთვის საჭირო ინფორმაციის მიღებას.</p><Link href="/vehicles" className="text-link">ნახე ყველა მოდელი <span aria-hidden="true">↗</span></Link></div>
     </div></section>
 
-    <section className="section catalogue-feature"><div className="container">
-      <div className="section-head"><div><p className="eyebrow">JMC-ის ავტომობილები</p><h2>აღმოაჩინე მოდელების ხაზი</h2><p className="section-sub">აღმოაჩინე JMC Vigus, Grand Avenue და Grand Avenue PRO — სამი პიკაპი განსხვავებული მახასიათებლებითა და შესაძლებლობებით.</p></div><Link href="/vehicles" className="text-link">ყველა მოდელი <span aria-hidden="true">↗</span></Link></div>
-      <div className="jmc-home-model-grid" aria-label="JMC-ის მოდელები">
-        {vehicles.map((model,index)=><article key={model.slug} className="jmc-home-model-card">
-          <Link href={`/vehicles/${model.slug}`} className="jmc-home-model-image">
-            <img src={model.heroImage} alt={`JMC ${model.name}`} loading="lazy"/>
-          </Link>
-          <div className="jmc-home-model-content">
-            <span>{String(index+1).padStart(2,'0')} / JMC Pickup</span>
-            <h3>{model.name}</h3><p>{model.description}</p>
-            <Link href={`/vehicles/${model.slug}`} className="button">აღმოაჩინე {model.name} ↗</Link>
-          </div>
-        </article>)}
+    <section className="jmc-editorial-lineup" aria-labelledby="lineup-title">
+      <div className="container jmc-lineup-heading">
+        <div><p className="eyebrow">JMC / MODEL RANGE</p><h2 id="lineup-title">სამი ხასიათი.<br/><span>ერთი მიმართულება.</span></h2></div>
+        <Link href="/vehicles" className="text-link">ყველა მოდელი ↗</Link>
       </div>
-    </div></section>
+      {vehicles.filter(model=>model.slug==='grand-avenue-pro').map(model=>
+        <article className="jmc-lineup-feature" key={model.slug}>
+          <img src={model.heroImage} alt="JMC Grand Avenue PRO — მთავარი ფოტო" loading="lazy"/>
+          <div className="jmc-lineup-feature-shade"/>
+          <div className="container jmc-lineup-feature-content">
+            <span>01 / FEATURED PICKUP</span>
+            <h3>GRAND AVENUE <em>PRO</em></h3>
+            <p>ყველა გზა ახალი შესაძლებლობაა.</p>
+            <Link href={`/vehicles/${model.slug}`} className="jmc-lineup-pill">აღმოაჩინე PRO <span aria-hidden="true">↗</span></Link>
+          </div>
+        </article>
+      )}
+      <div className="container jmc-lineup-secondary">
+        {vehicles.filter(model=>model.slug!=='grand-avenue-pro').map((model,i)=>
+          <article key={model.slug} className="jmc-lineup-secondary-card">
+            <Link href={`/vehicles/${model.slug}`} className="jmc-lineup-secondary-visual"><img src={model.heroImage} alt={`JMC ${model.name}`} loading="lazy"/><span aria-hidden="true">↗</span></Link>
+            <div className="jmc-lineup-secondary-copy"><span>{String(i+2).padStart(2,'0')} / JMC PICKUP</span><h3>{model.name}</h3><p>{model.slug==='vigus'?'მზად ყოველდღიური გზებისა და ახალი გამოწვევებისთვის.':'დიზაინი და შესაძლებლობები, რომლებიც გზას სცდება.'}</p><Link href={`/vehicles/${model.slug}`}>გაიცანი მოდელი ↗</Link></div>
+          </article>
+        )}
+      </div>
+    </section>
 
     <section className="section steps-section"><div className="container"><div className="section-head"><div><p className="eyebrow">მარტივი პროცესი</p><h2>არჩევანიდან პირველ შეხვედრამდე</h2></div></div><div className="steps-grid">{steps.map(step=><article className="step" key={step.id}><span className="step-num">{step.id}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></article>)}</div></div></section>
 
