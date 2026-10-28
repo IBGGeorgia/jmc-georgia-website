@@ -37,17 +37,17 @@ export function Footer(){
     <div className="jmc-footer-column jmc-footer-social-column">
      <h2>სოციალური ქსელები</h2>
      <div className="jmc-footer-socials" aria-label="სოციალური ქსელების ბმულები მოგვიანებით დაემატება">
-      <span className="jmc-social-icon" aria-label="Facebook — ბმული მალე დაემატება" title="Facebook">
+      <span className="jmc-social-icon" role="img" aria-label="Facebook" title="Facebook">
        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M13.8 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.8V3.1c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.7v1.9H7.3v3.2h2.7V21h3.8Z"/></svg>
       </span>
-      <span className="jmc-social-icon" aria-label="Instagram — ბმული მალე დაემატება" title="Instagram">
+      <span className="jmc-social-icon" role="img" aria-label="Instagram" title="Instagram">
        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
       </span>
-      <span className="jmc-social-icon" aria-label="LinkedIn — ბმული მალე დაემატება" title="LinkedIn">
+      <span className="jmc-social-icon" role="img" aria-label="LinkedIn" title="LinkedIn">
        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M5.2 8.6H2.4V21h2.8V8.6ZM3.8 3a1.65 1.65 0 1 0 0 3.3A1.65 1.65 0 0 0 3.8 3ZM21.6 13.6c0-3.3-1.7-5.1-4.2-5.1-1.9 0-2.8 1.1-3.2 1.8V8.6h-2.8V21h2.8v-6.8c0-1.8.7-2.8 2.1-2.8 1.4 0 2 .9 2 2.8V21h3.3v-7.4Z"/></svg>
       </span>
      </div>
-     <p className="jmc-footer-contact-note">გამოგვყევი სიახლეებისთვის</p>
+     <p className="jmc-footer-contact-note">სოციალური გვერდების ბმულები დაემატება.</p>
     </div>
    </div>
    <div className="jmc-footer-bottom">
