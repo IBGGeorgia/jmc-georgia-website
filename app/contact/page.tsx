@@ -14,8 +14,8 @@ export default function Contact() {
    </div>
    <section className="jmc-contact-location" aria-labelledby="contact-location-title">
     <div>
-     <p className="jmc-contact-location-label">მისამართი</p>
-     <h2 id="contact-location-title"><address>თბილისი, ბელიაშვილის 115</address></h2>
+     <h2 id="contact-location-title" className="jmc-contact-location-label">მისამართი</h2>
+     <address className="jmc-contact-location-address">თბილისი, ბელიაშვილის 115</address>
     </div>
     <p className="jmc-contact-location-note">ტელეფონი და სამუშაო საათები დაემატება ინფორმაციის დადასტურების შემდეგ.</p>
    </section>
