@@ -80,20 +80,20 @@ export function BrochureModelPage({
      }
     </div>
    </section>
-   <section className="container brochure-facts" aria-label="ძირითადი მონაცემები" data-model-reveal>
+   <dl className="container brochure-facts" aria-label="ძირითადი მონაცემები" data-model-reveal>
     {facts.map(fact=><div key={fact.label}>
      <dt>{fact.label}</dt><dd>{fact.value}</dd>
     </div>)}
-   </section>
+   </dl>
    <section id="story" className="container brochure-chapter">
     <ModelSectionHeading eyebrow="აღმოაჩინე" title={<>შესაძლებლობები.<span> ყოველდღე.</span></>}
-     description="დიზაინი, ფუნქციურობა, კომფორტი და უსაფრთხოება — Grand Avenue-ის ბროშურაში მოცემული აღჭურვილობა ერთ სივრცეში."/>
+     description="ბროშურაში დადასტურებული დიზაინი, ფუნქციურობა, კომფორტი და უსაფრთხოება ერთ სივრცეში."/>
     <BrochureStory model={vehicle.name} scenes={highlights} media={media}/>
    </section>
    <section id="specifications" className="brochure-technical">
     <div className="container">
      <ModelSectionHeading eyebrow="ტექნიკური მონაცემები" title="ყოველი დეტალი მნიშვნელოვანია."
-      description="ქვემოთ მოცემულია Grand Avenue 4×4 AT GL Diesel-ის 2026 წლის ბროშურაში აღწერილი მონაცემები."/>
+      description={`${vehicle.name} — ${vehicle.trims[0]?.name??"დადასტურებული ვერსია"}: 2026 წლის ბროშურის მონაცემები.`}/>
      <dl className="brochure-tech-grid" data-model-reveal>
       {technical.map(item=><div key={item.label}>
        <dt>{item.label}</dt><dd>{item.value}</dd>
@@ -103,7 +103,7 @@ export function BrochureModelPage({
    </section>
    <section id="equipment" className="container brochure-equipment">
     <ModelSectionHeading eyebrow="კომპლექტაცია" title="აღჭურვილობა."
-     description="Grand Avenue 4×4 AT GL Diesel — ტექნიკური, კომფორტისა და უსაფრთხოების ფუნქციების სრული სია."/>
+     description={`${vehicle.name} ${vehicle.trims[0]?.name??""} — კომფორტისა და უსაფრთხოების აღჭურვილობის სრული სია.`}/>
     <div className="brochure-equipment-list" data-model-reveal>
      {equipmentCategories.map(({key,name,index},i)=>
       <details key={key} open={i===0}>
@@ -116,7 +116,7 @@ export function BrochureModelPage({
    </section>
    {available.length>0&&<section id="gallery" className="brochure-gallery">
     <div className="container">
-     <ModelSectionHeading eyebrow="ფოტოგალერეა" title="Grand Avenue სხვადასხვა რაკურსით."/>
+     <ModelSectionHeading eyebrow="ფოტოგალერეა" title={`${vehicle.name} სხვადასხვა რაკურსით.`}/>
      <div className="brochure-gallery-grid">
       {available.map((item,i)=><figure key={item.key} data-model-reveal>
        <img src={media[item.key]!} loading="lazy" decoding="async"
@@ -127,7 +127,7 @@ export function BrochureModelPage({
     </div>
    </section>}
    <ModelClosingCTA name={vehicle.name}
-    title="გაიცანი Grand Avenue ახლოდან."
+    title={`გაიცანი ${vehicle.name} ახლოდან.`}
     description="შეისწავლე მისი აღჭურვილობა და გაეცანი ტესტ-დრაივის ინფორმაციას."
     compareHref="#equipment"/>
   </main>
