@@ -8,6 +8,7 @@ const links=[
  {href:'/vehicles',label:'ავტომობილები'},
  {href:'/vehicles/vigus',label:'JMC Vigus'},
  {href:'/vehicles/grand-avenue',label:'JMC Grand Avenue'},
+ {href:'/vehicles/grand-avenue-pro',label:'JMC Grand Avenue PRO'},
  {href:'/about',label:'ჩვენ შესახებ'},
  {href:'/contact',label:'კონტაქტი'}
 ];
