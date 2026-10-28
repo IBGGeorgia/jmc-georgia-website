@@ -1837,3 +1837,28 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
   transition:none!important;
  }
 }
+
+
+/* Last accent audit: comparison legend and keyboard focus are monochrome. */
+.vigus-experience .vigus-compare-legend>span{
+ width:8px;height:8px;background:#8a8a91;border-radius:50%;
+}
+.vigus-experience .comparison-scroll:focus-visible,
+.vigus-experience .vigus-gallery-interactive:focus-visible{
+ outline:2px solid var(--vigus-control-focus);
+ outline-offset:3px;
+}
+.vigus-experience .vigus-orbit-full-controls button:focus-visible,
+.vigus-experience .vigus-orbit-exit:focus-visible{
+ outline:2px solid white;outline-offset:3px;
+}
+.vigus-experience .vigus-orbit-exit{
+ background:rgba(255,255,255,.14);
+ color:#fff;border:1px solid rgba(255,255,255,.16);
+}
+.vigus-experience .vigus-orbit-exit:hover{
+ background:rgba(255,255,255,.24);
+}
+.vigus-experience .vigus-hero-actions .vigus-pill{
+ font-weight:600;font-size:clamp(14px,.92vw,16px);
+}
