@@ -309,3 +309,17 @@ test('Grand Avenue: mobile lightbox supports touch swipe',async({page})=>{
  await dialog.dispatchEvent('touchend',{changedTouches:[{identifier:1,clientX:120,clientY:400}]});
  await expect(dialog.getByText('02 / 04',{exact:false})).toBeVisible();
 });
+
+test('Grand Avenue: compact mobile gallery scrolls horizontally without document overflow',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/vehicles/grand-avenue',{waitUntil:'domcontentloaded'});
+ const grid=page.locator('.grand-gallery-grid');
+ await grid.scrollIntoViewIfNeeded();
+ const m=await grid.evaluate(el=>({visible:el.clientWidth,total:el.scrollWidth,count:el.querySelectorAll('figure').length,snap:getComputedStyle(el).scrollSnapType}));
+ expect(m.count).toBe(4);
+ expect(m.total).toBeGreaterThan(m.visible);
+ expect(m.snap).toContain('mandatory');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
+ await grid.evaluate(el=>{el.scrollLeft=el.scrollWidth});
+ await expect.poll(()=>grid.evaluate(el=>el.scrollLeft)).toBeGreaterThan(50);
+});
