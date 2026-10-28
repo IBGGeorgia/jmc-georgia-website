@@ -1632,3 +1632,11 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  }
  .vigus-experience .vigus-orbit-frame{transform:none!important}
 }
+
+
+/* Counters inherit hero-scale numeral styles, not caption-label styles. */
+.vigus-experience .vigus-quick-specs strong > [data-vigus-count],
+.vigus-experience .vigus-capabilities-grid strong > [data-vigus-count]{
+ color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit;
+ vertical-align:baseline;
+}
