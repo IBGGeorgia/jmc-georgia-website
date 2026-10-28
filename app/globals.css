@@ -2020,3 +2020,46 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
  }
 }
+
+/* Exact Grand Avenue PRO masthead parity for VIGUS and Grand Avenue.
+ * Previous rules inherited 800px/620px heights, rounded image corners and
+ * nested .container padding; the PRO reference uses 748px/650px and square edges.
+ */
+.vigus-experience .jmc-unified-hero{height:748px;min-height:748px!important;max-height:748px;border-radius:0!important;overflow:hidden}
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-image,
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-image img{inset:0;top:0!important;left:0!important;height:100%!important;border-radius:0!important;clip-path:none!important}
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
+ width:calc(100% - 48px)!important;max-width:calc(100% - 48px)!important;
+ padding:140px 0 85px!important;min-height:0;align-self:flex-end;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom h1{
+ max-width:1120px;font-size:clamp(48px,7vw,110px);line-height:1.03;
+}
+.vigus-experience .model-local-nav .vigus-local-inner.container{
+ width:calc(100% - 48px)!important;max-width:calc(100% - 48px)!important;
+ padding-inline:0!important;min-height:65px;
+}
+.vigus-experience .model-local-nav{min-height:65px}
+.vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
+ width:calc(100% - 48px)!important;max-width:calc(100% - 48px)!important;
+ margin-inline:auto!important;padding-inline:0!important;
+}
+@media(max-width:700px){
+ .vigus-experience .jmc-unified-hero{height:650px;min-height:650px!important;max-height:650px}
+ .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
+  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+  padding:190px 0 100px!important;
+ }
+ .vigus-experience .jmc-unified-hero .vigus-hero-bottom h1{font-size:clamp(41px,9.7vw,68px)}
+ .vigus-experience .model-local-nav .vigus-local-inner.container{
+  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+  min-height:58px;padding-inline:0!important;
+ }
+ .vigus-experience .model-local-nav{min-height:58px}
+ .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
+  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+ }
+}
+
+/* PRO metrics begin immediately at the masthead boundary. */
+.vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{margin-top:0!important;transform:none!important}
