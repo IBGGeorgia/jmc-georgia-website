@@ -22,12 +22,11 @@ export default function Home() {
 
     <section id="discover" className="section introduction"><div className="container intro-grid">
       <div><p className="eyebrow">აღმოაჩინე JMC</p><h2>ავტომობილი, რომელიც შენს გეგმებს ერგება.</h2></div>
-      <div className="intro-copy"><p>ყოველდღიური მარშრუტებიდან ახალ გამოწვევებამდე — JMC Georgia-ს საიტზე შეძლებ მოდელების გაცნობას, კომპლექტაციების შედარებას და გადაწყვეტილების მიღებისთვის საჭირო ინფორმაციის მიღებას.</p><Link href="/vehicles/vigus" className="text-link">გაეცანი JMC Vigus-ს <span aria-hidden="true">↗</span></Link></div>
+      <div className="intro-copy"><p>ყოველდღიური მარშრუტებიდან ახალ გამოწვევებამდე — JMC Georgia-ს საიტზე შეძლებ მოდელების გაცნობას, კომპლექტაციების შედარებას და გადაწყვეტილების მიღებისთვის საჭირო ინფორმაციის მიღებას.</p><Link href="/vehicles" className="text-link">ნახე ყველა მოდელი <span aria-hidden="true">↗</span></Link></div>
     </div></section>
 
     <section className="section catalogue-feature"><div className="container">
       <div className="section-head"><div><p className="eyebrow">JMC-ის ავტომობილები</p><h2>აღმოაჩინე მოდელების ხაზი</h2><p className="section-sub">გაეცანი JMC Vigus-სა და Grand Avenue-ს — ორი პიკაპი განსხვავებული მახასიათებლებითა და შესაძლებლობებით.</p></div><Link href="/vehicles" className="text-link">ყველა მოდელი <span aria-hidden="true">↗</span></Link></div>
-      <div className="vehicle-preview"><div className="vehicle-preview-visual"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_211343_7b3d12f5-0f3c-4964-9db2-14f404ec25be.png" alt="JMC Vigus პიკაპი" loading="lazy" className="home-vigus-product"/></div><div className="vehicle-preview-copy"><span className="preview-index">01 / Model lineup</span><h3>JMC Vigus — აღმოაჩინე დეტალები.</h3><p>ფოტოები, აღჭურვილობა, მახასიათებლები და Trim Comparison — ერთიანი ციფრული კატალოგი არჩევანის გასამარტივებლად.</p><Link href="/vehicles/vigus" className="button">აღმოაჩინე Vigus <span aria-hidden="true">↗</span></Link><small>ორი კომპლექტაცია — AT და MT.</small></div></div>
       <div className="jmc-home-model-grid" aria-label="JMC-ის მოდელები">
         {vehicles.map((model,index)=><article key={model.slug} className="jmc-home-model-card">
           <Link href={`/vehicles/${model.slug}`} className="jmc-home-model-image">
