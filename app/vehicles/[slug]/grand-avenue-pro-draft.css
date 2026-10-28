@@ -231,3 +231,11 @@
 .pro-premium-lightbox button:focus-visible{outline:3px solid white;outline-offset:4px}
 @media(max-width:600px){.pro-premium-gallery-tile{flex:0 0 85%;scroll-snap-align:start}.pro-premium-lightbox{padding-inline:10px}.pro-premium-gallery-zoom{width:36px;height:36px;right:12px;bottom:12px}}
 @media(prefers-reduced-motion:reduce){.pro-premium-gallery-tile img{transition:none}.pro-premium-gallery-tile:hover img{transform:none}}
+
+/* Direct comparison shortcuts are a clear, secondary action — not a new form. */
+.pro-compare-presets{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 19px}
+.pro-compare-presets button{font:inherit;font-size:13px;font-weight:650;border:1px solid #d1d1d6;border-radius:999px;background:#f6f6f8;color:#28282e;min-height:42px;padding:10px 17px;cursor:pointer;transition:background .2s,border-color .2s}
+.pro-compare-presets button:hover{background:#e9e9ed;border-color:#aeafb5}
+.pro-compare-presets button:focus-visible{outline:3px solid #666;outline-offset:3px}
+@media(max-width:600px){.pro-compare-presets button{flex:1 1 auto;min-width:140px}}
+@media(prefers-reduced-motion:reduce){.pro-compare-presets button{transition:none}}
