@@ -5,7 +5,9 @@ import {useEffect,useRef,useState} from 'react';
 
 const links=[
  {href:'/',label:'მთავარი'},
+ {href:'/vehicles',label:'ავტომობილები'},
  {href:'/vehicles/vigus',label:'JMC Vigus'},
+ {href:'/vehicles/grand-avenue',label:'JMC Grand Avenue'},
  {href:'/about',label:'ჩვენ შესახებ'},
  {href:'/contact',label:'კონტაქტი'}
 ];
@@ -107,6 +109,7 @@ type FooterSocial = {
 };
 const footerNavigation = [
  {href:'/vehicles/vigus',label:'JMC Vigus'},
+ {href:'/vehicles/grand-avenue',label:'JMC Grand Avenue'},
  {href:'/test-drive',label:'ტესტ-დრაივის ინფორმაცია'},
  {href:'/about',label:'ჩვენ შესახებ'},
  {href:'/contact',label:'კონტაქტი'}
