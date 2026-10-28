@@ -250,3 +250,16 @@ test('Grand Avenue draft: exact brochure trim, truthful fields and no premature 
  const response=await page.goto('/vehicles/grand-avenue',{waitUntil:'domcontentloaded'});
  expect(response?.status()).toBe(404);
 });
+
+test('Grand Avenue: all nine approved WebP assets are independently accessible',async({request})=>{
+ const expected=['hero','exterior','interior','safety','capability','front','side','rear','detail'];
+ for(const slot of expected){
+  const response=await request.get(`/images/grand-avenue/${slot}.webp`);
+  expect(response.status(),`${slot} asset HTTP status`).toBe(200);
+  expect(response.headers()['content-type'],`${slot} MIME`).toContain('image/webp');
+  const body=await response.body();
+  expect(body.length,`${slot} must contain real image data`).toBeGreaterThan(20000);
+  expect(body.subarray(0,4).toString()).toBe('RIFF');
+  expect(body.subarray(8,12).toString()).toBe('WEBP');
+ }
+});
