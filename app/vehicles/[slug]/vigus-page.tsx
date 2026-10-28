@@ -16,11 +16,13 @@ export function VigusPage({vehicle}:{vehicle:Vehicle}){
   {id:'technology',label:'შესაძლებლობები'},
   {id:'trims',label:'კომპლექტაციები'}
  ]}/>
- <section className="vigus-hero" aria-labelledby="vigus-title"><div className="container vigus-hero-content">
- <p className="vigus-kicker">JMC / პიკაპი</p>
- <div className="vigus-hero-image vigus-hero-image-editorial"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_202436_76cc31c1-2daf-46c4-b7b6-0e9870be3e28.png" alt="JMC Vigus — ვერცხლისფერი პიკაპი პრემიუმ არქიტექტურულ სტუდიაში" fetchPriority="high" width="2048" height="1152"/></div>
- <div className="vigus-hero-bottom"><p className="vigus-eyebrow">JMC-ის პიკაპი</p><h1 id="vigus-title">VIGUS</h1><p>მეტი შესაძლებლობა ყოველ გზაზე.</p><div className="vigus-hero-actions"><a href="#trims" className="vigus-pill vigus-pill-dark">შეადარე კომპლექტაციები</a><Link href="/test-drive" className="vigus-pill vigus-pill-light">ტესტ-დრაივის ინფორმაცია <span aria-hidden="true">↗</span></Link></div><a className="vigus-scroll-cue" href="#story" aria-label="ქვემოთ გადასვლა">აღმოაჩინე Vigus <span aria-hidden="true">↓</span></a></div>
- </div></section>
+ <section className="vigus-hero jmc-unified-hero jmc-unified-vigus" aria-labelledby="vigus-title">
+ <div className="vigus-hero-image vigus-hero-image-editorial jmc-unified-hero-image"><img src="/images/vigus/adventure-3.webp" alt="JMC Vigus — პიკაპი მთიან რელიეფზე" fetchPriority="high"/></div>
+ <div className="jmc-unified-hero-shade" aria-hidden="true"/>
+ <div className="container vigus-hero-content jmc-unified-hero-content"><p className="vigus-kicker">JMC / PICKUP SERIES</p>
+ <div className="vigus-hero-bottom"><h1 id="vigus-title">VIGUS</h1><p>მეტი შესაძლებლობა ყოველ გზაზე.</p><div className="vigus-hero-actions"><a href="#trims" className="vigus-pill vigus-pill-dark">შეადარე კომპლექტაციები ↗</a><a href="#story" className="vigus-pill vigus-pill-light">აღმოაჩინე VIGUS ↓</a></div></div>
+ </div><span className="jmc-unified-hero-index">01 / JMC VIGUS</span>
+ </section>
  <section className="vigus-quick-specs container" data-vigus-reveal="metrics" aria-label="ძირითადი მონაცემები"><div><strong><span data-vigus-count="2.5">2.5</span> <small>L</small></strong><span>დიზელის ძრავა</span></div><div><strong><span data-vigus-count="167">167</span> <small>HP</small></strong><span>სიმძლავრე</span></div><div><strong>4×4</strong><span>ამძრავი</span></div><div><strong><span data-vigus-count="210">210</span> <small>mm</small></strong><span>კლირენსი</span></div></section>
  <section id="story" className="vigus-story vigus-section"><div className="container"><ModelSectionHeading animated eyebrow="01 / ხასიათი" title={<>შენი გზა.<br/>შენი შესაძლებლობები.</>} description="Vigus აერთიანებს პიკაპის პრაქტიკულობას, ოთხივე წამყვანი თვლის შესაძლებლობას და ყოველდღიური გადაადგილებისთვის საჭირო კომფორტს."/>
  <div className="vigus-story-mosaic" data-vigus-reveal="visual"><figure className="vigus-story-large"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_204108_025ab606-f597-4c60-a699-a293afa52d7f.png" alt="JMC Vigus — მთავარი ფოტო მთიან გარემოში" loading="lazy"/></figure><figure className="vigus-story-small"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_204433_ec69e7c2-c6d9-4bd6-bac4-6a2c16ea833c.png" alt="JMC Vigus — უკანა სამი მეოთხედის რაკურსით" loading="lazy"/></figure><div className="vigus-story-note"><span>JMC Vigus</span><p>მზადაა სამუშაო დღისთვის. მზადაა გზისთვის.</p></div></div></div></section>
