@@ -93,7 +93,7 @@ export function Header(){
     <Link href="/test-drive" className="button jmc-drawer-drive" onClick={()=>setOpen(false)}>
      ტესტ-დრაივი <span aria-hidden="true">↗</span>
     </Link>
-    <p className="jmc-drawer-foot">JMC Georgia · Quality · Technology · Service</p>
+    <p className="jmc-drawer-foot">JMC Georgia</p>
    </div>
   </div>
  </>;
