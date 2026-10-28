@@ -11,11 +11,11 @@ export default function TestDrive(){
  return <>
   <Header/>
   <main className="container jmc-test-drive-page">
-   <div className="page-head">
+   <header className="page-head jmc-page-intro">
     <p className="eyebrow">JMC Georgia</p>
     <h1>ტესტ-დრაივი</h1>
-    <p className="muted">გაიცანი JMC Vigus და დაგეგმე ავტომობილის დათვალიერება.</p>
-   </div>
+    <p className="jmc-page-lead">გაეცანი JMC Vigus-ს და ტესტ-დრაივის ონლაინ დაჯავშნის მიმდინარე სტატუსს.</p>
+   </header>
    <section className="jmc-test-drive-panel" aria-labelledby="test-drive-status">
     <div className="jmc-test-drive-panel-copy">
      <p className="jmc-test-drive-status-label">ონლაინ დაჯავშნა</p>
