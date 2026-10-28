@@ -8,7 +8,8 @@ Next.js App Router / React / TypeScript project for JMC Georgia. Deployed on Ren
 
 - Shared styles: `app/design-system.css` (imported after legacy `app/globals.css`)
 - Development guardrails: `AGENTS.md`
-- Model source data: `lib/vehicles.ts`
+- Model source data and explicit approved/draft publication gate: `lib/vehicles.ts`
+- New model intake checklist: `docs/NEXT_MODEL_INTAKE.md`
 - Vigus editorial composition: `app/vehicles/[slug]/vigus-page.tsx`
 - Shared model components: `app/vehicles/[slug]/model-sections.tsx`
 - Future verified-model baseline: `app/vehicles/[slug]/generic-model-page.tsx`
@@ -31,7 +32,7 @@ npm run qa:browser  # after npm run build and npx playwright install chromium
 ## Current route and availability status
 
 - `/`: JMC home with Vigus.
-- `/vehicles/vigus`: model detail / animated editorial experience; awaiting final browser visual approval.
+- `/vehicles/vigus`: approved reference model-page visual design; automated Chromium QA is in place (Safari/iOS QA is separate).
 - `/vehicles`: currently redirects to Vigus, since the wider catalogue is not yet published.
 - `/about`, `/contact`, `/test-drive`, `/privacy`: shared neutral editorial design.
 - Confirmed address: **თბილისი, ბელიაშვილის 115**.
@@ -52,7 +53,7 @@ Playwright covers six public routes at **1440 / 1024 / 768 / 430 / 390 / 320px**
 
 ## Before public launch or additional models
 
-- Approve final browser-visible Vigus template and verify responsive/keyboard/touch motion behavior.
+- Vigus's design baseline is approved; maintain regression testing and complete separate Safari/iOS verification before a public launch.
 - Obtain officially verified specifications, price availability, trims, model-specific photographs and rights for each new model.
 - Approve legal/consent, lead capture and CRM integrations before enabling online forms.
 - Verify SEO policy, custom domain and indexing permission.
