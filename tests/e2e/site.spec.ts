@@ -193,7 +193,7 @@ test('approved header and booking CTA layout, contact address in burger/footer',
   await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
   await expect(page.locator('.jmc-header-drive')).toHaveCount(0);
   const cta=page.locator('.model-local-nav .vigus-local-cta');
-  await expect(cta).toHaveText('დაჯავშნე Test Drive ↗');
+  await expect(cta).toHaveText('დაჯავშნე Test-Drive ↗');
   await expect(cta).toHaveAttribute('href','/test-drive');
   const position=await cta.boundingBox();
   expect(position).toBeTruthy();
