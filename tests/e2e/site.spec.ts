@@ -4,6 +4,7 @@ import {grandAvenue,grandAvenueTechnical,grandAvenueEquipment,grandAvenueMedia,g
 
 const routes=[
  {path:'/',label:'home'},
+ {path:'/vehicles',label:'vehicles catalogue'},
  ...vehicles.map(({slug})=>({path:`/vehicles/${slug}`,label:slug})),
  {path:'/about',label:'about'},
  {path:'/contact',label:'contact'},
@@ -263,4 +264,21 @@ test('Grand Avenue: all nine approved WebP assets are independently accessible',
   expect(body.subarray(0,4).toString()).toBe('RIFF');
   expect(body.subarray(8,12).toString()).toBe('WEBP');
  }
+});
+
+test('Grand Avenue discovery: homepage, catalogue, drawer, footer and test-drive',async({page})=>{
+ const grand='/vehicles/grand-avenue';
+ for(const path of ['/','/vehicles','/test-drive']){
+  await page.goto(path,{waitUntil:'domcontentloaded'});
+  await expect(page.locator('main a[href="'+grand+'"]').first()).toBeVisible();
+  await expect(page.locator('main a[href="/vehicles/vigus"]').first()).toBeVisible();
+ }
+ await page.goto('/');
+ const toggle=page.locator('.jmc-menu-trigger');
+ await toggle.click();
+ const drawer=page.getByRole('dialog',{name:'JMC Georgia — მენიუ'});
+ await expect(drawer.locator('a[href="'+grand+'"]').first()).toBeVisible();
+ await expect(drawer.locator('a[href="/vehicles"]')).toBeVisible();
+ await drawer.getByRole('button',{name:'დახურვა'}).click();
+ await expect(page.locator('.jmc-footer a[href="'+grand+'"]').first()).toBeVisible();
 });
