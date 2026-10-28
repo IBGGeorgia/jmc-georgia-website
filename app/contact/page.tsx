@@ -7,11 +7,11 @@ export default function Contact() {
  return <>
   <Header/>
   <main className="container jmc-contact-page">
-   <div className="page-head">
+   <header className="page-head jmc-page-intro">
     <p className="eyebrow">დაგვიკავშირდი</p>
     <h1>კონტაქტი</h1>
-    <p className="muted">JMC Georgia-ს მისამართი თბილისში.</p>
-   </div>
+    <p className="jmc-page-lead">JMC Georgia-ს მისამართი თბილისში.</p>
+   </header>
    <section className="jmc-contact-location" aria-labelledby="contact-location-title">
     <div>
      <h2 id="contact-location-title" className="jmc-contact-location-label">მისამართი</h2>
