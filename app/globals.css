@@ -2063,3 +2063,44 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
 
 /* PRO metrics begin immediately at the masthead boundary. */
 .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{margin-top:0!important;transform:none!important}
+
+/* Pixel-parity pass with the approved PRO page (measured in Chromium).
+   Match typography, vertical composition, CTA and the four-metric grid;
+   matching banner height alone was insufficient. */
+@media(min-width:701px){
+ .vigus-experience .jmc-unified-hero .vigus-hero-bottom h1{
+  font-size:clamp(60px,8.2vw,130px)!important;line-height:.96!important;
+  letter-spacing:-.065em!important;margin:21px 0 22px!important;
+ }
+ .vigus-experience .jmc-unified-hero .vigus-hero-bottom>p{
+  font-size:24px!important;line-height:1.5!important;margin:0 0 28px!important;
+  padding:0!important;
+ }
+ .vigus-experience .jmc-unified-hero .vigus-hero-actions .vigus-pill{
+  min-height:54px!important;padding:15px 24px!important;
+ }
+ .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
+  padding-top:46px!important;padding-bottom:63px!important;
+ }
+ .vigus-experience .jmc-unified-hero+.vigus-quick-specs>div{padding-top:25px!important}
+}
+@media(max-width:700px){
+ .vigus-experience .jmc-unified-hero .vigus-hero-bottom h1{
+  font-size:41px!important;line-height:1.03!important;
+  letter-spacing:-.06em!important;margin:17px 0!important;
+ }
+ .vigus-experience .jmc-unified-hero .vigus-hero-bottom>p{
+  font-size:17px!important;line-height:1.6!important;padding:0!important;
+  margin:0 0 26px!important;max-width:310px!important;
+ }
+ .vigus-experience .jmc-unified-hero .vigus-hero-actions{
+  gap:12px!important;max-width:100%!important;
+ }
+ .vigus-experience .jmc-unified-hero .vigus-hero-actions .vigus-pill{
+  min-height:48px!important;padding:12px 18px!important;
+ }
+ .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
+  padding-top:26px!important;padding-bottom:34px!important;
+ }
+ .vigus-experience .jmc-unified-hero+.vigus-quick-specs>div{padding-top:16px!important}
+}
