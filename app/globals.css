@@ -1946,3 +1946,77 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  .vigus-experience .jmc-unified-hero-index{right:16px;bottom:17px}
 }
 @media(max-width:350px){.vigus-experience .jmc-unified-hero-content .vigus-hero-bottom h1{font-size:44px}}
+
+/* Align every element of the model hero to ONE editorial left edge.
+   Earlier Vigus selectors center h1 and copy even inside the left-aligned hero. */
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-content,
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom,
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom h1,
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom>p,
+.vigus-experience .jmc-unified-hero .vigus-hero-actions{
+ text-align:left!important;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom h1{
+ width:100%;max-width:100%;padding:0;transform:none;margin-left:0;margin-right:0;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom>p{
+ width:100%;max-width:670px;margin-left:0;margin-right:0;transform:none;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-actions{
+ width:100%;margin-left:0;margin-right:0;justify-content:flex-start!important;transform:none;
+}
+/* Shared PRO-style local navigation: title left, chapters grouped right, CTA at end. */
+.vigus-experience .model-local-nav .vigus-local-inner{
+ width:min(var(--content-gallery,1200px),calc(100% - 48px));max-width:var(--content-gallery,1200px);
+ margin-inline:auto;display:flex;align-items:center;gap:clamp(14px,2.2vw,34px);
+}
+.vigus-experience .model-local-nav .vigus-local-title{margin:0 auto 0 0;flex:0 0 auto;text-align:left}
+.vigus-experience .model-local-nav .vigus-local-inner>div{
+ margin:0;display:flex;align-items:center;gap:clamp(12px,2vw,30px);flex:0 1 auto;
+}
+.vigus-experience .model-local-nav .vigus-local-cta{margin:0;flex:0 0 auto}
+@media(max-width:700px){
+ .vigus-experience .model-local-nav .vigus-local-inner{width:calc(100% - 32px);gap:12px}
+ .vigus-experience .model-local-nav .vigus-local-title{min-width:0}
+}
+
+/* Fix legacy width / flex overrides from VigusMotion and .container selectors. */
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
+ width:min(1200px,calc(100% - 48px))!important;max-width:1200px!important;
+ margin-left:auto!important;margin-right:auto!important;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom{
+ width:100%;max-width:100%;display:flex;flex-direction:column;align-items:flex-start!important;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom>p{
+ align-self:flex-start!important;max-width:670px!important;margin-left:0!important;margin-right:0!important;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-actions{align-self:flex-start!important}
+@media(max-width:900px){
+ .vigus-experience .model-local-nav .vigus-local-inner>div{display:none!important}
+ .vigus-experience .model-local-nav .vigus-local-inner{justify-content:space-between!important}
+ .vigus-experience .model-local-nav .vigus-local-cta{margin-left:auto!important}
+}
+@media(max-width:700px){
+ .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
+ width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important
+ }
+ .vigus-experience .model-local-nav .vigus-local-title{font-size:12px}
+ .vigus-experience .model-local-nav .vigus-local-cta{font-size:12px;padding:9px 11px}
+}
+
+/* Final shared centered grid for both the masthead and local navigation. */
+.vigus-experience .model-local-nav .vigus-local-inner.container{
+ width:min(1200px,calc(100% - 48px))!important;max-width:1200px!important;
+ margin-inline:auto!important;
+}
+@media(min-width:701px) and (max-width:900px){
+ .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
+ width:calc(100% - 48px)!important;max-width:calc(100% - 48px)!important;
+ }
+}
+@media(max-width:700px){
+ .vigus-experience .model-local-nav .vigus-local-inner.container{
+ width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+ }
+}
