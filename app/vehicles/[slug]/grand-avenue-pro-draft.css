@@ -456,3 +456,17 @@
  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
  }
 }
+
+/* Same editorial grid for PRO nav, hero, metrics and lower chapters. */
+.pro-draft-page .pro-premium-hero-content.pro-draft-wrap,
+.pro-draft-page .pro-page-nav-inner.pro-draft-wrap,
+.pro-draft-page .pro-draft-metrics.pro-draft-wrap{
+ width:min(1680px,calc(100% - 48px))!important;max-width:1680px!important;margin-inline:auto!important;
+}
+@media(max-width:700px){
+ .pro-draft-page .pro-premium-hero-content.pro-draft-wrap,
+ .pro-draft-page .pro-page-nav-inner.pro-draft-wrap,
+ .pro-draft-page .pro-draft-metrics.pro-draft-wrap{
+  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+ }
+}
