@@ -13,15 +13,15 @@ export const grandAvenueMedia:{
  hero?:string;exterior?:string;interior?:string;capability?:string;
  safety?:string;front?:string;side?:string;rear?:string;detail?:string;
 }={
- hero:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261028_124938_2618ac2a-6fdd-45f1-ab7b-913d17196084.png',
- exterior:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261028_124954_7ccde32f-9886-481d-8963-f848fd1af820.png',
- interior:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261028_124954_6f5f73c8-35fd-4f09-abc1-38c15629a997.png',
- safety:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261028_124954_aa8f7919-0d1a-4ba5-b9c5-3589b3f043bf.png',
- capability:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261028_124954_77b6d53a-b43b-4942-a29d-e2166c58003e.png',
- front:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261028_125008_a3fecc16-6b7f-49b9-9f02-78e556bf145e.png',
- side:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261028_125009_968a642d-26d1-4fb1-b0fa-6af16dd007c3.png',
- rear:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261028_125008_fe4a7d2e-bd4a-4dd1-956f-efa1f082be73.png',
- detail:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261028_125008_9ffcabbb-332e-4d69-b601-8eb02ca533bf.png'
+ hero:'/images/grand-avenue/hero.webp',
+ exterior:'/images/grand-avenue/exterior.webp',
+ interior:'/images/grand-avenue/interior.webp',
+ safety:'/images/grand-avenue/safety.webp',
+ capability:'/images/grand-avenue/capability.webp',
+ front:'/images/grand-avenue/front.webp',
+ side:'/images/grand-avenue/side.webp',
+ rear:'/images/grand-avenue/rear.webp',
+ detail:'/images/grand-avenue/detail.webp'
 };
 
 export const grandAvenueTechnical:Feature[]=[
