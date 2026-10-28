@@ -80,9 +80,8 @@ test('Vigus: functional red reading progress remains and fills on scroll',async(
  await page.evaluate(()=>window.scrollTo(0,Math.round(document.documentElement.scrollHeight*.42)));
  await page.waitForTimeout(350);
  const fraction=await bar.evaluate(element=>{
-  const transform=getComputedStyle(element).transform;
-  const match=transform.match(/^matrix\\(([^,]+)/);
-  return match?Number(match[1]):0;
+  const inline=element.style.transform;
+  return inline.startsWith('scaleX(')?Number(inline.slice(7,-1)):0;
  });
  expect(fraction).toBeGreaterThan(.1);
  expect(fraction).toBeLessThanOrEqual(1);
