@@ -305,7 +305,7 @@ test('Grand Avenue: mobile lightbox supports touch swipe',async({page})=>{
  await page.getByRole('button',{name:'წინა — სრულ ეკრანზე ნახვა'}).click();
  const dialog=page.getByRole('dialog',{name:'Grand Avenue — ფოტოგალერეა'});
  await expect(dialog.getByText('01 / 04',{exact:false})).toBeVisible();
- await dialog.dispatchEvent('touchstart',{touches:[{clientX:300}]});
- await dialog.dispatchEvent('touchend',{changedTouches:[{clientX:120}]});
+ await dialog.dispatchEvent('touchstart',{touches:[{identifier:1,clientX:300,clientY:400}]});
+ await dialog.dispatchEvent('touchend',{changedTouches:[{identifier:1,clientX:120,clientY:400}]});
  await expect(dialog.getByText('02 / 04',{exact:false})).toBeVisible();
 });
