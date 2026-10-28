@@ -323,3 +323,22 @@ test('Grand Avenue: compact mobile gallery scrolls horizontally without document
  await grid.evaluate(el=>{el.scrollLeft=el.scrollWidth});
  await expect.poll(()=>grid.evaluate(el=>el.scrollLeft)).toBeGreaterThan(50);
 });
+
+test('Vigus difference filter reduces comparison rows without changing values',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
+ const rows=page.locator('.vigus-compare-mobile .vigus-compare-card').first().locator('dl > div');
+ const full=await rows.count();
+ await page.getByLabel('მხოლოდ განსხვავებები').check();
+ const filtered=await rows.count();
+ expect(filtered).toBeGreaterThan(0);
+ expect(filtered).toBeLessThan(full);
+ await page.getByLabel('მხოლოდ განსხვავებები').uncheck();
+ await expect(rows).toHaveCount(full);
+});
+test('Grand Avenue specification groups preserve all brochure values',async({page})=>{
+ await page.goto('/vehicles/grand-avenue',{waitUntil:'domcontentloaded'});
+ await expect(page.locator('.grand-specification-group')).toHaveCount(2);
+ await expect(page.locator('.grand-specification-grid dt')).toHaveCount(grandAvenueTechnical.length);
+ await expect(page.locator('.grand-specification-grid dd')).toHaveCount(grandAvenueTechnical.length);
+});
