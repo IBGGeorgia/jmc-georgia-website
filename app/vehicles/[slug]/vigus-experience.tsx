@@ -53,27 +53,77 @@ const highlights=[
 ];
 export function VigusHighlights(){
  const [current,setCurrent]=useState(0);
+ const shell=useRef<HTMLDivElement>(null);
  const h=highlights[current];
- return <div className="vigus-highlight-experience" data-vigus-reveal="visual"><div className="vigus-highlight-stage" key={h.file}><img src={h.src} alt={h.name} loading="lazy"/></div><div className="vigus-highlight-info"><div className="vigus-highlight-options" role="tablist" aria-label="ავტომობილის გამორჩეული დეტალები">{highlights.map((item,i)=><button type="button" role="tab" id={`vigus-highlight-tab-${i}`}
- aria-controls="vigus-highlight-panel" aria-selected={i===current}
- tabIndex={i===current?0:-1} className={i===current?'selected':''}
- key={item.file} onClick={()=>setCurrent(i)}
- onKeyDown={event=>{
-  const key=event.key;
-  let next=i;
-  if(key==='ArrowRight')next=(i+1)%highlights.length;
-  else if(key==='ArrowLeft')next=(i-1+highlights.length)%highlights.length;
-  else if(key==='Home')next=0;
-  else if(key==='End')next=highlights.length-1;
-  else return;
-  event.preventDefault();
-  setCurrent(next);
-  event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus();
- }}><span>{String(i+1).padStart(2,'0')}</span>{item.name}</button>)}</div><div className="vigus-highlight-caption" role="tabpanel" id="vigus-highlight-panel" aria-labelledby={`vigus-highlight-tab-${current}`} tabIndex={0}><span className="vigus-eyebrow">{h.label}</span><h3>{h.name}</h3><p>{h.description}</p></div></div></div>;
+ useEffect(()=>{
+  const root=shell.current;
+  if(!root)return;
+  const desktop=window.matchMedia('(min-width: 961px)');
+  if(!desktop.matches)return;
+  const buttons=Array.from(root.querySelectorAll<HTMLButtonElement>('[data-vigus-story-step]'));
+  const observer=new IntersectionObserver(entries=>{
+   for(const entry of entries){
+    if(entry.isIntersecting){
+     const n=Number((entry.target as HTMLElement).dataset.vigusStoryStep);
+     if(Number.isFinite(n))setCurrent(n);
+    }
+   }
+  },{rootMargin:'-36% 0px -42% 0px',threshold:0.05});
+  buttons.forEach(button=>observer.observe(button));
+  return ()=>observer.disconnect();
+ },[]);
+ const choose=(i:number)=>{
+  setCurrent(i);
+  if(window.matchMedia('(min-width: 961px)').matches){
+   const el=shell.current?.querySelector<HTMLElement>(`[data-vigus-story-step="${i}"]`);
+   el?.scrollIntoView({
+    behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',
+    block:'center'
+   });
+  }
+ };
+ return <div ref={shell} className="vigus-highlight-experience vigus-storytelling" data-vigus-reveal="visual">
+  <div className="vigus-highlight-stage" aria-live="off">
+   {highlights.map((item,i)=>
+    <img key={item.file} src={item.src} alt={current===i?item.name:''}
+     className={i===current?'vigus-story-image is-active':'vigus-story-image'}
+     aria-hidden={i!==current} loading="lazy"/>)}
+   <div className="vigus-story-image-counter" aria-hidden="true">{String(current+1).padStart(2,'0')} / {String(highlights.length).padStart(2,'0')}</div>
+  </div>
+  <div className="vigus-highlight-info">
+   <div className="vigus-highlight-options" role="tablist" aria-label="ავტომობილის გამორჩეული დეტალები">
+    {highlights.map((item,i)=>
+     <button key={item.file} type="button" role="tab"
+      id={`vigus-highlight-tab-${i}`} data-vigus-story-step={i}
+      aria-controls="vigus-highlight-panel" aria-selected={i===current}
+      tabIndex={i===current?0:-1} className={i===current?'selected':''}
+      onClick={()=>choose(i)}
+      onKeyDown={event=>{
+       const key=event.key;
+       let next=i;
+       if(key==='ArrowRight'||key==='ArrowDown')next=(i+1)%highlights.length;
+       else if(key==='ArrowLeft'||key==='ArrowUp')next=(i-1+highlights.length)%highlights.length;
+       else if(key==='Home')next=0;
+       else if(key==='End')next=highlights.length-1;
+       else return;
+       event.preventDefault();
+       choose(next);
+       event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus();
+      }}>
+      <span className="vigus-story-step-index">{String(i+1).padStart(2,'0')}</span>
+      <span className="vigus-story-step-copy"><strong>{item.name}</strong><small>{item.description}</small></span>
+     </button>)}
+   </div>
+   <div className="vigus-highlight-caption" role="tabpanel" id="vigus-highlight-panel"
+    aria-labelledby={`vigus-highlight-tab-${current}`} tabIndex={0}>
+    <span className="vigus-eyebrow">{h.label}</span><h3>{h.name}</h3><p>{h.description}</p>
+   </div>
+  </div>
+ </div>;
 }
 export function VigusTrimSelector({trims}:{trims:Trim[]}){
  const [id,setId]=useState(trims[0]?.id??'');
  const t=trims.find(x=>x.id===id);
  if(!t)return null;
- return <div className="vigus-selector" data-vigus-reveal="panel"><div className="vigus-selector-controls" role="group" aria-label="კომპლექტაციის არჩევა">{trims.map(x=><button key={x.id} type="button" aria-pressed={id===x.id} className={id===x.id?'selected':''} onClick={()=>setId(x.id)}>{x.name}</button>)}</div><div className="vigus-selector-layout"><div className="vigus-selector-car"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_211343_87663d42-c2c8-4c4b-8ca0-b58d5dd34884.png" alt="JMC Vigus — პროდუქტის ფოტო" loading="lazy"/><small>საილუსტრაციო ფოტო — კომპლექტაციას შესაბამისი ცალკე გამოსახულება არ არის მოწოდებული</small></div><div className="vigus-selector-details"><p className="vigus-eyebrow">Selected version</p><h3>{t.name}</h3><p>{t.powertrain}</p><div className="vigus-selector-stats"><div><span>ტრანსმისია</span><strong>{t.transmission}</strong></div><div><span>ამძრავი</span><strong>{t.drivetrain}</strong></div><div><span>სიმძლავრე</span><strong>167 HP</strong></div></div><Link href="/contact" className="vigus-pill vigus-pill-dark">მისამართის ნახვა ↗</Link></div></div></div>;
+ return <div className="vigus-selector" data-vigus-reveal="panel"><div className="vigus-selector-controls" role="group" aria-label="კომპლექტაციის არჩევა">{trims.map(x=><button key={x.id} type="button" aria-pressed={id===x.id} className={id===x.id?'selected':''} onClick={()=>setId(x.id)}>{x.name}</button>)}</div><div className="vigus-selector-layout"><div className="vigus-selector-car"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_211343_87663d42-c2c8-4c4b-8ca0-b58d5dd34884.png" alt="JMC Vigus — პროდუქტის ფოტო" loading="lazy"/><small>საილუსტრაციო ფოტო — კომპლექტაციას შესაბამისი ცალკე გამოსახულება არ არის მოწოდებული</small></div><div className="vigus-selector-details"><p className="vigus-eyebrow">Selected version</p><div className="vigus-trim-animated" key={t.id}><h3>{t.name}</h3><p>{t.powertrain}</p><div className="vigus-selector-stats"><div><span>ტრანსმისია</span><strong>{t.transmission}</strong></div><div><span>ამძრავი</span><strong>{t.drivetrain}</strong></div><div><span>სიმძლავრე</span><strong>167 HP</strong></div></div></div><Link href="/contact" className="vigus-pill vigus-pill-dark">მისამართის ნახვა ↗</Link></div></div></div>;
 }
