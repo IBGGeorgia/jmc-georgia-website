@@ -1,6 +1,7 @@
 import {test, expect} from '@playwright/test';
 import {vehicles} from '../../lib/vehicles';
 import {getProVariant,proSourceVariants,proDraftStatus} from '../../lib/grand-avenue-pro';
+import {grandAvenueProOriginalMedia} from '../../lib/grand-avenue-pro-media';
 import {grandAvenue,grandAvenueTechnical,grandAvenueEquipment,grandAvenueMedia,grandAvenueHighlights} from '../../lib/grand-avenue';
 
 const routes=[
@@ -375,4 +376,17 @@ test('PRO editorial draft stays disconnected from public pages and routing',asyn
  await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(0);
  await page.goto('/test-drive',{waitUntil:'domcontentloaded'});
  await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(0);
+});
+
+test('PRO editorial media only points to original user photos, not AI candidate or other models',()=>{
+ const images=Object.values(grandAvenueProOriginalMedia);
+ expect(images).toHaveLength(7);
+ for(const image of images){
+  expect(image.src).toMatch(/^https:\/\/d2ol7oe51mr4n9\.cloudfront\.net\//);
+  expect(image.original).toMatch(/\.jpg$/);
+  expect(image.alt.length).toBeGreaterThan(12);
+  expect(image.src).not.toContain('be63a43e-1ac9-43f5-8607-ab639e509419');
+  expect(image.src).not.toContain('/vigus/');
+  expect(image.src).not.toContain('/grand-avenue/');
+ }
 });
