@@ -1,2 +1,24 @@
-import {redirect} from 'next/navigation';
-export default function LegacyVehiclesRoute(){redirect('/vehicles/vigus');}
+import Link from 'next/link';
+import {Header,Footer} from '../site-components';
+import {vehicles} from '../../lib/vehicles';
+
+export default function VehiclesCatalogue(){
+ return <><Header/><main className="container jmc-models-page">
+  <header className="page-head jmc-page-intro">
+   <p className="eyebrow">JMC Georgia</p><h1>ავტომობილები</h1>
+   <p className="jmc-page-lead">აღმოაჩინე JMC-ის მოდელები და გაეცანი მათ მახასიათებლებს.</p>
+  </header>
+  <section className="jmc-home-model-grid" aria-label="ავტომობილების კატალოგი">
+   {vehicles.map((model,i)=><article key={model.slug} className="jmc-home-model-card">
+    <Link href={`/vehicles/${model.slug}`} className="jmc-home-model-image">
+     <img src={model.heroImage} alt={`JMC ${model.name}`} loading="lazy"/>
+    </Link>
+    <div className="jmc-home-model-content">
+     <span>{String(i+1).padStart(2,'0')} / JMC</span><h2>{model.name}</h2>
+     <p>{model.description}</p>
+     <Link href={`/vehicles/${model.slug}`} className="button">მოდელის ნახვა ↗</Link>
+    </div>
+   </article>)}
+  </section>
+ </main><Footer/></>;
+}
