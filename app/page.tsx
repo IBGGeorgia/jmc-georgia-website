@@ -4,7 +4,7 @@ import { Header, Footer } from './site-components';
 const steps = [
   { id: '01', title: 'აირჩიე ავტომობილი', text: 'გაეცანი JMC-ის მოდელებს და შეარჩიე შენი საჭიროებების შესაბამისი ავტომობილი.' },
   { id: '02', title: 'შეადარე კომპლექტაციები', text: 'ერთ სივრცეში შეადარე ტექნიკური მახასიათებლები და აღჭურვილობა.' },
-  { id: '03', title: 'დაგეგმე ტესტ-დრაივი', text: 'მოითხოვე შეხვედრა და გაეცანი ავტომობილს პირადად.' },
+  { id: '03', title: 'გაეცანი ტესტ-დრაივს', text: 'შეიტყვე დაჯავშნის მიმდინარე სტატუსი და იპოვე JMC Georgia-ს მისამართი.' },
 ];
 
 export default function Home() {
@@ -32,6 +32,6 @@ export default function Home() {
 
     <section className="section steps-section"><div className="container"><div className="section-head"><div><p className="eyebrow">მარტივი პროცესი</p><h2>არჩევანიდან პირველ შეხვედრამდე</h2></div></div><div className="steps-grid">{steps.map(step=><article className="step" key={step.id}><span className="step-num">{step.id}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></article>)}</div></div></section>
 
-    <section className="section action-section"><div className="container"><div className="action-banner"><div><p className="eyebrow light">JMC Georgia</p><h2>გაქვს შეკითხვა?<br/>დავიწყოთ საუბარი.</h2><p>დაგვიკავშირდი სასურველი მოდელის, ხელმისაწვდომობის ან კომპლექტაციის შესახებ.</p></div><div className="action-banner-buttons"><Link href="/contact" className="button">დაგვიკავშირდი ↗</Link><Link href="/about" className="button button-ghost">ჩვენ შესახებ →</Link></div></div></div></section>
+    <section className="section action-section"><div className="container"><div className="action-banner"><div><p className="eyebrow light">JMC Georgia</p><h2>იპოვე JMC Georgia.<br/>გაიგე მეტი.</h2><p>ჩვენი მისამართია: თბილისი, ბელიაშვილის 115. აღმოაჩინე მოდელის შესახებ ინფორმაცია და დაგეგმე შემდეგი ნაბიჯი.</p></div><div className="action-banner-buttons"><Link href="/contact" className="button">მისამართის ნახვა ↗</Link><Link href="/about" className="button button-ghost">ჩვენ შესახებ →</Link></div></div></div></section>
   </main><Footer/></>;
 }
