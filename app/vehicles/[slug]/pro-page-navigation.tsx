@@ -9,7 +9,7 @@ export function ProPageNavigation(){
   const update=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{
    const max=document.documentElement.scrollHeight-window.innerHeight;
    setProgress(max>0?Math.min(100,Math.max(0,window.scrollY/max*100)):0);
-   let current=chapters[0][0];
+   let current:string=chapters[0][0];
    for(const [id] of chapters){const e=document.getElementById(id);if(e&&e.getBoundingClientRect().top<window.innerHeight*.38)current=id}
    setActive(current);
   })};
