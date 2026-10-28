@@ -382,7 +382,7 @@ test('PRO editorial media only points to original user photos, not AI candidate 
  const images=Object.values(grandAvenueProOriginalMedia);
  expect(images).toHaveLength(7);
  for(const image of images){
-  expect(image.src).toMatch(/^https:\/\/d2ol7oe51mr4n9\.cloudfront\.net\//);
+  expect(image.src).toMatch(/^\/images\/grand-avenue-pro\/[a-z-]+\.jpg$/);
   expect(image.original).toMatch(/\.jpg$/);
   expect(image.alt.length).toBeGreaterThan(12);
   expect(image.src).not.toContain('be63a43e-1ac9-43f5-8607-ab639e509419');
