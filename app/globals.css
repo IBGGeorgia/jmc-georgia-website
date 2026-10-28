@@ -2060,3 +2060,6 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
   width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
  }
 }
+
+/* PRO metrics begin immediately at the masthead boundary. */
+.vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{margin-top:0!important;transform:none!important}
