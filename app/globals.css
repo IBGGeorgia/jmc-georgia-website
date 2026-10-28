@@ -1416,3 +1416,183 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  }
  .vigus-experience .vigus-gallery-interactive{scroll-behavior:auto}
 }
+
+
+/* Vigus motion v2 — editorial kinetic typography / GSAP scrollytelling */
+.vigus-experience .vigus-storytelling{
+ position:relative;isolation:isolate;
+}
+.vigus-experience .vigus-storytelling .vigus-highlight-stage{
+ position:relative;isolation:isolate;
+ background:#e8e9ea;min-height:clamp(300px,37vw,670px);
+ overflow:hidden;animation:none;
+}
+.vigus-experience .vigus-storytelling .vigus-story-image{
+ position:absolute;inset:0;width:100%;height:100%;
+ object-fit:cover;opacity:0;transform:scale(1.035);
+ transition:opacity .7s cubic-bezier(.22,.72,.2,1),
+            transform 1.15s cubic-bezier(.22,.72,.2,1);
+ pointer-events:none;
+}
+.vigus-experience .vigus-storytelling .vigus-story-image.is-active{
+ opacity:1;transform:scale(1);z-index:1;
+}
+.vigus-story-image-counter{
+ position:absolute;left:clamp(20px,2vw,34px);bottom:clamp(18px,2vw,30px);
+ z-index:2;color:#fff;background:rgba(10,11,13,.68);
+ backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);
+ padding:10px 14px;border-radius:100px;
+ font-family:var(--font-latin);font-size:12px;font-weight:600;
+ letter-spacing:.04em;
+}
+.vigus-experience .vigus-storytelling .vigus-highlight-options button{
+ min-width:0;cursor:pointer;
+}
+.vigus-experience .vigus-story-step-index{
+ display:block;white-space:nowrap;
+}
+.vigus-experience .vigus-story-step-copy{
+ display:flex;min-width:0;flex-direction:column;gap:12px;
+}
+.vigus-experience .vigus-story-step-copy strong{
+ display:block;font-family:var(--font-ka);
+ font-size:clamp(16px,1.7vw,25px);line-height:1.28;
+ font-weight:600;letter-spacing:-.02em;
+}
+.vigus-experience .vigus-story-step-copy small{
+ display:block;font-family:var(--font-ka);
+ font-size:clamp(13px,.92vw,16px);line-height:1.8;
+ font-weight:400;color:var(--label-secondary);
+ letter-spacing:0;
+}
+.vigus-experience .vigus-storytelling .vigus-highlight-options button.selected{
+ color:var(--label-primary);
+}
+.vigus-experience .vigus-storytelling .vigus-highlight-options button.selected::before{
+ height:34px;border-radius:2px;
+}
+.vigus-experience .vigus-highlight-caption{
+ line-height:1.65;
+}
+.vigus-experience .vigus-cinema{
+ isolation:isolate;
+}
+.vigus-experience .vigus-cinema>img{
+ transform-origin:center center;
+}
+.vigus-experience .vigus-ink-word{
+ display:inline-block;white-space:normal;
+}
+.vigus-experience [data-vigus-count]{
+ display:inline-block;font-variant-numeric:tabular-nums;
+}
+.vigus-experience .vigus-quick-specs>div::after{
+ content:'';display:block;width:22px;height:2px;
+ margin-top:12px;background:var(--jmc-red);opacity:.82;
+}
+.vigus-experience .vigus-selector-details .vigus-trim-animated{
+ position:relative;
+}
+@media(min-width:961px){
+ .vigus-experience .vigus-storytelling{
+  display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.82fr);
+  gap:clamp(34px,4.5vw,90px);align-items:start;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-stage{
+  position:sticky;top:clamp(180px,17vh,230px);
+  height:min(62vh,700px);min-height:400px;
+  align-self:start;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-info{
+  display:block;min-width:0;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-options{
+  display:flex;flex-direction:column;gap:0;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-options button{
+  display:grid;grid-template-columns:35px minmax(0,1fr);
+  align-items:center;gap:18px;position:relative;
+  min-height:clamp(360px,65vh,600px);
+  width:100%;padding:35px 16px 35px 0;
+  border-top:1px solid #dcdddf;
+  background:transparent;
+  font-size:inherit;
+  scroll-margin-top:24vh;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-options button.selected::before{
+  position:absolute;left:-12px;top:50%;transform:translateY(-50%);
+  width:3px;height:60px;margin:0;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-caption{
+  position:relative;
+  padding:22px 0 0;border-top:1px solid #dcdddf;
+ }
+}
+@media(max-width:960px){
+ .vigus-experience .vigus-storytelling{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:22px;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-stage{
+  position:relative;top:auto;height:clamp(300px,48vw,520px);
+  min-height:300px;width:100%;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-options{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-options button{
+  display:flex;align-items:center;gap:9px;
+  min-height:72px;padding:12px;
+  background:#f6f7f8;border:1px solid #e5e6e8;border-radius:10px;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-options button.selected{
+  border-color:rgba(229,0,18,.5);background:#fff;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-options button.selected::before{
+  display:none;
+ }
+ .vigus-experience .vigus-story-step-copy{gap:5px}
+ .vigus-experience .vigus-story-step-copy strong{font-size:14px}
+ .vigus-experience .vigus-story-step-copy small{display:none}
+ .vigus-experience .vigus-highlight-caption{padding-top:15px}
+}
+@media(max-width:430px){
+ .vigus-experience .vigus-storytelling .vigus-highlight-stage{
+  height:clamp(260px,68vw,365px);min-height:260px;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-options{
+  grid-template-columns:minmax(0,1fr);gap:7px;
+ }
+ .vigus-experience .vigus-storytelling .vigus-highlight-options button{
+  min-height:58px;
+ }
+}
+@media(prefers-reduced-motion:no-preference){
+ .vigus-experience .vigus-trim-animated{
+  animation:vigus-trim-enter .48s cubic-bezier(.2,.75,.2,1) both;
+ }
+ .vigus-experience .vigus-compare-ui .comparison tbody tr,
+ .vigus-experience .vigus-compare-mobile .vigus-compare-card{
+  animation:vigus-trim-enter .38s cubic-bezier(.2,.75,.2,1) both;
+ }
+ .vigus-experience .vigus-compare-ui .comparison tbody tr:nth-child(2n){
+  animation-delay:50ms;
+ }
+}
+@keyframes vigus-trim-enter{
+ from{opacity:.25;transform:translateY(10px)}
+ to{opacity:1;transform:translateY(0)}
+}
+@media(prefers-reduced-motion:reduce){
+ .vigus-experience .vigus-storytelling .vigus-story-image{
+  transition:none;transform:none!important;
+ }
+ .vigus-experience .vigus-storytelling .vigus-story-image:not(.is-active){
+  opacity:0;
+ }
+ .vigus-experience .vigus-trim-animated,
+ .vigus-experience .vigus-compare-ui .comparison tbody tr,
+ .vigus-experience .vigus-compare-mobile .vigus-compare-card{
+  animation:none!important;
+ }
+}
