@@ -2104,3 +2104,12 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  }
  .vigus-experience .jmc-unified-hero+.vigus-quick-specs>div{padding-top:16px!important}
 }
+
+/* PRO mobile hero uses one compact primary action, not a two-row button stack. */
+@media(max-width:700px){
+ .vigus-experience .jmc-unified-hero .vigus-hero-actions .vigus-pill-light{display:none!important}
+ .vigus-experience .jmc-unified-hero .vigus-hero-actions .vigus-pill-dark{
+  font-size:12px!important;min-height:45px!important;padding:11px 18px!important;
+ }
+ .vigus-experience .jmc-unified-hero .vigus-hero-actions{width:auto!important;max-width:100%;gap:0!important}
+}
