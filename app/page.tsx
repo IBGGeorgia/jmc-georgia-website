@@ -10,9 +10,8 @@ const steps = [
 export default function Home() {
   return <><Header /><main>
     <section className="hero hero-editorial" aria-labelledby="hero-title">
-      <div className="hero-geometry" aria-hidden="true"><span/><span/><span/></div>
       <div className="container hero-content">
-        <p className="eyebrow light">JMC Georgia <span className="eyebrow-rule" /> ოფიციალური წარმომადგენლობა</p>
+        <p className="eyebrow light">JMC Georgia · ოფიციალური წარმომადგენლობა</p>
         <h1 id="hero-title">შენი გზა.<br/><span>ახალი შესაძლებლობები.</span></h1>
         <p className="lead">აღმოაჩინე JMC საქართველოში — გაეცანი ავტომობილებს, შეადარე კომპლექტაციები და დაგეგმე მომავალი ტესტ-დრაივი.</p>
         <div className="actions"><Link href="/vehicles/vigus" className="button">აღმოაჩინე Vigus <span aria-hidden="true">↗</span></Link><Link href="/test-drive" className="button button-ghost">ტესტ-დრაივი <span aria-hidden="true">→</span></Link></div>
@@ -26,7 +25,7 @@ export default function Home() {
     </div></section>
 
     <section className="section catalogue-feature"><div className="container">
-      <div className="section-head"><div><p className="eyebrow">JMC-ის ავტომობილები</p><h2>აღმოაჩინე მოდელების ხაზი</h2><p className="section-sub">პირველი მოდელი საქართველოში — JMC Vigus. გაიგე მეტი მისი შესაძლებლობებისა და კომპლექტაციების შესახებ.</p></div><Link href="/vehicles/vigus" className="text-link">JMC Vigus ↗</Link></div>
+      <div className="section-head"><div><p className="eyebrow">JMC-ის ავტომობილები</p><h2>აღმოაჩინე მოდელების ხაზი</h2><p className="section-sub">პირველი მოდელი საქართველოში — JMC Vigus. გაიგე მეტი მისი შესაძლებლობებისა და კომპლექტაციების შესახებ.</p></div><Link href="/vehicles/vigus" className="text-link">JMC Vigus <span aria-hidden="true">↗</span></Link></div>
       <div className="vehicle-preview"><div className="vehicle-preview-visual"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_211343_7b3d12f5-0f3c-4964-9db2-14f404ec25be.png" alt="JMC Vigus პიკაპი" loading="lazy" className="home-vigus-product"/></div><div className="vehicle-preview-copy"><span className="preview-index">01 / Model lineup</span><h3>JMC Vigus — აღმოაჩინე დეტალები.</h3><p>ფოტოები, აღჭურვილობა, მახასიათებლები და Trim Comparison — ერთიანი ციფრული კატალოგი არჩევანის გასამარტივებლად.</p><Link href="/vehicles/vigus" className="button">აღმოაჩინე Vigus <span aria-hidden="true">↗</span></Link><small>ორი კომპლექტაცია — AT და MT.</small></div></div>
     </div></section>
 
