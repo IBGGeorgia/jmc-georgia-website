@@ -1,5 +1,6 @@
 import {test, expect} from '@playwright/test';
 import {vehicles} from '../../lib/vehicles';
+import {getProVariant,proSourceVariants,proDraftStatus} from '../../lib/grand-avenue-pro';
 import {grandAvenue,grandAvenueTechnical,grandAvenueEquipment,grandAvenueMedia,grandAvenueHighlights} from '../../lib/grand-avenue';
 
 const routes=[
@@ -341,4 +342,28 @@ test('Grand Avenue specification groups preserve all brochure values',async({pag
  await expect(page.locator('.grand-specification-group')).toHaveCount(2);
  await expect(page.locator('.grand-specification-grid dt')).toHaveCount(grandAvenueTechnical.length);
  await expect(page.locator('.grand-specification-grid dd')).toHaveCount(grandAvenueTechnical.length);
+});
+
+test('Grand Avenue PRO draft: four source-verified independent variants',()=>{
+ expect(proDraftStatus).toBe('draft');
+ expect(proSourceVariants).toHaveLength(4);
+ expect(new Set(proSourceVariants.map(v=>v.id)).size).toBe(4);
+ for(const trim of ['LX','SLX'] as const){
+  for(const fuel of ['diesel','gasoline'] as const){
+   const item=getProVariant(trim,fuel);
+   expect(item).toBeTruthy();
+   expect(item?.specs.engine).toContain('2.3 L');
+   expect(item?.specs.power).toBe(fuel==='diesel'?'177 hp':'258 hp');
+   expect(item?.specs.transmission).toBe('8AT');
+   expect(item?.specs.clearance).toBe('255 mm');
+   expect(item?.specs.acceleration).toBe('');
+   expect(item?.specs.consumption).toBe('');
+   expect(Array.isArray(item?.groups.safety)).toBe(true);
+  }
+ }
+ expect(vehicles.some(v=>v.slug==='grand-avenue-pro')).toBe(false);
+});
+test('Grand Avenue PRO cannot be reached on production-style public routing',async({page})=>{
+ const response=await page.goto('/vehicles/grand-avenue-pro',{waitUntil:'domcontentloaded'});
+ expect(response?.status()).toBe(404);
 });
