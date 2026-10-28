@@ -1,70 +1,158 @@
 'use client';
 import {useEffect} from 'react';
 
-/** Progressive enhancement: content is visible by default without JavaScript.
- *  Reveal and progress affordances only activate after client hydration.
+/**
+ * Vigus-specific cinematic motion. Static HTML stays visible if JavaScript,
+ * GSAP or IntersectionObserver is unavailable. Everything tears down on unmount.
  */
 export function VigusMotion(){
  useEffect(()=>{
   const root=document.querySelector<HTMLElement>('.vigus-experience');
   if(!root)return;
-  const bar=root.querySelector<HTMLElement>('.vigus-scroll-progress-fill');
-  const links=Array.from(root.querySelectorAll<HTMLAnchorElement>('.vigus-local-inner a[href^="#"]'))
-   .filter(link=>link.getAttribute('href')!=='#top');
-  const sections=links.map(link=>({
-   link,element:document.getElementById(link.hash.slice(1))
-  })).filter((pair):pair is {link:HTMLAnchorElement;element:HTMLElement}=>Boolean(pair.element));
-
-  let raf=0;
-  const paint=()=>{
-   raf=0;
-   const start=root.getBoundingClientRect().top+window.scrollY;
-   const max=Math.max(1,root.offsetHeight-window.innerHeight);
-   const progress=Math.max(0,Math.min(1,(window.scrollY-start)/max));
-   if(bar)bar.style.transform=`scaleX(${progress})`;
-   const top=window.scrollY+(window.innerWidth<=700?68:82)+86;
+  const progress=root.querySelector<HTMLElement>('.vigus-scroll-progress-fill');
+  const menu=Array.from(root.querySelectorAll<HTMLAnchorElement>('.vigus-local-inner a[href^="#"]'))
+   .filter(link=>link.hash&&link.hash!=='#top');
+  const sections=menu.map(link=>({link,element:root.querySelector<HTMLElement>(link.hash)}))
+   .filter((item):item is {link:HTMLAnchorElement;element:HTMLElement}=>Boolean(item.element));
+  let frame=0;
+  const update=()=>{
+   frame=0;
+   const top=root.getBoundingClientRect().top+window.scrollY;
+   const span=Math.max(1,root.offsetHeight-window.innerHeight);
+   const value=Math.min(1,Math.max(0,(window.scrollY-top)/span));
+   if(progress)progress.style.transform=`scaleX(${value})`;
+   const cutoff=window.scrollY+(window.innerWidth<=700?68:82)+90;
    let active:HTMLElement|null=null;
-   for(const section of sections){
-    if(section.element.getBoundingClientRect().top+window.scrollY<=top)active=section.element;
-   }
-   for(const section of sections){
-    if(section.element===active)section.link.setAttribute('aria-current','location');
-    else section.link.removeAttribute('aria-current');
-   }
+   sections.forEach(section=>{
+    if(section.element.getBoundingClientRect().top+window.scrollY<=cutoff)active=section.element;
+   });
+   sections.forEach(({link,element})=>{
+    if(active===element)link.setAttribute('aria-current','location');
+    else link.removeAttribute('aria-current');
+   });
   };
-  const onScroll=()=>{if(!raf)raf=window.requestAnimationFrame(paint)};
+  const onScroll=()=>{if(!frame)frame=requestAnimationFrame(update)};
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll,{passive:true});
-  paint();
+  update();
 
-  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const elements=Array.from(root.querySelectorAll<HTMLElement>('[data-vigus-reveal]'));
-  let observer:IntersectionObserver|null=null;
-  if(!reduced&&'IntersectionObserver' in window){
-   const viewport=window.innerHeight;
-   for(const element of elements){
-    const rect=element.getBoundingClientRect();
-    if(rect.top<viewport*.9&&rect.bottom>0)element.classList.add('is-visible');
-   }
-   observer=new IntersectionObserver(entries=>{
-    for(const entry of entries){
-     if(entry.isIntersecting){
-      entry.target.classList.add('is-visible');
-      observer?.unobserve(entry.target);
-     }
+  let disposed=false;
+  let teardown=()=>{};
+  const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(!preference.matches){
+   const initialize=async()=>{
+    try{
+     const [{default:gsap},{ScrollTrigger},{SplitText}]=await Promise.all([
+      import('gsap'),import('gsap/ScrollTrigger'),import('gsap/SplitText')
+     ]);
+     if(disposed)return;
+     gsap.registerPlugin(ScrollTrigger,SplitText);
+     const splitInstances:Array<{revert:()=>void}>=[];
+     const ctx=gsap.context(()=>{
+      // Entrance for text blocks with a mask; never split individual Georgian letters.
+      const headings=Array.from(root.querySelectorAll<HTMLElement>(
+       '.vigus-section-heading h2,.vigus-cinema-overlay h2,.vigus-final h2'
+      ));
+      for(const element of headings){
+       if(element.closest('#technology'))continue;
+       const split=SplitText.create(element,{
+        type:'lines',mask:'lines',autoSplit:true,
+        onSplit(instance){
+         return gsap.from(instance.lines,{
+          yPercent:110,opacity:0,duration:.95,stagger:.12,ease:'power3.out',
+          scrollTrigger:{trigger:element,start:'top 88%',once:true}
+         });
+        }
+       });
+       splitInstances.push(split);
+      }
+
+      // Scroll-driven word illumination is reserved for a single editorial headline.
+      const illuminated=root.querySelector<HTMLElement>('#technology .vigus-section-heading h2');
+      if(illuminated){
+       const split=SplitText.create(illuminated,{type:'words',wordsClass:'vigus-ink-word'});
+       splitInstances.push(split);
+       gsap.fromTo(split.words,{color:'rgba(25,27,30,.27)'},{
+        color:'rgba(25,27,30,.94)',stagger:.18,ease:'none',
+        scrollTrigger:{
+         trigger:illuminated,start:'top 86%',end:'bottom 52%',
+         scrub:.55
+        }
+       });
+      }
+
+      // Supporting content enters in a consistent rhythm.
+      const blocks=root.querySelectorAll<HTMLElement>(
+       '[data-vigus-reveal]:not(.vigus-cinema):not(.vigus-section-heading)'
+      );
+      blocks.forEach(element=>{
+       gsap.fromTo(element,{y:28,opacity:0},{
+        y:0,opacity:1,duration:.9,ease:'power2.out',
+        scrollTrigger:{trigger:element,start:'top 91%',once:true}
+       });
+      });
+      root.querySelectorAll<HTMLElement>('.vigus-section-heading').forEach(heading=>{
+       const label=heading.querySelector('.vigus-eyebrow');
+       const description=heading.querySelector('p');
+       if(label)gsap.from(label,{y:10,opacity:0,duration:.6,ease:'power2.out',
+        scrollTrigger:{trigger:heading,start:'top 91%',once:true}});
+       if(description)gsap.from(description,{y:18,opacity:0,duration:.75,ease:'power2.out',
+        scrollTrigger:{trigger:heading,start:'top 88%',once:true}});
+      });
+
+      // Image container expands elegantly; the original image file stays untouched.
+      const cinematic=root.querySelector<HTMLElement>('.vigus-cinema');
+      if(cinematic){
+       gsap.fromTo(cinematic,{clipPath:'inset(0% 7% round 22px)'},{
+        clipPath:'inset(0% 0% round 0px)',ease:'none',
+        scrollTrigger:{trigger:cinematic,start:'top 95%',end:'center 54%',scrub:1.05}
+       });
+       const image=cinematic.querySelector('img');
+       if(image)gsap.fromTo(image,{scale:1.09},{scale:1,ease:'none',
+        scrollTrigger:{trigger:cinematic,start:'top bottom',end:'bottom top',scrub:1.25}});
+      }
+
+      // Preserve numeric truth while introducing a restrained count-up on first visit.
+      root.querySelectorAll<HTMLElement>('[data-vigus-count]').forEach(element=>{
+       const target=Number(element.dataset.vigusCount);
+       if(!Number.isFinite(target))return;
+       const decimals=target%1===0?0:1;
+       ScrollTrigger.create({
+        trigger:element,start:'top 90%',once:true,
+        onEnter(){
+         const value={n:0};
+         gsap.to(value,{n:target,duration:1.25,ease:'power2.out',
+          onUpdate(){element.textContent=value.n.toFixed(decimals)},
+          onComplete(){element.textContent=target.toFixed(decimals)}
+         });
+        }
+       });
+      });
+
+      // Subtle pinned-photo depth, no wheel hijack and no full-screen forced pin.
+      const story=root.querySelector<HTMLElement>('.vigus-storytelling');
+      const stage=story?.querySelector<HTMLElement>('.vigus-highlight-stage');
+      if(story&&stage){
+       gsap.fromTo(stage,{y:10},{y:-10,ease:'none',
+        scrollTrigger:{trigger:story,start:'top 75%',end:'bottom 30%',scrub:1}});
+      }
+      ScrollTrigger.refresh();
+     },root);
+     teardown=()=>{ctx.revert();splitInstances.forEach(instance=>instance.revert())};
+    }catch(error){
+     // The page remains fully usable without optional motion enhancement.
+     console.warn('Vigus motion unavailable; displaying static content.',error);
     }
-   },{rootMargin:'0px 0px -7% 0px',threshold:0.08});
-   elements.filter(element=>!element.classList.contains('is-visible'))
-    .forEach(element=>observer?.observe(element));
-   root.dataset.motionReady='true';
+   };
+   void initialize();
   }
   return ()=>{
+   disposed=true;
+   teardown();
    window.removeEventListener('scroll',onScroll);
    window.removeEventListener('resize',onScroll);
-   if(raf)window.cancelAnimationFrame(raf);
-   observer?.disconnect();
-   root.removeAttribute('data-motion-ready');
-   links.forEach(link=>link.removeAttribute('aria-current'));
+   if(frame)cancelAnimationFrame(frame);
+   menu.forEach(link=>link.removeAttribute('aria-current'));
   };
  },[]);
  return null;
