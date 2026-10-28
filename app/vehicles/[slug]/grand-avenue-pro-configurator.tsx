@@ -10,6 +10,7 @@ export function GrandAvenueProConfigurator(){
  const [fuel,setFuel]=useState<ProFuel>('diesel');
  const [comparison,setComparison]=useState<string[]>(['avenue_lx_d','avenue_slx_d']);
  const [diffOnly,setDiffOnly]=useState(false);
+ const preset=(kind:'trim'|'engine')=>{setComparison(kind==='trim'?['avenue_lx_d','avenue_slx_d']:['avenue_lx_d','avenue_lx_g']);setDiffOnly(true)};
  const selected=getProVariant(trim,fuel);
  const compared=useMemo(()=>proSourceVariants.filter(v=>comparison.includes(v.id)),[comparison]);
  if(!selected)return null;
@@ -31,6 +32,7 @@ export function GrandAvenueProConfigurator(){
    {equipmentCategories.map(([key,title])=>{const items=selected.groups[key];const list=Array.isArray(items)?items.filter(x=>typeof x==='string'):[];return <details key={key}><summary>{title} · {list.length}</summary><ul>{list.map((v:string,i:number)=><li key={i}>{v}</li>)}</ul></details>})}
   </section>
   <section aria-labelledby="pro-draft-compare"><h3 id="pro-draft-compare">შეადარე კომპლექტაციები</h3>
+   <div className="pro-compare-presets"><button type="button" onClick={()=>preset("trim")}>LX / SLX განსხვავებები</button><button type="button" onClick={()=>preset("engine")}>დიზელი / ბენზინი</button></div>
    <div className="pro-draft-compare-options">{proSourceVariants.map(v=><label key={v.id}><input type="checkbox" checked={comparison.includes(v.id)} onChange={e=>setComparison(prev=>e.target.checked?[...prev,v.id]:prev.filter(x=>x!==v.id))}/> PRO {v.trim} · {fuelName(v.fuel)}</label>)}</div>
    <label className="pro-draft-diff-toggle"><input type="checkbox" checked={diffOnly} onChange={e=>setDiffOnly(e.target.checked)}/> მხოლოდ განსხვავებები <span>{differenceCount}</span></label>
    {compared.length===0?<p role="status">აირჩიე ერთი კომპლექტაცია მაინც.</p>:rows.length===0?<p role="status" className="pro-draft-no-differences">არჩეულ ვერსიებს შორის მითითებული ტექნიკური მონაცემებით განსხვავება არ გამოვლენილა. აღჭურვილობის განსხვავებები იხილე შესაბამის კატეგორიაში.</p>:
