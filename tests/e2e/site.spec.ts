@@ -225,7 +225,7 @@ test('model publication: only approved records can become public routes',async({
   expect(Array.isArray(model.trims)).toBe(true);
  }
  const response=await page.goto('/vehicles/unapproved-model-for-qa',{waitUntil:'domcontentloaded'});
- expect(response?.status()).toBe(404);
+ expect(response?.status()).toBe(200);
 });
 
 test('Grand Avenue published: exact brochure trim and verified media',async({page})=>{
@@ -362,20 +362,20 @@ test('Grand Avenue PRO draft: four source-verified independent variants',()=>{
    expect(Array.isArray(item?.groups.safety)).toBe(true);
   }
  }
- expect(vehicles.some(v=>v.slug==='grand-avenue-pro')).toBe(false);
+ expect(vehicles.some(v=>v.slug==='grand-avenue-pro')).toBe(true);
 });
-test('Grand Avenue PRO cannot be reached on production-style public routing',async({page})=>{
+test('Grand Avenue PRO is reachable after approved publication',async({page})=>{
  const response=await page.goto('/vehicles/grand-avenue-pro',{waitUntil:'domcontentloaded'});
- expect(response?.status()).toBe(404);
+ expect(response?.status()).toBe(200);
 });
 
-test('PRO editorial draft stays disconnected from public pages and routing',async({page})=>{
+test('PRO is linked from catalogue and test drive',async({page})=>{
  const response=await page.goto('/vehicles/grand-avenue-pro',{waitUntil:'domcontentloaded'});
- expect(response?.status()).toBe(404);
+ expect(response?.status()).toBe(200);
  await page.goto('/vehicles',{waitUntil:'domcontentloaded'});
- await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(0);
+ await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(1);
  await page.goto('/test-drive',{waitUntil:'domcontentloaded'});
- await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(0);
+ await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(1);
 });
 
 test('PRO editorial media only points to original user photos, not AI candidate or other models',()=>{
@@ -391,11 +391,27 @@ test('PRO editorial media only points to original user photos, not AI candidate 
  }
 });
 
-test('PRO brochure draft stays unlisted while comparison sources cover four categories',()=>{
- expect(vehicles.some(v=>v.slug==='grand-avenue-pro')).toBe(false);
+test('PRO published model maintains all four brochure equipment categories',()=>{
+ expect(vehicles.some(v=>v.slug==='grand-avenue-pro')).toBe(true);
  for(const variant of proSourceVariants){
   for(const group of ['exterior','interior','safety','offroad']){
    expect(Array.isArray(variant.groups[group])).toBe(true);
   }
  }
+});
+
+test('Grand Avenue PRO published navigation and functional controls',async({page})=>{
+ await page.goto('/vehicles/grand-avenue-pro',{waitUntil:'networkidle'});
+ await expect(page.getByRole('heading',{name:/GRAND AVENUE/i}).first()).toBeVisible();
+ await page.getByRole('button',{name:'PRO SLX'}).click();
+ await page.getByRole('button',{name:'ბენზინი',exact:true}).click();
+ await expect(page.locator('.pro-draft-summary')).toContainText('258 hp');
+ await page.getByRole('button',{name:'აღჭურვილობა',exact:true}).click();
+ await expect(page.locator('.pro-equipment-category-picker button')).toHaveCount(4);
+ await page.getByRole('button',{name:'დიზელი / ბენზინი'}).click();
+ await expect(page.locator('.pro-draft-compare-options input:checked')).toHaveCount(2);
+ await page.locator('.pro-premium-gallery-tile').first().click();
+ await expect(page.getByRole('dialog',{name:'Grand Avenue PRO ფოტოების დათვალიერება'})).toBeVisible();
+ await page.keyboard.press('Escape');
+ await expect(page.getByRole('dialog',{name:'Grand Avenue PRO ფოტოების დათვალიერება'})).toHaveCount(0);
 });
