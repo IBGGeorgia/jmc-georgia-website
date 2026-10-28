@@ -155,3 +155,22 @@
 @media(prefers-reduced-motion:reduce){
  .model-page .vigus-local-cta{transition:none}
 }
+
+
+/* Model-local Test Drive entry: readable on compact screens, functional progress remains intact. */
+.vigus-experience .model-local-nav .vigus-local-cta,
+.model-page .model-local-nav .vigus-local-cta{
+ white-space:nowrap;
+ display:inline-flex;
+ gap:6px;
+ align-items:center;
+ justify-content:center;
+}
+@media(max-width:390px){
+ .vigus-experience .model-local-nav .vigus-local-cta,
+ .model-page .model-local-nav .vigus-local-cta{
+  font-size:12px;
+  padding:9px 11px;
+  min-height:44px;
+ }
+}
