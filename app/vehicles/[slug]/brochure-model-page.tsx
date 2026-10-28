@@ -19,6 +19,10 @@ const categories=[{key:'exterior',name:'ექსტერიერი'},{key:'i
  */
 export function BrochureModelPage({vehicle,highlights,technical,equipment,media}:BrochureModelContent){
  const spec=(label:string)=>technical.find(x=>x.label===label)?.value??'';
+ const groups=[
+  {name:'ძრავა და შესაძლებლობები',items:technical.slice(0,10)},
+  {name:'ზომები და პრაქტიკულობა',items:technical.slice(10)}
+ ];
  const gallery=[{key:'front',label:'წინა'},{key:'side',label:'გვერდი'},{key:'rear',label:'უკანა'},{key:'detail',label:'დეტალი'}] as const;
  return <><Header/><main className="vigus-experience grand-vigus-page" id="top"><VigusMotion/>
  <ModelLocalNavigation name={vehicle.name} progress items={[
@@ -62,7 +66,7 @@ export function BrochureModelPage({vehicle,highlights,technical,equipment,media}
    <div><strong>80 L</strong><span>საწვავის ავზი</span></div>
    <div><strong>3270 mm</strong><span>თვლების ბაზა</span></div>
   </div>
-  <div className="grand-specification-grid">{technical.map(f=><div key={f.label}><span>{f.label}</span><strong>{f.value}</strong></div>)}</div>
+  <div className="grand-specification-groups">{groups.map(group=><section className="grand-specification-group" key={group.name} aria-label={group.name}><h3>{group.name}</h3><dl className="grand-specification-grid">{group.items.map(f=><div key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></div>)}</dl></section>)}</div>
  </div></section>
  <section id="trims" className="vigus-trims vigus-section"><div className="container">
   <ModelSectionHeading animated eyebrow="კომპლექტაცია" title="Grand Avenue 4X4 AT GL." description="ტექნიკური მონაცემები და აღჭურვილობა — 2026 წლის ბროშურის მიხედვით."/>
