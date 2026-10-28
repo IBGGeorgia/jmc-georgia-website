@@ -77,3 +77,26 @@
 .pro-draft-gallery-grid>.pro-draft-original-photo{min-height:280px}
 .pro-draft-gallery-grid>.pro-draft-original-photo img{aspect-ratio:16/10}
 @media(max-width:700px){.pro-draft-hero>.pro-draft-original-photo{min-height:260px}.pro-draft-hero>.pro-draft-original-photo img{min-height:260px;aspect-ratio:4/3}.pro-draft-tech-grid{grid-template-columns:1fr}.pro-draft-editorial>.pro-draft-original-photo,.pro-draft-editorial>.pro-draft-original-photo img{min-height:260px}.pro-draft-gallery-grid>.pro-draft-original-photo{flex:0 0 86%;min-height:220px}}
+
+/* Refinement: honest product-led sections, precise native-photo framing and usable selection states. */
+.pro-draft-editorial:nth-child(odd) .pro-draft-original-photo{order:1}
+.pro-draft-editorial:nth-child(odd) .pro-draft-editorial-copy{order:2}
+.pro-draft-editorial>.pro-draft-original-photo img{object-position:center 52%}
+.pro-draft-technology .pro-draft-original-photo img{aspect-ratio:16/10;object-fit:contain;background:#111318}
+.pro-draft-gallery-grid>.pro-draft-original-photo{min-width:0}
+.pro-draft-gallery-grid>.pro-draft-original-photo img{object-position:center 55%}
+.pro-draft-hero>.pro-draft-original-photo img{object-position:center 54%}
+.pro-draft-diff-toggle{display:inline-flex;align-items:center;gap:10px;background:#f5f5f7;border-radius:999px;padding:12px 16px;margin-top:10px;font-size:14px;font-weight:600;min-height:44px}
+.pro-draft-diff-toggle input{width:17px;height:17px;accent-color:#29292d}
+.pro-draft-diff-toggle span{border-radius:999px;background:#e2e2e6;padding:3px 9px;font-variant-numeric:tabular-nums}
+.pro-draft-no-differences{padding:20px 24px;background:#f5f5f7;border-radius:12px;line-height:1.7;color:#515159}
+.pro-draft-compare-options label:has(input:checked){border-color:#82828b;background:#f5f5f7}
+.pro-draft-compare-options label:focus-within{outline:2px solid #57575f;outline-offset:2px}
+@media(max-width:800px){.pro-draft-editorial:nth-child(odd) .pro-draft-editorial-copy,.pro-draft-editorial:nth-child(odd) .pro-draft-original-photo{order:unset}}
+@media(max-width:600px){
+ .pro-draft-gallery-grid{padding-bottom:15px;scroll-padding-inline:3px}
+ .pro-draft-gallery-grid>.pro-draft-original-photo{scroll-snap-align:start}
+ .pro-draft-hero>.pro-draft-original-photo img{object-position:center 50%}
+ .pro-draft-technology .pro-draft-original-photo img{max-height:360px}
+ .pro-draft-compare-scroll{scrollbar-width:thin}
+}
