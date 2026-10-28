@@ -225,9 +225,9 @@ test('model publication: only approved records can become public routes',async({
  expect(response?.status()).toBe(404);
 });
 
-test('Grand Avenue draft: exact brochure trim, truthful fields and no premature publication',async({page})=>{
+test('Grand Avenue published: exact brochure trim and verified media',async({page})=>{
  expect(grandAvenue.slug).toBe('grand-avenue');
- expect(grandAvenue.publicationStatus).toBe('draft');
+ expect(grandAvenue.publicationStatus).toBe('approved');
  expect(grandAvenue.trims).toHaveLength(1);
  expect(grandAvenue.trims[0].name).toBe('4X4 AT GL · Diesel');
  expect(grandAvenue.trims[0].drivetrain).toBe('4×4');
@@ -247,9 +247,9 @@ test('Grand Avenue draft: exact brochure trim, truthful fields and no premature 
  }
  expect(grandAvenue.heroImage).toBe('/images/grand-avenue/hero.webp');
  expect(grandAvenue.gallery).toEqual(['front','side','rear','detail'].map(slot=>`/images/grand-avenue/${slot}.webp`));
- expect(vehicles.some(v=>v.slug==='grand-avenue')).toBe(false);
+ expect(vehicles.some(v=>v.slug==='grand-avenue')).toBe(true);
  const response=await page.goto('/vehicles/grand-avenue',{waitUntil:'domcontentloaded'});
- expect(response?.status()).toBe(404);
+ expect(response?.status()).toBe(200);
 });
 
 test('Grand Avenue: all nine approved WebP assets are independently accessible',async({request})=>{
