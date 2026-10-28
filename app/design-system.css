@@ -395,3 +395,26 @@
  .hero.hero-editorial>.hero-content{padding:70px 0 95px!important}
  .hero.hero-editorial h1{font-size:clamp(37px,9vw,60px)}
 }
+
+/* Width Bible v1.2 — secondary pages and footer.
+   The outer centered container must not also add page gutters inside itself. */
+.jmc-footer .jmc-footer-inner.container,
+main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-drive-page){
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;
+ max-width:var(--jmc-content-max)!important;
+ margin-inline:auto!important;
+ padding-left:0!important;padding-right:0!important;
+}
+main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-drive-page)>.page-head{
+ max-width:var(--jmc-readable-max)!important;
+ margin-left:0;margin-right:0;
+}
+.jmc-footer .jmc-footer-main,.jmc-footer .jmc-footer-bottom{
+ width:100%;max-width:none;margin-inline:0;
+}
+@media(max-width:700px){
+ .jmc-footer .jmc-footer-inner.container,
+ main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-drive-page){
+  width:calc(100% - 2 * var(--jmc-gutter-mobile))!important;
+ }
+}
