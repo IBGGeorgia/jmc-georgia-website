@@ -239,3 +239,15 @@
 .pro-compare-presets button:focus-visible{outline:3px solid #666;outline-offset:3px}
 @media(max-width:600px){.pro-compare-presets button{flex:1 1 auto;min-width:140px}}
 @media(prefers-reduced-motion:reduce){.pro-compare-presets button{transition:none}}
+
+/* Specification/equipment comparison: accessible and source-honest. */
+.pro-compare-modes,.pro-equipment-category-picker{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.pro-compare-modes button,.pro-equipment-category-picker button{font:inherit;border:1px solid #d7d7dc;background:#fff;border-radius:999px;padding:11px 18px;min-height:44px;font-size:14px;font-weight:600;cursor:pointer}
+.pro-compare-modes button[aria-pressed=true]{background:#25262a;color:#fff;border-color:#25262a}
+.pro-equipment-category-picker button[aria-pressed=true]{background:#e9e9ec;border-color:#888991}
+.pro-compare-modes button:focus-visible,.pro-equipment-category-picker button:focus-visible{outline:3px solid #6a6b76;outline-offset:3px}
+.pro-equipment-note{color:#686971;font-size:13px;line-height:1.75;margin:13px 0 18px;max-width:780px}
+.pro-feature-present{color:#1b5939;font-weight:600}
+.pro-feature-unlisted{color:#757780}
+.pro-draft-compare-scroll tbody td{min-width:135px}
+@media(max-width:600px){.pro-compare-modes button{flex:1}.pro-equipment-category-picker button{padding:10px 13px;font-size:12px}}
