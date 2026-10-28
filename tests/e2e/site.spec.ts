@@ -117,3 +117,25 @@ test('footer social icons remain non-interactive until official URLs exist',asyn
  await expect(social.locator('a')).toHaveCount(0);
  await expect(page.getByText('თბილისი, ბელიაშვილის 115').first()).toBeVisible();
 });
+
+test('Vigus: animated editorial sections actually reveal during scrolling',async({page},testInfo)=>{
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
+ const targets=[
+  {name:'character',selector:'#story .vigus-story-mosaic'},
+  {name:'design',selector:'#design .vigus-storytelling'},
+  {name:'capabilities',selector:'#technology .vigus-capabilities-grid'},
+  {name:'trims',selector:'#trims .vigus-selector'},
+ ] as const;
+ for(const target of targets){
+  const section=page.locator(target.selector);
+  await section.scrollIntoViewIfNeeded();
+  await expect.poll(async()=>Number(await section.evaluate(node=>getComputedStyle(node).opacity)),{
+   timeout:8000,message:`Scroll reveal remains invisible: ${target.name}`,
+  }).toBeGreaterThan(.85);
+  await testInfo.attach(`vigus-scrolled-${target.name}`,{
+   body:await page.screenshot({animations:'disabled'}),
+   contentType:'image/png',
+  });
+ }
+});
