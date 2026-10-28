@@ -26,7 +26,7 @@ export default function Home() {
     </div></section>
 
     <section className="section catalogue-feature"><div className="container">
-      <div className="section-head"><div><p className="eyebrow">JMC-ის ავტომობილები</p><h2>აღმოაჩინე მოდელების ხაზი</h2><p className="section-sub">გაეცანი JMC Vigus-სა და Grand Avenue-ს — ორი პიკაპი განსხვავებული მახასიათებლებითა და შესაძლებლობებით.</p></div><Link href="/vehicles" className="text-link">ყველა მოდელი <span aria-hidden="true">↗</span></Link></div>
+      <div className="section-head"><div><p className="eyebrow">JMC-ის ავტომობილები</p><h2>აღმოაჩინე მოდელების ხაზი</h2><p className="section-sub">აღმოაჩინე JMC Vigus, Grand Avenue და Grand Avenue PRO — სამი პიკაპი განსხვავებული მახასიათებლებითა და შესაძლებლობებით.</p></div><Link href="/vehicles" className="text-link">ყველა მოდელი <span aria-hidden="true">↗</span></Link></div>
       <div className="jmc-home-model-grid" aria-label="JMC-ის მოდელები">
         {vehicles.map((model,index)=><article key={model.slug} className="jmc-home-model-card">
           <Link href={`/vehicles/${model.slug}`} className="jmc-home-model-image">
