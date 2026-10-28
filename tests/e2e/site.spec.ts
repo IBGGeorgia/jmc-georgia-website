@@ -1,5 +1,6 @@
 import {test, expect} from '@playwright/test';
 import {vehicles} from '../../lib/vehicles';
+import {grandAvenue,grandAvenueTechnical,grandAvenueEquipment,grandAvenueMedia,grandAvenueHighlights} from '../../lib/grand-avenue';
 
 const routes=[
  {path:'/',label:'home'},
@@ -221,5 +222,28 @@ test('model publication: only approved records can become public routes',async({
   expect(Array.isArray(model.trims)).toBe(true);
  }
  const response=await page.goto('/vehicles/unapproved-model-for-qa',{waitUntil:'domcontentloaded'});
+ expect(response?.status()).toBe(404);
+});
+
+test('Grand Avenue draft: exact brochure trim, truthful fields and no premature publication',async({page})=>{
+ expect(grandAvenue.slug).toBe('grand-avenue');
+ expect(grandAvenue.publicationStatus).toBe('draft');
+ expect(grandAvenue.trims).toHaveLength(1);
+ expect(grandAvenue.trims[0].name).toBe('4X4 AT GL · Diesel');
+ expect(grandAvenue.trims[0].drivetrain).toBe('4×4');
+ expect(grandAvenue.trims[0].transmission).toBe('8AT');
+ expect(grandAvenueTechnical.find(s=>s.label==='სიმძლავრე')?.value).toBe('211 ც.ძ.');
+ expect(grandAvenueTechnical.find(s=>s.label==='კლირენსი')?.value).toBe('235 მმ');
+ expect(grandAvenueTechnical.find(s=>s.label==='საწვავის ავზი')?.value).toBe('80 ლ');
+ expect(grandAvenueTechnical.find(s=>s.label==='ემისიის სტანდარტი')?.value).toBe('Euro 5');
+ expect(grandAvenueTechnical.some(s=>/საწვავის მოხმარება|ფასი|გარანტია/.test(s.label))).toBe(false);
+ expect(grandAvenueHighlights).toHaveLength(4);
+ expect(grandAvenueEquipment.exterior.length).toBeGreaterThanOrEqual(5);
+ expect(grandAvenueEquipment.interior).toHaveLength(18);
+ expect(grandAvenueEquipment.safety).toHaveLength(20);
+ expect(grandAvenueMedia.hero).toBeUndefined();
+ expect(grandAvenue.gallery).toHaveLength(0);
+ expect(vehicles.some(v=>v.slug==='grand-avenue')).toBe(false);
+ const response=await page.goto('/vehicles/grand-avenue',{waitUntil:'domcontentloaded'});
  expect(response?.status()).toBe(404);
 });
