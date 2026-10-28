@@ -272,3 +272,39 @@
  .jmc-drawer-links a,.jmc-menu-trigger{transition:none!important}
  .button:active{transform:none}
 }
+
+
+/* Approved header hierarchy: menu at left, official centered logo, no promotional header CTA. */
+.jmc-drawer-address{
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+ margin-top:auto;
+ padding-top:clamp(24px,4vh,48px);
+ border-top:1px solid var(--jmc-ui-border);
+}
+.jmc-drawer-address>span{
+ color:var(--jmc-ui-tertiary);
+ font:500 13px/1.5 var(--font-ka);
+}
+.jmc-drawer-address address{
+ font-style:normal;
+ line-height:1.65;
+}
+.jmc-drawer-address a{
+ display:inline-flex;
+ align-items:center;
+ min-height:44px;
+ text-decoration:none;
+ color:var(--jmc-ui-ink);
+ font:600 15px/1.65 var(--font-ka);
+}
+.jmc-drawer-address a:hover{opacity:.72}
+.jmc-drawer-address a:focus-visible{
+ outline:2px solid var(--jmc-ui-focus);
+ outline-offset:3px;
+}
+.jmc-drawer-foot{
+ margin:0;
+ padding-top:18px;
+}
