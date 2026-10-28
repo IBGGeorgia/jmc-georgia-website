@@ -1878,3 +1878,10 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
 .jmc-test-drive-models{padding-top:70px;padding-bottom:90px}
 .jmc-test-drive-models>h2{font-size:clamp(26px,3vw,44px);letter-spacing:-.04em}
 @media(max-width:700px){.jmc-home-model-grid{grid-template-columns:1fr}.jmc-models-page{padding-top:95px}.jmc-home-model-content{padding:24px}}
+
+/* Vigus comparisons: a clear, accessible difference filter shared across layouts. */
+.vigus-differences-toggle{display:inline-flex;align-items:center;gap:10px;margin:18px 0 20px;padding:12px 17px;border:1px solid #dedee3;border-radius:999px;cursor:pointer;font-size:14px;font-weight:600;color:#25252a;background:#f7f7f8}
+.vigus-differences-toggle input{accent-color:#292930;width:17px;height:17px}
+.vigus-differences-toggle span{font-variant-numeric:tabular-nums;font-size:12px;border-radius:999px;background:#e6e6ea;padding:3px 8px}
+.vigus-differences-toggle:focus-within{outline:2px solid #777780;outline-offset:3px}
+@media(max-width:700px){.vigus-differences-toggle{margin-block:13px 18px;min-height:46px}}
