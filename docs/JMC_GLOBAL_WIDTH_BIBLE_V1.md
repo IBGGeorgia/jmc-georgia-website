@@ -28,3 +28,8 @@ Run `npm run lint`, `npm run build`, then test public pages at 1920, 1440, 768, 
 
 ## Future maintenance
 If migrating legacy CSS, remove superseded selectors instead of stacking multiple new overrides; keep intentional narrow component-specific constraints. Any Width Bible amendment requires explicit design approval and corresponding regression QA.
+
+## Approved Hero Height — v1.1
+- Global cinematic hero: **748px desktop**, **650px mobile** (breakpoint at 700px).
+- Full-bleed artwork occupies the full hero; text aligns with the main content grid.
+- Keep consistent values across Homepage, VIGUS, Grand Avenue and PRO. Exception only with explicit design approval.

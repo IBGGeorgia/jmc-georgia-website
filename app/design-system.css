@@ -359,3 +359,39 @@
 .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{flex:0 0 auto!important}
 .vigus-experience .model-local-nav .vigus-local-inner.container,
 .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{padding-inline:0!important}
+
+/* JMC Global Width Bible v1.1 — PRO hero geometry and home section audit.
+   Approved common masthead: 748px desktop, 650px mobile. */
+:root{--jmc-hero-height-desktop:748px;--jmc-hero-height-mobile:650px}
+.hero.hero-editorial{
+ height:var(--jmc-hero-height-desktop);
+ min-height:var(--jmc-hero-height-desktop);
+ max-height:var(--jmc-hero-height-desktop);
+}
+.hero.hero-editorial>.hero-content{
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;
+ max-width:var(--jmc-content-max)!important;
+ margin-inline:auto!important;
+ padding:clamp(70px,8vw,115px) 0 100px!important;
+}
+.hero.hero-editorial .hero-bottom-inner{
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;
+ max-width:var(--jmc-content-max)!important;
+ margin-inline:auto!important;padding-inline:0!important;
+}
+.introduction>.container,.steps-section>.container,.action-section>.container,
+.jmc-editorial-lineup>.container,.jmc-lineup-feature>.container{
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;
+ max-width:var(--jmc-content-max)!important;
+ margin-inline:auto!important;padding-inline:0!important;
+}
+.action-section>.container>.action-banner{
+ width:100%;max-width:none;margin-inline:0;
+}
+@media(max-width:700px){
+ .hero.hero-editorial{
+  height:var(--jmc-hero-height-mobile);min-height:var(--jmc-hero-height-mobile);max-height:var(--jmc-hero-height-mobile);
+ }
+ .hero.hero-editorial>.hero-content{padding:70px 0 95px!important}
+ .hero.hero-editorial h1{font-size:clamp(37px,9vw,60px)}
+}
