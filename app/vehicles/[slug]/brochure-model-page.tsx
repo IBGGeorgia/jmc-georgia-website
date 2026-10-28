@@ -72,7 +72,7 @@ export function BrochureModelPage({vehicle,highlights,technical,equipment,media}
     <div><span>ტრანსმისია</span><strong>8AT</strong></div><div><span>ამძრავი</span><strong>4×4</strong></div><div><span>კლირენსი</span><strong>{spec('კლირენსი')}</strong></div>
    </div><Link href="/test-drive" className="vigus-pill vigus-pill-dark">ტესტ-დრაივის ინფორმაცია ↗</Link></div>
   </div></div>
-  <div className="grand-equipment"><h3>აღჭურვილობა</h3>{categories.map(({key,name})=><details key={key}><summary>{name}<span>{equipment[key].length} ფუნქცია +</span></summary><ul>{equipment[key].map(v=><li key={v}>{v}</li>)}</ul></details>)}</div>
+  <div className="grand-equipment"><div className="grand-equipment-heading"><h3>აღჭურვილობა</h3><p>აირჩიე კატეგორია დეტალური ინფორმაციისთვის.</p></div>{categories.map(({key,name},index)=><details key={key} open={index===0}><summary>{name}<span>{equipment[key].length} ფუნქცია +</span></summary><ul>{equipment[key].map(v=><li key={v}>{v}</li>)}</ul></details>)}</div>
  </div></section>
  <ModelClosingCTA name="Grand Avenue" title="გაიცანი Grand Avenue ახლოდან." description="გაეცანი მოდელის აღჭურვილობასა და ტესტ-დრაივის ინფორმაციას." compareHref="#trims" animated/>
  </main><Footer/></>;
