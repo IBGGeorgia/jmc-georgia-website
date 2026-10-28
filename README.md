@@ -9,7 +9,9 @@ Next.js App Router / React / TypeScript project for JMC Georgia. Deployed on Ren
 - Shared styles: `app/design-system.css` (imported after legacy `app/globals.css`)
 - Development guardrails: `AGENTS.md`
 - Model source data: `lib/vehicles.ts`
-- Vigus reference page: `app/vehicles/[slug]/page.tsx`
+- Vigus editorial composition: `app/vehicles/[slug]/vigus-page.tsx`
+- Shared model components: `app/vehicles/[slug]/model-sections.tsx`
+- Future verified-model baseline: `app/vehicles/[slug]/generic-model-page.tsx`
 - Motion system: `app/vehicles/[slug]/vigus-motion.tsx`
 - Approved asset notes: `docs/VIGUS_ASSET_INSTALL.md`
 
