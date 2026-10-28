@@ -4,6 +4,7 @@ import {getVehicle,vehicles} from '../../../lib/vehicles';
 import {VigusPage} from './vigus-page';
 import {GenericModelPage} from './generic-model-page';
 import {BrochureModelPage} from './brochure-model-page';
+import {GrandAvenueProDraftPage} from './grand-avenue-pro-draft-page';
 import {grandAvenueTechnical,grandAvenueEquipment,grandAvenueMedia,grandAvenueHighlights} from '../../../lib/grand-avenue';
 import './model-page.css';
 import './brochure-model.css';
@@ -24,6 +25,7 @@ export default async function VehiclePage({params}:{params:Promise<{slug:string}
  const {slug}=await params;
  const vehicle=getVehicle(slug);
  if(!vehicle)notFound();
+ if(slug==='grand-avenue-pro')return <GrandAvenueProDraftPage/>;
  if(slug==='vigus')return <VigusPage vehicle={vehicle}/>;
  if(slug==='grand-avenue')return <BrochureModelPage
   vehicle={vehicle} intro="შექმნილი რეალური გზებისთვის."
