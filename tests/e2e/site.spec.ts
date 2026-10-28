@@ -390,3 +390,12 @@ test('PRO editorial media only points to original user photos, not AI candidate 
   expect(image.src).not.toContain('/grand-avenue/');
  }
 });
+
+test('PRO brochure draft stays unlisted while comparison sources cover four categories',()=>{
+ expect(vehicles.some(v=>v.slug==='grand-avenue-pro')).toBe(false);
+ for(const variant of proSourceVariants){
+  for(const group of ['exterior','interior','safety','offroad']){
+   expect(Array.isArray(variant.groups[group])).toBe(true);
+  }
+ }
+});
