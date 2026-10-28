@@ -1,3 +1,4 @@
+import {grandAvenue} from './grand-avenue';
 export type Feature={label:string;value:string};
 export type Trim={id:string;name:string;priceGEL?:number;powertrain?:string;drivetrain?:string;transmission?:string;features:Feature[]};
 export type Vehicle={slug:string;name:string;category:'pickup'|'suv'|'commercial'|'other';publicationStatus:'approved'|'draft';description:string;heroImage?:string;gallery:string[];trims:Trim[];highlighted?:boolean};
@@ -17,7 +18,7 @@ const catalogue:Vehicle[]=[{
  {id:'vigus-at',name:'4X4 AT GL',powertrain:'2.5 L Diesel · 167 hp',drivetrain:'4×4',transmission:'8AT',features:[...vigusSpecs,{label:'დისკები და საბურავები',value:'17″ · 245/70 R17'}]},
  {id:'vigus-mt',name:'4X4 MT GL',powertrain:'2.5 L Diesel · 167 hp',drivetrain:'4×4',transmission:'6MT',features:[...vigusSpecs,{label:'დისკები და საბურავები',value:'17″ · 245/70 R17'}]}
  ]
-}];
+},grandAvenue];
 /** Only explicitly approved models are exposed to routing, catalogue and metadata. */
 export const vehicles:Vehicle[]=catalogue.filter(vehicle=>vehicle.publicationStatus==='approved');
 export const getVehicle=(slug:string)=>vehicles.find(v=>v.slug===slug);
