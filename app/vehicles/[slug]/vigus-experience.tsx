@@ -87,7 +87,7 @@ export function VigusHighlights(){
    {highlights.map((item,i)=>
     <img key={item.file} src={item.src} alt={current===i?item.name:''}
      className={i===current?'vigus-story-image is-active':'vigus-story-image'}
-     aria-hidden={i!==current} loading="lazy"/>)}
+     aria-hidden={i!==current} loading={i===0?"eager":"lazy"} decoding="async"/>)}
    <div className="vigus-story-image-counter" aria-hidden="true">{String(current+1).padStart(2,'0')} / {String(highlights.length).padStart(2,'0')}</div>
   </div>
   <div className="vigus-highlight-info">
