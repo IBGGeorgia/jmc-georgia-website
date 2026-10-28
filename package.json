@@ -9,7 +9,9 @@
     "lint": "tsc --noEmit",
     "audit": "npm audit",
     "qa:browser": "playwright test",
-    "qa:browser:ui": "playwright test --ui"
+    "qa:browser:ui": "playwright test --ui",
+    "prebuild": "node scripts/sync-pro-media.mjs",
+    "sync:pro-media": "node scripts/sync-pro-media.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",
