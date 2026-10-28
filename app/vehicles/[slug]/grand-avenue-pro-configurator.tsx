@@ -14,6 +14,7 @@ export function GrandAvenueProConfigurator(){
  const compared=useMemo(()=>proSourceVariants.filter(v=>comparison.includes(v.id)),[comparison]);
  if(!selected)return null;
  const rows=fields.map(key=>({key,label:selected.specLabels[key]?.[0]??key,values:compared.map(v=>v.specs[key]||'—')})).filter(row=>!diffOnly||compared.length<2||new Set(row.values).size>1);
+ const differenceCount=fields.filter(key=>compared.length>1&&new Set(compared.map(v=>v.specs[key]||'—')).size>1).length;
  return <div className="pro-draft-configurator">
   <p className="pro-draft-eyebrow">Grand Avenue PRO / Draft</p>
   <h2>აირჩიე შენი PRO</h2>
@@ -31,8 +32,8 @@ export function GrandAvenueProConfigurator(){
   </section>
   <section aria-labelledby="pro-draft-compare"><h3 id="pro-draft-compare">შეადარე კომპლექტაციები</h3>
    <div className="pro-draft-compare-options">{proSourceVariants.map(v=><label key={v.id}><input type="checkbox" checked={comparison.includes(v.id)} onChange={e=>setComparison(prev=>e.target.checked?[...prev,v.id]:prev.filter(x=>x!==v.id))}/> PRO {v.trim} · {fuelName(v.fuel)}</label>)}</div>
-   <label><input type="checkbox" checked={diffOnly} onChange={e=>setDiffOnly(e.target.checked)}/> მხოლოდ განსხვავებები</label>
-   {compared.length===0?<p>აირჩიე ერთი კომპლექტაცია მაინც.</p>:
+   <label className="pro-draft-diff-toggle"><input type="checkbox" checked={diffOnly} onChange={e=>setDiffOnly(e.target.checked)}/> მხოლოდ განსხვავებები <span>{differenceCount}</span></label>
+   {compared.length===0?<p role="status">აირჩიე ერთი კომპლექტაცია მაინც.</p>:rows.length===0?<p role="status" className="pro-draft-no-differences">არჩეულ ვერსიებს შორის მითითებული ტექნიკური მონაცემებით განსხვავება არ გამოვლენილა. აღჭურვილობის განსხვავებები იხილე შესაბამის კატეგორიაში.</p>:
     <div className="pro-draft-compare-scroll" role="region" aria-label="PRO კომპლექტაციების შედარება" tabIndex={0}><table><thead><tr><th scope="col">მახასიათებელი</th>{compared.map(v=><th scope="col" key={v.id}>PRO {v.trim} · {fuelName(v.fuel)}</th>)}</tr></thead>
      <tbody>{rows.map(row=><tr key={row.key}><th scope="row">{row.label}</th>{row.values.map((value,i)=><td key={compared[i].id}>{value}</td>)}</tr>)}</tbody></table></div>}
   </section>
