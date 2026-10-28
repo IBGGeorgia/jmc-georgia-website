@@ -374,3 +374,26 @@
  .pro-premium-mosaic-note strong{font-size:clamp(16px,4.15vw,23px);line-height:1.2}
 }
 @media(max-width:350px){.pro-premium-mosaic-side{grid-template-columns:1fr}.pro-premium-mosaic-note{min-height:175px}}
+
+/* Final section continuity and overlap guards across breakpoints. */
+.pro-premium-mosaic-main,.pro-premium-mosaic-side,.pro-premium-mosaic-note{min-width:0}
+.pro-premium-mosaic-note{box-sizing:border-box}
+.pro-premium-cinema-copy{box-sizing:border-box}
+.pro-premium-cinema-copy h2{max-width:840px;overflow-wrap:break-word}
+.pro-draft-tech-grid>*{min-width:0}
+.pro-draft-technology .pro-draft-original-photo figcaption{display:none}
+.pro-draft-gallery .pro-draft-original-photo figcaption{display:none}
+.pro-explorer-controls,.pro-explorer-controls fieldset,.pro-explorer-visual{min-width:0}
+.pro-explorer-visual>div strong{overflow-wrap:break-word;line-height:1.12}
+@media(min-width:601px) and (max-width:1000px){
+ .pro-premium-mosaic{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);min-height:510px}
+ .pro-premium-mosaic-side{grid-template-rows:minmax(0,1fr) auto}
+ .pro-premium-mosaic-note{padding:26px;min-height:195px}
+ .pro-premium-mosaic-note strong{font-size:clamp(22px,2.9vw,30px)}
+}
+@media(max-width:600px){
+ .pro-premium-mosaic-side>.pro-draft-original-photo img{width:100%;height:100%;object-fit:cover}
+ .pro-premium-mosaic-note strong{hyphens:auto}
+ .pro-premium-cinema-copy h2{overflow-wrap:break-word}
+ .pro-draft-gallery .pro-draft-chapter-heading{max-width:100%}
+}
