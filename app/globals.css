@@ -1310,3 +1310,109 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
 @media(prefers-reduced-motion:reduce){
  .jmc-menu-icon i{transition:none}
 }
+
+
+/* Vigus editorial motion v1 — progressive, scroll-aware, reduced-motion safe */
+.vigus-experience .vigus-local-nav{
+ top:82px;
+ position:sticky;
+ z-index:52;
+}
+.vigus-experience .vigus-local-nav{isolation:isolate}
+.vigus-scroll-progress{
+ position:absolute;inset:auto 0 0;height:2px;
+ overflow:hidden;pointer-events:none;background:rgba(20,20,20,.035);
+}
+.vigus-scroll-progress-fill{
+ display:block;width:100%;height:100%;
+ background:var(--jmc-red);transform:scaleX(0);transform-origin:left center;
+}
+.vigus-experience :is(#story,#design,#technology,#trims){
+ scroll-margin-top:174px;
+}
+.vigus-local-inner>div a[aria-current="location"]{
+ color:var(--jmc-red);font-weight:700;
+}
+.vigus-experience .vigus-gallery-interactive:focus-visible,
+.vigus-experience .vigus-highlight-options button:focus-visible,
+.vigus-experience .vigus-orbit-steps button:focus-visible,
+.vigus-experience .vigus-orbit-controls button:focus-visible{
+ outline:2px solid var(--jmc-red);outline-offset:4px;
+}
+@media(max-width:700px){
+ .vigus-experience .vigus-local-nav{top:68px}
+ .vigus-experience :is(#story,#design,#technology,#trims){scroll-margin-top:148px}
+}
+
+/* Animation behavior only activates when the user has not requested reduced motion. */
+@media(prefers-reduced-motion:no-preference){
+ .vigus-experience[data-motion-ready="true"] [data-vigus-reveal]{
+  transition:opacity .72s cubic-bezier(.2,.75,.2,1),
+   transform .85s cubic-bezier(.2,.75,.2,1);
+ }
+ .vigus-experience[data-motion-ready="true"] [data-vigus-reveal]:not(.is-visible){
+  opacity:0;transform:translate3d(0,22px,0);
+ }
+ .vigus-experience[data-motion-ready="true"] [data-vigus-reveal="visual"]:not(.is-visible){
+  transform:translate3d(0,28px,0);
+ }
+ .vigus-experience[data-motion-ready="true"] [data-vigus-reveal].is-visible{
+  opacity:1;transform:none;
+ }
+ .vigus-experience .vigus-hero-image-editorial{
+  animation:vigus-hero-image-arrive .9s cubic-bezier(.22,.75,.22,1) both;
+ }
+ .vigus-experience .vigus-hero-bottom>.vigus-eyebrow{
+  animation:vigus-copy-arrive .6s .06s cubic-bezier(.2,.75,.2,1) both;
+ }
+ .vigus-experience .vigus-hero-bottom h1{
+  animation:vigus-copy-arrive .74s .12s cubic-bezier(.2,.75,.2,1) both;
+ }
+ .vigus-experience .vigus-hero-bottom>p:not(.vigus-eyebrow){
+  animation:vigus-copy-arrive .7s .2s cubic-bezier(.2,.75,.2,1) both;
+ }
+ .vigus-experience .vigus-hero-actions{
+  animation:vigus-copy-arrive .68s .28s cubic-bezier(.2,.75,.2,1) both;
+ }
+ .vigus-experience .vigus-pill,.vigus-orbit-steps button,
+ .vigus-selector-controls button,.vigus-gallery-controls button{
+  transition:transform .22s ease,box-shadow .22s ease,
+   background-color .22s ease,border-color .22s ease,color .22s ease;
+ }
+ @media(hover:hover) and (pointer:fine){
+  .vigus-experience .vigus-pill:hover:not(:disabled){
+   transform:translateY(-2px);box-shadow:0 7px 22px rgba(0,0,0,.12);
+  }
+  .vigus-experience .vigus-story-mosaic figure img,
+  .vigus-experience .vigus-highlight-stage img,
+  .vigus-experience .vigus-gallery-strip figure img{
+   transition:transform .8s cubic-bezier(.22,.75,.22,1);
+  }
+  .vigus-experience .vigus-story-mosaic figure:hover img,
+  .vigus-experience .vigus-gallery-strip figure:hover img{
+   transform:scale(1.022);
+  }
+  .vigus-experience .vigus-orbit-steps button:hover:not(:disabled),
+  .vigus-experience .vigus-gallery-controls button:hover:not(:disabled){
+   transform:translateY(-1px);
+  }
+ }
+}
+@keyframes vigus-copy-arrive{
+ from{opacity:0;transform:translate3d(0,16px,0)}
+ to{opacity:1;transform:translate3d(0,0,0)}
+}
+@keyframes vigus-hero-image-arrive{
+ from{opacity:.45;transform:translate3d(0,14px,0)}
+ to{opacity:1;transform:translate3d(0,0,0)}
+}
+@media(prefers-reduced-motion:reduce){
+ .vigus-experience [data-vigus-reveal]{
+  opacity:1!important;transform:none!important;transition:none!important;
+ }
+ .vigus-experience :is(.vigus-hero-image-editorial,.vigus-hero-bottom h1,
+ .vigus-hero-bottom>.vigus-eyebrow,.vigus-hero-bottom>p,.vigus-hero-actions){
+  animation:none!important;
+ }
+ .vigus-experience .vigus-gallery-interactive{scroll-behavior:auto}
+}
