@@ -1,5 +1,6 @@
 'use client';
 import {useMemo,useState} from 'react';
+import {grandAvenueProOriginalMedia} from '../../../lib/grand-avenue-pro-media';
 import {getProVariant,proSourceVariants,type ProTrim,type ProFuel} from '../../../lib/grand-avenue-pro';
 const equipmentCategories:[string,string][]=[['exterior','ექსტერიერი'],['interior','ინტერიერი'],['safety','უსაფრთხოება'],['offroad','Off-road']];
 const fuelName=(fuel:ProFuel)=>fuel==='diesel'?'დიზელი':'ბენზინი';
@@ -25,7 +26,7 @@ export function GrandAvenueProConfigurator(){
  return <div className="pro-draft-configurator">
   <p className="pro-draft-eyebrow">JMC / GRAND AVENUE PRO</p>
   <h2>აირჩიე შენი PRO</h2>
-  <div className="pro-draft-axes">
+  <div className="pro-explorer-layout"><div className="pro-explorer-visual"><img src={grandAvenueProOriginalMedia.exterior.src} alt={grandAvenueProOriginalMedia.exterior.alt} loading="lazy"/><div><span>GRAND AVENUE PRO</span><strong>{trim} / {fuelName(fuel)}</strong></div></div><div className="pro-explorer-controls"><p className="pro-explorer-lead">შეარჩიე კომპლექტაცია და ძრავა. ტექნიკური მონაცემები ავტომატურად განახლდება.</p><div className="pro-draft-axes">
    <fieldset><legend>კომპლექტაცია</legend><div className="pro-draft-segments">{(['LX','SLX'] as const).map(value=><button type="button" key={value} aria-pressed={trim===value} onClick={()=>setTrim(value)}>PRO {value}</button>)}</div></fieldset>
    <fieldset><legend>ძრავა</legend><div className="pro-draft-segments">{(['diesel','gasoline'] as const).map(value=><button type="button" key={value} aria-pressed={fuel===value} onClick={()=>setFuel(value)}>{fuelName(value)}</button>)}</div></fieldset>
   </div>
@@ -33,6 +34,7 @@ export function GrandAvenueProConfigurator(){
    <h3>PRO {trim} · {fuelName(fuel)}</h3>
    <dl>{['engine','power','transmission','clearance'].map(key=><div key={key}><dt>{selected.specLabels[key]?.[0]}</dt><dd>{selected.specs[key]}</dd></div>)}</dl>
   </div>
+  </div></div>
   <section aria-labelledby="pro-draft-tech"><h3 id="pro-draft-tech">ტექნიკური მონაცემები</h3><dl className="pro-draft-facts">{fields.filter(k=>selected.specs[k]).map(key=><div key={key}><dt>{selected.specLabels[key]?.[0]}</dt><dd>{selected.specs[key]}</dd></div>)}</dl></section>
   <section aria-labelledby="pro-draft-equipment"><h3 id="pro-draft-equipment">აღჭურვილობა · PRO {trim} · {fuelName(fuel)}</h3>
    {equipmentCategories.map(([key,title])=>{const items=selected.groups[key];const list=Array.isArray(items)?items.filter(x=>typeof x==='string'):[];return <details key={key}><summary>{title} · {list.length}</summary><ul>{list.map((v:string,i:number)=><li key={i}>{v}</li>)}</ul></details>})}

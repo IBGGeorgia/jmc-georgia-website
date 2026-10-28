@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import {Header,Footer} from '../../site-components';
+import {ProPageNavigation} from './pro-page-navigation';
 import {GrandAvenueProConfigurator} from './grand-avenue-pro-configurator';
 import {GrandAvenueProGallery} from './grand-avenue-pro-gallery';
 import {grandAvenueProOriginalMedia as photos} from '../../../lib/grand-avenue-pro-media';
 import './grand-avenue-pro-draft.css';
 import {proSourceVariants} from '../../../lib/grand-avenue-pro';
-/** Unmounted PRO editorial composition. No route, import into public catalogue or fake images.
- * Phase 4 connects verified PRO photographs and publishes only after user approval.
- */
+/** Approved public PRO editorial, with experimental design changes isolated to preview branch. */
 const metrics=[['2.3 L','ძრავის მოცულობა'],['4×4','ამძრავი'],['8AT','ავტომატური ტრანსმისია'],['255 მმ','კლირენსი']];
 const story=[
  {index:'01',name:'ექსტერიერი',title:'ფორმა და ფუნქცია.',description:'ავტომობილის დიზაინის დეტალები და ექსტერიერის აღჭურვილობა.',media:'exterior'},
@@ -19,7 +18,7 @@ function OriginalPhoto({photo,priority=false}:{photo:ProPhotoKey;priority?:boole
  const entry=photos[photo];return <figure className="pro-draft-original-photo"><img src={entry.src} alt={entry.alt} loading={priority?'eager':'lazy'} decoding="async"/><figcaption>{entry.alt}</figcaption></figure>;
 }
 export function GrandAvenueProDraftPage(){
- return <><Header/><main className="pro-draft-page">
+ return <><Header/><main className="pro-draft-page"><ProPageNavigation/>
 
   <header className="pro-draft-hero" id="pro-top">
    <div className="pro-premium-hero-photo"><OriginalPhoto photo="hero" priority/><div className="pro-premium-hero-shade"/></div>

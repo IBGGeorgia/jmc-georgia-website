@@ -1885,3 +1885,35 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
 .vigus-differences-toggle span{font-variant-numeric:tabular-nums;font-size:12px;border-radius:999px;background:#e6e6ea;padding:3px 8px}
 .vigus-differences-toggle:focus-within{outline:2px solid #777780;outline-offset:3px}
 @media(max-width:700px){.vigus-differences-toggle{margin-block:13px 18px;min-height:46px}}
+
+/* Homepage Editorial Lineup — isolated to home, preserving catalogue cards elsewhere. */
+.jmc-editorial-lineup{padding:clamp(90px,9vw,145px) 0;background:#fff}
+.jmc-lineup-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;padding-bottom:44px}
+.jmc-lineup-heading h2{font-size:clamp(46px,5.8vw,86px);line-height:1.05;letter-spacing:-.065em;font-weight:620;margin:16px 0 0}
+.jmc-lineup-heading h2 span{color:#92939a}
+.jmc-lineup-feature{position:relative;isolation:isolate;min-height:clamp(520px,61vw,800px);display:flex;align-items:end;overflow:hidden;background:#17191c}
+.jmc-lineup-feature>img,.jmc-lineup-feature-shade{position:absolute;inset:0;width:100%;height:100%}
+.jmc-lineup-feature>img{object-fit:cover;object-position:center 55%}
+.jmc-lineup-feature-shade{background:linear-gradient(0deg,rgba(11,13,16,.85),transparent 72%),linear-gradient(90deg,rgba(11,13,16,.38),transparent 65%)}
+.jmc-lineup-feature-content{z-index:1;color:white;padding-bottom:clamp(55px,6vw,95px);position:relative}
+.jmc-lineup-feature-content>span,.jmc-lineup-secondary-copy>span{font-size:12px;letter-spacing:.15em;font-weight:650}
+.jmc-lineup-feature-content h3{font-family:var(--font-latin),sans-serif;font-size:clamp(48px,8vw,122px);letter-spacing:-.065em;line-height:1;margin:21px 0}
+.jmc-lineup-feature-content h3 em{font-style:normal;color:#fff}
+.jmc-lineup-feature-content p{font-size:clamp(17px,1.8vw,25px);margin:0 0 27px}
+.jmc-lineup-pill{display:inline-flex;gap:26px;align-items:center;min-height:50px;padding:13px 23px;border-radius:99px;background:white;color:#202126;text-decoration:none;font-weight:650}
+.jmc-lineup-secondary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,3vw,44px);padding-top:clamp(24px,4vw,58px)}
+.jmc-lineup-secondary-card{min-width:0}
+.jmc-lineup-secondary-visual{display:block;position:relative;aspect-ratio:5/4;overflow:hidden;border-radius:15px;background:#edeef0}
+.jmc-lineup-secondary-visual img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.jmc-lineup-secondary-visual:hover img{transform:scale(1.035)}
+.jmc-lineup-secondary-visual>span{position:absolute;right:18px;bottom:18px;width:45px;height:45px;display:grid;place-items:center;background:white;border-radius:50%;font-size:22px;color:#222}
+.jmc-lineup-secondary-copy{padding:30px 4px}
+.jmc-lineup-secondary-copy>span{color:#8b8b93}
+.jmc-lineup-secondary-copy h3{font-family:var(--font-latin),sans-serif;text-transform:uppercase;font-size:clamp(33px,4vw,60px);letter-spacing:-.055em;line-height:1.1;margin:15px 0}
+.jmc-lineup-secondary-copy p{font-size:16px;line-height:1.7;color:#66666d}
+.jmc-lineup-secondary-copy>a{display:inline-flex;color:#24252a;font-weight:650;text-decoration:none;border-bottom:1px solid currentColor;padding:12px 0}
+.jmc-lineup-pill:focus-visible,.jmc-lineup-secondary a:focus-visible{outline:3px solid #b73c43;outline-offset:4px}
+@media(max-width:700px){.jmc-editorial-lineup{padding:70px 0}.jmc-lineup-heading{align-items:start;flex-direction:column;padding-bottom:27px}.jmc-lineup-feature{min-height:620px}.jmc-lineup-feature>img{object-position:63% center}.jmc-lineup-feature-content{padding-bottom:53px}.jmc-lineup-feature-content h3{font-size:clamp(44px,10vw,70px)}.jmc-lineup-secondary{grid-template-columns:1fr;gap:20px}.jmc-lineup-secondary-copy{padding:22px 2px 28px}.jmc-lineup-secondary-visual{aspect-ratio:4/3}}
+@media(prefers-reduced-motion:reduce){.jmc-lineup-secondary-visual img{transition:none}.jmc-lineup-secondary-visual:hover img{transform:none}}
+
+@media(max-width:380px){.jmc-lineup-heading h2{font-size:clamp(37px,11vw,46px);overflow-wrap:anywhere}.jmc-lineup-heading>div{min-width:0;max-width:100%}}
