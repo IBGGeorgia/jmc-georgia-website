@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: { default: 'JMC Georgia | ოფიციალური წარმომადგენლობა', template: '%s | JMC Georgia' },
-  description: 'JMC Georgia — აღმოაჩინე ავტომობილები, შეადარე კომპლექტაციები და მოითხოვე ტესტ-დრაივი.',
+  description: 'JMC Georgia — აღმოაჩინე ავტომობილები, შეადარე კომპლექტაციები და გაეცანი ტესტ-დრაივის ინფორმაციას.',
   robots: { index: false, follow: false }, // Keep staging site out of search until content is approved.
 };
 
