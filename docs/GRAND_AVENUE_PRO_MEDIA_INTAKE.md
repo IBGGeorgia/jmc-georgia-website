@@ -4,23 +4,23 @@ Status: **media intake, not published**. 11 images uploaded by user. These are a
 
 | User file | Native dimensions | Intended role | QA/usage |
 |---|---|---|---|
-| prooo.jpg | 1400×784 | Hero candidate, wide red pickup with desert | High priority original reference; a FLUX.2 Flex 2K candidate was generated for comparison. Inspect product fidelity before approval. |
-| prppppp_0.jpg | 1400×784 | Exterior / main editorial scene | Wide red pickup, mountain composition |
-| pro1-copy_0.jpg | 1400×784 | Exterior / landscape capability | Red pickup with terrain |
-| picture19.jpg | 1643×1095 | Rear ¾ / gallery | Large vehicle rear and side |
-| picture20.jpg | 1717×1146 | Details / front wheel, grille, lighting | Sharp close-up |
-| picture21.jpg | 1746×1164 | Exterior / elevated terrain | Red pickup, rugged road |
-| picture16.jpg | 536×340 | Thumbnail / secondary reference | Small source, not recommended full-bleed hero |
-| picture17.jpg | 497×332 | Thumbnail / secondary reference | Small source, not recommended full-bleed hero |
-| picture18 (2).jpg | 537×366 | Thumbnail / driving mood | Small source, avoid enlargement |
-| picture1_1.jpg | 512×341 | Four-image collage / K-MAN suspension and rear details | Must not treat collage as four high-resolution originals; can use a supported cropped tile with quality limits |
-| picture22.jpg | 569×320 | Overhead turn shot | Small source / possible supporting visual only |
+| picture1_1.jpg | 512×341 | Small side-profile in bright desert | Reference / thumbnail only |
+| picture16.jpg | 536×340 | Small front three-quarter in mountains | Reference / thumbnail only |
+| picture17.jpg | 497×332 | Dusty action/front three-quarter | Small original, no full bleed |
+| picture18 (2).jpg | 537×366 | Four-image collage with K-MAN suspension, rear detail | Lower-resolution multi-tile source; don't treat as four original photos |
+| picture19.jpg | 1643×1095 | Rear three-quarter desert, side and tailgate | Editorial/gallery, high-resolution original |
+| picture20.jpg | 1717×1146 | Digital instrument cluster, gauges | Technology detail; NOT wide cabin |
+| picture21.jpg | 1746×1164 | Digital instrument cluster, terrain mode graphic | Technology/offroad detail; NOT wide cabin |
+| picture22.jpg | 569×320 | Bird's-eye red pickup doing circle in desert | Small atmospheric/reference photo |
+| pro1-copy_0.jpg | 1400×784 | Close-up front lighting, grille, wheel and snorkel | Detail photography |
+| prooo.jpg | 1400×784 | Wide front three-quarter red pickup in desert | Main hero candidate; Flex 2K candidate reference |
+| prppppp_0.jpg | 1400×784 | Front three-quarter in rugged dark mountains | Storytelling/off-road |
 
 Additional supplied interior views:
-- Picture showing instrument cluster and driving angles (picture18?); see user images and source filename verification below.
-- Actual detailed interior photos are limited to instrument-cluster close-ups, **not** a complete wide cabin picture.
+- **picture20.jpg** and **picture21.jpg** show the instrument cluster and driving/terrain settings.
+- A full wide-cabin photo is **not included** in this batch; do not invent a cabin from a dashboard crop.
 
-**Important visual QA:** above filename/role association for the 11 uploaded images needs a direct source QA against their image pixels before production assignment; avoid inferring specific trim just from red exterior. User has NOT confirmed LX vs SLX for the exterior photos, although the K-MAN photo suggests SLX-specific equipment (verify brochure/stock before claim).
+**Source visual QA completed:** all eleven file-role mappings were verified using a filename-labeled contact sheet. Specific LX vs SLX trim identity cannot be inferred from red exterior photos; K-MAN-equipped close-up is only in a collage and requires trim confirmation. User has NOT confirmed LX vs SLX for the exterior photos, although the K-MAN photo suggests SLX-specific equipment (verify brochure/stock before claim).
 
 ## Higgsfield generation
 - Requested model: `flux_2` with `variant=flex`, `resolution=2k`, `aspect_ratio=16:9`.
