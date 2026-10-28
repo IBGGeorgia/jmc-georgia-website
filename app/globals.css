@@ -1290,3 +1290,23 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  .jmc-test-drive-actions{align-items:stretch;flex-direction:column;gap:10px}
  .jmc-test-drive-actions .button,.jmc-test-drive-secondary{justify-content:space-between}
 }
+
+
+/* Accessible modal navigation — focus, scroll lock and narrow-screen safeguards */
+.jmc-drawer-shell[hidden]{display:none!important}
+.jmc-drawer-shell{isolation:isolate;overscroll-behavior:contain}
+.jmc-drawer{overscroll-behavior:contain;overscroll-behavior-y:contain}
+.jmc-drawer-links a[aria-current="page"]{color:var(--jmc-red)}
+.jmc-drawer-links a[aria-current="page"] span:first-child{color:var(--jmc-red)}
+.jmc-drawer-close:focus-visible,.jmc-drawer-links a:focus-visible,
+.jmc-drawer-drive:focus-visible,.jmc-menu-trigger:focus-visible{
+ outline:3px solid var(--jmc-red);outline-offset:3px;
+}
+@media(max-width:700px){
+ .jmc-drawer{padding-bottom:max(26px,env(safe-area-inset-bottom))}
+ .jmc-drawer-links a{min-height:68px}
+ .jmc-drawer-drive{min-height:52px}
+}
+@media(prefers-reduced-motion:reduce){
+ .jmc-menu-icon i{transition:none}
+}
