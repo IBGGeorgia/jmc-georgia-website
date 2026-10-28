@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Header, Footer } from '../site-components';
+import {vehicles} from '../../lib/vehicles';
 
 export const metadata:Metadata={
  title:'ტესტ-დრაივი',
- description:'JMC Georgia — ტესტ-დრაივის დაჯავშნის ინფორმაცია და JMC Vigus-ის გაცნობა.'
+ description:'JMC Georgia — ტესტ-დრაივის დაჯავშნის ინფორმაცია და JMC Vigus-ისა და Grand Avenue-ის გაცნობა.'
 };
 
 export default function TestDrive(){
@@ -14,15 +15,15 @@ export default function TestDrive(){
    <header className="page-head jmc-page-intro">
     <p className="eyebrow">JMC Georgia</p>
     <h1>ტესტ-დრაივი</h1>
-    <p className="jmc-page-lead">გაეცანი JMC Vigus-ს და ტესტ-დრაივის ონლაინ დაჯავშნის მიმდინარე სტატუსს.</p>
+    <p className="jmc-page-lead">გაეცანი JMC-ის მოდელებს და ტესტ-დრაივის ონლაინ დაჯავშნის მიმდინარე სტატუსს.</p>
    </header>
    <section className="jmc-test-drive-panel" aria-labelledby="test-drive-status">
     <div className="jmc-test-drive-panel-copy">
      <p className="jmc-test-drive-status-label">ონლაინ დაჯავშნა</p>
      <h2 id="test-drive-status">ფორმა მალე დაემატება.</h2>
-     <p>ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება. მანამდე შეგიძლია გაეცნო Vigus-ის მახასიათებლებს და ნახო ჩვენი მისამართი.</p>
+     <p>ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება. მანამდე შეგიძლია გაეცნო JMC-ის მოდელებს და ნახო ჩვენი მისამართი.</p>
      <div className="jmc-test-drive-actions">
-      <Link className="button" href="/vehicles/vigus">აღმოაჩინე Vigus <span aria-hidden="true">↗</span></Link>
+      <Link className="button" href="/vehicles">ნახე ყველა მოდელი <span aria-hidden="true">↗</span></Link>
       <Link className="jmc-test-drive-secondary" href="/contact">მისამართის ნახვა <span aria-hidden="true">↗</span></Link>
      </div>
     </div>
@@ -31,6 +32,7 @@ export default function TestDrive(){
      <address>თბილისი, ბელიაშვილის 115</address>
     </div>
    </section>
+   <section className="jmc-test-drive-models" aria-label="აირჩიე მოდელი"><h2>გაიცანი მოდელები</h2><div className="jmc-home-model-grid">{vehicles.map(model=><article className="jmc-home-model-card" key={model.slug}><Link className="jmc-home-model-image" href={`/vehicles/${model.slug}`}><img src={model.heroImage} loading="lazy" alt={`JMC ${model.name}`}/></Link><div className="jmc-home-model-content"><h3>{model.name}</h3><Link href={`/vehicles/${model.slug}`} className="button">მახასიათებლების ნახვა ↗</Link></div></article>)}</div></section>
   </main>
   <Footer/>
  </>;
