@@ -216,3 +216,18 @@
  .pro-draft-gallery{padding-bottom:70px}
  .pro-premium-choose{padding-block:20px}
 }
+
+/* Premium gallery: native image assets, accessible full-screen inspection. */
+.pro-premium-gallery-tile{border:0;padding:0;position:relative;overflow:hidden;cursor:zoom-in;min-width:0;border-radius:18px;background:#e7e7e9;aspect-ratio:16/10}
+.pro-premium-gallery-tile img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .4s ease}
+.pro-premium-gallery-tile:hover img{transform:scale(1.035)}
+.pro-premium-gallery-tile:focus-visible{outline:3px solid #666;outline-offset:4px}
+.pro-premium-gallery-zoom{position:absolute;right:16px;bottom:16px;background:#fffffff0;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;font-size:22px}
+.pro-premium-lightbox{position:fixed;z-index:10000;inset:0;background:#101114f7;display:flex;align-items:center;justify-content:center;padding:75px clamp(15px,5vw,75px) 95px}
+.pro-premium-lightbox>img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.pro-premium-gallery-close{position:absolute;top:22px;right:25px;width:48px;height:48px;border:1px solid #ffffff80;border-radius:50%;background:#ffffff1b;color:white;font-size:30px;cursor:pointer}
+.pro-premium-gallery-nav{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:27px;color:white;font-variant-numeric:tabular-nums;font-size:14px}
+.pro-premium-gallery-nav button{width:44px;height:44px;border:1px solid #ffffff80;background:#ffffff15;border-radius:50%;color:#fff;font-size:24px;cursor:pointer}
+.pro-premium-lightbox button:focus-visible{outline:3px solid white;outline-offset:4px}
+@media(max-width:600px){.pro-premium-gallery-tile{flex:0 0 85%;scroll-snap-align:start}.pro-premium-lightbox{padding-inline:10px}.pro-premium-gallery-zoom{width:36px;height:36px;right:12px;bottom:12px}}
+@media(prefers-reduced-motion:reduce){.pro-premium-gallery-tile img{transition:none}.pro-premium-gallery-tile:hover img{transform:none}}
