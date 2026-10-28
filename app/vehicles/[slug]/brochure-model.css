@@ -403,3 +403,18 @@
 @media(prefers-reduced-motion:reduce){
  .grand-vigus-page .brochure-story-tabs button{transition:none}
 }
+
+/* Mobile editorial gallery — keep the desktop image grid, compress mobile scroll length. */
+@media(max-width:700px){
+ .grand-vigus-page .grand-gallery-grid{
+  display:flex;gap:14px;overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scroll-padding-inline:2px;
+  padding:0 2px 18px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;
+ }
+ .grand-vigus-page .grand-gallery-grid figure{
+  flex:0 0 min(84%,340px);width:min(84%,340px);
+  scroll-snap-align:start;
+ }
+ .grand-vigus-page .grand-gallery-grid img{aspect-ratio:4/3}
+ .grand-vigus-page .grand-gallery-grid figcaption{margin-top:10px}
+}
