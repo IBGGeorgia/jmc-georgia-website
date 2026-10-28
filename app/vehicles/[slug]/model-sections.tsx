@@ -39,9 +39,9 @@ export function ModelClosingCTA({
   <div className="container">
    <span className="vigus-eyebrow">JMC Georgia</span>
    <h2>{title??`გაიცანი ${name} ახლოდან.`}</h2>
-   <p>{description??`გაეცანი ${name}-ის ინფორმაციას და ნახე ჩვენი მისამართი თბილისში.`}</p>
+   <p>{description??`გაეცანი ${name}-ის მახასიათებლებსა და ტესტ-დრაივის ინფორმაციას.`}</p>
    <div>
-    <Link href="/contact" className="vigus-pill vigus-pill-white">მისამართის ნახვა <span aria-hidden="true">↗</span></Link>
+    <Link href="/test-drive" className="vigus-pill vigus-pill-white">ტესტ-დრაივის ინფორმაცია <span aria-hidden="true">↗</span></Link>
     {compareHref&&<a href={compareHref} className="vigus-pill vigus-pill-outline">
      {compareHref==='#trims'?'შეადარე კომპლექტაციები':'მახასიათებლების ნახვა'}
     </a>}
