@@ -2131,3 +2131,26 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
   width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
  }
 }
+
+/* Model page alignment: match the actual lower editorial grid (1680px),
+   not the earlier 1200px nav/hero constraint. */
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container,
+.vigus-experience .model-local-nav .vigus-local-inner.container,
+.vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
+ width:min(1680px,calc(100% - 48px))!important;max-width:1680px!important;margin-inline:auto!important;
+}
+.jmc-header .jmc-header-inner.container{
+ width:min(1680px,calc(100% - 48px))!important;max-width:1680px!important;
+ padding-inline:0!important;margin-inline:auto!important;
+}
+.jmc-header .jmc-header-inner .jmc-menu-trigger{
+ padding:0!important;justify-self:start;justify-content:center;
+}
+@media(max-width:700px){
+ .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container,
+ .vigus-experience .model-local-nav .vigus-local-inner.container,
+ .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container,
+ .jmc-header .jmc-header-inner.container{
+  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+ }
+}
