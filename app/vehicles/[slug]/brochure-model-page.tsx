@@ -29,14 +29,13 @@ export function BrochureModelPage({vehicle,highlights,technical,equipment,media}
   {id:'story',label:'აღმოაჩინე'},{id:'design',label:'დიზაინი'},
   {id:'technology',label:'შესაძლებლობები'},{id:'trims',label:'კომპლექტაცია'}
  ]}/>
- <section className="vigus-hero" aria-labelledby="grand-title"><div className="container vigus-hero-content">
-  <p className="vigus-kicker">JMC / პიკაპი</p>
-  <div className="vigus-hero-image vigus-hero-image-editorial"><img src={media.hero} alt="JMC Grand Avenue — მთავარი ფოტო" fetchPriority="high" width={2048} height={1152}/></div>
-  <div className="vigus-hero-bottom"><p className="vigus-eyebrow">JMC-ის 4×4 პიკაპი</p>
-  <h1 id="grand-title">GRAND AVENUE</h1><p>შესაძლებლობები, რომლებიც გზას სცდება.</p>
-  <div className="vigus-hero-actions"><a href="#trims" className="vigus-pill vigus-pill-dark">გაეცანი კომპლექტაციას</a><Link href="/test-drive" className="vigus-pill vigus-pill-light">ტესტ-დრაივის ინფორმაცია ↗</Link></div>
-  <a className="vigus-scroll-cue" href="#story">აღმოაჩინე Grand Avenue ↓</a></div>
- </div></section>
+ <section className="vigus-hero jmc-unified-hero jmc-unified-grand" aria-labelledby="grand-title">
+ <div className="vigus-hero-image vigus-hero-image-editorial jmc-unified-hero-image"><img src={media.hero} alt="JMC Grand Avenue — მთავარი ფოტო" fetchPriority="high"/></div>
+ <div className="jmc-unified-hero-shade" aria-hidden="true"/>
+ <div className="container vigus-hero-content jmc-unified-hero-content"><p className="vigus-kicker">JMC / PICKUP SERIES</p>
+ <div className="vigus-hero-bottom"><h1 id="grand-title">GRAND AVENUE</h1><p>შესაძლებლობები, რომლებიც გზას სცდება.</p><div className="vigus-hero-actions"><a href="#trims" className="vigus-pill vigus-pill-dark">გაეცანი კომპლექტაციას ↗</a><a href="#story" className="vigus-pill vigus-pill-light">აღმოაჩინე Grand Avenue ↓</a></div></div>
+ </div><span className="jmc-unified-hero-index">01 / GRAND AVENUE</span>
+ </section>
  <section className="vigus-quick-specs container" aria-label="ძირითადი მონაცემები" data-vigus-reveal="metrics">
   <div><strong>2.5 <small>L</small></strong><span>დიზელის ძრავა</span></div>
   <div><strong>211 <small>HP</small></strong><span>სიმძლავრე</span></div>
