@@ -36,3 +36,9 @@ Additional supplied interior views:
 4. Obtain a genuinely wide PRO cabin photo if available; avoid claiming dashboard close-up as full cabin.
 5. Image export optimized WebP at suitable sizes with descriptive alt text and no baked-in CTA typography.
 6. Mount in unpublished draft until user review and release approval.
+
+## Client feedback — source fidelity requirement
+- User confirms no available wide cabin photograph. Use real instrument-cluster images as technology detail only; change the interior editorial section to a text+instrument-detail composition, not a synthetic cabin or an empty full-width image.
+- User reports the front grille badge/wordmark appears altered in the FLUX.2 Flex hero candidate. **Candidate is rejected for website use pending visual verification**. Do not use an AI-generated version whose front branding is changed.
+- Safe approved-geometry fallback: preserve the original user-supplied `prooo.jpg` unchanged in subject detail and prepare only a loss-controlled WebP export for the hero. No AI replacement of grille, lamps, wheels, badges, snorkel or car body.
+- If additional Higgsfield Flex tests are made, reference original photos and treat outputs only as experiments; never publish before comparing vehicle-identifying details against original pixels.
