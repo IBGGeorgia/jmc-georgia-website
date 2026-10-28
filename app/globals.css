@@ -2113,3 +2113,21 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  }
  .vigus-experience .jmc-unified-hero .vigus-hero-actions{width:auto!important;max-width:100%;gap:0!important}
 }
+
+/* Shared model masthead frame: identical centered 1200px inner grid for all three.
+   Overrides earlier viewport-wide !important values on VIGUS / Grand Avenue. */
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container,
+.vigus-experience .model-local-nav .vigus-local-inner.container,
+.vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
+ width:min(1200px,calc(100% - 48px))!important;
+ max-width:1200px!important;
+ margin-inline:auto!important;
+}
+.vigus-experience .model-local-nav .vigus-local-inner.container{padding-inline:0!important}
+@media(max-width:700px){
+ .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container,
+ .vigus-experience .model-local-nav .vigus-local-inner.container,
+ .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
+  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+ }
+}

@@ -442,3 +442,17 @@
  .pro-premium-mosaic-main .pro-draft-original-photo img{object-position:center}
  .pro-draft-technology .pro-draft-chapter-heading{margin-bottom:26px}
 }
+
+/* Keep PRO aligned with the same automotive model-page grid. */
+.pro-draft-page .pro-premium-hero-content.pro-draft-wrap,
+.pro-draft-page .pro-page-nav-inner.pro-draft-wrap,
+.pro-draft-page .pro-draft-metrics.pro-draft-wrap{
+ width:min(1200px,calc(100% - 48px))!important;max-width:1200px!important;margin-inline:auto!important;
+}
+@media(max-width:700px){
+ .pro-draft-page .pro-premium-hero-content.pro-draft-wrap,
+ .pro-draft-page .pro-page-nav-inner.pro-draft-wrap,
+ .pro-draft-page .pro-draft-metrics.pro-draft-wrap{
+ width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+ }
+}
