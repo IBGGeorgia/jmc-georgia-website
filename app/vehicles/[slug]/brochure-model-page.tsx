@@ -4,6 +4,7 @@ import type {Vehicle,Feature} from '../../../lib/vehicles';
 import {ModelLocalNavigation,ModelSectionHeading,ModelClosingCTA} from './model-sections';
 import {BrochureStory,type EditorialScene,type EditorialMedia} from './brochure-story';
 import {VigusMotion} from './vigus-motion';
+import {GrandGallery} from './grand-gallery';
 
 export type BrochureModelContent={
  vehicle:Vehicle;intro:string;highlights:readonly EditorialScene[];
@@ -40,7 +41,7 @@ export function BrochureModelPage({vehicle,highlights,technical,equipment,media}
  </section>
  <section id="story" className="vigus-story vigus-section"><div className="container">
   <ModelSectionHeading animated eyebrow="01 / ხასიათი" title={<>შექმნილი რეალური გზებისთვის.</>} description={vehicle.description}/>
-  <div className="vigus-story-mosaic" data-vigus-reveal="visual"><figure className="vigus-story-large"><img src={media.capability} alt="Grand Avenue — გზის შესაძლებლობები" loading="lazy"/></figure><figure className="vigus-story-small"><img src={media.exterior} alt="Grand Avenue — ექსტერიერი" loading="lazy"/></figure><div className="vigus-story-note"><span>JMC Grand Avenue</span><p>ძალა და კომფორტი ყოველდღიურობაში.</p></div></div>
+  <div className="vigus-story-mosaic" data-vigus-reveal="visual"><figure className="vigus-story-large"><img src={media.capability} alt="Grand Avenue — გზის შესაძლებლობები" loading="lazy"/></figure><figure className="vigus-story-small"><img src={media.rear} alt="Grand Avenue — უკანა რაკურსი" loading="lazy"/></figure><div className="vigus-story-note"><span>JMC Grand Avenue</span><p>ძალა და კომფორტი ყოველდღიურობაში.</p></div></div>
  </div></section>
  <section className="vigus-cinema" data-vigus-reveal="visual" aria-label="Grand Avenue ექსტერიერი">
   <img src={media.exterior} alt="Grand Avenue — ექსტერიერის ფართო ფოტო" loading="lazy"/>
@@ -52,10 +53,7 @@ export function BrochureModelPage({vehicle,highlights,technical,equipment,media}
  </div></section>
  <section className="vigus-gallery-section vigus-section"><div className="container">
   <ModelSectionHeading animated eyebrow="გალერეა" title="დეტალები ახლოდან."/>
-  <div className="grand-gallery-grid" data-vigus-reveal="visual">{gallery.map((item,i)=><figure key={item.key}>
-   <img src={media[item.key]} alt={`JMC Grand Avenue — ${item.label}`} loading="lazy"/>
-   <figcaption>{String(i+1).padStart(2,'0')} / {item.label}</figcaption>
-  </figure>)}</div>
+  <GrandGallery photos={gallery.map(item=>({src:media[item.key]!,label:item.label}))}/>
  </div></section>
  <section id="technology" className="vigus-capabilities vigus-section"><div className="container">
   <ModelSectionHeading animated eyebrow="შესაძლებლობები" title="შესაძლებლობები, რომლებსაც ეყრდნობი."/>
