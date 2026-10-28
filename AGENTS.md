@@ -14,7 +14,7 @@ Before any page, component, content, CSS, animation, or new-model change, read:
 - Preserve confirmed address: **თბილისი, ბელიაშვილის 115**. Social icons have NO destination URLs until supplied.
 - No fabricated model, pricing, warranty, finance, contact hours/phone, campaign offer, social URL or lead collection.
 - Test-drive form is currently nonfunctional; privacy policy is pending. Do not suggest live intake is possible.
-- Do not add next model until Vigus is explicitly approved by the user as final template.
+- Vigus has now been accepted as the reference template. Add further models only with explicit model identity and verified Georgian-market brochure, trims and rights-cleared model-specific photos; draft models must not be published.
 
 ## Workflow
 - Prefer shared CSS and components over per-page styling patches. Do not keep piling overrides into legacy `app/globals.css`.
