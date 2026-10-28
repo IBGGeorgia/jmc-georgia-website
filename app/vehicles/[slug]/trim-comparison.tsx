@@ -11,6 +11,7 @@ const rows:{label:string;value:(t:Trim)=>string}[]=[
 type ComparisonRow={label:string;values:string[];different:boolean};
 export function TrimComparison({trims}:{trims:Trim[]}){
  const [ids,setIds]=useState<string[]>(()=>trims.slice(0,3).map(t=>t.id));
+ const [differencesOnly,setDifferencesOnly]=useState(false);
  if(trims.length===0)return <p className="muted">კომპლექტაციების მახასიათებლები დაემატება დადასტურების შემდეგ.</p>;
  const selected=trims.filter(t=>ids.includes(t.id));
  const featureNames=Array.from(new Set(selected.flatMap(t=>t.features.map(f=>f.label))));
@@ -19,6 +20,7 @@ export function TrimComparison({trims}:{trims:Trim[]}){
   ...featureNames.map(label=>({label,values:selected.map(t=>t.features.find(f=>f.label===label)?.value??'—')}))
  ].map(r=>({...r,different:r.values.length>1&&new Set(r.values).size>1}));
  const differenceCount=comparisonRows.filter(r=>r.different).length;
+ const visibleRows=differencesOnly&&selected.length>1?comparisonRows.filter(r=>r.different):comparisonRows;
  return <div className="vigus-compare-ui">
   <div className="vigus-compare-toolbar">
    <div>
@@ -29,19 +31,20 @@ export function TrimComparison({trims}:{trims:Trim[]}){
     {trims.map(t=><label key={t.id} className="filter-chip"><input type="checkbox" checked={ids.includes(t.id)} onChange={e=>setIds(prev=>e.target.checked?[...prev,t.id]:prev.filter(id=>id!==t.id))}/>{t.name}</label>)}
    </div>
   </div>
+  {selected.length>1&&<label className="vigus-differences-toggle"><input type="checkbox" checked={differencesOnly} onChange={event=>setDifferencesOnly(event.target.checked)}/> მხოლოდ განსხვავებები <span>{differenceCount}</span></label>}
   {selected.length===0
    ?<p className="catalogue-compare-empty" role="status">აირჩიე ერთი კომპლექტაცია მაინც შესადარებლად.</p>
    :<>
     <div className="comparison-scroll" role="region" aria-label="კომპლექტაციების შედარების ცხრილი" tabIndex={0}>
      <table className="comparison">
       <thead><tr><th scope="col">მახასიათებელი</th>{selected.map(t=><th scope="col" key={t.id}>{t.name}</th>)}</tr></thead>
-      <tbody key={selected.map(t=>t.id).join('-')}>{comparisonRows.map(r=><tr key={r.label}><th scope="row">{r.label}</th>{selected.map((t,i)=><td className={r.different?'comparison-different':''} key={t.id}>{r.values[i]}</td>)}</tr>)}</tbody>
+      <tbody key={selected.map(t=>t.id).join('-')}>{visibleRows.map(r=><tr key={r.label}><th scope="row">{r.label}</th>{selected.map((t,i)=><td className={r.different?'comparison-different':''} key={t.id}>{r.values[i]}</td>)}</tr>)}</tbody>
      </table>
     </div>
     <div key={selected.map(t=>t.id).join('-')} className="vigus-compare-mobile" aria-label="კომპლექტაციების მობილური შედარება">
      {selected.map((t,i)=><section className="vigus-compare-card" key={t.id} aria-label={t.name}>
       <header className="vigus-compare-card-head"><span>კომპლექტაცია</span><h4>{t.name}</h4></header>
-      <dl>{comparisonRows.map(r=><div className={r.different?'is-different':''} key={r.label}><dt>{r.label}</dt><dd>{r.values[i]}</dd></div>)}</dl>
+      <dl>{visibleRows.map(r=><div className={r.different?'is-different':''} key={r.label}><dt>{r.label}</dt><dd>{r.values[i]}</dd></div>)}</dl>
      </section>)}
     </div>
    </>
