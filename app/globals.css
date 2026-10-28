@@ -1596,3 +1596,39 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
   animation:none!important;
  }
 }
+
+
+/* Vigus v2 final polish — true-photo stepped orbit and comparison feedback */
+.vigus-experience .vigus-orbit-frame{
+ transition:opacity .64s cubic-bezier(.22,.72,.2,1),
+            transform .9s cubic-bezier(.2,.72,.2,1);
+}
+.vigus-experience .vigus-orbit-frame.is-active{transform:scale(1)}
+.vigus-experience .vigus-orbit-steps button{
+ position:relative;overflow:hidden;
+}
+.vigus-experience .vigus-orbit-steps button::after{
+ content:'';position:absolute;bottom:0;left:16%;width:68%;height:2px;
+ transform:scaleX(0);transform-origin:center;
+ background:var(--jmc-red);
+ transition:transform .34s cubic-bezier(.2,.75,.2,1);
+}
+.vigus-experience .vigus-orbit-steps button.selected::after{
+ transform:scaleX(1);
+}
+.vigus-experience .vigus-selector-controls button.selected{
+ box-shadow:inset 0 -2px 0 var(--jmc-red);
+}
+.vigus-experience .vigus-compare-ui .comparison tbody tr td.comparison-different,
+.vigus-experience .vigus-compare-mobile .vigus-compare-card dd{
+ transition:background-color .25s,color .25s;
+}
+@media(prefers-reduced-motion:reduce){
+ .vigus-experience .vigus-orbit-frame,
+ .vigus-experience .vigus-orbit-steps button::after,
+ .vigus-experience .vigus-compare-ui .comparison tbody tr td,
+ .vigus-experience .vigus-compare-mobile .vigus-compare-card dd{
+  transition:none!important;
+ }
+ .vigus-experience .vigus-orbit-frame{transform:none!important}
+}
