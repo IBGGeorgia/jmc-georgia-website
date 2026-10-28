@@ -1,16 +1,101 @@
 'use client';
 import Link from 'next/link';
-import {useEffect,useState} from 'react';
-const links=[{href:'/',label:'მთავარი'},{href:'/vehicles/vigus',label:'JMC Vigus'},{href:'/about',label:'ჩვენ შესახებ'},{href:'/contact',label:'კონტაქტი'}];
+import {usePathname} from 'next/navigation';
+import {useEffect,useRef,useState} from 'react';
+
+const links=[
+ {href:'/',label:'მთავარი'},
+ {href:'/vehicles/vigus',label:'JMC Vigus'},
+ {href:'/about',label:'ჩვენ შესახებ'},
+ {href:'/contact',label:'კონტაქტი'}
+];
+
 export function Header(){
  const [open,setOpen]=useState(false);
- useEffect(()=>{if(!open)return;const escape=(event:KeyboardEvent)=>{if(event.key==='Escape')setOpen(false)};document.addEventListener('keydown',escape);const previous=document.body.style.overflow;document.body.style.overflow='hidden';return ()=>{document.removeEventListener('keydown',escape);document.body.style.overflow=previous}},[open]);
- return <><header className="site-header jmc-header"><div className="container jmc-header-inner">
- <button type="button" className="jmc-menu-trigger" aria-label={open?'მენიუს დახურვა':'მენიუს გახსნა'} aria-controls="jmc-navigation-panel" aria-expanded={open} onClick={()=>setOpen(v=>!v)}><span className={open?'jmc-menu-icon is-open':'jmc-menu-icon'} aria-hidden="true"><i/><i/></span></button>
- <Link href="/" className="jmc-centered-logo" aria-label="JMC Georgia — მთავარი"><img src="/brand/jmc-logo-red.svg" width={130} height={40} alt="JMC"/></Link>
- <Link href="/test-drive" className="button jmc-header-drive">ტესტ-დრაივი <span aria-hidden="true">↗</span></Link>
- </div></header>
- {open&&<div className="jmc-drawer-shell"><button type="button" className="jmc-drawer-backdrop" aria-label="მენიუს დახურვა" onClick={()=>setOpen(false)}/><nav className="jmc-drawer" id="jmc-navigation-panel" aria-label="ძირითადი ნავიგაცია"><div className="jmc-drawer-top"><img src="/brand/jmc-logo-red.svg" width={110} height={34} alt="JMC"/><button type="button" className="jmc-drawer-close" onClick={()=>setOpen(false)} aria-label="დახურვა">×</button></div><p className="jmc-drawer-eyebrow">JMC Georgia / Menu</p><div className="jmc-drawer-links">{links.map((l,i)=><Link key={l.href} href={l.href} onClick={()=>setOpen(false)}><span>{String(i+1).padStart(2,'0')}</span>{l.label}<span aria-hidden="true">↗</span></Link>)}</div><Link href="/test-drive" className="button jmc-drawer-drive" onClick={()=>setOpen(false)}>ტესტ-დრაივის დაჯავშნა ↗</Link><p className="jmc-drawer-foot">JMC Georgia · Quality · Technology · Service</p></nav></div>}
+ const pathname=usePathname();
+ const triggerRef=useRef<HTMLButtonElement>(null);
+ const dialogRef=useRef<HTMLDivElement>(null);
+
+ useEffect(()=>{
+  if(!open)return;
+  const previousOverflow=document.body.style.overflow;
+  document.body.style.overflow='hidden';
+  const background=[document.querySelector('.site-header'),document.querySelector('main'),document.querySelector('footer')]
+   .filter((node):node is HTMLElement=>node instanceof HTMLElement);
+  const previousInert=background.map(node=>node.inert);
+  background.forEach(node=>{node.inert=true});
+  const panel=dialogRef.current;
+  panel?.querySelector<HTMLButtonElement>('.jmc-drawer-close')?.focus();
+
+  function onKeyDown(event:KeyboardEvent){
+   if(event.key==='Escape'){
+    event.preventDefault();
+    setOpen(false);
+    return;
+   }
+   if(event.key!=='Tab'||!panel)return;
+   const focusables=Array.from(panel.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])'))
+    .filter(element=>element.getClientRects().length>0);
+   if(!focusables.length){event.preventDefault();panel.focus();return}
+   const first=focusables[0];
+   const last=focusables[focusables.length-1];
+   if(event.shiftKey&&(document.activeElement===first||!panel.contains(document.activeElement))){
+    event.preventDefault();last.focus();
+   }else if(!event.shiftKey&&(document.activeElement===last||!panel.contains(document.activeElement))){
+    event.preventDefault();first.focus();
+   }
+  }
+  document.addEventListener('keydown',onKeyDown);
+  return ()=>{
+   document.removeEventListener('keydown',onKeyDown);
+   document.body.style.overflow=previousOverflow;
+   background.forEach((node,i)=>{node.inert=previousInert[i]});
+   triggerRef.current?.focus();
+  };
+ },[open]);
+
+ return <>
+  <header className="site-header jmc-header">
+   <div className="container jmc-header-inner">
+    <button ref={triggerRef} type="button" className="jmc-menu-trigger"
+     aria-label={open?'მენიუს დახურვა':'მენიუს გახსნა'}
+     aria-controls="jmc-navigation-panel" aria-expanded={open}
+     onClick={()=>setOpen(value=>!value)}>
+     <span className={open?'jmc-menu-icon is-open':'jmc-menu-icon'} aria-hidden="true"><i/><i/></span>
+    </button>
+    <Link href="/" className="jmc-centered-logo" aria-label="JMC Georgia — მთავარი">
+     <img src="/brand/jmc-logo-red.svg" width={130} height={40} alt="JMC"/>
+    </Link>
+    <Link href="/test-drive" className="button jmc-header-drive">ტესტ-დრაივი <span aria-hidden="true">↗</span></Link>
+   </div>
+  </header>
+  <div className="jmc-drawer-shell" hidden={!open}>
+   <button type="button" className="jmc-drawer-backdrop" aria-label="მენიუს დახურვა"
+    onClick={()=>setOpen(false)}/>
+   <div ref={dialogRef} className="jmc-drawer" id="jmc-navigation-panel" role="dialog"
+    aria-modal="true" aria-label="JMC Georgia — მენიუ" tabIndex={-1}>
+    <div className="jmc-drawer-top">
+     <img src="/brand/jmc-logo-red.svg" width={110} height={34} alt="JMC"/>
+     <button type="button" className="jmc-drawer-close" onClick={()=>setOpen(false)}
+      aria-label="დახურვა">×</button>
+    </div>
+    <p className="jmc-drawer-eyebrow">JMC Georgia / Menu</p>
+    <nav className="jmc-drawer-links" aria-label="ძირითადი ნავიგაცია">
+     {links.map((item,i)=>
+      <Link key={item.href} href={item.href} aria-current={pathname===item.href?'page':undefined}
+       onClick={()=>setOpen(false)}>
+       <span>{String(i+1).padStart(2,'0')}</span>
+       {item.label}
+       <span aria-hidden="true">↗</span>
+      </Link>
+     )}
+    </nav>
+    <Link href="/test-drive" className="button jmc-drawer-drive" onClick={()=>setOpen(false)}>
+     ტესტ-დრაივი <span aria-hidden="true">↗</span>
+    </Link>
+    <p className="jmc-drawer-foot">JMC Georgia · Quality · Technology · Service</p>
+   </div>
+  </div>
  </>;
 }
 type FooterSocial = {
