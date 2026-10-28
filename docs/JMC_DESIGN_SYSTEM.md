@@ -157,3 +157,13 @@ For every future UI request:
 - Current automated route matrix: 6 public pages × viewport widths 1440, 1024, 768, 430, 390 and 320 px.
 - Additional checks: modal focus trap / Escape, inert background, Vigus reading-progress bar, 4-photo selector, trim controls, reduced-motion and real-scroll reveal assertions.
 - Interpret results correctly: Chromium automation can establish responsive/functional baselines, but cannot automatically approve aesthetics, iOS/Safari or all visual transitions. Review screenshots and obtain user approval for Vigus before adding the next model.
+
+
+## 12. Header, address and Test Drive navigation — approved 2026-10-28
+
+- The primary site header shows **only the burger menu and centered official JMC logo**. Do not restore the old "გაიცანი Vigus" action or add a second top-header button.
+- On every model's sticky local navigation, use the single right-side CTA **"დაჯავშნე Test Drive"** linking to `/test-drive`; preserve the functional **red scroll-progress bar** on Vigus.
+- The verified street address **თბილისი, ბელიაშვილის 115** is primarily surfaced in **Contact**, **Footer**, and the **Burger Menu's address block**. Do not add an address button back into model-local navigation.
+- The `/test-drive` page is currently **informational only**: its online booking form is not connected. Keep the unavailable-booking message explicit and do not imply that clicking the CTA completes a booking. Update this state only after implementing and verifying actual lead submission, consent, and CRM integration.
+- Additional actions inside model pages may say **"ტესტ-დრაივის ინფორმაცია"** while online booking is disabled. Use minimal neutral buttons consistent with the HIG-informed design system.
+- Include automated regression tests for the removed header CTA, local Test Drive CTA, compact viewports, and address presence in the drawer and footer.
