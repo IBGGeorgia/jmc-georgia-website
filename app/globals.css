@@ -2154,3 +2154,9 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
   width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
  }
 }
+
+/* The old flex:1 on the cinematic wrapper was still stretching the hero
+   outside its explicit grid width on 1440px desktop. */
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
+ flex:0 0 auto!important;align-self:flex-end;
+}
