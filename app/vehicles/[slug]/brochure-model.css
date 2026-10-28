@@ -303,3 +303,39 @@
  .brochure-model .brochure-story-visual img,
  .brochure-model .brochure-plus{transition:none!important}
 }
+
+/* Grand Avenue: use approved Vigus layout; only model-specific gallery and facts below. */
+.grand-vigus-page .brochure-story{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,64px);align-items:start}
+.grand-vigus-page .brochure-story-visual{height:min(66vh,600px);min-height:420px;position:sticky;top:150px;overflow:hidden;border-radius:22px;background:#e8e8eb}
+.grand-vigus-page .brochure-story-visual img{position:absolute;width:100%;height:100%;inset:0;object-fit:cover;opacity:0;transition:opacity .45s}
+.grand-vigus-page .brochure-story-visual img.is-active{opacity:1;z-index:1}
+.grand-vigus-page .brochure-story-counter{position:absolute;z-index:3;bottom:20px;left:20px;background:#18181bc9;color:#fff;padding:8px 14px;border-radius:30px}
+.grand-vigus-page .brochure-story-tabs{display:flex;flex-direction:column}
+.grand-vigus-page .brochure-story-tabs button{display:flex;align-items:center;text-align:left;gap:20px;min-height:clamp(190px,30vh,280px);padding:30px 0;border:0;border-top:1px solid #ddd;background:transparent;cursor:pointer;color:#777}
+.grand-vigus-page .brochure-story-tabs button.is-active{color:#161616}
+.grand-vigus-page .brochure-story-tabs button strong{font-size:clamp(20px,2vw,29px);display:block;line-height:1.3}
+.grand-vigus-page .brochure-story-tabs button small{display:block;margin-top:10px;font-size:14px;line-height:1.55}
+.grand-vigus-page .brochure-scene-index{font-size:13px;align-self:center}
+.grand-vigus-page .brochure-scene-caption{border-top:1px solid #ddd;padding-top:24px}
+.grand-vigus-page .brochure-scene-caption h3{font-size:clamp(21px,2.2vw,32px);margin:10px 0}
+.grand-vigus-page .brochure-scene-caption p{line-height:1.7}
+.grand-gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.grand-gallery-grid figure{min-width:0;margin:0}
+.grand-gallery-grid img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:18px}
+.grand-gallery-grid figcaption{font-size:13px;margin-top:12px;color:#747474}
+.grand-specification-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 30px;margin-top:52px}
+.grand-specification-grid>div{border-top:1px solid #ddd;padding:20px 0 25px;display:flex;flex-direction:column;gap:12px}
+.grand-specification-grid span{font-size:13px;color:#777}
+.grand-specification-grid strong{font-size:19px;overflow-wrap:anywhere}
+.grand-equipment{margin-top:70px}
+.grand-equipment h3{font-size:clamp(24px,3vw,42px);margin:0 0 28px}
+.grand-equipment details{border-top:1px solid #ccc}
+.grand-equipment details:last-child{border-bottom:1px solid #ccc}
+.grand-equipment summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:24px 0;font-size:clamp(19px,2.2vw,28px);font-weight:600}
+.grand-equipment summary::-webkit-details-marker{display:none}
+.grand-equipment summary span{font-size:13px;color:#777;font-weight:400}
+.grand-equipment ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px;list-style:none;padding:0 0 28px;margin:0}
+.grand-equipment li{border-top:1px solid #e4e4e4;padding:12px 0;line-height:1.6;font-size:15px}
+@media(max-width:960px){.grand-vigus-page .brochure-story{grid-template-columns:1fr}.grand-vigus-page .brochure-story-visual{position:relative;top:auto;height:50vw;min-height:310px}.grand-vigus-page .brochure-story-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grand-vigus-page .brochure-story-tabs button{min-height:92px;border:1px solid #dedee2;border-radius:14px;padding:15px}.grand-vigus-page .brochure-story-tabs button small{display:none}}
+@media(max-width:700px){.grand-gallery-grid,.grand-equipment ul{grid-template-columns:1fr}.grand-specification-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.grand-vigus-page .brochure-story-visual{height:64vw;min-height:250px}.grand-vigus-page .brochure-story-tabs button strong{font-size:15px}.grand-vigus-page .vigus-hero-bottom h1{font-size:clamp(42px,9vw,68px)}}
+@media(max-width:390px){.grand-vigus-page .brochure-story-tabs{grid-template-columns:1fr}.grand-vigus-page .brochure-story-tabs button{min-height:65px}}
