@@ -16,7 +16,7 @@ export default function Home() {
         <p className="lead">აღმოაჩინე JMC საქართველოში — გაეცანი ავტომობილებს, შეადარე კომპლექტაციები და დაგეგმე მომავალი ტესტ-დრაივი.</p>
         <div className="actions"><Link href="/vehicles/vigus" className="button">აღმოაჩინე Vigus <span aria-hidden="true">↗</span></Link><Link href="/test-drive" className="button button-ghost">ტესტ-დრაივი <span aria-hidden="true">→</span></Link></div>
       </div>
-      <div className="hero-bottom"><div className="container hero-bottom-inner"><span>JMC / Georgia</span><span>Quality · Technology · Service</span><a href="#discover" aria-label="გადადით შემდეგ სექციაზე">აღმოაჩინე ↓</a></div></div>
+      <div className="hero-bottom"><div className="container hero-bottom-inner"><span>JMC / Georgia</span><span>ავტომობილები საქართველოში</span><a href="#discover" aria-label="გადადით შემდეგ სექციაზე">აღმოაჩინე ↓</a></div></div>
     </section>
 
     <section id="discover" className="section introduction"><div className="container intro-grid">
