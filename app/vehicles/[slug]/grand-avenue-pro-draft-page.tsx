@@ -8,9 +8,8 @@ import {proSourceVariants} from '../../../lib/grand-avenue-pro';
 const metrics=[['2.3 L','ძრავის მოცულობა'],['4×4','ამძრავი'],['8AT','ავტომატური ტრანსმისია'],['255 მმ','კლირენსი']];
 const story=[
  {index:'01',name:'ექსტერიერი',title:'ფორმა და ფუნქცია.',description:'ავტომობილის დიზაინის დეტალები და ექსტერიერის აღჭურვილობა.',media:'exterior'},
- {index:'02',name:'ინტერიერი',title:'კომფორტი ყოველდღიური გზებისთვის.',description:'სალონის ტექნოლოგიები და კომპლექტაციებზე დამოკიდებული აღჭურვილობა.',media:'cluster'},
- {index:'03',name:'უსაფრთხოება',title:'დამხმარე სისტემები.',description:'უსაფრთხოების ფუნქციები შესაბამისი LX/SLX ვერსიის მიხედვით.',media:'frontDetail'},
- {index:'04',name:'შესაძლებლობები',title:'4×4 შესაძლებლობები.',description:'მართვის რეჟიმები და გამავლობის სისტემები — მხოლოდ დადასტურებული ვერსიებისთვის.',media:'terrainDisplay'},
+ {index:'02',name:'დიზაინის დეტალები',title:'დეტალები ახლოდან.',description:'ფარი, გრილი და ბორბალი — ორიგინალი ფოტოთი, შეუცვლელი ავტომობილის პროპორციებით.',media:'frontDetail'},
+ {index:'03',name:'შესაძლებლობები',title:'4×4 შესაძლებლობები.',description:'მართვის რეჟიმები და გამავლობის სისტემები — შესაბამისი ვერსიის აღწერით ქვემოთ.',media:'rear'},
 ] as const;
 type ProPhotoKey=keyof typeof photos;
 function OriginalPhoto({photo,priority=false}:{photo:ProPhotoKey;priority?:boolean}){
@@ -29,7 +28,7 @@ export function GrandAvenueProDraftPage(){
   <section className="pro-draft-wrap pro-draft-chapters" id="pro-story"><div className="pro-draft-chapter-heading"><span>01 / დეტალები</span><h2>შექმნილია განსხვავებული გზებისთვის.</h2></div>
    {story.map((item,i)=><article key={item.index} className="pro-draft-editorial"><div className="pro-draft-editorial-copy"><span>{item.index} / {item.name}</span><h3>{item.title}</h3><p>{item.description}</p></div><OriginalPhoto photo={item.media as ProPhotoKey}/></article>)}
   </section>
-  <section className="pro-draft-technology pro-draft-wrap"><div className="pro-draft-chapter-heading"><span>02 / ტექნოლოგიები</span><h2>ინფორმაცია შენს წინაშე.</h2><p>სალონის ფართო ფოტოს ნაცვლად წარმოდგენილია მხოლოდ ორიგინალი ინსტრუმენტების პანელისა და მართვის რეჟიმების კადრები.</p></div><div className="pro-draft-tech-grid"><OriginalPhoto photo="cluster"/><OriginalPhoto photo="terrainDisplay"/></div></section>
+  <section className="pro-draft-technology pro-draft-wrap"><div className="pro-draft-chapter-heading"><span>02 / ტექნოლოგიები</span><h2>ინფორმაცია შენს წინაშე.</h2><p>ციფრული ინსტრუმენტების პანელი და გამავლობის რეჟიმების ვიზუალური ინფორმაცია.</p></div><div className="pro-draft-tech-grid"><OriginalPhoto photo="cluster"/><OriginalPhoto photo="terrainDisplay"/></div></section>
   <section className="pro-draft-gallery pro-draft-wrap" id="pro-gallery"><div className="pro-draft-chapter-heading"><span>03 / ვიზუალური გამოცდილება</span><h2>აღმოაჩინე დეტალები.</h2></div><div className="pro-draft-gallery-grid">{(['hero','rear','frontDetail','exterior'] as const).map(photo=><OriginalPhoto key={photo} photo={photo}/>)}</div></section>
   <section className="pro-draft-wrap" id="pro-choose"><GrandAvenueProConfigurator/></section>
   <footer className="pro-draft-footer pro-draft-wrap"><span>JMC Grand Avenue PRO</span><p>ვიზუალური დამტკიცებისა და ფოტოების შემოწმების შემდეგ დაემატება საიტის საერთო Test Drive CTA.</p><p>მოდელის მონაცემები: {proSourceVariants.length} დოკუმენტირებული ვერსია.</p></footer>
