@@ -1,4 +1,5 @@
 import {GrandAvenueProConfigurator} from './grand-avenue-pro-configurator';
+import {GrandAvenueProGallery} from './grand-avenue-pro-gallery';
 import {grandAvenueProOriginalMedia as photos} from '../../../lib/grand-avenue-pro-media';
 import './grand-avenue-pro-draft.css';
 import {proSourceVariants} from '../../../lib/grand-avenue-pro';
@@ -33,7 +34,7 @@ export function GrandAvenueProDraftPage(){
   </section>
   <section className="pro-premium-cinema"><OriginalPhoto photo="frontDetail"/><div className="pro-premium-cinema-shade"/><div className="pro-premium-cinema-copy pro-draft-wrap"><span>02 / დიზაინი</span><h2>დეტალები,<br/>რომლებიც გამოარჩევს.</h2></div></section>
   <section className="pro-draft-technology pro-draft-wrap"><div className="pro-draft-chapter-heading"><span>03 / ტექნოლოგიები</span><h2>ინფორმაცია შენს წინაშე.</h2><p>ციფრული ინსტრუმენტების პანელი და გამავლობის რეჟიმების ვიზუალური ინფორმაცია.</p></div><div className="pro-draft-tech-grid"><OriginalPhoto photo="cluster"/><OriginalPhoto photo="terrainDisplay"/></div></section>
-  <section className="pro-draft-gallery pro-draft-wrap" id="pro-gallery"><div className="pro-draft-chapter-heading"><span>04 / გალერეა</span><h2>აღმოაჩინე დეტალები.</h2></div><div className="pro-draft-gallery-grid">{(['rear','exterior','frontDetail','hero'] as const).map(photo=><OriginalPhoto key={photo} photo={photo}/>)}</div></section>
+  <section className="pro-draft-gallery pro-draft-wrap" id="pro-gallery"><div className="pro-draft-chapter-heading"><span>04 / გალერეა</span><h2>აღმოაჩინე დეტალები.</h2></div><GrandAvenueProGallery/></section>
   <section className="pro-draft-wrap pro-premium-choose" id="pro-choose"><GrandAvenueProConfigurator/></section>
   <footer className="pro-draft-footer pro-draft-wrap"><span>JMC Grand Avenue PRO</span><p>ვიზუალური დამტკიცებისა და ფოტოების შემოწმების შემდეგ დაემატება საიტის საერთო Test Drive CTA.</p><p>მოდელის მონაცემები: {proSourceVariants.length} დოკუმენტირებული ვერსია.</p></footer>
  </main>;
