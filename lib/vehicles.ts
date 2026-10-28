@@ -1,4 +1,6 @@
 import {grandAvenue} from './grand-avenue';
+import {proSourceVariants} from './grand-avenue-pro';
+import {grandAvenueProOriginalMedia} from './grand-avenue-pro-media';
 export type Feature={label:string;value:string};
 export type Trim={id:string;name:string;priceGEL?:number;powertrain?:string;drivetrain?:string;transmission?:string;features:Feature[]};
 export type Vehicle={slug:string;name:string;category:'pickup'|'suv'|'commercial'|'other';publicationStatus:'approved'|'draft';description:string;heroImage?:string;gallery:string[];trims:Trim[];highlighted?:boolean};
@@ -18,7 +20,13 @@ const catalogue:Vehicle[]=[{
  {id:'vigus-at',name:'4X4 AT GL',powertrain:'2.5 L Diesel · 167 hp',drivetrain:'4×4',transmission:'8AT',features:[...vigusSpecs,{label:'დისკები და საბურავები',value:'17″ · 245/70 R17'}]},
  {id:'vigus-mt',name:'4X4 MT GL',powertrain:'2.5 L Diesel · 167 hp',drivetrain:'4×4',transmission:'6MT',features:[...vigusSpecs,{label:'დისკები და საბურავები',value:'17″ · 245/70 R17'}]}
  ]
-},grandAvenue];
+},grandAvenue,{
+ slug:'grand-avenue-pro',name:'Grand Avenue PRO',category:'pickup',publicationStatus:'approved',
+ description:'JMC Grand Avenue PRO — 2.3-ლიტრიანი 4×4 პიკაპი, 8-საფეხურიანი ავტომატური ტრანსმისიით. LX და SLX კომპლექტაციები დიზელისა და ბენზინის ძრავებით.',
+ heroImage:grandAvenueProOriginalMedia.hero.src,
+ gallery:[grandAvenueProOriginalMedia.exterior.src,grandAvenueProOriginalMedia.rear.src,grandAvenueProOriginalMedia.frontDetail.src],
+ trims:proSourceVariants.map(v=>({id:v.id,name:`PRO ${v.trim} ${v.fuel==='diesel'?'Diesel':'Gasoline'}`,powertrain:v.specs.engine,drivetrain:'4×4',transmission:v.specs.transmission,features:Object.keys(v.specs).filter(k=>v.specs[k]).map(k=>({label:v.specLabels[k]?.[0]??k,value:v.specs[k]}))}))
+}];
 /** Only explicitly approved models are exposed to routing, catalogue and metadata. */
 export const vehicles:Vehicle[]=catalogue.filter(vehicle=>vehicle.publicationStatus==='approved');
 export const getVehicle=(slug:string)=>vehicles.find(v=>v.slug===slug);
