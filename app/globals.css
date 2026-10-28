@@ -1979,3 +1979,28 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  .vigus-experience .model-local-nav .vigus-local-inner{width:calc(100% - 32px);gap:12px}
  .vigus-experience .model-local-nav .vigus-local-title{min-width:0}
 }
+
+/* Fix legacy width / flex overrides from VigusMotion and .container selectors. */
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
+ width:min(1200px,calc(100% - 48px))!important;max-width:1200px!important;
+ margin-left:auto!important;margin-right:auto!important;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom{
+ width:100%;max-width:100%;display:flex;flex-direction:column;align-items:flex-start!important;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-bottom>p{
+ align-self:flex-start!important;max-width:670px!important;margin-left:0!important;margin-right:0!important;
+}
+.vigus-experience .jmc-unified-hero .vigus-hero-actions{align-self:flex-start!important}
+@media(max-width:900px){
+ .vigus-experience .model-local-nav .vigus-local-inner>div{display:none!important}
+ .vigus-experience .model-local-nav .vigus-local-inner{justify-content:space-between!important}
+ .vigus-experience .model-local-nav .vigus-local-cta{margin-left:auto!important}
+}
+@media(max-width:700px){
+ .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
+ width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important
+ }
+ .vigus-experience .model-local-nav .vigus-local-title{font-size:12px}
+ .vigus-experience .model-local-nav .vigus-local-cta{font-size:12px;padding:9px 11px}
+}
