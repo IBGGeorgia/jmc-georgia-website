@@ -149,7 +149,7 @@ test('Vigus: active CTAs are truthful, labels are Georgian and future routes rem
  await page.setViewportSize({width:1440,height:900});
  await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
  await expect(page.locator('.vigus-hero-actions a[href="#trims"]')).toHaveCount(1);
- await expect(page.locator('.vigus-hero-actions a[href="/test-drive"]')).toHaveText(/ტესტ-დრაივის ინფორმაცია/);
+ await expect(page.locator('.model-local-nav a[href="/test-drive"]')).toContainText('დაჯავშნე Test-Drive');
  await expect(page.locator('.model-final a[href="/test-drive"]')).toHaveCount(1);
  await expect(page.locator('.model-local-nav .vigus-scroll-progress-fill')).toHaveCount(1);
  await expect(page.locator('.model-section-heading')).toHaveCount(6);
@@ -193,7 +193,7 @@ test('approved header and booking CTA layout, contact address in burger/footer',
   await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
   await expect(page.locator('.jmc-header-drive')).toHaveCount(0);
   const cta=page.locator('.model-local-nav .vigus-local-cta');
-  await expect(cta).toHaveText('დაჯავშნე Test Drive ↗');
+  await expect(cta).toHaveText('დაჯავშნე Test-Drive ↗');
   await expect(cta).toHaveAttribute('href','/test-drive');
   const position=await cta.boundingBox();
   expect(position).toBeTruthy();
