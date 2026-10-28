@@ -35,10 +35,10 @@ export function TrimComparison({trims}:{trims:Trim[]}){
     <div className="comparison-scroll" role="region" aria-label="კომპლექტაციების შედარების ცხრილი" tabIndex={0}>
      <table className="comparison">
       <thead><tr><th scope="col">მახასიათებელი</th>{selected.map(t=><th scope="col" key={t.id}>{t.name}</th>)}</tr></thead>
-      <tbody>{comparisonRows.map(r=><tr key={r.label}><th scope="row">{r.label}</th>{selected.map((t,i)=><td className={r.different?'comparison-different':''} key={t.id}>{r.values[i]}</td>)}</tr>)}</tbody>
+      <tbody key={selected.map(t=>t.id).join('-')}>{comparisonRows.map(r=><tr key={r.label}><th scope="row">{r.label}</th>{selected.map((t,i)=><td className={r.different?'comparison-different':''} key={t.id}>{r.values[i]}</td>)}</tr>)}</tbody>
      </table>
     </div>
-    <div className="vigus-compare-mobile" aria-label="კომპლექტაციების მობილური შედარება">
+    <div key={selected.map(t=>t.id).join('-')} className="vigus-compare-mobile" aria-label="კომპლექტაციების მობილური შედარება">
      {selected.map((t,i)=><section className="vigus-compare-card" key={t.id} aria-label={t.name}>
       <header className="vigus-compare-card-head"><span>კომპლექტაცია</span><h4>{t.name}</h4></header>
       <dl>{comparisonRows.map(r=><div className={r.different?'is-different':''} key={r.label}><dt>{r.label}</dt><dd>{r.values[i]}</dd></div>)}</dl>
