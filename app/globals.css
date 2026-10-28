@@ -2004,3 +2004,19 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  .vigus-experience .model-local-nav .vigus-local-title{font-size:12px}
  .vigus-experience .model-local-nav .vigus-local-cta{font-size:12px;padding:9px 11px}
 }
+
+/* Final shared centered grid for both the masthead and local navigation. */
+.vigus-experience .model-local-nav .vigus-local-inner.container{
+ width:min(1200px,calc(100% - 48px))!important;max-width:1200px!important;
+ margin-inline:auto!important;
+}
+@media(min-width:701px) and (max-width:900px){
+ .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
+ width:calc(100% - 48px)!important;max-width:calc(100% - 48px)!important;
+ }
+}
+@media(max-width:700px){
+ .vigus-experience .model-local-nav .vigus-local-inner.container{
+ width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
+ }
+}
