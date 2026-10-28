@@ -23,6 +23,7 @@ npm run dev
 npm run build
 npm run lint
 npm run audit
+npm run qa:browser  # after npm run build and npx playwright install chromium
 ```
 
 ## Current route and availability status
@@ -35,6 +36,17 @@ npm run audit
 - Test-drive online submissions are disabled; a validated and spam-protected API and consent flow are not yet available.
 - Privacy policy is pending approval. No fake policy or live-lead promise should be introduced.
 - Facebook, Instagram and LinkedIn icons deliberately have no links.
+
+
+## Automated cross-page browser QA
+
+Playwright covers six public routes at **1440 / 1024 / 768 / 430 / 390 / 320px** and checks horizontal overflow, page load, the accessible mobile drawer, Vigus progress bar, trim/view interactions and reduced-motion behavior.
+
+- Test specification: `tests/e2e/site.spec.ts`
+- Browser configuration: `playwright.config.ts`
+- GitHub Actions workflow: `.github/workflows/browser-qa.yml`
+- Review screenshots, failures and traces in the **jmc-browser-qa** artifact attached to each [Browser QA run](https://github.com/gkalandia-pixel/jmc-georgia-website/actions/workflows/browser-qa.yml).
+- These are automated checks, **not** a replacement for visual acceptance and cross-browser manual testing.
 
 ## Before public launch or additional models
 
