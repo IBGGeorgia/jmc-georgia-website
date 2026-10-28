@@ -28,7 +28,10 @@ export function VigusGallery(){
   };
   const wheel=(event:WheelEvent)=>{
    if(event.ctrlKey||event.metaKey||event.altKey||!event.cancelable)return;
-   const delta=event.shiftKey&&event.deltaX===0?event.deltaY:(Math.abs(event.deltaX)>Math.abs(event.deltaY)?event.deltaX:event.deltaY);
+   // Preserve normal vertical page scrolling; move the rail only for explicit
+   // horizontal trackpad/Shift+wheel gestures or via the visible arrow buttons.
+   if(!event.shiftKey&&Math.abs(event.deltaX)<=Math.abs(event.deltaY))return;
+   const delta=event.shiftKey&&event.deltaX===0?event.deltaY:event.deltaX;
    const normalized=delta*(event.deltaMode===1?18:event.deltaMode===2?el.clientWidth:1);
    if(!normalized||el.scrollWidth<=el.clientWidth)return;
    const now=performance.now();
@@ -46,9 +49,15 @@ export function VigusGallery(){
   return ()=>{ro.disconnect();el.removeEventListener('wheel',wheel);if(wheelRaf.current!==null)cancelAnimationFrame(wheelRaf.current);wheelRaf.current=null;wheelTarget.current=null};
  },[sync]);
  const next=(direction:number)=>{const el=rail.current;if(!el)return;if(wheelRaf.current!==null)cancelAnimationFrame(wheelRaf.current);wheelRaf.current=null;wheelTarget.current=null;const item=el.querySelector('figure');el.scrollBy({left:direction*(item?.getBoundingClientRect().width??el.clientWidth*.8)+direction*20,behavior:'smooth'})};
- return <div className="vigus-gallery-component">
+ return <div className="vigus-gallery-component" data-vigus-reveal="visual">
  <div className="vigus-gallery-controls"><span className="vigus-gallery-index" aria-live="polite">{String(current+1).padStart(2,'0')} <span>/ {String(slides.length).padStart(2,'0')}</span></span><div><button type="button" aria-label="წინა ფოტო" disabled={!canPrev} onClick={()=>next(-1)}>←</button><button type="button" aria-label="შემდეგი ფოტო" disabled={!canNext} onClick={()=>next(1)}>→</button></div></div>
  <div ref={rail} className="vigus-gallery-strip vigus-gallery-interactive" tabIndex={0} role="region" aria-label="Vigus-ის ფოტოების გალერეა" onScroll={sync}
+ onKeyDown={event=>{
+  if(event.key==='ArrowLeft'||event.key==='ArrowRight'){
+   event.preventDefault();
+   next(event.key==='ArrowRight'?1:-1);
+  }
+ }}
  onPointerDown={event=>{if(event.pointerType==='mouse'&&event.button===0){const el=rail.current;if(!el)return;drag.current={x:event.clientX,scroll:el.scrollLeft,active:true};el.setPointerCapture(event.pointerId)}}}
  onPointerMove={event=>{if(!drag.current.active||!rail.current)return;rail.current.scrollLeft=drag.current.scroll-(event.clientX-drag.current.x)}}
  onPointerUp={event=>{drag.current.active=false;if(rail.current?.hasPointerCapture(event.pointerId))rail.current.releasePointerCapture(event.pointerId)}}
