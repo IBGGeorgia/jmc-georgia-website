@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import {Header,Footer} from '../../site-components';
 import {GrandAvenueProConfigurator} from './grand-avenue-pro-configurator';
 import {GrandAvenueProGallery} from './grand-avenue-pro-gallery';
 import {grandAvenueProOriginalMedia as photos} from '../../../lib/grand-avenue-pro-media';
@@ -17,8 +19,8 @@ function OriginalPhoto({photo,priority=false}:{photo:ProPhotoKey;priority?:boole
  const entry=photos[photo];return <figure className="pro-draft-original-photo"><img src={entry.src} alt={entry.alt} loading={priority?'eager':'lazy'} decoding="async"/><figcaption>{entry.alt}</figcaption></figure>;
 }
 export function GrandAvenueProDraftPage(){
- return <main className="pro-draft-page">
-  <div className="pro-draft-page-notice">შიდა სამუშაო მაკეტი · გამოსაქვეყნებელი არ არის</div>
+ return <><Header/><main className="pro-draft-page">
+
   <header className="pro-draft-hero" id="pro-top">
    <div className="pro-premium-hero-photo"><OriginalPhoto photo="hero" priority/><div className="pro-premium-hero-shade"/></div>
    <div className="pro-premium-hero-content pro-draft-wrap"><p className="pro-premium-overline">JMC / PROFESSIONAL PICKUP SERIES</p>
@@ -36,6 +38,6 @@ export function GrandAvenueProDraftPage(){
   <section className="pro-draft-technology pro-draft-wrap"><div className="pro-draft-chapter-heading"><span>03 / ტექნოლოგიები</span><h2>ინფორმაცია შენს წინაშე.</h2><p>ციფრული ინსტრუმენტების პანელი და გამავლობის რეჟიმების ვიზუალური ინფორმაცია.</p></div><div className="pro-draft-tech-grid"><OriginalPhoto photo="cluster"/><OriginalPhoto photo="terrainDisplay"/></div></section>
   <section className="pro-draft-gallery pro-draft-wrap" id="pro-gallery"><div className="pro-draft-chapter-heading"><span>04 / გალერეა</span><h2>აღმოაჩინე დეტალები.</h2></div><GrandAvenueProGallery/></section>
   <section className="pro-draft-wrap pro-premium-choose" id="pro-choose"><GrandAvenueProConfigurator/></section>
-  <footer className="pro-draft-footer pro-draft-wrap"><span>JMC Grand Avenue PRO</span><p>ვიზუალური დამტკიცებისა და ფოტოების შემოწმების შემდეგ დაემატება საიტის საერთო Test Drive CTA.</p><p>მოდელის მონაცემები: {proSourceVariants.length} დოკუმენტირებული ვერსია.</p></footer>
- </main>;
+  <footer className="pro-draft-footer pro-draft-wrap"><span>JMC Grand Avenue PRO</span><p>გაეცანი ოთხივე კომპლექტაციას და დაგეგმე შემდეგი ნაბიჯი.</p><Link href="/test-drive" className="pro-premium-primary pro-premium-footer-cta">ტესტ-დრაივის ინფორმაცია ↗</Link></footer>
+ </main><Footer/></>;
 }
