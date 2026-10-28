@@ -397,3 +397,19 @@
  .pro-premium-cinema-copy h2{overflow-wrap:break-word}
  .pro-draft-gallery .pro-draft-chapter-heading{max-width:100%}
 }
+
+/* PRO visual-system alignment with the approved VIGUS / Grand Avenue pages.
+ * The global header owns the first 83px desktop / 69px mobile.
+ */
+.pro-draft-page{--pro-site-header-height:83px;--pro-content-max:var(--content-gallery,1200px)}
+.pro-draft-page .pro-draft-wrap{width:min(var(--pro-content-max),calc(100% - 48px));margin-inline:auto}
+.pro-draft-page .pro-page-nav{top:var(--pro-site-header-height);z-index:52}
+.pro-draft-page .pro-page-nav-inner{width:min(var(--pro-content-max),calc(100% - 48px));margin-inline:auto}
+.pro-draft-page :is(#pro-story,#pro-gallery,#pro-choose){scroll-margin-top:calc(var(--pro-site-header-height) + 84px)}
+.pro-draft-page .pro-premium-hero-content{max-width:var(--pro-content-max)}
+.pro-draft-page .pro-premium-intro-copy,.pro-draft-page .pro-draft-chapter-heading{margin-right:auto}
+@media(max-width:700px){
+ .pro-draft-page{--pro-site-header-height:69px}
+ .pro-draft-page .pro-draft-wrap,.pro-draft-page .pro-page-nav-inner{width:calc(100% - 32px)}
+ .pro-draft-page :is(#pro-story,#pro-gallery,#pro-choose){scroll-margin-top:calc(var(--pro-site-header-height) + 76px)}
+}
