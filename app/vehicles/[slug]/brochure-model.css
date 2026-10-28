@@ -360,3 +360,12 @@
 .grand-vigus-page .grand-equipment summary span{white-space:nowrap}
 @media(max-width:700px){.grand-vigus-page .vigus-hero-bottom h1{font-size:clamp(38px,8.6vw,64px)}.grand-lightbox{padding:10px}.grand-lightbox>img{max-width:96vw;max-height:70vh}.grand-lightbox-controls{gap:14px}.grand-lightbox-controls button{width:42px;height:42px}.grand-gallery-zoom{width:38px;height:38px;right:12px;bottom:12px}}
 @media(prefers-reduced-motion:reduce){.grand-gallery-open img{transition:none}}
+
+/* Second refinement: calmer equipment disclosure rhythm and clearer hierarchy. */
+.grand-equipment-heading{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 30px;margin-bottom:20px}
+.grand-equipment-heading h3{margin:0}
+.grand-equipment-heading p{color:#747780;font-size:14px;line-height:1.6;max-width:320px;margin:0 0 4px}
+.grand-equipment details[open]{padding-bottom:6px}
+.grand-equipment details[open] summary span{color:#333}
+.grand-equipment details summary span{transition:color .2s}
+@media(max-width:700px){.grand-equipment-heading{align-items:flex-start;flex-direction:column}.grand-equipment-heading p{max-width:unset}}
