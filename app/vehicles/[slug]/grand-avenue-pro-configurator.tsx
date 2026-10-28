@@ -23,7 +23,7 @@ export function GrandAvenueProConfigurator(){
  const visibleFeatures=featureNames.filter(name=>!diffOnly||compared.length<2||compared.some(v=>!documented(v,equipmentGroup).includes(name)));
  const equipmentDifferences=featureNames.filter(name=>compared.length>1&&compared.some(v=>!documented(v,equipmentGroup).includes(name))).length;
  return <div className="pro-draft-configurator">
-  <p className="pro-draft-eyebrow">Grand Avenue PRO / Draft</p>
+  <p className="pro-draft-eyebrow">JMC / GRAND AVENUE PRO</p>
   <h2>აირჩიე შენი PRO</h2>
   <div className="pro-draft-axes">
    <fieldset><legend>კომპლექტაცია</legend><div className="pro-draft-segments">{(['LX','SLX'] as const).map(value=><button type="button" key={value} aria-pressed={trim===value} onClick={()=>setTrim(value)}>PRO {value}</button>)}</div></fieldset>
