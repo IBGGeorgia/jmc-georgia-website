@@ -12,6 +12,10 @@ on:
       - '.github/workflows/browser-qa.yml'
   workflow_dispatch:
 
+concurrency:
+  group: jmc-browser-qa-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
