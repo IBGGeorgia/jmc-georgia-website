@@ -66,7 +66,7 @@ export function Header(){
     <Link href="/" className="jmc-centered-logo" aria-label="JMC Georgia — მთავარი">
      <img src="/brand/jmc-logo-red.svg" width={130} height={40} alt="JMC"/>
     </Link>
-    <Link href="/test-drive" className="button jmc-header-drive">ტესტ-დრაივი <span aria-hidden="true">↗</span></Link>
+    <Link href="/vehicles/vigus" className="button jmc-header-drive">გაიცანი Vigus <span aria-hidden="true">↗</span></Link>
    </div>
   </header>
   <div className="jmc-drawer-shell" hidden={!open}>
@@ -91,7 +91,7 @@ export function Header(){
      )}
     </nav>
     <Link href="/test-drive" className="button jmc-drawer-drive" onClick={()=>setOpen(false)}>
-     ტესტ-დრაივი <span aria-hidden="true">↗</span>
+     ტესტ-დრაივის ინფორმაცია <span aria-hidden="true">↗</span>
     </Link>
     <p className="jmc-drawer-foot">JMC Georgia</p>
    </div>
@@ -104,7 +104,7 @@ type FooterSocial = {
 };
 const footerNavigation = [
  {href:'/vehicles/vigus',label:'JMC Vigus'},
- {href:'/test-drive',label:'ტესტ-დრაივი'},
+ {href:'/test-drive',label:'ტესტ-დრაივის ინფორმაცია'},
  {href:'/about',label:'ჩვენ შესახებ'},
  {href:'/contact',label:'კონტაქტი'}
 ] as const;
