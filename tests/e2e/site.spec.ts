@@ -245,7 +245,8 @@ test('Grand Avenue draft: exact brochure trim, truthful fields and no premature 
  for(const [slot,url] of Object.entries(grandAvenueMedia)){
   expect(url,`${slot}: first-party optimized asset`).toBe(`/images/grand-avenue/${slot}.webp`);
  }
- expect(grandAvenue.gallery).toHaveLength(0);
+ expect(grandAvenue.heroImage).toBe('/images/grand-avenue/hero.webp');
+ expect(grandAvenue.gallery).toEqual(['front','side','rear','detail'].map(slot=>`/images/grand-avenue/${slot}.webp`));
  expect(vehicles.some(v=>v.slug==='grand-avenue')).toBe(false);
  const response=await page.goto('/vehicles/grand-avenue',{waitUntil:'domcontentloaded'});
  expect(response?.status()).toBe(404);
