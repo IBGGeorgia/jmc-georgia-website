@@ -11,7 +11,7 @@ export function ModelLocalNavigation({
   <div className="container vigus-local-inner">
    <a href="#top" className="vigus-local-title">{name}</a>
    <div>{items.map(item=><a key={item.id} href={`#${item.id}`}>{item.label}</a>)}</div>
-   <Link href="/contact" className="vigus-local-cta">მისამართი <span aria-hidden="true">↗</span></Link>
+   <Link href="/test-drive" className="vigus-local-cta" title="ტესტ-დრაივის ინფორმაცია — ონლაინ დაჯავშნა ამ ეტაპზე მიუწვდომელია">დაჯავშნე Test Drive <span aria-hidden="true">↗</span></Link>
   </div>
   {progress&&<span className="vigus-scroll-progress" aria-hidden="true">
    <span className="vigus-scroll-progress-fill"/>
