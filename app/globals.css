@@ -1640,3 +1640,200 @@ body{color:var(--label-primary);font-size:var(--type-body);font-weight:400;line-
  color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit;
  vertical-align:baseline;
 }
+
+
+/* Vigus controls v3 — quiet, HIG-inspired hierarchy. Brand logos remain unchanged. */
+.vigus-experience{
+ --vigus-control-ink:#1d1d1f;
+ --vigus-control-secondary:#5d5d62;
+ --vigus-control-surface:#f1f1f3;
+ --vigus-control-surface-hover:#e8e8eb;
+ --vigus-control-border:rgba(29,29,31,.11);
+ --vigus-control-focus:#45454b;
+}
+/* Retire decorative red rules rather than merely recoloring the lines. */
+.vigus-experience .vigus-quick-specs>div::after,
+.vigus-experience .vigus-storytelling .vigus-highlight-options button.selected::before,
+.vigus-experience .vigus-orbit-steps button::after{
+ content:none;display:none;
+}
+.vigus-experience .vigus-selector-controls button.selected{
+ box-shadow:none;
+}
+.vigus-experience .vigus-story-note>span,
+.vigus-experience .vigus-ink-word,
+.vigus-experience .vigus-eyebrow{
+ text-decoration:none;
+}
+.vigus-experience .vigus-story-note>span{color:#6e6e73}
+.vigus-experience .vigus-local-inner>div a[aria-current="location"]{
+ color:var(--vigus-control-ink);font-weight:650;
+ background:var(--vigus-control-surface);
+ border-radius:999px;
+}
+.vigus-experience .vigus-local-inner>div a{
+ border-radius:999px;
+ padding:9px 13px;
+ transition:background-color .2s,color .2s;
+}
+.vigus-experience .vigus-local-inner>div a:hover{
+ background:#f5f5f7;color:var(--vigus-control-ink);
+}
+/* Buttons share a predictable 48px control height and neutral primary/secondary hierarchy. */
+.vigus-experience .vigus-pill,
+.vigus-experience .vigus-local-cta{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:48px;padding:12px 22px;
+ border:1px solid transparent;
+ border-radius:999px;
+ font-family:var(--font-ka);
+ font-size:clamp(14px,.92vw,16px);
+ font-weight:600;line-height:1.3;
+ letter-spacing:0;text-decoration:none;
+ box-shadow:none;
+ transform:none;
+ transition:background-color .2s ease,color .2s ease,
+  border-color .2s ease,opacity .2s ease,transform .18s ease;
+ -webkit-tap-highlight-color:transparent;
+}
+.vigus-experience .vigus-pill-dark{
+ background:var(--vigus-control-ink);color:#fff;
+}
+.vigus-experience .vigus-pill-light{
+ background:var(--vigus-control-surface);color:var(--vigus-control-ink);
+}
+.vigus-experience .vigus-local-cta{
+ background:var(--vigus-control-surface);color:var(--vigus-control-ink)!important;
+ border:0;min-height:42px;font-size:14px;padding:10px 18px;
+}
+.vigus-experience .vigus-pill-white{
+ background:#fff;color:var(--vigus-control-ink);
+}
+.vigus-experience .vigus-pill-outline{
+ background:rgba(255,255,255,.12);color:#fff;
+ border:1px solid rgba(255,255,255,.08);
+}
+@media(hover:hover) and (pointer:fine){
+ .vigus-experience .vigus-pill:hover:not(:disabled),
+ .vigus-experience .vigus-local-cta:hover{
+  box-shadow:none;transform:none;
+ }
+ .vigus-experience .vigus-pill-dark:hover{background:#39393d;color:#fff}
+ .vigus-experience .vigus-pill-light:hover,
+ .vigus-experience .vigus-local-cta:hover{background:var(--vigus-control-surface-hover);color:var(--vigus-control-ink)!important}
+ .vigus-experience .vigus-pill-white:hover{background:#eeeef0;color:var(--vigus-control-ink)}
+ .vigus-experience .vigus-pill-outline:hover{background:rgba(255,255,255,.2);color:#fff}
+}
+.vigus-experience .vigus-pill:active,
+.vigus-experience .vigus-local-cta:active{
+ transform:scale(.98);opacity:.85;
+}
+/* Quiet segmented selectors use surface contrast instead of red strokes. */
+.vigus-experience .vigus-selector-controls,
+.vigus-experience .vigus-orbit-steps{
+ display:inline-flex;align-items:center;gap:4px;max-width:100%;
+ flex-wrap:wrap;background:var(--vigus-control-surface);
+ border-radius:22px;padding:4px;
+}
+.vigus-experience .vigus-selector-controls button,
+.vigus-experience .vigus-orbit-steps button{
+ min-height:44px;padding:10px 17px;
+ background:transparent;color:var(--vigus-control-secondary);
+ border:1px solid transparent;border-radius:18px;
+ font-family:var(--font-ka);font-size:13px;font-weight:600;
+ letter-spacing:0;box-shadow:none;
+ transition:background-color .2s,color .2s,box-shadow .2s;
+}
+.vigus-experience .vigus-selector-controls button.selected,
+.vigus-experience .vigus-orbit-steps button.selected{
+ background:#fff;color:var(--vigus-control-ink);border-color:transparent;
+ box-shadow:0 1px 5px rgba(10,10,10,.08);
+}
+@media(hover:hover) and (pointer:fine){
+ .vigus-experience .vigus-selector-controls button:not(.selected):hover,
+ .vigus-experience .vigus-orbit-steps button:not(.selected):hover{
+  background:rgba(255,255,255,.6);color:var(--vigus-control-ink);
+ }
+}
+/* Icon-only buttons remain discoverable and comfortable to tap. */
+.vigus-experience .vigus-gallery-controls button,
+.vigus-experience .vigus-orbit-controls button,
+.vigus-experience .vigus-orbit-expand,
+.vigus-experience .vigus-orbit-full-controls button{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-width:44px;min-height:44px;
+ background:var(--vigus-control-surface);
+ color:var(--vigus-control-ink);border:1px solid transparent;
+ border-radius:999px;box-shadow:none;
+ transition:background-color .2s,color .2s,opacity .2s;
+}
+.vigus-experience .vigus-orbit-expand{
+ width:fit-content;padding:10px 18px;font-size:14px;
+ font-weight:600;margin-top:22px;
+}
+.vigus-experience :is(.vigus-gallery-controls button,.vigus-orbit-controls button):disabled{
+ opacity:.33;cursor:default;
+}
+@media(hover:hover) and (pointer:fine){
+ .vigus-experience :is(.vigus-gallery-controls button,.vigus-orbit-controls button,.vigus-orbit-expand):not(:disabled):hover{
+  background:var(--vigus-control-surface-hover);
+  color:var(--vigus-control-ink);transform:none;
+ }
+}
+.vigus-experience .vigus-orbit-full-controls button{
+ background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.12);
+}
+.vigus-experience .vigus-orbit-full-controls button:not(:disabled):hover{
+ background:rgba(255,255,255,.23);color:#fff;
+}
+/* Active story state: typography and subtle surfaces, no red marker. */
+.vigus-experience .vigus-storytelling .vigus-highlight-options button.selected{
+ color:var(--vigus-control-ink);
+}
+.vigus-experience .vigus-storytelling .vigus-highlight-options button:not(.selected){
+ color:var(--vigus-control-secondary);
+}
+.vigus-experience .vigus-storytelling .vigus-highlight-options button.selected .vigus-story-step-index{
+ color:var(--vigus-control-ink);
+}
+.vigus-experience .vigus-storytelling .vigus-highlight-options button.selected .vigus-story-step-copy small{
+ color:var(--vigus-control-secondary);
+}
+@media(max-width:960px){
+ .vigus-experience .vigus-storytelling .vigus-highlight-options button.selected{
+  border-color:var(--vigus-control-border);
+  background:#fff;
+  box-shadow:0 2px 10px rgba(12,12,16,.045);
+ }
+}
+.vigus-experience .vigus-compare-ui .filter-chip{
+ border-color:var(--vigus-control-border);
+ background:var(--vigus-control-surface);
+ color:var(--vigus-control-ink);
+}
+.vigus-experience .vigus-compare-ui .filter-chip:has(input:checked){
+ background:#e8e8eb;border-color:rgba(29,29,31,.16);
+}
+.vigus-experience .vigus-compare-ui .filter-chip input{
+ accent-color:var(--vigus-control-ink);
+}
+.vigus-experience .vigus-compare-ui .filter-chip:focus-within,
+.vigus-experience :is(.vigus-pill,.vigus-local-cta,.vigus-gallery-controls button,.vigus-orbit-controls button,.vigus-orbit-expand,.vigus-orbit-steps button,.vigus-selector-controls button,.vigus-highlight-options button):focus-visible{
+ outline:2px solid var(--vigus-control-focus);
+ outline-offset:3px;
+}
+.vigus-experience .vigus-compare-ui .comparison-different,
+.vigus-experience .vigus-compare-mobile .is-different{
+ background:rgba(30,30,35,.045);
+}
+@media(max-width:700px){
+ .vigus-experience .vigus-local-cta{font-size:13px;min-height:42px;padding:9px 15px}
+ .vigus-experience .vigus-pill{min-height:48px;padding:11px 17px}
+ .vigus-experience .vigus-selector-controls,
+ .vigus-experience .vigus-orbit-steps{border-radius:20px}
+}
+@media(prefers-reduced-motion:reduce){
+ .vigus-experience :is(.vigus-pill,.vigus-local-cta,.vigus-gallery-controls button,.vigus-orbit-controls button,.vigus-orbit-expand,.vigus-orbit-full-controls button,.vigus-selector-controls button,.vigus-orbit-steps button){
+  transition:none!important;
+ }
+}
