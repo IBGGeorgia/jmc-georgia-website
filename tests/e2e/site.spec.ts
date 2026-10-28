@@ -181,3 +181,29 @@ test('Vigus: sticky editorial chapters have a compact scroll rhythm',async({page
   expect(height).toBeGreaterThanOrEqual(220);
  }
 });
+
+test('approved header and booking CTA layout, contact address in burger/footer',async({page})=>{
+ for(const width of [1440,390,320]){
+  await page.setViewportSize({width,height:width<500?740:900});
+  await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
+  await expect(page.locator('.jmc-header-drive')).toHaveCount(0);
+  const cta=page.locator('.model-local-nav .vigus-local-cta');
+  await expect(cta).toHaveText('დაჯავშნე Test Drive ↗');
+  await expect(cta).toHaveAttribute('href','/test-drive');
+  const position=await cta.boundingBox();
+  expect(position).toBeTruthy();
+  expect(position!.x).toBeGreaterThanOrEqual(0);
+  expect(position!.x+position!.width).toBeLessThanOrEqual(width+1);
+  await expect(page.locator('.model-local-nav .vigus-scroll-progress-fill')).toHaveCount(1);
+  await expect(page.locator('.jmc-footer-contact address')).toContainText('თბილისი, ბელიაშვილის 115');
+  const trigger=page.locator('.jmc-menu-trigger');
+  await trigger.click();
+  const drawer=page.getByRole('dialog',{name:'JMC Georgia — მენიუ'});
+  await expect(drawer.locator('.jmc-drawer-address')).toContainText('თბილისი, ბელიაშვილის 115');
+  await expect(drawer.locator('.jmc-drawer-address a')).toHaveAttribute('href','/contact');
+  await drawer.getByRole('button',{name:'დახურვა'}).click();
+  await cta.click();
+  await expect(page).toHaveURL(/\/test-drive$/);
+  await expect(page.getByText('ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება.',{exact:false})).toBeVisible();
+ }
+});
