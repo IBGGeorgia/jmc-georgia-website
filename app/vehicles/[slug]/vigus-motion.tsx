@@ -113,20 +113,12 @@ export function VigusMotion(){
         scrollTrigger:{trigger:cinematic,start:'top bottom',end:'bottom top',scrub:1.25}});
       }
 
-      // Preserve numeric truth while introducing a restrained count-up on first visit.
+      // Technical figures always show their verified final values.
+      // Animate position/opacity only: do not display fabricated intermediate figures.
       root.querySelectorAll<HTMLElement>('[data-vigus-count]').forEach(element=>{
-       const target=Number(element.dataset.vigusCount);
-       if(!Number.isFinite(target))return;
-       const decimals=target%1===0?0:1;
-       ScrollTrigger.create({
-        trigger:element,start:'top 90%',once:true,
-        onEnter(){
-         const value={n:0};
-         gsap.to(value,{n:target,duration:1.25,ease:'power2.out',
-          onUpdate(){element.textContent=value.n.toFixed(decimals)},
-          onComplete(){element.textContent=target.toFixed(decimals)}
-         });
-        }
+       gsap.fromTo(element,{y:9,opacity:.55},{
+        y:0,opacity:1,duration:.65,ease:'power2.out',
+        scrollTrigger:{trigger:element,start:'top 90%',once:true}
        });
       });
 
