@@ -282,3 +282,19 @@ test('Grand Avenue discovery: homepage, catalogue, drawer, footer and test-drive
  await drawer.getByRole('button',{name:'დახურვა'}).click();
  await expect(page.locator('.jmc-footer a[href="'+grand+'"]').first()).toBeVisible();
 });
+
+test('Grand Avenue editorial gallery: fullscreen navigation, Escape and focus restore',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/vehicles/grand-avenue',{waitUntil:'domcontentloaded'});
+ const open=page.getByRole('button',{name:'წინა — სრულ ეკრანზე ნახვა'});
+ await open.scrollIntoViewIfNeeded();
+ await open.click();
+ const dialog=page.getByRole('dialog',{name:'Grand Avenue — ფოტოგალერეა'});
+ await expect(dialog).toBeVisible();
+ await expect(dialog.getByText('01 / 04', {exact:false})).toBeVisible();
+ await page.keyboard.press('ArrowRight');
+ await expect(dialog.getByText('02 / 04', {exact:false})).toBeVisible();
+ await page.keyboard.press('Escape');
+ await expect(dialog).toHaveCount(0);
+ await expect(open).toBeFocused();
+});
