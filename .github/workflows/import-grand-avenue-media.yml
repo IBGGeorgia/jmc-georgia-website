@@ -1,0 +1,28 @@
+name: JMC — Import approved Grand Avenue photos
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-grand-avenue-media.yml'
+permissions:
+  contents: write
+jobs:
+  import-approved-media:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install Pillow==11.3.0
+      - name: Download and optimize the nine approved Higgsfield assets
+        run: python scripts/import-grand-avenue-media.py
+      - name: Commit optimized first-party files while preserving Draft gate
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/grand-avenue lib/grand-avenue.ts tests/e2e/site.spec.ts
+          git diff --cached --quiet || (git commit -m 'Host approved Grand Avenue images locally as optimized WebP' && git push)
