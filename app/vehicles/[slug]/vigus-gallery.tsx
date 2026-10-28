@@ -42,13 +42,18 @@ export function VigusGallery(){
    const target=Math.max(0,Math.min(max,start+normalized*1.25));
    if(Math.abs(target-start)<.1)return;
    event.preventDefault();
+   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    el.scrollLeft=target;
+    wheelTarget.current=null;
+    return;
+   }
    wheelTarget.current=target;
    if(wheelRaf.current===null)wheelRaf.current=requestAnimationFrame(animate);
   };
   el.addEventListener('wheel',wheel,{passive:false});
   return ()=>{ro.disconnect();el.removeEventListener('wheel',wheel);if(wheelRaf.current!==null)cancelAnimationFrame(wheelRaf.current);wheelRaf.current=null;wheelTarget.current=null};
  },[sync]);
- const next=(direction:number)=>{const el=rail.current;if(!el)return;if(wheelRaf.current!==null)cancelAnimationFrame(wheelRaf.current);wheelRaf.current=null;wheelTarget.current=null;const item=el.querySelector('figure');el.scrollBy({left:direction*(item?.getBoundingClientRect().width??el.clientWidth*.8)+direction*20,behavior:'smooth'})};
+ const next=(direction:number)=>{const el=rail.current;if(!el)return;if(wheelRaf.current!==null)cancelAnimationFrame(wheelRaf.current);wheelRaf.current=null;wheelTarget.current=null;const item=el.querySelector('figure');el.scrollBy({left:direction*(item?.getBoundingClientRect().width??el.clientWidth*.8)+direction*20,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})};
  return <div className="vigus-gallery-component" data-vigus-reveal="visual">
  <div className="vigus-gallery-controls"><span className="vigus-gallery-index" aria-live="polite">{String(current+1).padStart(2,'0')} <span>/ {String(slides.length).padStart(2,'0')}</span></span><div><button type="button" aria-label="წინა ფოტო" disabled={!canPrev} onClick={()=>next(-1)}>←</button><button type="button" aria-label="შემდეგი ფოტო" disabled={!canNext} onClick={()=>next(1)}>→</button></div></div>
  <div ref={rail} className="vigus-gallery-strip vigus-gallery-interactive" tabIndex={0} role="region" aria-label="Vigus-ის ფოტოების გალერეა" onScroll={sync}
