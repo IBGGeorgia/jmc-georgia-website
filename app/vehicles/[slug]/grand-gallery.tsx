@@ -5,6 +5,8 @@ export function GrandGallery({photos}:{photos:Photo[]}){
  const [active,setActive]=useState<number|null>(null);
  const closeRef=useRef<HTMLButtonElement>(null);
  const triggerRefs=useRef<(HTMLButtonElement|null)[]>([]);
+ const originatingTrigger=useRef<number|null>(null);
+ useEffect(()=>{if(active===null&&originatingTrigger.current!==null){triggerRefs.current[originatingTrigger.current]?.focus();originatingTrigger.current=null}},[active]);
  useEffect(()=>{
   if(active===null)return;
   const old=document.body.style.overflow;document.body.style.overflow='hidden';
@@ -16,11 +18,11 @@ export function GrandGallery({photos}:{photos:Photo[]}){
    if(e.key==='Tab'){const buttons=Array.from(document.querySelectorAll<HTMLButtonElement>('.grand-lightbox button'));if(!buttons.length)return;const first=buttons[0],last=buttons[buttons.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
   };
   document.addEventListener('keydown',onKey);
-  return()=>{document.body.style.overflow=old;document.removeEventListener('keydown',onKey);triggerRefs.current[active]?.focus()};
+  return()=>{document.body.style.overflow=old;document.removeEventListener('keydown',onKey)};
  },[active,photos.length]);
  return <>
   <div className="grand-gallery-grid" data-vigus-reveal="visual">{photos.map((item,i)=><figure key={item.src}>
-   <button ref={el=>{triggerRefs.current[i]=el}} type="button" className="grand-gallery-open" onClick={()=>setActive(i)} aria-label={`${item.label} — სრულ ეკრანზე ნახვა`}>
+   <button ref={el=>{triggerRefs.current[i]=el}} type="button" className="grand-gallery-open" onClick={()=>{originatingTrigger.current=i;setActive(i)}} aria-label={`${item.label} — სრულ ეკრანზე ნახვა`}>
     <img src={item.src} alt={`JMC Grand Avenue — ${item.label}`} loading="lazy"/>
     <span className="grand-gallery-zoom" aria-hidden="true">↗</span>
    </button><figcaption>{String(i+1).padStart(2,'0')} / {item.label}</figcaption>
