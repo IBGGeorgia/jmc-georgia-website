@@ -54,7 +54,7 @@ test.describe('all live routes — responsive integrity',()=>{
 test('mobile drawer: focus trap, inert background, Escape and focus restore',async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto('/',{waitUntil:'domcontentloaded'});
- const trigger=page.getByRole('button',{name:'მენიუს გახსნა'});
+ const trigger=page.locator('.jmc-menu-trigger');
  await trigger.click();
  const dialog=page.getByRole('dialog',{name:'JMC Georgia — მენიუ'});
  await expect(dialog).toBeVisible();
