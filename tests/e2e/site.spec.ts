@@ -139,3 +139,45 @@ test('Vigus: animated editorial sections actually reveal during scrolling',async
   });
  }
 });
+
+test('Vigus: active CTAs are truthful, labels are Georgian and future routes remain clean',async({page})=>{
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
+ await expect(page.locator('.vigus-hero-actions a[href="#trims"]')).toHaveCount(1);
+ await expect(page.locator('.vigus-hero-actions a[href="/test-drive"]')).toHaveCount(0);
+ await expect(page.locator('.model-final a[href="/contact"]')).toHaveCount(1);
+ await expect(page.locator('.model-local-nav .vigus-scroll-progress-fill')).toHaveCount(1);
+ await expect(page.locator('.model-section-heading')).toHaveCount(6);
+ const copy=await page.locator('main').innerText();
+ for(const stale of ['Selected version','Choose your Vigus','The new JMC pickup','Design & Comfort','Explore / View selector','Interactive view / Vigus']){
+  expect(copy,`stale English label ${stale}`).not.toContain(stale);
+ }
+ const links=await page.locator('.model-local-nav a[href^="#"]').evaluateAll(nodes=>nodes.map(el=>el.getAttribute('href')));
+ for(const href of links){
+  expect(href).toBeTruthy();
+  await expect(page.locator(href!)).toHaveCount(1);
+ }
+});
+
+test('Vigus: all published figures remain exactly verified while reveal runs',async({page})=>{
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
+ const values=page.locator('[data-vigus-count]');
+ const before=await values.allTextContents();
+ expect(before).toEqual(['2.5','167','210','75','3150']);
+ await page.locator('#technology').scrollIntoViewIfNeeded();
+ await page.waitForTimeout(1100);
+ expect(await values.allTextContents()).toEqual(before);
+});
+
+test('Vigus: sticky editorial chapters have a compact scroll rhythm',async({page})=>{
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
+ const steps=page.locator('.vigus-storytelling .vigus-highlight-options button');
+ await expect(steps).toHaveCount(4);
+ for(const step of await steps.all()){
+  const height=await step.evaluate(element=>element.getBoundingClientRect().height);
+  expect(height,'desktop story chapter should not create excessive empty scroll').toBeLessThanOrEqual(355);
+  expect(height).toBeGreaterThanOrEqual(220);
+ }
+});
