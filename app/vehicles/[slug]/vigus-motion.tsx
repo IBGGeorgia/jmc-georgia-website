@@ -25,7 +25,7 @@ export function VigusMotion(){
    const top=window.scrollY+(window.innerWidth<=700?68:82)+86;
    let active:HTMLElement|null=null;
    for(const section of sections){
-    if(section.element.offsetTop<=top)active=section.element;
+    if(section.element.getBoundingClientRect().top+window.scrollY<=top)active=section.element;
    }
    for(const section of sections){
     if(section.element===active)section.link.setAttribute('aria-current','location');
