@@ -339,3 +339,24 @@
 @media(max-width:960px){.grand-vigus-page .brochure-story{grid-template-columns:1fr}.grand-vigus-page .brochure-story-visual{position:relative;top:auto;height:50vw;min-height:310px}.grand-vigus-page .brochure-story-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grand-vigus-page .brochure-story-tabs button{min-height:92px;border:1px solid #dedee2;border-radius:14px;padding:15px}.grand-vigus-page .brochure-story-tabs button small{display:none}}
 @media(max-width:700px){.grand-gallery-grid,.grand-equipment ul{grid-template-columns:1fr}.grand-specification-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.grand-vigus-page .brochure-story-visual{height:64vw;min-height:250px}.grand-vigus-page .brochure-story-tabs button strong{font-size:15px}.grand-vigus-page .vigus-hero-bottom h1{font-size:clamp(42px,9vw,68px)}}
 @media(max-width:390px){.grand-vigus-page .brochure-story-tabs{grid-template-columns:1fr}.grand-vigus-page .brochure-story-tabs button{min-height:65px}}
+
+/* Grand Avenue refinement: editorial gallery is retained, with Vigus-quality interactions. */
+.grand-gallery-open{display:block;position:relative;width:100%;border:0;padding:0;background:#e8e9eb;cursor:zoom-in;border-radius:18px;overflow:hidden;text-align:left}
+.grand-gallery-open img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:18px;transition:transform .5s cubic-bezier(.22,.7,.2,1)}
+.grand-gallery-open:hover img{transform:scale(1.035)}
+.grand-gallery-open:focus-visible{outline:3px solid var(--jmc-ui-focus);outline-offset:4px}
+.grand-gallery-zoom{position:absolute;right:16px;bottom:16px;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.95);color:#171719;box-shadow:0 4px 12px #0002;font-size:20px}
+.grand-lightbox{position:fixed;inset:0;z-index:9999;background:rgba(9,10,13,.97);display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,58px)}
+.grand-lightbox>img{max-width:min(90vw,1500px);max-height:78vh;object-fit:contain;border-radius:10px}
+.grand-lightbox button{background:#ffffff20;border:1px solid #ffffff40;border-radius:50%;width:48px;height:48px;color:white;cursor:pointer;font-size:25px}
+.grand-lightbox button:focus-visible{outline:3px solid white;outline-offset:4px}
+.grand-lightbox-close{position:absolute;top:clamp(16px,3vw,36px);right:clamp(16px,3vw,36px)}
+.grand-lightbox-controls{display:flex;gap:24px;align-items:center;justify-content:center;position:absolute;bottom:clamp(20px,4vw,45px);color:white;font-size:14px}
+.grand-vigus-page .vigus-hero-bottom h1{font-size:clamp(48px,7.3vw,116px);letter-spacing:-.055em;text-wrap:balance}
+.grand-vigus-page .grand-specification-grid>div{transition:background .2s,padding .2s}
+.grand-vigus-page .grand-specification-grid>div:hover{background:#ffffff0b}
+.grand-vigus-page .grand-equipment details[open] summary{color:#111}
+.grand-vigus-page .grand-equipment summary:focus-visible{outline:2px solid var(--jmc-ui-focus);outline-offset:4px}
+.grand-vigus-page .grand-equipment summary span{white-space:nowrap}
+@media(max-width:700px){.grand-vigus-page .vigus-hero-bottom h1{font-size:clamp(38px,8.6vw,64px)}.grand-lightbox{padding:10px}.grand-lightbox>img{max-width:96vw;max-height:70vh}.grand-lightbox-controls{gap:14px}.grand-lightbox-controls button{width:42px;height:42px}.grand-gallery-zoom{width:38px;height:38px;right:12px;bottom:12px}}
+@media(prefers-reduced-motion:reduce){.grand-gallery-open img{transition:none}}
