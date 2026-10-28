@@ -2,7 +2,7 @@
 
 **Status:** Canonical product/design standard (v1.1, 2026-10-28)
 **Scope:** All public pages, navigation, responsive components, future vehicle pages.
-**Approval note:** Direction and specific Vigus decisions reflect user-reviewed preferences. This document codifies them; it does **not** imply all pages have passed visual/browser acceptance.
+**Approval note:** Vigus's visual direction and final header/navigation were explicitly accepted by the user on 2026-10-28. This is the approved model-page baseline; it does **not** imply cross-browser (Safari/iOS) verification or approval of unprovided future model materials.
 
 > **Source of truth for future development.** Before writing or editing UI, read this document, `app/design-system.css`, the target page and its data source. Follow the shared defaults unless a new explicit approval overrides a rule.
 
@@ -75,7 +75,7 @@ Use shared `.button` for general pages; `.vigus-pill` is the model-story equival
 
 Reference components:
 - `app/vehicles/[slug]/page.tsx` — model routing and metadata only.
-- `app/vehicles/[slug]/vigus-page.tsx` — Vigus's approved editorial composition (still pending visual sign-off).
+- `app/vehicles/[slug]/vigus-page.tsx` — approved Vigus editorial composition; unique vehicle-specific content is not blindly reused.
 - `app/vehicles/[slug]/model-sections.tsx` — shared navigation, headings and truthful closing CTA.
 - `app/vehicles/[slug]/generic-model-page.tsx` — data-driven fallback for future **approved** vehicle models, without Vigus-specific imagery.
 - `app/vehicles/[slug]/model-page.css` — scoped responsive model layout and compact Vigus chapter rhythm.
@@ -101,7 +101,7 @@ No blanket reuse of Vigus-specific animation on unrelated informational pages.
 | Route | Intended layout | Data/functional state |
 | --- | --- | --- |
 | `/` | Cinematic, minimal editorial hero; Vigus card; three-step explanation; neutral contact CTA | Vigus is only confirmed model; no invented catalogue data |
-| `/vehicles/vigus` | Reference model page with photos, chapters, views, comparison and scroll progress | **Awaiting final browser visual/interaction approval**, despite successful builds |
+| `/vehicles/vigus` | Approved reference page with photos, chapters, views, comparison and scroll progress | Visually approved; automated Chromium regression tested; Safari/iOS separate QA pending |
 | `/vehicles` | Redirect to `/vehicles/vigus` | Full catalogue not yet active |
 | `/about` | Shared informational page + truthful JMC/Vigus introduction | Corporate history pending officially approved text |
 | `/contact` | Shared page intro + address information card | Only confirmed address; phone/hours pending |
@@ -113,7 +113,7 @@ No blanket reuse of Vigus-specific animation on unrelated informational pages.
 
 ## 8. Future model pages: required workflow
 
-**Do not create another model until Vigus is visually approved as template.**
+**Vigus is now approved as the model-page visual reference.** Future models must still pass independent market-data/media intake and page acceptance.
 
 1. Intake: approved model name/slug/segment, variants, prices (or explicit *not available*), powertrain/specification source, brand assets, full photo set and permitted image use.
 2. Data: add model/trim/features to `lib/vehicles.ts`; preserve existing slugs/fields. Never copy Vigus specifications into a different model. Only models in this verified list should generate public routes.
@@ -122,7 +122,7 @@ No blanket reuse of Vigus-specific animation on unrelated informational pages.
 5. Functional truthfulness: no unsupported form, checkout, price, social URL, finance promise, test drive booking or location.
 6. SEO: title and description reflect confirmed model. Preserve current `robots:noindex` until authorized to launch.
 7. QA: build, type check, npm audit, desktop/tablet/mobile, keyboard/touch, image loading, sticky nav, in-page anchors, hover/focus, scrolling, accessibility and Render LIVE status.
-8. Obtain explicit user approval before declaring template finished or proceeding to another model.
+8. Obtain explicit user approval of each future model's content and visuals before changing its status from draft to approved.
 
 ## 9. Definition of done & QA
 
@@ -133,7 +133,7 @@ No blanket reuse of Vigus-specific animation on unrelated informational pages.
 - Test every link, CTA, dialog, gallery/trim control, keyboard Tab/Escape, screen-reader names, mobile touch and reduced-motion mode.
 - Confirm no image crop changes, Vigus 4-photo truthfulness and no invented model data.
 - Render service `srv-dbge2kflk1mc73dq4lpg` deployed to `https://jmc-georgia.onrender.com/`; record deployed commit and actual Render status.
-- User approval before finalizing the Vigus template.
+- Vigus's visual standard is approved; each new model requires its own specification/media sign-off.
 
 **Unverified unless explicitly tested:** Screenshot-level browser rendering, performance/Core Web Vitals, keyboard behavior in an actual browser, iOS Safari touch behavior, and legal policy content. A successful Build is **not** the same as visual QA.
 
@@ -154,7 +154,7 @@ For every future UI request:
 - Canonical suite: `tests/e2e/site.spec.ts`; runner config: `playwright.config.ts`.
 - Github Actions: `.github/workflows/browser-qa.yml`. Run on changes to pages, CSS, shared components or model data.
 - Screenshots and failure traces: downloadable artifact `jmc-browser-qa` from the selected GitHub Actions run.
-- Current automated route matrix: 6 public pages × viewport widths 1440, 1024, 768, 430, 390 and 320 px.
+- Current automated route matrix: shared pages plus **every approved published model** × viewport widths 1440, 1024, 768, 430, 390 and 320 px.
 - Additional checks: modal focus trap / Escape, inert background, Vigus reading-progress bar, 4-photo selector, trim controls, reduced-motion and real-scroll reveal assertions.
 - Interpret results correctly: Chromium automation can establish responsive/functional baselines, but cannot automatically approve aesthetics, iOS/Safari or all visual transitions. Review screenshots and obtain user approval for Vigus before adding the next model.
 
@@ -167,3 +167,7 @@ For every future UI request:
 - The `/test-drive` page is currently **informational only**: its online booking form is not connected. Keep the unavailable-booking message explicit and do not imply that clicking the CTA completes a booking. Update this state only after implementing and verifying actual lead submission, consent, and CRM integration.
 - Additional actions inside model pages may say **"ტესტ-დრაივის ინფორმაცია"** while online booking is disabled. Use minimal neutral buttons consistent with the HIG-informed design system.
 - Include automated regression tests for the removed header CTA, local Test Drive CTA, compact viewports, and address presence in the drawer and footer.
+
+## 13. Next model intake and publication safety
+
+Read `docs/NEXT_MODEL_INTAKE.md` before adding any non-Vigus model. Only records explicitly marked `publicationStatus:'approved'` may appear in public routing and catalogue. A draft is strictly private and must not have a published model route. Browser QA dynamically tests every approved model at all supported breakpoints; do not borrow another market's trim specifications.
