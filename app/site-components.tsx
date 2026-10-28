@@ -66,7 +66,6 @@ export function Header(){
     <Link href="/" className="jmc-centered-logo" aria-label="JMC Georgia — მთავარი">
      <img src="/brand/jmc-logo-red.svg" width={130} height={40} alt="JMC"/>
     </Link>
-    <Link href="/vehicles/vigus" className="button jmc-header-drive">გაიცანი Vigus <span aria-hidden="true">↗</span></Link>
    </div>
   </header>
   <div className="jmc-drawer-shell" hidden={!open}>
@@ -93,6 +92,10 @@ export function Header(){
     <Link href="/test-drive" className="button jmc-drawer-drive" onClick={()=>setOpen(false)}>
      ტესტ-დრაივის ინფორმაცია <span aria-hidden="true">↗</span>
     </Link>
+    <div className="jmc-drawer-address">
+     <span>მისამართი</span>
+     <address><Link href="/contact" onClick={()=>setOpen(false)}>თბილისი, ბელიაშვილის 115</Link></address>
+    </div>
     <p className="jmc-drawer-foot">JMC Georgia</p>
    </div>
   </div>
