@@ -20,7 +20,7 @@ export function Footer(){
     <div className="jmc-footer-brand-column">
      <div className="jmc-footer-brand"><img src="/brand/jmc-logo-white.svg" width={148} height={46} alt="JMC"/><span>Georgia</span></div>
      <p className="jmc-footer-description">JMC-ის ოფიციალური წარმომადგენლობა საქართველოში.</p>
-     <Link href="/test-drive" className="jmc-footer-cta">დაჯავშნე ტესტ-დრაივი <span aria-hidden="true">↗</span></Link>
+     <Link href="/vehicles/vigus" className="jmc-footer-cta">აღმოაჩინე JMC Vigus <span aria-hidden="true">↗</span></Link>
     </div>
     <nav className="jmc-footer-column" aria-label="ქვედა ნავიგაცია">
      <h2>ნავიგაცია</h2>
@@ -32,7 +32,7 @@ export function Footer(){
     <div className="jmc-footer-column jmc-footer-contact">
      <h2>მისამართი</h2>
      <address>თბილისი, ბელიაშვილის 115</address>
-     <p className="jmc-footer-contact-note">JMC Georgia</p>
+     
     </div>
     <div className="jmc-footer-column jmc-footer-social-column">
      <h2>სოციალური ქსელები</h2>
@@ -47,13 +47,13 @@ export function Footer(){
        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M5.2 8.6H2.4V21h2.8V8.6ZM3.8 3a1.65 1.65 0 1 0 0 3.3A1.65 1.65 0 0 0 3.8 3ZM21.6 13.6c0-3.3-1.7-5.1-4.2-5.1-1.9 0-2.8 1.1-3.2 1.8V8.6h-2.8V21h2.8v-6.8c0-1.8.7-2.8 2.1-2.8 1.4 0 2 .9 2 2.8V21h3.3v-7.4Z"/></svg>
       </span>
      </div>
-     <p className="jmc-footer-contact-note">სოციალური გვერდების ბმულები დაემატება.</p>
+     
     </div>
    </div>
    <div className="jmc-footer-bottom">
     <span>© {new Date().getFullYear()} JMC Georgia. ყველა უფლება დაცულია.</span>
     <Link href="/privacy">კონფიდენციალურობა</Link>
-    <span className="jmc-footer-signature">JMC Georgia</span>
+    
    </div>
   </div>
  </footer>;
