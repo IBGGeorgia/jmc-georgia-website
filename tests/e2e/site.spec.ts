@@ -115,7 +115,7 @@ test('footer social icons remain non-interactive until official URLs exist',asyn
  const social=page.locator('.jmc-footer-socials');
  await expect(social.locator('span.jmc-social-icon')).toHaveCount(3);
  await expect(social.locator('a')).toHaveCount(0);
- await expect(page.getByText('თბილისი, ბელიაშვილის 115').first()).toBeVisible();
+ await expect(page.locator('.jmc-footer-contact address')).toHaveText('თბილისი, ბელიაშვილის 115');
 });
 
 test('Vigus: animated editorial sections actually reveal during scrolling',async({page},testInfo)=>{
@@ -144,7 +144,7 @@ test('Vigus: active CTAs are truthful, labels are Georgian and future routes rem
  await page.setViewportSize({width:1440,height:900});
  await page.goto('/vehicles/vigus',{waitUntil:'domcontentloaded'});
  await expect(page.locator('.vigus-hero-actions a[href="#trims"]')).toHaveCount(1);
- await expect(page.locator('.vigus-hero-actions a[href="/test-drive"]')).toHaveCount(0);
+ await expect(page.locator('.vigus-hero-actions a[href="/test-drive"]')).toHaveText(/ტესტ-დრაივის ინფორმაცია/);
  await expect(page.locator('.model-final a[href="/test-drive"]')).toHaveCount(1);
  await expect(page.locator('.model-local-nav .vigus-scroll-progress-fill')).toHaveCount(1);
  await expect(page.locator('.model-section-heading')).toHaveCount(6);
