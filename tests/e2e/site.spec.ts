@@ -217,7 +217,8 @@ test('model publication: only approved records can become public routes',async({
   expect(model.name.trim()).not.toBe('');
   expect(model.description.trim()).not.toBe('');
   expect(model.slug).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
-  expect(model.gallery).toEqual(expect.arrayContaining([]));
+  expect(Array.isArray(model.gallery)).toBe(true);
+  expect(Array.isArray(model.trims)).toBe(true);
  }
  const response=await page.goto('/vehicles/unapproved-model-for-qa',{waitUntil:'domcontentloaded'});
  expect(response?.status()).toBe(404);
