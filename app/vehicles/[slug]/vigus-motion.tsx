@@ -9,7 +9,7 @@ export function VigusMotion(){
  useEffect(()=>{
   const root=document.querySelector<HTMLElement>('.vigus-experience');
   if(!root)return;
-  const progress=root.querySelector<HTMLElement>('.vigus-scroll-progress-fill');
+
   const menu=Array.from(root.querySelectorAll<HTMLAnchorElement>('.vigus-local-inner a[href^="#"]'))
    .filter(link=>link.hash&&link.hash!=='#top');
   const sections=menu.map(link=>({link,element:root.querySelector<HTMLElement>(link.hash)}))
@@ -17,10 +17,6 @@ export function VigusMotion(){
   let frame=0;
   const update=()=>{
    frame=0;
-   const top=root.getBoundingClientRect().top+window.scrollY;
-   const span=Math.max(1,root.offsetHeight-window.innerHeight);
-   const value=Math.min(1,Math.max(0,(window.scrollY-top)/span));
-   if(progress)progress.style.transform=`scaleX(${value})`;
    const cutoff=window.scrollY+(window.innerWidth<=700?68:82)+90;
    let active:HTMLElement|null=null;
    sections.forEach(section=>{
