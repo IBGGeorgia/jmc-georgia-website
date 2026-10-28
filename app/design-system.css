@@ -308,3 +308,54 @@
  margin:0;
  padding-top:18px;
 }
+
+
+/* JMC GLOBAL WIDTH BIBLE v1.0 — APPROVED 2026-10-29.
+   Main 1680px; text 760px; desktop 24px; mobile 16px.
+   Center all non-full-bleed content. Media covers remain 100vw.
+   Do not reintroduce per-page fixed 1200/1240/1480 layout caps. */
+:root{
+ --jmc-content-max:1680px;
+ --jmc-readable-max:760px;
+ --jmc-gutter-desktop:24px;
+ --jmc-gutter-mobile:16px;
+ --jmc-page-gutter:var(--jmc-gutter-desktop);
+ --content-gallery:var(--jmc-content-max);
+ --content-wide:var(--jmc-content-max);
+ --content-readable:var(--jmc-readable-max);
+ --content-ui:var(--jmc-content-max);
+ --layout-max:var(--jmc-content-max);
+}
+@media(max-width:700px){:root{--jmc-page-gutter:var(--jmc-gutter-mobile)}}
+:where(.container,.jmc-header-inner,.jmc-footer-inner,.jmc-info-page>.container){
+ box-sizing:border-box;
+}
+.container{
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)));
+ max-width:var(--jmc-content-max);
+ margin-inline:auto;
+}
+:where(.jmc-header .jmc-header-inner.container,.jmc-footer .container){
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;
+ max-width:var(--jmc-content-max)!important;
+ margin-inline:auto!important;
+}
+.jmc-header .jmc-header-inner.container{padding-inline:0!important}
+:where(.jmc-info-page,.model-page) .container{max-width:var(--jmc-content-max)}
+:where(.jmc-info-page,.model-page) .jmc-page-intro,
+:where(.jmc-info-page,.model-page) .model-section-heading p{max-width:var(--jmc-readable-max)}
+.vigus-experience :is(.vigus-story .container,.vigus-highlights .container,.vigus-gallery-section .container,.vigus-viewer-section .container,.vigus-capabilities .container,.vigus-trims .container){
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;
+ max-width:var(--jmc-content-max)!important;
+ padding-inline:0!important;margin-inline:auto!important;
+}
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container,
+.vigus-experience .model-local-nav .vigus-local-inner.container,
+.vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;
+ max-width:var(--jmc-content-max)!important;
+ margin-inline:auto!important;
+}
+.vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{flex:0 0 auto!important}
+.vigus-experience .model-local-nav .vigus-local-inner.container,
+.vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{padding-inline:0!important}
