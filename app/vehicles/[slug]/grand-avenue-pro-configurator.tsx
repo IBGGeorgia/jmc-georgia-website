@@ -5,7 +5,7 @@ import {getProVariant,proSourceVariants,type ProTrim,type ProFuel} from '../../.
 const equipmentCategories:[string,string][]=[['exterior','ექსტერიერი'],['interior','ინტერიერი'],['safety','უსაფრთხოება'],['offroad','Off-road']];
 const fuelName=(fuel:ProFuel)=>fuel==='diesel'?'დიზელი':'ბენზინი';
 const fields=['engine','power','transmission','clearance','kerb','gross','tank','emissions','dimensions','cargo_length','cargo_width','cargo_height','wheelbase','wheels'];
-/** Draft-only configurator; keep unmounted until the full photo-backed page is approved. */
+/** Source-verified PRO explorer, shared by the published model page. */
 export function GrandAvenueProConfigurator(){
  const [trim,setTrim]=useState<ProTrim>('LX');
  const [fuel,setFuel]=useState<ProFuel>('diesel');
@@ -25,7 +25,7 @@ export function GrandAvenueProConfigurator(){
  const equipmentDifferences=featureNames.filter(name=>compared.length>1&&compared.some(v=>!documented(v,equipmentGroup).includes(name))).length;
  return <div className="pro-draft-configurator">
   <p className="pro-draft-eyebrow">JMC / GRAND AVENUE PRO</p>
-  <h2>აირჩიე შენი PRO</h2>
+  <h2>აღმოაჩინე შენი PRO.</h2>
   <div className="pro-explorer-layout"><div className="pro-explorer-visual"><img src={grandAvenueProOriginalMedia.exterior.src} alt={grandAvenueProOriginalMedia.exterior.alt} loading="lazy"/><div><span>GRAND AVENUE PRO</span><strong>{trim} / {fuelName(fuel)}</strong></div></div><div className="pro-explorer-controls"><p className="pro-explorer-lead">შეარჩიე კომპლექტაცია და ძრავა. ტექნიკური მონაცემები ავტომატურად განახლდება.</p><div className="pro-draft-axes">
    <fieldset><legend>კომპლექტაცია</legend><div className="pro-draft-segments">{(['LX','SLX'] as const).map(value=><button type="button" key={value} aria-pressed={trim===value} onClick={()=>setTrim(value)}>PRO {value}</button>)}</div></fieldset>
    <fieldset><legend>ძრავა</legend><div className="pro-draft-segments">{(['diesel','gasoline'] as const).map(value=><button type="button" key={value} aria-pressed={fuel===value} onClick={()=>setFuel(value)}>{fuelName(value)}</button>)}</div></fieldset>
@@ -35,7 +35,7 @@ export function GrandAvenueProConfigurator(){
    <dl>{['engine','power','transmission','clearance'].map(key=><div key={key}><dt>{selected.specLabels[key]?.[0]}</dt><dd>{selected.specs[key]}</dd></div>)}</dl>
   </div>
   </div></div>
-  <section aria-labelledby="pro-draft-tech"><h3 id="pro-draft-tech">ტექნიკური მონაცემები</h3><dl className="pro-draft-facts">{fields.filter(k=>selected.specs[k]).map(key=><div key={key}><dt>{selected.specLabels[key]?.[0]}</dt><dd>{selected.specs[key]}</dd></div>)}</dl></section>
+  <details className="pro-explorer-more-specs"><summary>ყველა ტექნიკური მახასიათებელი <span aria-hidden="true">↓</span></summary><dl className="pro-draft-facts">{fields.filter(k=>selected.specs[k]&&!['engine','power','transmission','clearance'].includes(k)).map(key=><div key={key}><dt>{selected.specLabels[key]?.[0]}</dt><dd>{selected.specs[key]}</dd></div>)}</dl></details>
   <section aria-labelledby="pro-draft-equipment"><h3 id="pro-draft-equipment">აღჭურვილობა · PRO {trim} · {fuelName(fuel)}</h3>
    {equipmentCategories.map(([key,title])=>{const items=selected.groups[key];const list=Array.isArray(items)?items.filter(x=>typeof x==='string'):[];return <details key={key}><summary>{title} · {list.length}</summary><ul>{list.map((v:string,i:number)=><li key={i}>{v}</li>)}</ul></details>})}
   </section>

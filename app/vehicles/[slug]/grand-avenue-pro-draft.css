@@ -397,3 +397,48 @@
  .pro-premium-cinema-copy h2{overflow-wrap:break-word}
  .pro-draft-gallery .pro-draft-chapter-heading{max-width:100%}
 }
+
+/* PRO visual-system alignment with the approved VIGUS / Grand Avenue pages.
+ * The global header owns the first 83px desktop / 69px mobile.
+ */
+.pro-draft-page{--pro-site-header-height:83px;--pro-content-max:var(--content-gallery,1200px)}
+.pro-draft-page .pro-draft-wrap{width:min(var(--pro-content-max),calc(100% - 48px));margin-inline:auto}
+.pro-draft-page .pro-page-nav{top:var(--pro-site-header-height);z-index:52}
+.pro-draft-page .pro-page-nav-inner{width:min(var(--pro-content-max),calc(100% - 48px));margin-inline:auto}
+.pro-draft-page :is(#pro-story,#pro-gallery,#pro-choose){scroll-margin-top:calc(var(--pro-site-header-height) + 84px)}
+.pro-draft-page .pro-premium-hero-content{max-width:var(--pro-content-max)}
+.pro-draft-page .pro-premium-intro-copy,.pro-draft-page .pro-draft-chapter-heading{margin-right:auto}
+@media(max-width:700px){
+ .pro-draft-page{--pro-site-header-height:69px}
+ .pro-draft-page .pro-draft-wrap,.pro-draft-page .pro-page-nav-inner{width:calc(100% - 32px)}
+ .pro-draft-page :is(#pro-story,#pro-gallery,#pro-choose){scroll-margin-top:calc(var(--pro-site-header-height) + 76px)}
+}
+
+/* Visual System 3.0: one information hierarchy instead of repeated spec blocks. */
+.pro-explorer-more-specs{margin:-46px 0 clamp(72px,8vw,112px);border-top:1px solid #dedee2;border-bottom:1px solid #dedee2}
+.pro-explorer-more-specs>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px;padding:20px 4px;font-size:clamp(17px,1.5vw,22px);font-weight:650;list-style:none}
+.pro-explorer-more-specs>summary::-webkit-details-marker{display:none}
+.pro-explorer-more-specs>summary>span{font-size:22px;transition:transform .2s ease}
+.pro-explorer-more-specs[open]>summary>span{transform:rotate(180deg)}
+.pro-explorer-more-specs .pro-draft-facts{padding:10px 6px 35px}
+.pro-explorer-more-specs summary:focus-visible{outline:2px solid #64646d;outline-offset:4px}
+.pro-premium-choose .pro-draft-configurator>section:first-of-type{margin-top:0}
+@media(max-width:700px){.pro-explorer-more-specs{margin:-26px 0 62px}.pro-explorer-more-specs>summary{min-height:62px;padding:17px 2px}.pro-explorer-more-specs .pro-draft-facts{padding-bottom:25px}}
+@media(prefers-reduced-motion:reduce){.pro-explorer-more-specs>summary>span{transition:none}}
+
+/* Storytelling 3.0: deliberate photographic pacing, clean chapter transitions. */
+.pro-premium-intro .pro-premium-mosaic{margin-top:clamp(34px,4vw,58px)}
+.pro-premium-mosaic-main .pro-draft-original-photo,
+.pro-premium-mosaic-side .pro-draft-original-photo{overflow:hidden}
+.pro-premium-mosaic-main img,.pro-premium-mosaic-side img{display:block;width:100%;height:100%;object-fit:cover}
+.pro-premium-mosaic-side .pro-draft-original-photo img{object-position:center 44%}
+.pro-premium-cinema{margin-block:clamp(32px,5vw,75px) 0}
+.pro-draft-technology .pro-draft-chapter-heading{margin-bottom:clamp(28px,3.6vw,48px)}
+.pro-draft-gallery{margin-top:0}
+.pro-premium-choose{border-top:1px solid #e8e8eb}
+@media(max-width:700px){
+ .pro-premium-intro .pro-premium-mosaic{margin-top:30px}
+ .pro-premium-cinema{margin-top:20px}
+ .pro-premium-mosaic-main .pro-draft-original-photo img{object-position:center}
+ .pro-draft-technology .pro-draft-chapter-heading{margin-bottom:26px}
+}
