@@ -1,6 +1,6 @@
 # JMC Georgia — Design System & Product Page Standard
 
-**Status:** Canonical product/design standard (v1.0, 2026-10-28)
+**Status:** Canonical product/design standard (v1.1, 2026-10-28)
 **Scope:** All public pages, navigation, responsive components, future vehicle pages.
 **Approval note:** Direction and specific Vigus decisions reflect user-reviewed preferences. This document codifies them; it does **not** imply all pages have passed visual/browser acceptance.
 
@@ -74,7 +74,11 @@ Use shared `.button` for general pages; `.vigus-pill` is the model-story equival
 ## 6. Motion: Vigus is the reference implementation
 
 Reference components:
-- `app/vehicles/[slug]/page.tsx` — complete Vigus section composition.
+- `app/vehicles/[slug]/page.tsx` — model routing and metadata only.
+- `app/vehicles/[slug]/vigus-page.tsx` — Vigus's approved editorial composition (still pending visual sign-off).
+- `app/vehicles/[slug]/model-sections.tsx` — shared navigation, headings and truthful closing CTA.
+- `app/vehicles/[slug]/generic-model-page.tsx` — data-driven fallback for future **approved** vehicle models, without Vigus-specific imagery.
+- `app/vehicles/[slug]/model-page.css` — scoped responsive model layout and compact Vigus chapter rhythm.
 - `app/vehicles/[slug]/vigus-motion.tsx` — GSAP/ScrollTrigger/SplitText orchestration.
 - `app/vehicles/[slug]/vigus-experience.tsx` — photo view, tab/storytelling and trim selector.
 - `app/vehicles/[slug]/vigus-gallery.tsx` — drag/keyboard photo gallery.
@@ -84,7 +88,7 @@ Approved pattern:
 2. Kinetic lines of text animate as whole lines; never split Georgian glyphs character-by-character.
 3. Cinematic photo reveal and quiet parallax/Scroll storytelling on capable desktop.
 4. Sticky story imagery transitions from **existing verified photographs**; mobile uses simpler switching.
-5. Numeric counters show **only source-verified values**, maintaining exact units/decimals.
+5. Technical numbers always show **source-verified final values**; entrance animation may move/fade figures, never count through fabricated intermediate numbers.
 6. Real four-photo view is described as four angles, **not** full 360° capture.
 7. Trim selector/table updates use restrained transitions; all comparison data comes from `lib/vehicles.ts`.
 8. Vigus sticky-local-nav has a thin **red** progress line: functional reading progress; preserve it.
@@ -112,8 +116,8 @@ No blanket reuse of Vigus-specific animation on unrelated informational pages.
 **Do not create another model until Vigus is visually approved as template.**
 
 1. Intake: approved model name/slug/segment, variants, prices (or explicit *not available*), powertrain/specification source, brand assets, full photo set and permitted image use.
-2. Data: add model/trim/features to `lib/vehicles.ts`; preserve existing slugs/fields. Never copy Vigus specifications into a different model.
-3. Composition: reuse global Header/Footer, introductory hero, verified specs, editorial chapters, relevant galleries, trim selection/comparison and CTA states. Complex photo/360 interactions **only when source images actually support them**.
+2. Data: add model/trim/features to `lib/vehicles.ts`; preserve existing slugs/fields. Never copy Vigus specifications into a different model. Only models in this verified list should generate public routes.
+3. Composition: use shared `ModelLocalNavigation`, `ModelSectionHeading`, `ModelClosingCTA` and data-driven `GenericModelPage`. New-model-specific stories are optional only with approved media/copy. Complex photo/360 interactions **only when source images actually support them**.
 4. Motion: reuse the approved GSAP philosophy, not necessarily identical timings for every model; respect `prefers-reduced-motion`.
 5. Functional truthfulness: no unsupported form, checkout, price, social URL, finance promise, test drive booking or location.
 6. SEO: title and description reflect confirmed model. Preserve current `robots:noindex` until authorized to launch.
