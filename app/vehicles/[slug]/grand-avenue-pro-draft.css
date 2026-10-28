@@ -280,3 +280,19 @@
 .pro-explorer-controls .pro-draft-summary dl>div{border-color:#525359}
 @media(max-width:950px){.pro-explorer-layout{grid-template-columns:1fr}.pro-explorer-visual{min-height:380px}.pro-explorer-controls .pro-draft-axes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.pro-explorer-layout{border-radius:17px;margin:20px 0 46px}.pro-explorer-visual{min-height:270px}.pro-explorer-visual>div{bottom:24px;left:22px}.pro-explorer-controls{padding:22px}.pro-explorer-controls .pro-draft-axes{grid-template-columns:1fr}.pro-explorer-controls .pro-draft-summary{padding:20px}.pro-explorer-controls .pro-draft-summary dl{gap:14px}}
+
+/* PRO sticky chapter navigation with JMC red scroll indicator. */
+.pro-page-nav{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.94);backdrop-filter:blur(15px);border-bottom:1px solid #e4e4e6}
+.pro-page-nav-inner{min-height:65px;display:flex;align-items:center;gap:36px}
+.pro-page-nav a{text-decoration:none}
+.pro-page-nav-title{white-space:nowrap;color:#202127;font-family:var(--font-latin),sans-serif;font-size:14px;font-weight:750;letter-spacing:.065em}
+.pro-page-nav-chapters{display:flex;gap:clamp(14px,2.6vw,35px);margin-left:auto}
+.pro-page-nav-chapters a{font-size:13px;font-weight:550;color:#707078;white-space:nowrap;padding:20px 0}
+.pro-page-nav-chapters a[aria-current=location]{color:#16171b;font-weight:750}
+.pro-page-nav-cta{white-space:nowrap;padding:10px 18px;border-radius:99px;background:#22232a;color:#fff;font-size:12px;font-weight:650}
+.pro-page-progress{position:absolute;bottom:-1px;left:0;right:0;height:3px;background:#e50012;transform-origin:left;will-change:transform}
+.pro-page-nav a:focus-visible{outline:2px solid #e50012;outline-offset:3px}
+.pro-draft-page :is(#pro-story,#pro-gallery,#pro-choose){scroll-margin-top:85px}
+@media(max-width:850px){.pro-page-nav-inner{min-height:58px;gap:16px}.pro-page-nav-title{font-size:12px}.pro-page-nav-chapters{gap:17px}.pro-page-nav-chapters a{font-size:12px}.pro-page-nav-cta{display:none}}
+@media(max-width:550px){.pro-page-nav-inner{min-height:54px}.pro-page-nav-title{font-size:11px;letter-spacing:0}.pro-page-nav-chapters{gap:12px}.pro-page-nav-chapters a{font-size:11px}.pro-page-nav-chapters a:first-child{display:none}}
+@media(max-width:350px){.pro-page-nav-chapters a:nth-child(2){display:none}}
