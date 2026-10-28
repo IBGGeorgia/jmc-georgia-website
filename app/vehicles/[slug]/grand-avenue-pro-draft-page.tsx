@@ -18,19 +18,23 @@ function OriginalPhoto({photo,priority=false}:{photo:ProPhotoKey;priority?:boole
 export function GrandAvenueProDraftPage(){
  return <main className="pro-draft-page">
   <div className="pro-draft-page-notice">შიდა სამუშაო მაკეტი · გამოსაქვეყნებელი არ არის</div>
-  <header className="pro-draft-hero pro-draft-wrap" id="pro-top"><p className="pro-draft-kicker">JMC / GRAND AVENUE PRO</p>
-   <h1>GRAND AVENUE <span>PRO</span></h1>
-   <p>ოთხივე კომპლექტაცია, ორი ძრავის ვარიანტი და დამოუკიდებელი პროდუქტის გამოცდილება.</p>
-   <OriginalPhoto photo="hero" priority/>
-   <a href="#pro-choose" className="pro-draft-link">აირჩიე ვერსია ↓</a>
+  <header className="pro-draft-hero" id="pro-top">
+   <div className="pro-premium-hero-photo"><OriginalPhoto photo="hero" priority/><div className="pro-premium-hero-shade"/></div>
+   <div className="pro-premium-hero-content pro-draft-wrap"><p className="pro-premium-overline">JMC / PROFESSIONAL PICKUP SERIES</p>
+    <h1>GRAND AVENUE <em>PRO</em></h1>
+    <p>ყველა გზა ახალი შესაძლებლობაა.</p>
+    <div className="pro-premium-hero-actions"><a href="#pro-choose" className="pro-premium-primary">აღმოაჩინე კომპლექტაციები <span aria-hidden="true">↗</span></a><a href="#pro-story" className="pro-premium-secondary">გაიცანი PRO ↓</a></div>
+   </div>
+   <div className="pro-premium-hero-index">01 / GRAND AVENUE PRO</div>
   </header>
   <section className="pro-draft-wrap pro-draft-metrics" aria-label="ძირითადი მონაცემები">{metrics.map(([value,label])=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</section>
-  <section className="pro-draft-wrap pro-draft-chapters" id="pro-story"><div className="pro-draft-chapter-heading"><span>01 / დეტალები</span><h2>შექმნილია განსხვავებული გზებისთვის.</h2></div>
-   {story.map((item,i)=><article key={item.index} className="pro-draft-editorial"><div className="pro-draft-editorial-copy"><span>{item.index} / {item.name}</span><h3>{item.title}</h3><p>{item.description}</p></div><OriginalPhoto photo={item.media as ProPhotoKey}/></article>)}
+  <section className="pro-premium-intro pro-draft-wrap" id="pro-story"><div className="pro-premium-intro-copy"><span className="pro-draft-kicker">01 / ხასიათი</span><h2>იქ, სადაც გზა <span>აღარ არის ჩვეულებრივი.</span></h2><p>Grand Avenue PRO აერთიანებს 4×4 შესაძლებლობებს, ავტომატურ ტრანსმისიას და ოთხ განსხვავებულ ვერსიას.</p></div>
+   <div className="pro-premium-mosaic"><div className="pro-premium-mosaic-main"><OriginalPhoto photo="exterior"/></div><div className="pro-premium-mosaic-side"><OriginalPhoto photo="rear"/><div className="pro-premium-mosaic-note"><span>JMC / PRO</span><strong>შექმნილი განსხვავებული გზებისთვის.</strong></div></div></div>
   </section>
-  <section className="pro-draft-technology pro-draft-wrap"><div className="pro-draft-chapter-heading"><span>02 / ტექნოლოგიები</span><h2>ინფორმაცია შენს წინაშე.</h2><p>ციფრული ინსტრუმენტების პანელი და გამავლობის რეჟიმების ვიზუალური ინფორმაცია.</p></div><div className="pro-draft-tech-grid"><OriginalPhoto photo="cluster"/><OriginalPhoto photo="terrainDisplay"/></div></section>
-  <section className="pro-draft-gallery pro-draft-wrap" id="pro-gallery"><div className="pro-draft-chapter-heading"><span>03 / ვიზუალური გამოცდილება</span><h2>აღმოაჩინე დეტალები.</h2></div><div className="pro-draft-gallery-grid">{(['hero','rear','frontDetail','exterior'] as const).map(photo=><OriginalPhoto key={photo} photo={photo}/>)}</div></section>
-  <section className="pro-draft-wrap" id="pro-choose"><GrandAvenueProConfigurator/></section>
+  <section className="pro-premium-cinema"><OriginalPhoto photo="frontDetail"/><div className="pro-premium-cinema-shade"/><div className="pro-premium-cinema-copy pro-draft-wrap"><span>02 / დიზაინი</span><h2>დეტალები,<br/>რომლებიც გამოარჩევს.</h2></div></section>
+  <section className="pro-draft-technology pro-draft-wrap"><div className="pro-draft-chapter-heading"><span>03 / ტექნოლოგიები</span><h2>ინფორმაცია შენს წინაშე.</h2><p>ციფრული ინსტრუმენტების პანელი და გამავლობის რეჟიმების ვიზუალური ინფორმაცია.</p></div><div className="pro-draft-tech-grid"><OriginalPhoto photo="cluster"/><OriginalPhoto photo="terrainDisplay"/></div></section>
+  <section className="pro-draft-gallery pro-draft-wrap" id="pro-gallery"><div className="pro-draft-chapter-heading"><span>04 / გალერეა</span><h2>აღმოაჩინე დეტალები.</h2></div><div className="pro-draft-gallery-grid">{(['rear','exterior','frontDetail','hero'] as const).map(photo=><OriginalPhoto key={photo} photo={photo}/>)}</div></section>
+  <section className="pro-draft-wrap pro-premium-choose" id="pro-choose"><GrandAvenueProConfigurator/></section>
   <footer className="pro-draft-footer pro-draft-wrap"><span>JMC Grand Avenue PRO</span><p>ვიზუალური დამტკიცებისა და ფოტოების შემოწმების შემდეგ დაემატება საიტის საერთო Test Drive CTA.</p><p>მოდელის მონაცემები: {proSourceVariants.length} დოკუმენტირებული ვერსია.</p></footer>
  </main>;
 }
