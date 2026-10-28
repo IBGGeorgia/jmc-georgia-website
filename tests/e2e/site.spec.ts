@@ -298,3 +298,14 @@ test('Grand Avenue editorial gallery: fullscreen navigation, Escape and focus re
  await expect(dialog).toHaveCount(0);
  await expect(open).toBeFocused();
 });
+
+test('Grand Avenue: mobile lightbox supports touch swipe',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/vehicles/grand-avenue',{waitUntil:'domcontentloaded'});
+ await page.getByRole('button',{name:'წინა — სრულ ეკრანზე ნახვა'}).click();
+ const dialog=page.getByRole('dialog',{name:'Grand Avenue — ფოტოგალერეა'});
+ await expect(dialog.getByText('01 / 04',{exact:false})).toBeVisible();
+ await dialog.dispatchEvent('touchstart',{touches:[{clientX:300}]});
+ await dialog.dispatchEvent('touchend',{changedTouches:[{clientX:120}]});
+ await expect(dialog.getByText('02 / 04',{exact:false})).toBeVisible();
+});
