@@ -21,7 +21,7 @@ export default function TestDrive(){
    <section className="jmc-test-drive-panel" aria-labelledby="test-drive-status">
     <div className="jmc-test-drive-panel-copy">
      <p className="jmc-test-drive-status-label">ონლაინ დაჯავშნა</p>
-     <h2 id="test-drive-status">ფორმა მალე დაემატება.</h2>
+     <h2 id="test-drive-status">Under Construction — ფორმა მზადდება.</h2>
      <p>ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება. მანამდე შეგიძლია გაეცნო JMC-ის მოდელებს და ნახო ჩვენი მისამართი.</p>
      <div className="jmc-test-drive-actions">
       <Link className="button" href="/vehicles">ნახე ყველა მოდელი <JmcIcon name="arrow-up-right"/></Link>
