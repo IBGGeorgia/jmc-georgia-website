@@ -514,3 +514,21 @@ main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-d
 @media(prefers-reduced-motion:reduce){
  :is(.vigus-gallery-controls button,.vigus-orbit-controls button,.grand-lightbox-controls button,.vigus-selector-controls button,.trim-switches .filter-chip){transition:none!important}
 }
+
+/* PRO product controls: shared pill and icon language, preserving data logic. */
+.pro-draft-page :is(.pro-draft-segments button,.pro-compare-modes button,.pro-compare-presets button,.pro-equipment-category-picker button,.pro-draft-compare-options label){
+ border-radius:var(--jmc-button-radius);min-height:44px;
+}
+.pro-draft-page :is(.pro-premium-gallery-toolbar button,.pro-premium-gallery-nav button,.pro-premium-gallery-close,.pro-premium-gallery-zoom){
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:44px;min-width:44px;border-radius:999px;
+}
+.pro-draft-page :is(.pro-draft-segments button,.pro-compare-modes button,.pro-compare-presets button,.pro-equipment-category-picker button,.pro-premium-gallery-tile,.pro-premium-gallery-toolbar button,.pro-premium-gallery-nav button,.pro-premium-gallery-close):focus-visible{
+ outline:2px solid var(--jmc-ui-focus);outline-offset:4px;
+}
+.pro-draft-page .jmc-icon-prev{transform:rotate(180deg)}
+.pro-draft-page :is(.pro-draft-compare-options label,.pro-draft-diff-toggle){cursor:pointer}
+.pro-draft-page :is(.pro-draft-segments button,.pro-compare-modes button,.pro-compare-presets button,.pro-equipment-category-picker button):disabled{opacity:.4;cursor:not-allowed}
+@media(prefers-reduced-motion:reduce){
+ .pro-draft-page :is(.pro-draft-segments button,.pro-compare-modes button,.pro-compare-presets button,.pro-equipment-category-picker button,.pro-premium-gallery-toolbar button){transition:none!important}
+}
