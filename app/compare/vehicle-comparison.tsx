@@ -41,6 +41,7 @@ export function VehicleComparison(){
    {selected.length<Math.min(3,vehicles.length)&&<button type="button" className="jmc-compare-add" onClick={()=>setSelected(old=>[...old,vehicles.find(v=>!old.includes(v.slug))!.slug])}><JmcIcon name="plus"/> მესამე მოდელის დამატება</button>}
   </div>
   {selected.length===3&&<button type="button" className="jmc-compare-remove" onClick={()=>setSelected(old=>old.slice(0,2))}>მესამე მოდელის ამოღება</button>}
+  <div className="jmc-compare-insight" aria-live="polite"><h3>რას გვაჩვენებს ეს შედარება?</h3><p>{onlyDifferent ? `არჩეულ კომპლექტაციებს შორის ${rows.length} განსხვავებული პარამეტრია გამოყოფილი. ცხრილში მხოლოდ ის ველები ჩანს, რომელთა მითითებული მნიშვნელობები ერთმანეთს არ ემთხვევა.` : `ამჟამად ერთმანეთს ადარებ ${choices.map(v=>v.name).join(' და ')}-ს. შეცვალე კომპლექტაციები, შემდეგ ჩართე „მხოლოდ განსხვავებები“, რომ მათი მონაცემების შედარება გაამარტივო.`}</p></div>
   <div className="jmc-compare-table-heading"><h2>ტექნიკური მონაცემები</h2><label className="jmc-compare-toggle"><input type="checkbox" checked={onlyDifferent} onChange={e=>setOnlyDifferent(e.target.checked)}/> მხოლოდ განსხვავებები</label></div>
   <div className="jmc-compare-scroll" role="region" aria-label="მოდელების მახასიათებლების შედარების ცხრილი" tabIndex={0}>
    <table className="jmc-compare-table"><thead><tr><th scope="col">მახასიათებელი</th>{choices.map(v=><th key={v.slug} scope="col">{v.name}</th>)}</tr></thead>
