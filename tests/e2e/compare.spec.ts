@@ -2,6 +2,8 @@ import {test,expect} from '@playwright/test';
 test('compare two models, switch trims, add third, and filter differences',async({page})=>{
  await page.goto('/compare');
  await expect(page.getByRole('heading',{name:/სამი მოდელი/})).toBeVisible();
+ await expect(page.getByText('JMC საქართველო · მოდელების შედარება')).toBeVisible();
+ await expect(page.getByText('01 / მოდელების გაცნობა')).toBeVisible();
  await expect(page.getByRole('heading',{name:'რით იწყება სწორი არჩევანი?'})).toBeVisible();
  await expect(page.locator('.jmc-compare-story')).toHaveCount(3);
  await expect(page.getByRole('heading',{name:'ახლა შეადარე დეტალები'})).toBeVisible();
