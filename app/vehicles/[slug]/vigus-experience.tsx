@@ -1,4 +1,5 @@
 'use client';
+import {JmcIcon} from '../../jmc-icons';
 import {useEffect,useRef,useState} from 'react';
 import Link from 'next/link';
 import type {Trim} from '../../../lib/vehicles';
@@ -38,11 +39,11 @@ export function VigusViewer(){
  return <div className="vigus-orbit" data-vigus-reveal="visual">
  <div className="vigus-orbit-layout"><div className="vigus-orbit-main">{orbitStage}</div>
  <div className="vigus-orbit-info"><p className="vigus-eyebrow">Vigus-ის რაკურსები</p><h3>ყველა დეტალი სხვა რაკურსით.</h3><p>დაათვალიერე ავტომობილი არსებული რეალური ფოტოებით. გადაათრიე მარცხნივ ან მარჯვნივ, ან გამოიყენე ისრები.</p>
- <div className="vigus-orbit-controls"><button type="button" aria-label="წინა რაკურსი" disabled={index===0} onClick={()=>step(-1)}>←</button><span aria-live="polite">{String(index+1).padStart(2,'0')} / {String(orbit.length).padStart(2,'0')} · {current.name}</span><button type="button" aria-label="შემდეგი რაკურსი" disabled={index===orbit.length-1} onClick={()=>step(1)}>→</button></div>
+ <div className="vigus-orbit-controls"><button type="button" aria-label="წინა რაკურსი" disabled={index===0} onClick={()=>step(-1)}><JmcIcon name="arrow-right" className="jmc-icon-prev"/></button><span aria-live="polite">{String(index+1).padStart(2,'0')} / {String(orbit.length).padStart(2,'0')} · {current.name}</span><button type="button" aria-label="შემდეგი რაკურსი" disabled={index===orbit.length-1} onClick={()=>step(1)}><JmcIcon name="arrow-right"/></button></div>
  <div className="vigus-orbit-steps" role="group" aria-label="რაკურსების არჩევა">{orbit.map((v,i)=><button key={v.file} type="button" className={index===i?'selected':''} aria-pressed={index===i} onClick={()=>setIndex(i)}>{v.name}</button>)}</div>
  <button ref={fullscreenTrigger} className="vigus-orbit-expand" type="button" onClick={()=>setExpanded(true)}>სრული ეკრანი ↗</button>
  <p className="vigus-orbit-disclosure">ეს არის 4 რეალური ფოტოს ინტერაქციული დათვალიერება და არა უწყვეტი 360° გადაღება.</p></div></div>
- {expanded&&<div className="vigus-orbit-fullscreen" role="dialog" aria-modal="true" aria-label="Vigus-ის რაკურსები სრულ ეკრანზე"><button ref={fullscreenClose} type="button" className="vigus-orbit-exit" onClick={()=>setExpanded(false)} aria-label="დახურვა">×</button>{orbitStage}<div className="vigus-orbit-full-controls"><button type="button" disabled={index===0} onClick={()=>step(-1)} aria-label="წინა ფოტო">←</button><span>{current.name}</span><button type="button" disabled={index===orbit.length-1} onClick={()=>step(1)} aria-label="შემდეგი ფოტო">→</button></div></div>}
+ {expanded&&<div className="vigus-orbit-fullscreen" role="dialog" aria-modal="true" aria-label="Vigus-ის რაკურსები სრულ ეკრანზე"><button ref={fullscreenClose} type="button" className="vigus-orbit-exit" onClick={()=>setExpanded(false)} aria-label="დახურვა"><JmcIcon name="x"/></button>{orbitStage}<div className="vigus-orbit-full-controls"><button type="button" disabled={index===0} onClick={()=>step(-1)} aria-label="წინა ფოტო"><JmcIcon name="arrow-right" className="jmc-icon-prev"/></button><span>{current.name}</span><button type="button" disabled={index===orbit.length-1} onClick={()=>step(1)} aria-label="შემდეგი ფოტო"><JmcIcon name="arrow-right"/></button></div></div>}
  </div>;
 }
 const highlights=[
