@@ -1,4 +1,4 @@
-/** User-approved studio assets. Keep originals for all editorial / detail content. */
+/** User-approved and repository-verified studio assets. Keep originals for all editorial / detail content. */
 export const studioImages:Record<string,string>={
  'vigus':'/images/studio/vigus-studio.webp',
  'grand-avenue':'/images/studio/grand-avenue-studio.webp',
