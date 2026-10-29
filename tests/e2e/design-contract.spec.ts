@@ -11,7 +11,7 @@ test.describe('JMC approved UI v2 design contracts',()=>{
    await page.locator('.jmc-menu-trigger').click();
    const dialog=page.getByRole('dialog',{name:'JMC Georgia — მენიუ'});
    await expect(dialog).toBeVisible();
-   await expect(dialog.locator('nav a')).toHaveCount(7);
+   await expect(dialog.locator('nav a')).toHaveCount(8);
    expect(await dialog.evaluate(e=>e.scrollWidth)).toBeLessThanOrEqual(width+2);
    const icons=dialog.locator('.jmc-icon');
    expect(await icons.count()).toBeGreaterThan(0);

@@ -8,6 +8,7 @@ const routes=[
  {path:'/',label:'home'},
  {path:'/vehicles',label:'vehicles catalogue'},
  ...vehicles.map(({slug})=>({path:`/vehicles/${slug}`,label:slug})),
+ {path:'/compare',label:'compare'},
  {path:'/about',label:'about'},
  {path:'/contact',label:'contact'},
  {path:'/test-drive',label:'test-drive'},
