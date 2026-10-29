@@ -571,3 +571,26 @@ main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-d
   --jmc-vigus-focal-compare-selector:50% 52%;
  }
 }
+
+
+/* Unified JMC Studio Collection: original approved vehicle photography only.
+   Never reconstruct model marks, lighting units, wheels, or sheet metal with AI. */
+.jmc-studio-surface,.jmc-studio-selector img{
+ background-color:#f0f1f3;
+}
+.jmc-studio-surface{isolation:isolate;background-image:linear-gradient(140deg,#f9f9fa 0%,#eceef1 62%,#e4e6e9 100%)}
+.jmc-studio-surface img,.jmc-studio-selector>img{
+ object-fit:contain!important;
+ object-position:center center!important;
+ width:100%;
+ height:100%;
+ transition:transform .35s cubic-bezier(.2,.75,.2,1);
+}
+.jmc-compare-story-image.jmc-studio-surface:hover img{transform:scale(1.012)}
+.jmc-studio-selector>img{border-radius:12px;padding:4px;background-image:linear-gradient(140deg,#f9f9fa,#e9eaed)}
+@media(max-width:700px){
+ .jmc-studio-surface img,.jmc-studio-selector>img{object-position:center center!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .jmc-studio-surface img,.jmc-studio-selector>img{transition:none!important;transform:none!important}
+}
