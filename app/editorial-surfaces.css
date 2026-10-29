@@ -143,11 +143,6 @@
  width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;max-width:var(--jmc-content-max)!important;
  margin-inline:auto!important;
 }
-@media(min-width:701px) and (max-width:900px){
- .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container{
- width:calc(100% - 48px)!important;max-width:calc(100% - 48px)!important;
- }
-}
 @media(max-width:700px){
  .vigus-experience .model-local-nav .vigus-local-inner.container{
  width:calc(100% - 32px)!important;max-width:calc(100% - 32px)!important;
