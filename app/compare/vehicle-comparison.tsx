@@ -1,5 +1,5 @@
-import {studioImageFor} from '../../lib/studio-images';
 'use client';
+import {studioImageFor} from '../../lib/studio-images';
 import {useState} from 'react';
 import Link from 'next/link';
 import {vehicles} from '../../lib/vehicles';
