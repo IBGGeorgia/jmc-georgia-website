@@ -35,7 +35,7 @@ export default function ComparePage(){
     const vehicle=vehicles.find(v=>v.slug===item.slug);
     if(!vehicle)return null;
     return <article className="jmc-compare-story" key={item.slug}>
-     <Link href={`/vehicles/${item.slug}`} className="jmc-compare-story-image" aria-label={`${vehicle.name} — მოდელის ნახვა`}>
+     <Link href={`/vehicles/${item.slug}`} className="jmc-compare-story-image jmc-studio-surface" aria-label={`${vehicle.name} — მოდელის ნახვა`}>
       <img className={item.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-compare-story':undefined} src={vehicle.heroImage} loading="lazy" alt={`JMC ${vehicle.name}`}/>
      </Link>
      <div className="jmc-compare-story-body"><span className="jmc-compare-story-index">{item.number} / {vehicle.name}</span><span className="jmc-compare-story-eyebrow">{item.eyebrow}</span><h3>{item.heading}</h3><p>{item.copy}</p><Link href={`/vehicles/${item.slug}`} className="jmc-compare-story-link">აღმოაჩინე მოდელი <JmcIcon name="arrow-up-right"/></Link></div>
