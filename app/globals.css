@@ -858,16 +858,7 @@ main:not(.vigus-experience) .steps-grid{gap:clamp(16px,2.2vw,32px)}
 @media(prefers-reduced-motion:reduce){.vigus-compare-ui .filter-chip{transition:none}}
 
 
-/* JMC brand typography: Switzer (Latin), Google Sans (Georgian) */
-:root{
- --font-ka:"Google Sans","Noto Sans Georgian",sans-serif;
- --font-latin:"Switzer","Google Sans",sans-serif;
-}
-html,body{font-family:var(--font-latin);font-synthesis:none}
-body{font-family:"Switzer","Google Sans",sans-serif;line-height:1.65}
-:lang(ka){font-family:"Switzer","Google Sans",sans-serif}
-:lang(en),:lang(en-US),:lang(en-GB),:lang(fr),:lang(de),:lang(es){font-family:var(--font-latin)}
-button,input,select,textarea{font-family:inherit}
+/* Legacy font fallbacks removed: Typography v6 below is the canonical source. */
 .brand-word,.footer-brand,.vigus-local-title,.vigus-hero-bottom h1,
 .vigus-quick-specs strong,.vigus-capabilities-grid strong,
 .vigus-selector-details h3,.vigus-compare-card-head h4,
