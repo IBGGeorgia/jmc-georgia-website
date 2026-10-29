@@ -1,4 +1,5 @@
 'use client';
+import {JmcIcon} from '../../jmc-icons';
 import {useEffect,useRef,useState} from 'react';
 type Photo={src:string;label:string};
 export function GrandGallery({photos}:{photos:Photo[]}){
@@ -25,15 +26,15 @@ export function GrandGallery({photos}:{photos:Photo[]}){
   <div className="grand-gallery-grid" data-vigus-reveal="visual">{photos.map((item,i)=><figure key={item.src}>
    <button ref={el=>{triggerRefs.current[i]=el}} type="button" className="grand-gallery-open" onClick={()=>{originatingTrigger.current=i;setActive(i)}} aria-label={`${item.label} — სრულ ეკრანზე ნახვა`}>
     <img src={item.src} alt={`JMC Grand Avenue — ${item.label}`} loading="lazy"/>
-    <span className="grand-gallery-zoom" aria-hidden="true">↗</span>
+    <span className="grand-gallery-zoom" aria-hidden="true"><JmcIcon name="arrow-up-right"/></span>
    </button><figcaption>{String(i+1).padStart(2,'0')} / {item.label}</figcaption>
   </figure>)}</div>
   {active!==null&&<div className="grand-lightbox" role="dialog" aria-modal="true" aria-label="Grand Avenue — ფოტოგალერეა" onTouchStart={e=>{touchStart.current=e.touches[0]?.clientX??null}} onTouchEnd={e=>{if(touchStart.current===null)return;const distance=e.changedTouches[0].clientX-touchStart.current;if(Math.abs(distance)>65)setActive(i=>i===null?null:(i+(distance<0?1:photos.length-1))%photos.length);touchStart.current=null}}>
-   <button ref={closeRef} type="button" className="grand-lightbox-close" onClick={()=>setActive(null)} aria-label="დახურვა">×</button>
+   <button ref={closeRef} type="button" className="grand-lightbox-close" onClick={()=>setActive(null)} aria-label="დახურვა"><JmcIcon name="x"/></button>
    <img draggable={false} src={photos[active].src} alt={`JMC Grand Avenue — ${photos[active].label}`}/>
-   <div className="grand-lightbox-controls"><button type="button" onClick={()=>setActive((active+photos.length-1)%photos.length)} aria-label="წინა ფოტო">←</button>
+   <div className="grand-lightbox-controls"><button type="button" onClick={()=>setActive((active+photos.length-1)%photos.length)} aria-label="წინა ფოტო"><JmcIcon name="arrow-right" className="jmc-icon-prev"/></button>
     <span aria-live="polite">{String(active+1).padStart(2,'0')} / {String(photos.length).padStart(2,'0')} · {photos[active].label}</span>
-    <button type="button" onClick={()=>setActive((active+1)%photos.length)} aria-label="შემდეგი ფოტო">→</button></div>
+    <button type="button" onClick={()=>setActive((active+1)%photos.length)} aria-label="შემდეგი ფოტო"><JmcIcon name="arrow-right"/></button></div>
   </div>}
  </>;
 }
