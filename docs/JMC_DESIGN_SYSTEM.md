@@ -171,3 +171,13 @@ For every future UI request:
 ## 13. Next model intake and publication safety
 
 Read `docs/NEXT_MODEL_INTAKE.md` before adding any non-Vigus model. Only records explicitly marked `publicationStatus:'approved'` may appear in public routing and catalogue. A draft is strictly private and must not have a published model route. Browser QA dynamically tests every approved model at all supported breakpoints; do not borrow another market's trim specifications.
+
+## Approved UI Design System v2.0 (2026-10-29)
+
+- **Icons:** shared `JmcIcon` component in `app/jmc-icons.tsx`, Lucide-compatible 24×24 viewBox, outline stroke **1.75**, standard rendered **20px** (24px for emphasized use). Use semantic icons, avoid raw Unicode arrows in newly authored controls.
+- **Buttons:** fully pill-shaped (`border-radius:999px`), graphite primary, soft-gray secondary, white on dark imagery. Default min height **48px**, compact local controls at least **44px**, hero CTAs **52px** where space allows.
+- **Spacing:** shared 4/8/12/16/24/32px tokens. **Cards** use shared 20px radius where appropriate; preserve intentional square cinematic Hero edges.
+- **Interactions:** consistent neutral focus ring, no transform-on-hover, clear keyboard focus and disabled-state treatment, reduced motion respects accessibility.
+- **Typography and Layout:** explicitly preserve previously approved fonts/type hierarchy and Width Bible (1680px / 760px; gutters 24px / 16px; Hero 748px desktop and 650px mobile). Do not redefine.
+- **Scope:** Header, Footer, Homepage, Catalogue, model pages, About, Contact, Test Drive and Privacy. Product-specific interactive controls retain intentional behavior, gallery scrolling and compact mobile navigation.
+- **Implementation:** shared styling in `app/design-system.css`; existing page-specific rules are superseded only where inconsistent with this standard. Remove superseded CSS opportunistically after visual regression comparison, not by broad deletion.
