@@ -59,8 +59,7 @@ test.describe('Global Width Bible — approved layout contracts', () => {
         expect(dimensions.scroll, `${path} at ${width}px overflows`).toBeLessThanOrEqual(dimensions.viewport + 2);
         expect(errors, `${path} at ${width}px browser exceptions`).toEqual([]);
         if (path !== '/') {
-          const cta = page.locator('.model-local-nav a[href="/test-drive"], .pro-page-nav a[href="/test-drive"]');
-          await expect(cta.first()).toBeAttached();
+          await expect(page.locator('main a[href="/test-drive"]').first()).toBeAttached();
         }
       }
     });
