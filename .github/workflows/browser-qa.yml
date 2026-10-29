@@ -44,6 +44,8 @@ jobs:
         run: npm install
       - name: Install browser and runtime dependencies
         run: npx playwright install --with-deps chromium
+      - name: CSS design contract audit
+        run: npm run qa:css
       - name: Build production app
         run: npm run build
       - name: Browser QA

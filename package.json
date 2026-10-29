@@ -11,7 +11,8 @@
     "qa:browser": "playwright test",
     "qa:browser:ui": "playwright test --ui",
     "prebuild": "node scripts/sync-pro-media.mjs",
-    "sync:pro-media": "node scripts/sync-pro-media.mjs"
+    "sync:pro-media": "node scripts/sync-pro-media.mjs",
+    "qa:css": "node scripts/audit-css.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",
