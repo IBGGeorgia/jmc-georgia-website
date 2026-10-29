@@ -1,7 +1,10 @@
 import {test,expect} from '@playwright/test';
 test('compare two models, switch trims, add third, and filter differences',async({page})=>{
  await page.goto('/compare');
- await expect(page.getByRole('heading',{name:'შეადარე მოდელები'})).toBeVisible();
+ await expect(page.getByRole('heading',{name:/სამი მოდელი/})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'რით იწყება სწორი არჩევანი?'})).toBeVisible();
+ await expect(page.locator('.jmc-compare-story')).toHaveCount(3);
+ await expect(page.getByRole('heading',{name:'ახლა შეადარე დეტალები'})).toBeVisible();
  await expect(page.locator('.jmc-compare-slot')).toHaveCount(2);
  await expect(page.locator('.jmc-compare-table tbody tr').first()).toBeVisible();
  await page.locator('#compare-model-1').selectOption('grand-avenue-pro');
@@ -10,6 +13,7 @@ test('compare two models, switch trims, add third, and filter differences',async
  await page.getByRole('button',{name:'მესამე მოდელის დამატება'}).click();
  await expect(page.locator('.jmc-compare-slot')).toHaveCount(3);
  await page.getByLabel('მხოლოდ განსხვავებები').check();
+ await expect(page.locator('.jmc-compare-insight')).toContainText('განსხვავებული პარამეტრია');
  await expect(page.locator('.jmc-compare-table tbody tr').first()).toBeVisible();
  await page.getByRole('button',{name:'მესამე მოდელის ამოღება'}).click();
  await expect(page.locator('.jmc-compare-slot')).toHaveCount(2);
