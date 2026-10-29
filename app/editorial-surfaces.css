@@ -247,15 +247,17 @@
  .vigus-experience .jmc-unified-hero .vigus-hero-actions{width:auto!important;max-width:100%;gap:0!important}
 }
 
-/* Model page alignment: match the actual lower editorial grid (1680px),
-   not the earlier 1200px nav/hero constraint. */
+/* Legacy alignment bridge: consume canonical Width Bible tokens.
+   The final design-system layer remains the authoritative layout source. */
 .vigus-experience .jmc-unified-hero .jmc-unified-hero-content.container,
 .vigus-experience .model-local-nav .vigus-local-inner.container,
 .vigus-experience .jmc-unified-hero+.vigus-quick-specs.container{
- width:min(1680px,calc(100% - 48px))!important;max-width:1680px!important;margin-inline:auto!important;
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;
+ max-width:var(--jmc-content-max)!important;margin-inline:auto!important;
 }
 .jmc-header .jmc-header-inner.container{
- width:min(1680px,calc(100% - 48px))!important;max-width:1680px!important;
+ width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)))!important;
+ max-width:var(--jmc-content-max)!important;
  padding-inline:0!important;margin-inline:auto!important;
 }
 .jmc-header .jmc-header-inner .jmc-menu-trigger{
