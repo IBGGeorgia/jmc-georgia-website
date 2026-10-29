@@ -9,6 +9,7 @@ export default function VehiclesCatalogue(){
    <p className="eyebrow">JMC Georgia</p><h1>ავტომობილები</h1>
    <p className="jmc-page-lead">აღმოაჩინე JMC-ის მოდელები და გაეცანი მათ მახასიათებლებს.</p>
   </header>
+  <div style={{marginBottom:28}}><Link href="/compare" className="button">შეადარე მოდელები <JmcIcon name="arrow-up-right"/></Link></div>
   <section className="jmc-home-model-grid" aria-label="ავტომობილების კატალოგი">
    {vehicles.map((model,i)=><article key={model.slug} className="jmc-home-model-card">
     <Link href={`/vehicles/${model.slug}`} className="jmc-home-model-image">
