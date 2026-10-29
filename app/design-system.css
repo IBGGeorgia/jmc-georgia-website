@@ -594,3 +594,108 @@ main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-d
 @media(prefers-reduced-motion:reduce){
  .jmc-studio-surface img,.jmc-studio-selector>img{transition:none!important;transform:none!important}
 }
+
+
+/* JMC PHOTO GEOMETRY BIBLE v1
+   Approved 1672×941 studio masters must render uncropped across model
+   overview surfaces. Large cinematic and editorial model-page images remain
+   deliberately art-directed and are not forced into these card ratios. */
+.jmc-lineup-secondary-visual.jmc-studio-surface,
+.jmc-home-model-image.jmc-studio-surface,
+.jmc-compare-story-image.jmc-studio-surface{
+ aspect-ratio:16/9;
+ min-width:0;
+ min-height:0;
+}
+.jmc-lineup-secondary-visual.jmc-studio-surface img,
+.jmc-home-model-image.jmc-studio-surface img,
+.jmc-compare-story-image.jmc-studio-surface img{
+ display:block;
+ width:100%;
+ height:100%;
+ object-fit:cover!important;
+ object-position:center!important;
+}
+.jmc-compare-slot.jmc-studio-selector>img{
+ display:block;
+ width:100%;
+ height:auto!important;
+ aspect-ratio:16/9;
+ max-height:none;
+ padding:0!important;
+ border-radius:12px;
+ object-fit:cover!important;
+ object-position:center!important;
+ background:#eef0f2;
+}
+.jmc-compare-slot.jmc-studio-selector{
+ min-width:0;
+ overflow:hidden;
+}
+.jmc-lineup-secondary-visual.jmc-studio-surface .jmc-icon{
+ position:absolute;
+ right:18px;
+ bottom:18px;
+ z-index:1;
+}
+/* Control image magnification in horizontal galleries without changing
+   original source crops, captions or full-screen inspection. */
+.vigus-experience .vigus-gallery-strip figure{
+ flex-basis:clamp(280px,31vw,520px);
+}
+.vigus-experience .vigus-gallery-strip figure img{
+ display:block;
+ width:100%;
+ height:auto;
+ aspect-ratio:16/10;
+ object-fit:cover;
+}
+@media(max-width:700px){
+ .vigus-experience .vigus-gallery-strip figure{
+  flex-basis:min(82vw,500px);
+ }
+ .jmc-compare-slot.jmc-studio-selector>img{border-radius:9px}
+ .jmc-lineup-secondary-visual.jmc-studio-surface .jmc-icon{
+  right:12px;
+  bottom:12px;
+ }
+}
+
+/* Footer CTA — same approved fully rounded Button system, inverted for
+   the dark footer. Replaces the legacy underline-only text link. */
+.jmc-footer .jmc-footer-cta.button{
+ display:inline-flex;
+ justify-content:center;
+ align-items:center;
+ gap:14px;
+ width:fit-content;
+ max-width:100%;
+ min-height:48px;
+ padding:12px 22px;
+ font-family:var(--font-ka);
+ font-size:clamp(14px,.93vw,16px);
+ font-weight:600;
+ line-height:1.4;
+ text-align:center;
+ color:var(--jmc-ui-ink);
+ background:#fff;
+ border:1px solid transparent;
+ border-radius:var(--jmc-ui-radius-control);
+ box-shadow:none;
+ text-decoration:none;
+}
+.jmc-footer .jmc-footer-cta.button:hover{
+ color:var(--jmc-ui-ink);
+ background:#e9e9ed;
+ border-color:transparent;
+}
+.jmc-footer .jmc-footer-cta.button:focus-visible{
+ outline:2px solid #fff;
+ outline-offset:4px;
+}
+@media(max-width:380px){
+ .jmc-footer .jmc-footer-cta.button{padding:12px 16px;gap:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ .jmc-footer .jmc-footer-cta.button{transition:none!important}
+}
