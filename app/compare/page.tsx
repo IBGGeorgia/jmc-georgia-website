@@ -24,13 +24,13 @@ const editorial=[
 export default function ComparePage(){
  return <><Header/><CompareMotion/><main className="container jmc-compare-page">
   <header className="page-head jmc-page-intro jmc-compare-intro">
-   <p className="eyebrow">JMC Georgia / Compare</p>
+   <p className="eyebrow">JMC საქართველო · მოდელების შედარება</p>
    <h1>სამი მოდელი.<br/>შენი არჩევანი.</h1>
-   <p className="jmc-page-lead">ერთი შეხედვით ყველა პიკაპი მსგავს ამოცანას ემსახურება. განსხვავება დეტალებშია — ძრავში, ტრანსმისიაში, კომპლექტაციასა და იმაში, რას ელოდები ყოველდღიური გადაადგილებისგან.</p>
+   <p className="jmc-page-lead">აირჩიე შენთვის შესაფერისი JMC. გაიცანი მოდელების განსხვავებები, შეადარე კომპლექტაციები და მიიღე გადაწყვეტილება რეალურ მონაცემებზე დაყრდნობით.</p>
    <a className="jmc-compare-jump" href="#compare-workspace">დაიწყე შედარება <JmcIcon name="arrow-down"/></a>
   </header>
   <section className="jmc-compare-editorial" aria-labelledby="compare-story-title">
-   <div className="jmc-compare-story-heading"><p className="eyebrow">01 / MODEL STORIES</p><h2 id="compare-story-title">რით იწყება სწორი არჩევანი?</h2><p>სანამ ტექნიკურ ცხრილს შეადარებ, გაიცანი თითოეული მოდელის შესაძლებლობების ძირითადი მიმართულება. ქვემოთ მოცემული აღწერები ეყრდნობა გამოქვეყნებულ მოდელებსა და კომპლექტაციებს — არა ვარაუდს მათი უპირატესობის შესახებ.</p></div>
+   <div className="jmc-compare-story-heading"><p className="eyebrow">01 / მოდელების გაცნობა</p><h2 id="compare-story-title">რით იწყება სწორი არჩევანი?</h2><p>სანამ ტექნიკურ ცხრილს შეადარებ, გაიცანი თითოეული მოდელის შესაძლებლობების ძირითადი მიმართულება. ქვემოთ მოცემული აღწერები ეყრდნობა გამოქვეყნებულ მოდელებსა და კომპლექტაციებს — არა ვარაუდს მათი უპირატესობის შესახებ.</p></div>
    <div className="jmc-compare-stories">{editorial.map(item=>{
     const vehicle=vehicles.find(v=>v.slug===item.slug);
     if(!vehicle)return null;
@@ -42,13 +42,13 @@ export default function ComparePage(){
     </article>;
    })}</div>
   </section>
-  <section className="jmc-compare-guidance" aria-labelledby="compare-guide-title"><div><p className="eyebrow">02 / FIND YOUR FIT</p><h2 id="compare-guide-title">რომელი დეტალია შენთვის მნიშვნელოვანი?</h2></div><div className="jmc-compare-guide-items">
+  <section className="jmc-compare-guidance" aria-labelledby="compare-guide-title"><div><p className="eyebrow">02 / არჩევანის გზამკვლევი</p><h2 id="compare-guide-title">რომელი დეტალია შენთვის მნიშვნელოვანი?</h2></div><div className="jmc-compare-guide-items">
    <p><strong>ტრანსმისია</strong><span>ავტომატური თუ მექანიკური — შეადარე კონკრეტული ვერსიები და აირჩიე მართვის შენთვის სასურველი ტიპი.</span></p>
    <p><strong>ძრავი</strong><span>გაეცანი მოცულობას, საწვავის ტიპსა და სიმძლავრეს იქ, სადაც მონაცემები დადასტურებულია.</span></p>
    <p><strong>აღჭურვილობა</strong><span>მხოლოდ მოდელის სახელით ნუ იხელმძღვანელებ: სხვადასხვა კომპლექტაციას სხვადასხვა მონაცემები შეიძლება ჰქონდეს.</span></p>
   </div></section>
-  <div id="compare-workspace" className="jmc-compare-workspace-anchor"><p className="eyebrow">03 / SIDE BY SIDE</p><h2>ახლა შეადარე დეტალები</h2><p>აირჩიე ორი ან სამი მოდელი. შეცვალე კომპლექტაცია და ჩართე „მხოლოდ განსხვავებები“, რათა ყურადღება გადაწყვეტილებისთვის მნიშვნელოვან ინფორმაციაზე გადაიტანო.</p></div>
+  <div id="compare-workspace" className="jmc-compare-workspace-anchor"><p className="eyebrow">03 / მოდელების შედარება</p><h2>ახლა შეადარე დეტალები</h2><p>აირჩიე ორი ან სამი მოდელი. შეცვალე კომპლექტაცია და ჩართე „მხოლოდ განსხვავებები“, რათა ყურადღება გადაწყვეტილებისთვის მნიშვნელოვან ინფორმაციაზე გადაიტანო.</p></div>
   <VehicleComparison/>
-  <section className="jmc-compare-afterword"><div><p className="eyebrow">NEXT STEP</p><h2>ციფრები მხოლოდ დასაწყისია.</h2><p>შედარებამ შეიძლება პასუხი გაგცეს ტექნიკურ კითხვებზე. საბოლოო არჩევანისთვის კი თითოეული მოდელის ფოტოებს, დეტალურ აღწერასა და კომპლექტაციების თავისებურებებსაც გაეცანი.</p></div><Link href="/vehicles" className="button">აღმოაჩინე ყველა მოდელი <JmcIcon name="arrow-up-right"/></Link></section>
+  <section className="jmc-compare-afterword"><div><p className="eyebrow">შემდეგი ნაბიჯი</p><h2>ციფრები მხოლოდ დასაწყისია.</h2><p>შედარებამ შეიძლება პასუხი გაგცეს ტექნიკურ კითხვებზე. საბოლოო არჩევანისთვის კი თითოეული მოდელის ფოტოებს, დეტალურ აღწერასა და კომპლექტაციების თავისებურებებსაც გაეცანი.</p></div><Link href="/vehicles" className="button">აღმოაჩინე ყველა მოდელი <JmcIcon name="arrow-up-right"/></Link></section>
  </main><Footer/></>;
 }
