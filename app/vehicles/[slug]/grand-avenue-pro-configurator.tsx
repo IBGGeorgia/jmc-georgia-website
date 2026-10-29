@@ -1,4 +1,5 @@
 'use client';
+import {JmcIcon} from '../../jmc-icons';
 import {useMemo,useState} from 'react';
 import {grandAvenueProOriginalMedia} from '../../../lib/grand-avenue-pro-media';
 import {getProVariant,proSourceVariants,type ProTrim,type ProFuel} from '../../../lib/grand-avenue-pro';
@@ -35,7 +36,7 @@ export function GrandAvenueProConfigurator(){
    <dl>{['engine','power','transmission','clearance'].map(key=><div key={key}><dt>{selected.specLabels[key]?.[0]}</dt><dd>{selected.specs[key]}</dd></div>)}</dl>
   </div>
   </div></div>
-  <details className="pro-explorer-more-specs"><summary>ყველა ტექნიკური მახასიათებელი <span aria-hidden="true">↓</span></summary><dl className="pro-draft-facts">{fields.filter(k=>selected.specs[k]&&!['engine','power','transmission','clearance'].includes(k)).map(key=><div key={key}><dt>{selected.specLabels[key]?.[0]}</dt><dd>{selected.specs[key]}</dd></div>)}</dl></details>
+  <details className="pro-explorer-more-specs"><summary>ყველა ტექნიკური მახასიათებელი <JmcIcon name="chevron-down"/></summary><dl className="pro-draft-facts">{fields.filter(k=>selected.specs[k]&&!['engine','power','transmission','clearance'].includes(k)).map(key=><div key={key}><dt>{selected.specLabels[key]?.[0]}</dt><dd>{selected.specs[key]}</dd></div>)}</dl></details>
   <section aria-labelledby="pro-draft-equipment"><h3 id="pro-draft-equipment">აღჭურვილობა · PRO {trim} · {fuelName(fuel)}</h3>
    {equipmentCategories.map(([key,title])=>{const items=selected.groups[key];const list=Array.isArray(items)?items.filter(x=>typeof x==='string'):[];return <details key={key}><summary>{title} · {list.length}</summary><ul>{list.map((v:string,i:number)=><li key={i}>{v}</li>)}</ul></details>})}
   </section>
