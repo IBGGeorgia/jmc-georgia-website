@@ -1,3 +1,4 @@
+import {JmcIcon} from '../../jmc-icons';
 import type {ReactNode} from 'react';
 import Link from 'next/link';
 

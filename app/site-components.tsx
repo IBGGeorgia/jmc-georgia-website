@@ -1,4 +1,5 @@
 'use client';
+import {JmcIcon} from './jmc-icons';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {useEffect,useRef,useState} from 'react';
@@ -79,7 +80,7 @@ export function Header(){
     <div className="jmc-drawer-top">
      <img src="/brand/jmc-logo-red.svg" width={110} height={34} alt="JMC"/>
      <button type="button" className="jmc-drawer-close" onClick={()=>setOpen(false)}
-      aria-label="დახურვა">×</button>
+      aria-label="დახურვა"><JmcIcon name="x"/></button>
     </div>
     <p className="jmc-drawer-eyebrow">JMC Georgia / Menu</p>
     <nav className="jmc-drawer-links" aria-label="ძირითადი ნავიგაცია">
@@ -88,12 +89,12 @@ export function Header(){
        onClick={()=>setOpen(false)}>
        <span>{String(i+1).padStart(2,'0')}</span>
        {item.label}
-       <span aria-hidden="true">↗</span>
+       <JmcIcon name="arrow-up-right"/>
       </Link>
      )}
     </nav>
     <Link href="/test-drive" className="button jmc-drawer-drive" onClick={()=>setOpen(false)}>
-     ტესტ-დრაივის ინფორმაცია <span aria-hidden="true">↗</span>
+     ტესტ-დრაივის ინფორმაცია <JmcIcon name="arrow-up-right"/>
     </Link>
     <div className="jmc-drawer-address">
      <span>მისამართი</span>
@@ -139,7 +140,7 @@ export function Footer(){
      </div>
      <p className="jmc-footer-description">JMC-ის ოფიციალური წარმომადგენლობა საქართველოში.</p>
      <Link href="/vehicles" className="jmc-footer-cta">
-      აღმოაჩინე JMC-ის მოდელები <span aria-hidden="true">↗</span>
+      აღმოაჩინე JMC-ის მოდელები <JmcIcon name="arrow-up-right"/>
      </Link>
     </div>
     <nav className="jmc-footer-column jmc-footer-navigation" aria-label="ქვედა ნავიგაცია">

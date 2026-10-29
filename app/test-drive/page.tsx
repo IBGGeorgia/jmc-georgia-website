@@ -1,3 +1,4 @@
+import {JmcIcon} from '../jmc-icons';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Header, Footer } from '../site-components';
@@ -23,8 +24,8 @@ export default function TestDrive(){
      <h2 id="test-drive-status">ფორმა მალე დაემატება.</h2>
      <p>ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება. მანამდე შეგიძლია გაეცნო JMC-ის მოდელებს და ნახო ჩვენი მისამართი.</p>
      <div className="jmc-test-drive-actions">
-      <Link className="button" href="/vehicles">ნახე ყველა მოდელი <span aria-hidden="true">↗</span></Link>
-      <Link className="jmc-test-drive-secondary" href="/contact">მისამართის ნახვა <span aria-hidden="true">↗</span></Link>
+      <Link className="button" href="/vehicles">ნახე ყველა მოდელი <JmcIcon name="arrow-up-right"/></Link>
+      <Link className="jmc-test-drive-secondary" href="/contact">მისამართის ნახვა <JmcIcon name="arrow-up-right"/></Link>
      </div>
     </div>
     <div className="jmc-test-drive-panel-aside">
@@ -32,7 +33,7 @@ export default function TestDrive(){
      <address>თბილისი, ბელიაშვილის 115</address>
     </div>
    </section>
-   <section className="jmc-test-drive-models" aria-label="აირჩიე მოდელი"><h2>გაიცანი მოდელები</h2><div className="jmc-home-model-grid">{vehicles.map(model=><article className="jmc-home-model-card" key={model.slug}><Link className="jmc-home-model-image" href={`/vehicles/${model.slug}`}><img src={model.heroImage} loading="lazy" alt={`JMC ${model.name}`}/></Link><div className="jmc-home-model-content"><h3>{model.name}</h3><Link href={`/vehicles/${model.slug}`} className="button">მახასიათებლების ნახვა ↗</Link></div></article>)}</div></section>
+   <section className="jmc-test-drive-models" aria-label="აირჩიე მოდელი"><h2>გაიცანი მოდელები</h2><div className="jmc-home-model-grid">{vehicles.map(model=><article className="jmc-home-model-card" key={model.slug}><Link className="jmc-home-model-image" href={`/vehicles/${model.slug}`}><img src={model.heroImage} loading="lazy" alt={`JMC ${model.name}`}/></Link><div className="jmc-home-model-content"><h3>{model.name}</h3><Link href={`/vehicles/${model.slug}`} className="button">მახასიათებლების ნახვა <JmcIcon name="arrow-up-right"/></Link></div></article>)}</div></section>
   </main>
   <Footer/>
  </>;

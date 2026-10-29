@@ -1,3 +1,4 @@
+import {JmcIcon} from '../jmc-icons';
 import type {Metadata} from 'next';
 import Link from 'next/link';
 import {Header,Footer} from '../site-components';
@@ -22,8 +23,8 @@ export default function About(){
      <h2 id="about-model-title">აღმოაჩინე JMC Vigus</h2>
      <p>გაეცანი პიკაპის დიზაინს, ტექნიკურ მახასიათებლებსა და კომპლექტაციების შედარებას ერთ სივრცეში.</p>
      <div className="jmc-info-actions">
-      <Link href="/vehicles/vigus" className="button">Vigus-ის დათვალიერება <span aria-hidden="true">↗</span></Link>
-      <Link href="/contact" className="jmc-secondary-link">მისამართის ნახვა <span aria-hidden="true">↗</span></Link>
+      <Link href="/vehicles/vigus" className="button">Vigus-ის დათვალიერება <JmcIcon name="arrow-up-right"/></Link>
+      <Link href="/contact" className="jmc-secondary-link">მისამართის ნახვა <JmcIcon name="arrow-up-right"/></Link>
      </div>
     </div>
     <div className="jmc-info-panel-aside" aria-label="JMC-ის მოდელი საქართველოში">
