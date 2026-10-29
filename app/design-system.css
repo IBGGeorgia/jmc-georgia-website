@@ -454,3 +454,41 @@ main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-d
 
 /* Preserve compact PRO chapter navigation below the tablet breakpoint. */
 @media(max-width:850px){.pro-draft-page .pro-page-nav-cta{display:none!important}}
+
+/* Editorial Navigation v2 — spacious neutral automotive drawer.
+   Preserve existing modal, escape, focus trap, inert and scroll lock logic. */
+.jmc-drawer{flex-basis:560px;width:min(560px,100%);padding:clamp(24px,3vw,44px);box-shadow:18px 0 70px rgba(0,0,0,.12);background:#fff}
+.jmc-drawer-backdrop{background:rgba(12,13,15,.55);backdrop-filter:blur(5px)}
+.jmc-drawer-top{padding-bottom:20px;border-bottom:1px solid var(--jmc-ui-border)}
+.jmc-drawer-heading{padding:clamp(26px,4vh,45px) 0 22px}
+.jmc-drawer-heading>span,.jmc-drawer-group-label{
+ font:650 11px/1.4 var(--font-latin);letter-spacing:.13em;color:var(--jmc-ui-secondary);
+}
+.jmc-drawer-heading h2{font-family:var(--font-ka);font-size:clamp(31px,3.2vw,46px);font-weight:650;letter-spacing:-.055em;line-height:1.18;margin:12px 0 0}
+.jmc-drawer-links{gap:0}
+.jmc-drawer-group-label{padding:0;margin:14px 0 8px;text-transform:none}
+.jmc-drawer-model-label{margin-top:24px}
+.jmc-drawer-links a,.jmc-drawer-links a.jmc-drawer-model-link{
+ min-height:53px;grid-template-columns:26px minmax(0,1fr) 22px;
+ padding:7px 12px 7px 4px;gap:12px;border:0;border-bottom:1px solid var(--jmc-ui-border);
+ border-radius:0;font-family:var(--font-ka);font-weight:600;font-size:clamp(17px,1.4vw,21px);
+ letter-spacing:-.025em;color:var(--jmc-ui-ink);
+}
+.jmc-drawer-links a.jmc-drawer-model-link{min-height:52px;font:650 clamp(15px,1.25vw,19px)/1.4 var(--font-latin);letter-spacing:-.012em}
+.jmc-drawer-links a>span:first-child{font:550 11px/1 var(--font-latin);color:var(--jmc-ui-tertiary)}
+.jmc-drawer-links a .jmc-icon{width:18px;height:18px;opacity:.62;transition:transform .2s,opacity .2s}
+.jmc-drawer-links a:hover,.jmc-drawer-links a[aria-current="page"]{background:var(--jmc-ui-surface);border-radius:10px;color:var(--jmc-ui-ink)}
+.jmc-drawer-links a:hover .jmc-icon{transform:translate(2px,-2px);opacity:1}
+.jmc-drawer-drive{margin-top:24px;align-self:stretch;min-height:52px;padding:12px 22px;justify-content:space-between}
+.jmc-drawer-address{margin-top:26px;padding-top:22px;gap:3px}
+.jmc-drawer-foot{margin-top:0;padding-top:18px;display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.03em}
+.jmc-drawer-foot span{font-family:var(--font-ka);font-weight:400;color:var(--jmc-ui-tertiary)}
+@media(max-width:700px){
+ .jmc-drawer{width:100%;flex-basis:100%;padding:20px 24px max(18px,env(safe-area-inset-bottom))}
+ .jmc-drawer-heading{padding:28px 0 14px}
+ .jmc-drawer-heading h2{font-size:32px}
+ .jmc-drawer-links a,.jmc-drawer-links a.jmc-drawer-model-link{min-height:49px}
+ .jmc-drawer-model-label{margin-top:18px}
+ .jmc-drawer-foot span{display:none}
+}
+@media(prefers-reduced-motion:reduce){.jmc-drawer-links a .jmc-icon{transition:none}}

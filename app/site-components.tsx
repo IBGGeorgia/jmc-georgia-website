@@ -4,15 +4,8 @@ import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {useEffect,useRef,useState} from 'react';
 
-const links=[
- {href:'/',label:'მთავარი'},
- {href:'/vehicles',label:'ავტომობილები'},
- {href:'/vehicles/vigus',label:'JMC Vigus'},
- {href:'/vehicles/grand-avenue',label:'JMC Grand Avenue'},
- {href:'/vehicles/grand-avenue-pro',label:'JMC Grand Avenue PRO'},
- {href:'/about',label:'ჩვენ შესახებ'},
- {href:'/contact',label:'კონტაქტი'}
-];
+const mainLinks=[{href:'/',label:'მთავარი'},{href:'/vehicles',label:'ყველა ავტომობილი'},{href:'/about',label:'ჩვენ შესახებ'},{href:'/contact',label:'კონტაქტი'}];
+const modelLinks=[{href:'/vehicles/vigus',label:'VIGUS',number:'01'},{href:'/vehicles/grand-avenue',label:'GRAND AVENUE',number:'02'},{href:'/vehicles/grand-avenue-pro',label:'GRAND AVENUE PRO',number:'03'}];
 
 export function Header(){
  const [open,setOpen]=useState(false);
@@ -82,16 +75,12 @@ export function Header(){
      <button type="button" className="jmc-drawer-close" onClick={()=>setOpen(false)}
       aria-label="დახურვა"><JmcIcon name="x"/></button>
     </div>
-    <p className="jmc-drawer-eyebrow">JMC Georgia / Menu</p>
+    <div className="jmc-drawer-heading"><span>JMC GEORGIA</span><h2>აღმოაჩინე<br/>შენი გზა.</h2></div>
     <nav className="jmc-drawer-links" aria-label="ძირითადი ნავიგაცია">
-     {links.map((item,i)=>
-      <Link key={item.href} href={item.href} aria-current={pathname===item.href?'page':undefined}
-       onClick={()=>setOpen(false)}>
-       <span>{String(i+1).padStart(2,'0')}</span>
-       {item.label}
-       <JmcIcon name="arrow-up-right"/>
-      </Link>
-     )}
+     <p className="jmc-drawer-group-label">ნავიგაცია</p>
+     {mainLinks.map((item,i)=><Link key={item.href} href={item.href} aria-current={pathname===item.href?'page':undefined} onClick={()=>setOpen(false)}><span>{String(i+1).padStart(2,'0')}</span><span>{item.label}</span><JmcIcon name="arrow-up-right"/></Link>)}
+     <p className="jmc-drawer-group-label jmc-drawer-model-label">მოდელები</p>
+     {modelLinks.map(item=><Link key={item.href} className="jmc-drawer-model-link" href={item.href} aria-current={pathname===item.href?'page':undefined} onClick={()=>setOpen(false)}><span>{item.number}</span><span>{item.label}</span><JmcIcon name="arrow-up-right"/></Link>)}
     </nav>
     <Link href="/test-drive" className="button jmc-drawer-drive" onClick={()=>setOpen(false)}>
      ტესტ-დრაივის ინფორმაცია <JmcIcon name="arrow-up-right"/>
@@ -100,7 +89,7 @@ export function Header(){
      <span>მისამართი</span>
      <address><Link href="/contact" onClick={()=>setOpen(false)}>თბილისი, ბელიაშვილის 115</Link></address>
     </div>
-    <p className="jmc-drawer-foot">JMC Georgia</p>
+    <p className="jmc-drawer-foot">JMC GEORGIA <span>ოფიციალური წარმომადგენლობა საქართველოში</span></p>
    </div>
   </div>
  </>;
