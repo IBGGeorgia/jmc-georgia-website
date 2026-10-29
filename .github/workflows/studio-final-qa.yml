@@ -1,0 +1,24 @@
+name: JMC Studio final browser verification
+on:
+  push:
+    branches: [feature/approved-studio-images-20261030]
+    paths:
+      - '.github/workflows/studio-final-qa.yml'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: |
+          test -s public/images/studio/vigus-studio.webp
+          test -s public/images/studio/grand-avenue-studio.webp
+          test -s public/images/studio/grand-avenue-pro-studio.webp
+          npm install
+          npx playwright install --with-deps chromium
+          npm run qa:css
+          npm run build
+          npm run qa:browser

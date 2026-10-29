@@ -1,3 +1,4 @@
+import {studioImageFor} from '../../lib/studio-images';
 import type {Metadata} from 'next';
 import Link from 'next/link';
 import {Header,Footer} from '../site-components';
@@ -36,7 +37,7 @@ export default function ComparePage(){
     if(!vehicle)return null;
     return <article className="jmc-compare-story" key={item.slug}>
      <Link href={`/vehicles/${item.slug}`} className="jmc-compare-story-image jmc-studio-surface" aria-label={`${vehicle.name} — მოდელის ნახვა`}>
-      <img className={item.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-compare-story':undefined} src={vehicle.heroImage} loading="lazy" alt={`JMC ${vehicle.name}`}/>
+      <img className={item.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-compare-story':undefined} src={studioImageFor(item.slug,vehicle.heroImage)} loading="lazy" alt={`JMC ${vehicle.name}`}/>
      </Link>
      <div className="jmc-compare-story-body"><span className="jmc-compare-story-index">{item.number} / {vehicle.name}</span><span className="jmc-compare-story-eyebrow">{item.eyebrow}</span><h3>{item.heading}</h3><p>{item.copy}</p><Link href={`/vehicles/${item.slug}`} className="jmc-compare-story-link">აღმოაჩინე მოდელი <JmcIcon name="arrow-up-right"/></Link></div>
     </article>;

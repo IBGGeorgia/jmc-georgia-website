@@ -1,3 +1,4 @@
+import {studioImageFor} from '../../lib/studio-images';
 import {JmcIcon} from '../jmc-icons';
 import Link from 'next/link';
 import {Header,Footer} from '../site-components';
@@ -13,7 +14,7 @@ export default function VehiclesCatalogue(){
   <section className="jmc-home-model-grid" aria-label="ავტომობილების კატალოგი">
    {vehicles.map((model,i)=><article key={model.slug} className="jmc-home-model-card">
     <Link href={`/vehicles/${model.slug}`} className="jmc-home-model-image jmc-studio-surface">
-     <img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-catalogue':undefined} src={model.heroImage} alt={`JMC ${model.name}`} loading="lazy"/>
+     <img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-catalogue':undefined} src={studioImageFor(model.slug,model.heroImage)} alt={`JMC ${model.name}`} loading="lazy"/>
     </Link>
     <div className="jmc-home-model-content">
      <span>{String(i+1).padStart(2,'0')} / JMC</span><h2>{model.name}</h2>

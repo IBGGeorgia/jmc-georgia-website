@@ -1,3 +1,4 @@
+import {studioImageFor} from '../../lib/studio-images';
 import {JmcIcon} from '../jmc-icons';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -33,7 +34,7 @@ export default function TestDrive(){
      <address>თბილისი, ბელიაშვილის 115</address>
     </div>
    </section>
-   <section className="jmc-test-drive-models" aria-label="აირჩიე მოდელი"><h2>გაიცანი მოდელები</h2><div className="jmc-home-model-grid">{vehicles.map(model=><article className="jmc-home-model-card" key={model.slug}><Link className="jmc-home-model-image jmc-studio-surface" href={`/vehicles/${model.slug}`}><img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-test-drive':undefined} src={model.heroImage} loading="lazy" alt={`JMC ${model.name}`}/></Link><div className="jmc-home-model-content"><h3>{model.name}</h3><Link href={`/vehicles/${model.slug}`} className="button">მახასიათებლების ნახვა <JmcIcon name="arrow-up-right"/></Link></div></article>)}</div></section>
+   <section className="jmc-test-drive-models" aria-label="აირჩიე მოდელი"><h2>გაიცანი მოდელები</h2><div className="jmc-home-model-grid">{vehicles.map(model=><article className="jmc-home-model-card" key={model.slug}><Link className="jmc-home-model-image jmc-studio-surface" href={`/vehicles/${model.slug}`}><img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-test-drive':undefined} src={studioImageFor(model.slug,model.heroImage)} loading="lazy" alt={`JMC ${model.name}`}/></Link><div className="jmc-home-model-content"><h3>{model.name}</h3><Link href={`/vehicles/${model.slug}`} className="button">მახასიათებლების ნახვა <JmcIcon name="arrow-up-right"/></Link></div></article>)}</div></section>
   </main>
   <Footer/>
  </>;
