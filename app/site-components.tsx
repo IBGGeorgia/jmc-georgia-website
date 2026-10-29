@@ -129,7 +129,7 @@ export function Footer(){
       <span>Georgia</span>
      </div>
      <p className="jmc-footer-description">JMC-ის ოფიციალური წარმომადგენლობა საქართველოში.</p>
-     <Link href="/vehicles" className="jmc-footer-cta">
+     <Link href="/vehicles" className="button jmc-footer-cta">
       აღმოაჩინე JMC-ის მოდელები <JmcIcon name="arrow-up-right"/>
      </Link>
     </div>
