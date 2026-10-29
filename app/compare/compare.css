@@ -124,3 +124,71 @@
  .jmc-compare-story-image img,.jmc-compare-story-link .jmc-icon,.jmc-compare-jump .jmc-icon,.jmc-compare-detail .jmc-icon,.jmc-compare-slot,.jmc-compare-add,.jmc-compare-guide-items p{transition:none!important}
  .jmc-compare-story-image:hover img,.jmc-compare-story-image:focus-visible img,.jmc-compare-story-link:hover .jmc-icon,.jmc-compare-detail:hover .jmc-icon,.jmc-compare-jump:hover .jmc-icon,.jmc-compare-slot:hover{transform:none!important}
 }
+
+
+/* Centered Georgian-first Compare introduction — overrides earlier editorial masthead. */
+.jmc-compare-page .jmc-compare-intro{
+ min-height:0;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ padding:clamp(64px,8vw,124px) 0 clamp(78px,9vw,132px);
+ margin-inline:auto;
+}
+.jmc-compare-page .jmc-compare-intro .eyebrow{
+ font-family:var(--font-ka);
+ font-size:13px;
+ font-weight:600;
+ letter-spacing:0;
+ text-transform:none;
+ margin:0 0 26px;
+ color:var(--jmc-ui-secondary);
+}
+.jmc-compare-page .jmc-compare-intro h1{
+ max-width:920px;
+ margin:0 auto;
+ font-family:var(--font-ka);
+ font-size:clamp(40px,5vw,78px);
+ font-weight:650;
+ line-height:1.16;
+ letter-spacing:-.045em;
+ text-align:center;
+ text-transform:none;
+ text-wrap:balance;
+}
+.jmc-compare-page .jmc-compare-intro .jmc-page-lead{
+ max-width:680px;
+ margin:clamp(26px,4vw,48px) auto 0;
+ font-size:clamp(16px,1.25vw,19px);
+ line-height:1.8;
+ text-align:center;
+}
+.jmc-compare-page .jmc-compare-jump{
+ margin:30px auto 0;
+ justify-content:center;
+}
+.jmc-compare-page .jmc-compare-intro::after{content:none}
+.jmc-compare-page .jmc-compare-story-heading .eyebrow,
+.jmc-compare-page .jmc-compare-guidance .eyebrow,
+.jmc-compare-page .jmc-compare-workspace-anchor .eyebrow,
+.jmc-compare-page .jmc-compare-afterword .eyebrow{
+ font-family:var(--font-ka);
+ letter-spacing:0;
+ text-transform:none;
+}
+@media(max-width:700px){
+ .jmc-compare-page .jmc-compare-intro{
+  padding:54px 0 80px;
+ }
+ .jmc-compare-page .jmc-compare-intro h1{
+  font-size:clamp(35px,8.5vw,52px);
+  line-height:1.2;
+ }
+ .jmc-compare-page .jmc-compare-intro .jmc-page-lead{
+  margin-top:24px;
+  font-size:15px;
+  line-height:1.75;
+ }
+}
