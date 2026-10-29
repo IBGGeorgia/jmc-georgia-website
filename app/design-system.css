@@ -451,3 +451,6 @@ main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-d
 @media(prefers-reduced-motion:reduce){
  :is(.button,.vigus-pill,.pro-premium-primary,.pro-premium-secondary,.pro-page-nav-cta,.vigus-local-cta,.jmc-lineup-pill,.jmc-footer-cta,.jmc-drawer-drive){transition:none!important}
 }
+
+/* Preserve compact PRO chapter navigation below the tablet breakpoint. */
+@media(max-width:850px){.pro-draft-page .pro-page-nav-cta{display:none!important}}
