@@ -1,5 +1,5 @@
-import {JmcIcon} from './jmc-icons';
 'use client';
+import {JmcIcon} from './jmc-icons';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {useEffect,useRef,useState} from 'react';
