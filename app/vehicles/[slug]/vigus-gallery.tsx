@@ -1,4 +1,5 @@
 'use client';
+import {JmcIcon} from '../../jmc-icons';
 import {useCallback,useEffect,useRef,useState} from 'react';
 const slides=[
  {file:'side',src:'https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261027_211343_e9481f3d-bb08-4230-b096-19b006d2d965.png',label:'პროფილი'},
@@ -55,7 +56,7 @@ export function VigusGallery(){
  },[sync]);
  const next=(direction:number)=>{const el=rail.current;if(!el)return;if(wheelRaf.current!==null)cancelAnimationFrame(wheelRaf.current);wheelRaf.current=null;wheelTarget.current=null;const item=el.querySelector('figure');el.scrollBy({left:direction*(item?.getBoundingClientRect().width??el.clientWidth*.8)+direction*20,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})};
  return <div className="vigus-gallery-component" data-vigus-reveal="visual">
- <div className="vigus-gallery-controls"><span className="vigus-gallery-index" aria-live="polite">{String(current+1).padStart(2,'0')} <span>/ {String(slides.length).padStart(2,'0')}</span></span><div><button type="button" aria-label="წინა ფოტო" disabled={!canPrev} onClick={()=>next(-1)}>←</button><button type="button" aria-label="შემდეგი ფოტო" disabled={!canNext} onClick={()=>next(1)}>→</button></div></div>
+ <div className="vigus-gallery-controls"><span className="vigus-gallery-index" aria-live="polite">{String(current+1).padStart(2,'0')} <span>/ {String(slides.length).padStart(2,'0')}</span></span><div><button type="button" aria-label="წინა ფოტო" disabled={!canPrev} onClick={()=>next(-1)}><JmcIcon name="arrow-right" className="jmc-icon-prev"/></button><button type="button" aria-label="შემდეგი ფოტო" disabled={!canNext} onClick={()=>next(1)}><JmcIcon name="arrow-right"/></button></div></div>
  <div ref={rail} className="vigus-gallery-strip vigus-gallery-interactive" tabIndex={0} role="region" aria-label="Vigus-ის ფოტოების გალერეა" onScroll={sync}
  onKeyDown={event=>{
   if(event.key==='ArrowLeft'||event.key==='ArrowRight'){
