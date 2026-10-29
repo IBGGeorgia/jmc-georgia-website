@@ -89,7 +89,7 @@ export function Header(){
      <span>მისამართი</span>
      <address><Link href="/contact" onClick={()=>setOpen(false)}>თბილისი, ბელიაშვილის 115</Link></address>
     </div>
-    <p className="jmc-drawer-foot">JMC GEORGIA <span>დიზაინი • შესაძლებლობები • მოძრაობა</span></p>
+    <p className="jmc-drawer-foot">JMC GEORGIA <span>ოფიციალური წარმომადგენლობა საქართველოში</span></p>
    </div>
   </div>
  </>;
