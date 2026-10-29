@@ -61,3 +61,66 @@
  .jmc-compare-afterword{margin-top:62px;flex-direction:column;align-items:flex-start}
  .jmc-compare-afterword .button{width:100%}
 }
+
+
+/* Compare composition v2 — asymmetric automotive editorial. */
+.jmc-compare-intro{position:relative;min-height:470px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-block:88px 100px}
+.jmc-compare-intro:after{content:"COMPARE / JMC";position:absolute;right:0;bottom:28px;font:650 11px/1.3 var(--font-latin);letter-spacing:.16em;color:var(--jmc-ui-tertiary)}
+.jmc-compare-intro h1{font-size:clamp(50px,6.6vw,110px);letter-spacing:-.065em;line-height:1.04;max-width:1000px;text-wrap:balance}
+.jmc-compare-intro .jmc-page-lead{max-width:690px}
+.jmc-compare-editorial{margin-bottom:120px}
+.jmc-compare-story-heading{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);margin-bottom:50px}
+.jmc-compare-stories{display:flex;flex-direction:column;gap:clamp(56px,8vw,132px)}
+.jmc-compare-story{display:grid;grid-template-columns:minmax(0,1.27fr) minmax(0,.73fr);align-items:center;gap:clamp(28px,6vw,112px)}
+.jmc-compare-story:nth-child(even){grid-template-columns:minmax(0,.73fr) minmax(0,1.27fr)}
+.jmc-compare-story:nth-child(even) .jmc-compare-story-image{order:2}
+.jmc-compare-story:nth-child(even) .jmc-compare-story-body{order:1}
+.jmc-compare-story-image{aspect-ratio:1.45;border-radius:18px}
+.jmc-compare-story-image img{transition:transform .75s cubic-bezier(.2,.75,.2,1);transform:scale(1)}
+.jmc-compare-story-image:hover img,.jmc-compare-story-image:focus-visible img{transform:scale(1.045)}
+.jmc-compare-story-body{padding:20px 0;max-width:520px}
+.jmc-compare-story-index{font-size:13px;margin-bottom:clamp(30px,5vw,78px)}
+.jmc-compare-story-eyebrow{letter-spacing:.03em}
+.jmc-compare-story h3{font-size:clamp(30px,3.3vw,55px);line-height:1.16;letter-spacing:-.045em;margin:14px 0 22px;text-wrap:balance}
+.jmc-compare-story-body p{font-size:clamp(15px,1.12vw,18px);line-height:1.8}
+.jmc-compare-story-link .jmc-icon,.jmc-compare-jump .jmc-icon,.jmc-compare-detail .jmc-icon{transition:transform .24s ease}
+.jmc-compare-story-link:hover .jmc-icon,.jmc-compare-detail:hover .jmc-icon{transform:translate(3px,-3px)}
+.jmc-compare-jump:hover .jmc-icon{transform:translateY(4px)}
+.jmc-compare-guidance{padding-block:100px;margin-bottom:120px}
+.jmc-compare-guide-items p{transition:background-color .25s ease,padding-inline .25s ease}
+.jmc-compare-guide-items p:hover{background:var(--jmc-ui-surface);padding-inline:14px}
+.jmc-compare-workspace-anchor{padding:0 0 16px}
+.jmc-compare-slot{transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease}
+.jmc-compare-slot:hover{border-color:rgba(29,29,31,.22);box-shadow:0 16px 40px rgba(29,29,31,.055);transform:translateY(-3px)}
+.jmc-compare-add{transition:background-color .25s ease,border-color .25s ease}
+.jmc-compare-add:hover{background:#ebebef;border-color:rgba(29,29,31,.26)}
+.jmc-compare-reveal{opacity:0;transform:translateY(28px)}
+.jmc-compare-reveal.is-revealed{opacity:1;transform:translateY(0);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.75,.2,1)}
+@media(max-width:900px){
+ .jmc-compare-intro{min-height:360px;padding-block:66px 80px}
+ .jmc-compare-story{gap:30px}
+ .jmc-compare-story:nth-child(even){gap:30px}
+ .jmc-compare-story-index{margin-bottom:24px}
+ .jmc-compare-story h3{font-size:clamp(28px,3.4vw,38px)}
+}
+@media(max-width:700px){
+ .jmc-compare-intro{min-height:0;padding-block:56px 70px}
+ .jmc-compare-intro h1{font-size:clamp(45px,11vw,68px)}
+ .jmc-compare-intro:after{bottom:12px}
+ .jmc-compare-story-heading{margin-bottom:32px}
+ .jmc-compare-stories{gap:62px}
+ .jmc-compare-story,.jmc-compare-story:nth-child(even){display:flex;flex-direction:column;align-items:stretch;gap:0}
+ .jmc-compare-story:nth-child(even) .jmc-compare-story-image,.jmc-compare-story:nth-child(even) .jmc-compare-story-body{order:initial}
+ .jmc-compare-story-image{width:100%;aspect-ratio:16/10}
+ .jmc-compare-story-body{padding:22px 0 0;max-width:none}
+ .jmc-compare-story-index{margin-bottom:18px}
+ .jmc-compare-story h3{font-size:32px}
+ .jmc-compare-guidance{padding-block:52px;margin-bottom:64px}
+ .jmc-compare-guide-items p:hover{padding-inline:0;background:transparent}
+ .jmc-compare-slot:hover{transform:none;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .jmc-compare-reveal,.jmc-compare-reveal.is-revealed{opacity:1;transform:none;transition:none!important}
+ .jmc-compare-story-image img,.jmc-compare-story-link .jmc-icon,.jmc-compare-jump .jmc-icon,.jmc-compare-detail .jmc-icon,.jmc-compare-slot,.jmc-compare-add,.jmc-compare-guide-items p{transition:none!important}
+ .jmc-compare-story-image:hover img,.jmc-compare-story-image:focus-visible img,.jmc-compare-story-link:hover .jmc-icon,.jmc-compare-detail:hover .jmc-icon,.jmc-compare-jump:hover .jmc-icon,.jmc-compare-slot:hover{transform:none!important}
+}
