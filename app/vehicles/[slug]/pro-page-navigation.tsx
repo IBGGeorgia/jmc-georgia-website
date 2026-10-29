@@ -1,5 +1,5 @@
-import {JmcIcon} from '../../jmc-icons';
 'use client';
+import {JmcIcon} from '../../jmc-icons';
 import Link from 'next/link';
 import {useEffect,useState} from 'react';
 const chapters=[['pro-story','ისტორია'],['pro-gallery','გალერეა'],['pro-choose','კომპლექტაციები']] as const;
