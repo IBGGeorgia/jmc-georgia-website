@@ -4,6 +4,7 @@ import {Header,Footer} from '../site-components';
 import {JmcIcon} from '../jmc-icons';
 import {vehicles} from '../../lib/vehicles';
 import {VehicleComparison} from './vehicle-comparison';
+import {CompareMotion} from './compare-motion';
 import './compare.css';
 
 export const metadata:Metadata={
@@ -21,7 +22,7 @@ const editorial=[
 ] as const;
 
 export default function ComparePage(){
- return <><Header/><main className="container jmc-compare-page">
+ return <><Header/><CompareMotion/><main className="container jmc-compare-page">
   <header className="page-head jmc-page-intro jmc-compare-intro">
    <p className="eyebrow">JMC Georgia / Compare</p>
    <h1>სამი მოდელი.<br/>შენი არჩევანი.</h1>
