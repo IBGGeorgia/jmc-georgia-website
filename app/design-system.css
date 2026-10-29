@@ -492,3 +492,25 @@ main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-d
  .jmc-drawer-foot span{display:none}
 }
 @media(prefers-reduced-motion:reduce){.jmc-drawer-links a .jmc-icon{transition:none}}
+
+/* Interactive model controls — v2.0 polish. Retain each component's logic. */
+.jmc-icon-prev{transform:rotate(180deg)}
+:is(.vigus-gallery-controls button,.vigus-orbit-controls button,.vigus-orbit-full-controls button,.vigus-orbit-exit,.grand-lightbox-controls button,.grand-lightbox-close,.grand-gallery-zoom){
+ display:inline-flex;align-items:center;justify-content:center;
+ min-width:44px;min-height:44px;border-radius:999px;
+}
+:is(.vigus-gallery-controls button,.vigus-orbit-controls button,.vigus-orbit-full-controls button,.vigus-orbit-exit,.grand-lightbox-controls button,.grand-lightbox-close,.grand-gallery-open,.vigus-selector-controls button,.trim-switches .filter-chip):focus-visible{
+ outline:2px solid var(--jmc-ui-focus);outline-offset:4px;
+}
+:is(.vigus-gallery-controls button,.vigus-orbit-controls button,.grand-lightbox-controls button):disabled{
+ opacity:.35;cursor:not-allowed;
+}
+:is(.vigus-selector-controls button,.trim-switches .filter-chip,.vigus-differences-toggle){
+ border-radius:var(--jmc-button-radius);
+}
+:is(.vigus-gallery-controls button,.vigus-orbit-controls button,.grand-lightbox-controls button,.vigus-selector-controls button,.trim-switches .filter-chip){
+ transition:background-color .18s ease,color .18s ease,border-color .18s ease;
+}
+@media(prefers-reduced-motion:reduce){
+ :is(.vigus-gallery-controls button,.vigus-orbit-controls button,.grand-lightbox-controls button,.vigus-selector-controls button,.trim-switches .filter-chip){transition:none!important}
+}
