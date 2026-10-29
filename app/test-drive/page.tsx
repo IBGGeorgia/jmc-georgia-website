@@ -1,4 +1,4 @@
-import {studioImageFor} from '../lib/studio-images';
+import {studioImageFor} from '../../lib/studio-images';
 import {JmcIcon} from '../jmc-icons';
 import type { Metadata } from 'next';
 import Link from 'next/link';
