@@ -1,4 +1,4 @@
-import {studioImageFor} from '../lib/studio-images';
+import {studioImageFor} from '../../lib/studio-images';
 import {JmcIcon} from '../jmc-icons';
 import Link from 'next/link';
 import {Header,Footer} from '../site-components';
