@@ -1,3 +1,4 @@
+import {studioImageFor} from '../lib/studio-images';
 import {JmcIcon} from './jmc-icons';
 import Link from 'next/link';
 import { Header, Footer } from './site-components';
@@ -46,7 +47,7 @@ export default function Home() {
       <div className="container jmc-lineup-secondary">
         {vehicles.filter(model=>model.slug!=='grand-avenue-pro').map((model,i)=>
           <article key={model.slug} className="jmc-lineup-secondary-card">
-            <Link href={`/vehicles/${model.slug}`} className="jmc-lineup-secondary-visual jmc-studio-surface"><img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-home':undefined} src={model.slug==='vigus'?'/images/vigus/adventure-3.webp':model.heroImage} alt={`JMC ${model.name}`} loading="lazy"/><JmcIcon name="arrow-up-right"/></Link>
+            <Link href={`/vehicles/${model.slug}`} className="jmc-lineup-secondary-visual jmc-studio-surface"><img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-home':undefined} src={studioImageFor(model.slug,model.heroImage)} alt={`JMC ${model.name}`} loading="lazy"/><JmcIcon name="arrow-up-right"/></Link>
             <div className="jmc-lineup-secondary-copy"><span>{String(i+2).padStart(2,'0')} / JMC PICKUP</span><h3>{model.name}</h3><p>{model.slug==='vigus'?'მზად ყოველდღიური გზებისა და ახალი გამოწვევებისთვის.':'დიზაინი და შესაძლებლობები, რომლებიც გზას სცდება.'}</p><Link href={`/vehicles/${model.slug}`}>გაიცანი მოდელი <JmcIcon name="arrow-up-right"/></Link></div>
           </article>
         )}
