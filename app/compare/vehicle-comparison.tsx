@@ -24,7 +24,7 @@ export function VehicleComparison(){
  }
  return <section className="jmc-compare-workspace" aria-label="მოდელების შედარება">
   <div className="jmc-compare-controls">
-   {choices.map((model,i)=><div className="jmc-compare-slot" key={i}>
+   {choices.map((model,i)=><div className="jmc-compare-slot jmc-studio-selector" key={i}>
     <label htmlFor={`compare-model-${i}`}>მოდელი {i+1}</label>
     <select id={`compare-model-${i}`} value={model.slug} onChange={e=>changeModel(i,e.target.value)}>
      {vehicles.map(v=><option value={v.slug} key={v.slug} disabled={selected.some((x,j)=>j!==i&&x===v.slug)}>{v.name}</option>)}
