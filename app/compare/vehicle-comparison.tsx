@@ -29,7 +29,7 @@ export function VehicleComparison(){
     <select id={`compare-model-${i}`} value={model.slug} onChange={e=>changeModel(i,e.target.value)}>
      {vehicles.map(v=><option value={v.slug} key={v.slug} disabled={selected.some((x,j)=>j!==i&&x===v.slug)}>{v.name}</option>)}
     </select>
-    <img src={model.heroImage} alt={`JMC ${model.name}`} loading="lazy"/>
+    <img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-compare-selector':undefined} src={model.heroImage} alt={`JMC ${model.name}`} loading="lazy"/>
     <h2>{model.name}</h2>
     <label htmlFor={`compare-trim-${i}`}>კომპლექტაცია</label>
     <select id={`compare-trim-${i}`} value={model.trims.some(t=>t.id===trims[model.slug])?trims[model.slug]:model.trims[0]?.id??''}

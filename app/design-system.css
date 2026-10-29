@@ -531,3 +531,43 @@ main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-d
 @media(prefers-reduced-motion:reduce){
  .pro-draft-page :is(.pro-draft-segments button,.pro-compare-modes button,.pro-compare-presets button,.pro-equipment-category-picker button,.pro-premium-gallery-toolbar button){transition:none!important}
 }
+
+
+/* VIGUS photography focal-point contract. Image content stays unchanged
+   until generated replacements pass vehicle-identity review. */
+:root{
+ --jmc-vigus-focal-home:56% 50%;
+ --jmc-vigus-focal-catalogue:50% 54%;
+ --jmc-vigus-focal-test-drive:50% 54%;
+ --jmc-vigus-focal-compare-story:50% 54%;
+ --jmc-vigus-focal-compare-selector:50% 54%;
+}
+.jmc-lineup-secondary-visual img.jmc-vigus-image-home{
+ object-fit:cover;
+ object-position:var(--jmc-vigus-focal-home);
+}
+.jmc-home-model-image img.jmc-vigus-image-catalogue{
+ object-fit:cover;
+ object-position:var(--jmc-vigus-focal-catalogue);
+}
+.jmc-test-drive-models .jmc-home-model-image img.jmc-vigus-image-test-drive{
+ object-fit:cover;
+ object-position:var(--jmc-vigus-focal-test-drive);
+}
+.jmc-compare-story-image img.jmc-vigus-image-compare-story{
+ object-fit:cover;
+ object-position:var(--jmc-vigus-focal-compare-story);
+}
+.jmc-compare-slot img.jmc-vigus-image-compare-selector{
+ object-fit:cover;
+ object-position:var(--jmc-vigus-focal-compare-selector);
+}
+@media(max-width:700px){
+ :root{
+  --jmc-vigus-focal-home:59% 50%;
+  --jmc-vigus-focal-catalogue:50% 52%;
+  --jmc-vigus-focal-test-drive:50% 52%;
+  --jmc-vigus-focal-compare-story:50% 52%;
+  --jmc-vigus-focal-compare-selector:50% 52%;
+ }
+}

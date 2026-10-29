@@ -13,7 +13,7 @@ export default function VehiclesCatalogue(){
   <section className="jmc-home-model-grid" aria-label="ავტომობილების კატალოგი">
    {vehicles.map((model,i)=><article key={model.slug} className="jmc-home-model-card">
     <Link href={`/vehicles/${model.slug}`} className="jmc-home-model-image">
-     <img src={model.heroImage} alt={`JMC ${model.name}`} loading="lazy"/>
+     <img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-catalogue':undefined} src={model.heroImage} alt={`JMC ${model.name}`} loading="lazy"/>
     </Link>
     <div className="jmc-home-model-content">
      <span>{String(i+1).padStart(2,'0')} / JMC</span><h2>{model.name}</h2>
