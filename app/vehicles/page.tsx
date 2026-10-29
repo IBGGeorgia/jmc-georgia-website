@@ -1,3 +1,4 @@
+import {JmcIcon} from '../jmc-icons';
 import Link from 'next/link';
 import {Header,Footer} from '../site-components';
 import {vehicles} from '../../lib/vehicles';
@@ -16,7 +17,7 @@ export default function VehiclesCatalogue(){
     <div className="jmc-home-model-content">
      <span>{String(i+1).padStart(2,'0')} / JMC</span><h2>{model.name}</h2>
      <p>{model.description}</p>
-     <Link href={`/vehicles/${model.slug}`} className="button">მოდელის ნახვა ↗</Link>
+     <Link href={`/vehicles/${model.slug}`} className="button">მოდელის ნახვა <JmcIcon name="arrow-up-right"/></Link>
     </div>
    </article>)}
   </section>
