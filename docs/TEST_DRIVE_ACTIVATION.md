@@ -60,3 +60,13 @@ Preserve local UUIDs, CRM status, opt-in, UTM attribution and timestamps. Introd
 
 ## CMS expansion
 Future modules should live under `/admin/*` and use the same identity, role authorization, audit log, navigation and style system. Next candidates are vehicle catalog management, editable text/images, campaign banners and analytics. Do not expose fake editing controls before their backing APIs exist.
+
+## Users & Permissions — next CMS milestone (2026-10-30)
+- `/admin/users`: available only to the `admin` role; create a named account with a unique username, a password of at least 16 characters and `admin`, `sales` or `editor` role.
+- `GET/POST/PATCH /api/admin/users`: protected admin-only endpoints. Never disclose password hashes through GET responses.
+- An administrator can change another user's role, disable/enable their account, and reset their password. Existing sessions are revoked immediately on those changes; all account mutations create an audit record.
+- Self-modification and deletion/demotion of the last active administrator are refused. There is deliberately no default administrator username/password.
+- Account creation and password resets are performed inside the protected CMS; hand off a generated initial password to the employee by an approved secure channel (not email notifications from the site).
+- A real logout button is available in the CMS sidebar and revokes the logged-in session.
+- A dedicated GitHub Actions integration workflow uses **disposable CI PostgreSQL** and randomly generated test credentials to test admin login, account creation, role restrictions and session revocation. Its data and credentials are unrelated to the paid production database.
+- Before relying on the system operationally, connect the paid Render database's internal `DATABASE_URL`, apply `npm run db:migrate:leads`, and run `npm run cms:admin:create` in an authorized environment. Never enable public lead collection until the approved privacy notice is published.
