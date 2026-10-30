@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {currentCMSUser} from '../../lib/lead-manager-auth';
 import '../lead-manager/lead-manager.css';
 import './admin.css';
+import {CMSLogout} from './logout-button';
 export const dynamic='force-dynamic';
 export const metadata:Metadata={title:'JMC Admin',robots:{index:false,follow:false}};
 export default async function AdminLayout({children}:{children:React.ReactNode}){
@@ -17,12 +18,13 @@ export default async function AdminLayout({children}:{children:React.ReactNode})
     <p className="jmc-admin-menu-eyebrow">Workspace</p>
     <Link href="/admin">მიმოხილვა</Link>
     {user.role!=='editor'&&<Link href="/admin/leads">Test Drive ლიდები</Link>}
+    {user.role==='admin'&&<Link href="/admin/users">მომხმარებლები და უფლებები</Link>}
     <Link href="/admin/settings">სისტემის სტატუსი</Link>
     <div className="jmc-admin-menu-future">
      <p>შემდეგი მოდულები</p>
      <span>მოდელების მართვა</span><span>საიტის კონტენტი</span><span>Zoho ინტეგრაცია</span>
     </div>
-    <p className="jmc-admin-menu-user">{user.display_name}<small>{user.role}</small></p>
+    <p className="jmc-admin-menu-user">{user.display_name}<small>{user.role}</small><CMSLogout/></p>
    </nav>}
    <main className="jmc-admin-main">{children}</main>
   </div>
