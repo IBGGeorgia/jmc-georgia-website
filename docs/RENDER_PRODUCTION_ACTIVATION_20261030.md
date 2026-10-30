@@ -70,3 +70,25 @@ After the first scheduled run succeeds, verify Render Cron Run history and CMS S
 - Render internal database connections: https://render.com/docs/postgresql-creating-connecting
 - Render Postgres Recovery: https://render.com/docs/postgresql-backups
 - Georgian privacy law: https://matsne.gov.ge/ka/document/view/5827307
+
+## Read-only Production schema diagnostics on every successful app startup
+
+The web service `npm run start` now invokes `prestart`:
+`node scripts/production-readiness-probe.mjs`. This uses the **existing web
+service's internal** `DATABASE_URL`, never creates or deletes rows, and
+**must not** block the public website when the database is unavailable.
+
+Render app startup logs show three deliberately PII-free records:
+- `JMC_PRODUCTION_SCHEMA: db=connected leads=true legal_hold=true heartbeat=true`;
+- `JMC_RETENTION_PREVIEW: total=… eligible=… protected=…; read-only; no records changed`;
+- `JMC_RETENTION_HEARTBEAT: ever_run=… fresh=…`.
+
+These reveal only schema flags and aggregate counts, never customers, contact details,
+database URLs or keys. Use Render's **JMC Web Service → Logs** after deployment,
+not the externally firewalled database connection, to verify the actual Production
+schema before planning a migration.
+
+**No production cleanup is authorized by these logs.** If `legal_hold=false`
+or `heartbeat=false`, check recovery/backup readiness before performing the
+idempotent migration using the authorized internal database connection. The
+paid Cron remains in status-only mode until independent legal and backup review.
