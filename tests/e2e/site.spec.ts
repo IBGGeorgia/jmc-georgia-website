@@ -280,8 +280,15 @@ test('Grand Avenue discovery: homepage, catalogue, drawer, footer and test-drive
    await page.locator('.jmc-lead-model input[value="vigus"]').check();
    await expect(page.locator('main a[href="/vehicles/vigus"]')).toHaveCount(1);
   }else{
-   await expect(page.locator('main a[href="'+grand+'"]' ).first()).toBeVisible();
-   await expect(page.locator('main a[href="/vehicles/vigus"]').first()).toBeVisible();
+   if(path==='/'){
+    await page.locator('.home3-model-tabs button').filter({hasText:'Grand Avenue'}).first().click();
+    await expect(page.locator('.home3-stage-copy a[href="'+grand+'"]').first()).toBeVisible();
+    await page.locator('.home3-model-tabs button').filter({hasText:'VIGUS'}).click();
+    await expect(page.locator('.home3-stage-copy a[href="/vehicles/vigus"]').first()).toBeVisible();
+   }else{
+    await expect(page.locator('main a[href="'+grand+'"]').first()).toBeVisible();
+    await expect(page.locator('main a[href="/vehicles/vigus"]').first()).toBeVisible();
+   }
   }
  }
  await page.goto('/');
