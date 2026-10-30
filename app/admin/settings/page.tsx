@@ -1,4 +1,5 @@
 import {redirect} from 'next/navigation';
+import {isPrivacyPolicyPublished} from '../../../lib/privacy-policy';
 import Link from 'next/link';
 import {currentCMSUser} from '../../../lib/lead-manager-auth';
 import {db,isAdminReady,isTestDriveReady,retentionHealth} from '../../../lib/test-drive-server';
@@ -22,7 +23,7 @@ export default async function AdminSettings(){
  const setupDisabled=process.env.CMS_SETUP_ENABLED!=='true';
  const [privateIntake,retention]=await Promise.all([isTestDriveReady(),retentionHealth()]);
  const ready=isAdminReady()&&connection;
- const privacyApproved=process.env.PRIVACY_POLICY_APPROVED==='true';
+ const privacyApproved=isPrivacyPolicyPublished();
  const items=[
   {title:'PostgreSQL',value:connection?'კავშირი მუშაობს':'კავშირი შეფერხებულია',
    detail:'პერსონალური მონაცემების დაცული შენახვა და სესიების მუშაობა'},

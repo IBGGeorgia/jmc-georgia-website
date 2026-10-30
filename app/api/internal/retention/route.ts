@@ -1,4 +1,5 @@
 import {NextResponse} from 'next/server';
+import {isPrivacyPolicyPublished} from '../../../../lib/privacy-policy';
 import {executeRetentionBridge,retentionBridgeAuthorized,retentionBridgeStatus}
  from '../../../../lib/retention-bridge';
 
@@ -27,7 +28,7 @@ export async function POST(req:Request){
  }catch{return reply({error:'INVALID'},400)}
  if(mode!=='status'&&mode!=='execute')return reply({error:'INVALID'},400);
  if(mode==='execute'&&!(process.env.RETENTION_HTTP_EXECUTION_ENABLED==='true'
-  &&process.env.PRIVACY_POLICY_APPROVED==='true')){
+  &&isPrivacyPolicyPublished())){
   return reply({error:'EXECUTION_DISABLED'},403);
  }
  try{

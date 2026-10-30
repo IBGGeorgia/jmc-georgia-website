@@ -26,7 +26,7 @@
 - [ ] **Legal approval:** sign off draft [PR #44](https://github.com/IBGGeorgia/jmc-georgia-website/pull/44) and publish the complete public `/privacy` page with approved effective date and version. Until then, only a holding page should appear.
 - [ ] **First safe Cron run:** check scheduled 31 October 07:00 Tbilisi job log for `JMC_RETENTION_BRIDGE_CONNECTED: schemaReady=true; cleanup disabled`. The separate automated review is configured for 07:15.
 - [ ] **Active retention:** only with verified backup/recovery, legal signoff, dry-run, and explicit authorization, enable web `RETENTION_HTTP_EXECUTION_ENABLED=true` and Cron `JMC_RETENTION_EXECUTION_ENABLED=true` in a controlled, observed rollout. Then inspect true `RETENTION_COMPLETE` and fresh DB heartbeat. A `status` result **does not** count as a cleanup heartbeat.
-- [ ] **Lead intake:** only after all above and tested production readiness may web `RETENTION_SCHEDULE_CONFIRMED`, `PRIVACY_POLICY_APPROVED`, `PRIVACY_POLICY_VERSION` and `TEST_DRIVE_ENABLED` be enabled.
+- [ ] **Lead intake:** only after all above and tested production readiness may web `RETENTION_SCHEDULE_CONFIRMED`, `PRIVACY_POLICY_APPROVED`, `PRIVACY_POLICY_VERSION`, `PRIVACY_POLICY_EFFECTIVE_DATE` and `TEST_DRIVE_ENABLED` be enabled.
 
 ## Capability boundary
 
@@ -92,3 +92,29 @@ before enabling any public intake flags.
 
 Never submit actual customer data in the preflight. Never use this job to
 perform or authorize cleanup execution.
+
+## Publication-ready Privacy page — conditional until signoff
+
+The customer-facing `/privacy` route now contains complete Georgian JMC
+privacy copy (controller: **შპს „იბერია ბიზნეს ჯგუფი“, 204975376**; consent
+and data types; marketing withdrawal; Frankfurt hosting; 12-month retention;
+data-subject rights). It is **not** published as an approved policy by a
+code deploy alone.
+
+All three conditions must hold simultaneously:
+- `PRIVACY_POLICY_APPROVED=true` — legal/management signoff of actual text
+- `PRIVACY_POLICY_VERSION=1.3` — immutable recorded consent version
+- `PRIVACY_POLICY_EFFECTIVE_DATE=YYYY-MM-DD` — validated, real calendar
+  date for the legal effective date, not an auto-changing display date
+
+If any are missing, the current holding page remains public and data
+collection stays disabled. The Test Drive readiness gate and authorized
+destructive cron bridge also require all three, preventing half-activated
+states. These flags must NOT be set before legal review and verified
+PITR/recovery and operational controls. The effective date must reflect
+the actual date of approval/publication, not an earlier code commit.
+
+**CI coverage:** ordinary Browser QA uses unapproved mode; disposable
+Test Drive E2E enables approved mode and verifies the full public policy
+before writing synthetic leads into ephemeral PostgreSQL. No Production
+customer leads are created by either test.
