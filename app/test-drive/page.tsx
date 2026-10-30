@@ -14,8 +14,8 @@ export const metadata:Metadata={
 };
 export const dynamic='force-dynamic';
 
-export default function TestDrive(){
- const ready=isTestDriveReady();
+export default async function TestDrive(){
+ const ready=await isTestDriveReady();
  const vehicle=vehicles.find(v=>v.slug==='grand-avenue-pro')??vehicles[0];
  return <>
   <Header/>
