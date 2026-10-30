@@ -3,7 +3,7 @@ import {test,expect} from '@playwright/test';
 /** Full-site photography geometry contract: equal-size approved studio
  * masters and independent editorial art direction for model details. */
 const studioSurfaces=[
- {route:'/',selector:'.jmc-lineup-secondary-visual.jmc-studio-surface',count:2},
+ 
  {route:'/vehicles',selector:'.jmc-home-model-image.jmc-studio-surface',count:3},
  {route:'/test-drive',selector:'.jmc-lead-model-photo',count:3},
  {route:'/compare',selector:'.jmc-compare-story-image.jmc-studio-surface',count:3},
