@@ -64,3 +64,64 @@ test('CMS Lead Inbox v2: access controls, 25-row pages, server filters and audit
   expect(q.rows[0].c).toBe(1);
  }finally{await pool.end()}
 });
+
+
+test('Marketing opt-out: operator-only, CSRF protected, audited and idempotent',async({page,request})=>{
+ test.skip(process.env.CMS_LEAD_E2E!=='1','Disposable PostgreSQL only');
+ const path='/api/lead-manager/marketing-opt-out';
+ const anonymous=await request.post(path,{data:{id:'00000000-0000-4000-8000-000000000000'}});
+ expect(anonymous.status()).toBe(401);
+
+ await page.goto('/admin');
+ await page.getByLabel('მომხმარებლის სახელი').fill(process.env.CMS_BOOTSTRAP_USERNAME!);
+ await page.getByLabel('პაროლი',{exact:true}).fill(process.env.CMS_BOOTSTRAP_PASSWORD!);
+ await page.getByRole('button',{name:'შესვლა'}).click();
+ await expect(page.getByRole('heading',{name:/გამარჯობა/})).toBeVisible();
+
+ const pool=new pg.Pool({connectionString:process.env.DATABASE_URL!});
+ try{
+  const found=await pool.query<{id:string}>(`
+   SELECT id FROM jmc_test_drive_leads
+   WHERE full_name='QA Lead 1' LIMIT 1`);
+  expect(found.rows).toHaveLength(1);
+  const id=found.rows[0].id;
+  await pool.query(`UPDATE jmc_test_drive_leads SET
+    marketing_opt_in=true,notes='Original QA note' WHERE id=$1`,[id]);
+
+  const invalid=await page.request.post(path,{
+   headers:{Origin:'http://127.0.0.1:3000'},
+   data:{id:'bad-uuid'}});
+  expect(invalid.status()).toBe(400);
+
+  const csrf=await page.request.post(path,{
+   headers:{Origin:'https://untrusted.example'},
+   data:{id}});
+  expect(csrf.status()).toBe(403);
+
+  await page.goto('/admin/leads');
+  const row=page.locator('.jmc-lead-inbox-v2 tbody tr').filter({hasText:'QA Lead 1'});
+  await expect(row).toBeVisible();
+  await expect(row.getByText('მარკეტინგი: თანხმობა გაცემულია')).toBeVisible();
+  page.once('dialog',d=>d.accept());
+  await row.getByRole('button',{name:/მარკეტინგული თანხმობის გაუქმება/}).click();
+  await expect(page.getByText('მარკეტინგული თანხმობა გაუქმებულია და მოქმედება დაფიქსირებულია CMS-ის ისტორიაში.')).toBeVisible();
+  await expect(row.getByText('მარკეტინგი: თანხმობა არ არის')).toBeVisible();
+  await expect(row.getByRole('button',{name:/მარკეტინგული თანხმობის გაუქმება/})).toHaveCount(0);
+
+  const updated=await pool.query(`SELECT status,notes,marketing_opt_in
+   FROM jmc_test_drive_leads WHERE id=$1`,[id]);
+  expect(updated.rows[0].marketing_opt_in).toBe(false);
+  expect(updated.rows[0].notes).toBe('Original QA note');
+  expect(['new','contacted']).toContain(updated.rows[0].status);
+
+  const again=await page.request.post(path,{
+   headers:{Origin:'http://127.0.0.1:3000'},
+   data:{id}});
+  expect(again.status()).toBe(200);
+  expect(await again.json()).toMatchObject({ok:true,withdrawn:true,changed:false});
+  const audit=await pool.query<{count:number}>(`SELECT COUNT(*)::int AS count
+   FROM jmc_cms_audit_log WHERE action='lead.marketing_withdrawn'
+    AND subject_id=$1`,[id]);
+  expect(audit.rows[0].count).toBe(1);
+ }finally{await pool.end()}
+});
