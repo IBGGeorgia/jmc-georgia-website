@@ -29,13 +29,13 @@ test('First-admin setup rejects unauthenticated initialization and is one-time o
  await repeated.fill('short-test-pass');
  await expect(submit).toBeEnabled();
  await submit.click();
- await expect(page.getByRole('alert')).toContainText('მინიმუმ 16 სიმბოლოს');
+ await expect(page.locator('.jmc-cms-setup-error')).toContainText('მინიმუმ 16 სიმბოლოს');
  await pass.fill(password);
  await repeated.fill(password+'typo');
  await expect(page.getByText('პაროლები ერთმანეთს არ ემთხვევა',{exact:true})).toBeVisible();
  await expect(submit).toBeEnabled();
  await submit.click();
- await expect(page.getByRole('alert')).toContainText('პაროლები ერთმანეთს არ ემთხვევა');
+ await expect(page.locator('.jmc-cms-setup-error')).toContainText('პაროლები ერთმანეთს არ ემთხვევა');
  await repeated.fill(password);
  await expect(page.getByText('✓ პაროლები ემთხვევა')).toBeVisible();
  await expect(submit).toBeEnabled();
