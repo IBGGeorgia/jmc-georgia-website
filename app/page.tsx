@@ -21,33 +21,6 @@ export default function Home() {
       <div className="intro-copy"><p>ყოველდღიური მარშრუტებიდან ახალ გამოწვევებამდე — JMC Georgia-ს საიტზე შეძლებ მოდელების გაცნობას, კომპლექტაციების შედარებას და გადაწყვეტილების მიღებისთვის საჭირო ინფორმაციის მიღებას.</p><Link href="#models" className="text-link">აირჩიე მოდელი <JmcIcon name="arrow-up-right"/></Link></div>
     </div></section>
 
-    <section className="jmc-editorial-lineup" aria-labelledby="lineup-title">
-      <div className="container jmc-lineup-heading">
-        <div><p className="eyebrow">JMC / MODEL RANGE</p><h2 id="lineup-title">სამი ხასიათი.<br/><span>ერთი მიმართულება.</span></h2></div>
-        <Link href="#models" className="text-link">მოდელების არჩევა <JmcIcon name="arrow-up-right"/></Link>
-      </div>
-      {vehicles.filter(model=>model.slug==='grand-avenue-pro').map(model=>
-        <article className="jmc-lineup-feature" key={model.slug}>
-          <img src={model.heroImage} alt="JMC Grand Avenue PRO — მთავარი ფოტო" loading="lazy"/>
-          <div className="jmc-lineup-feature-shade"/>
-          <div className="container jmc-lineup-feature-content">
-            <span>01 / FEATURED PICKUP</span>
-            <h3>GRAND AVENUE <em>PRO</em></h3>
-            <p>ყველა გზა ახალი შესაძლებლობაა.</p>
-            <Link href={`/vehicles/${model.slug}`} className="jmc-lineup-pill">აღმოაჩინე PRO <JmcIcon name="arrow-up-right"/></Link>
-          </div>
-        </article>
-      )}
-      <div className="container jmc-lineup-secondary">
-        {vehicles.filter(model=>model.slug!=='grand-avenue-pro').map((model,i)=>
-          <article key={model.slug} className="jmc-lineup-secondary-card">
-            <Link href={`/vehicles/${model.slug}`} className="jmc-lineup-secondary-visual jmc-studio-surface"><img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-home':undefined} src={studioImageFor(model.slug,model.heroImage)} alt={`JMC ${model.name}`} loading="lazy"/><JmcIcon name="arrow-up-right"/></Link>
-            <div className="jmc-lineup-secondary-copy"><span>{String(i+2).padStart(2,'0')} / JMC PICKUP</span><h3>{model.name}</h3><p>{model.slug==='vigus'?'მზად ყოველდღიური გზებისა და ახალი გამოწვევებისთვის.':'დიზაინი და შესაძლებლობები, რომლებიც გზას სცდება.'}</p><Link href={`/vehicles/${model.slug}`}>გაიცანი მოდელი <JmcIcon name="arrow-up-right"/></Link></div>
-          </article>
-        )}
-      </div>
-    </section>
-
     <section className="section steps-section"><div className="container"><div className="section-head"><div><p className="eyebrow">მარტივი პროცესი</p><h2>არჩევანიდან პირველ შეხვედრამდე</h2></div></div><div className="steps-grid">{steps.map(step=><article className="step" key={step.id}><span className="step-num">{step.id}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></article>)}</div></div></section>
 
     <section className="section action-section"><div className="container"><div className="action-banner"><div><p className="eyebrow light">JMC Georgia</p><h2>იპოვე JMC Georgia.<br/>გაიგე მეტი.</h2><p>ჩვენი მისამართია: თბილისი, ბელიაშვილის 115. აღმოაჩინე მოდელის შესახებ ინფორმაცია და დაგეგმე შემდეგი ნაბიჯი.</p></div><div className="action-banner-buttons"><Link href="/contact" className="button">მისამართის ნახვა <JmcIcon name="arrow-up-right"/></Link><Link href="/about" className="button button-ghost">ჩვენ შესახებ <JmcIcon name="arrow-right"/></Link></div></div></div></section>
