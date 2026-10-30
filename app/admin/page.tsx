@@ -10,7 +10,7 @@ export default async function AdminHome(){
   <p className="eyebrow">JMC / Internal Workspace</p><h1>JMC Admin</h1>
   <p>დაცული სამუშაო სივრცე ლიდების, მომხმარებლებისა და სამომავლოდ საიტის ფუნქციების მართვისთვის.</p>
   </div>{isAdminReady()?<div className="jmc-admin-auth-card"><h2>ავტორიზაცია</h2><p>შეიყვანე პირადი მომხმარებლის სახელი და პაროლი.</p><AdminLogin/></div>
-   :<div className="jmc-admin-auth-card"><h2>სისტემა მზადდება</h2><p>მომხმარებლების დაცული ავტორიზაცია გააქტიურდება მონაცემთა ბაზის დაკავშირებისა და პირველი ადმინისტრატორის შექმნის შემდეგ.</p></div>}</section>;
+   :<div className="jmc-admin-auth-card"><h2>სისტემა მზადდება</h2><p>მომხმარებლების დაცული ავტორიზაცია გააქტიურდება მონაცემთა ბაზის დაკავშირებისა და პირველი ადმინისტრატორის შექმნის შემდეგ.</p><Link href="/admin/setup" className="button">პირველი ადმინისტრატორის დაყენება ↗</Link></div>}</section>;
  let stats:Metrics|null=null;
  if(user.role!=='editor')try{
   const r=await db().query<Metrics>(`SELECT COUNT(*)::text AS total,
