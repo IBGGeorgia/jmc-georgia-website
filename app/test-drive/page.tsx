@@ -24,10 +24,10 @@ export default function TestDrive(){
     <div className="jmc-td-hero-copy">
      <p className="eyebrow">JMC Georgia / Test Drive</p>
      <h1 id="jmc-td-hero-title">შეიგრძენი JMC.<br/>საკუთარი გამოცდილებით.</h1>
-     <p className="jmc-td-hero-lead">აირჩიე სასურველი პიკაპი, გაეცანი მას ახლოდან და დაგეგმე საცდელი მართვა ჩვენს გუნდთან ერთად.</p>
+     <p className="jmc-td-hero-lead">შეარჩიე მოდელი და დატოვე მოთხოვნა. ჩვენი გუნდი დაგიკავშირდება საცდელი მართვის დროის შესათანხმებლად.</p>
      <div className="jmc-td-hero-actions">
       <a className="button jmc-td-hero-primary" href="#test-drive-request">
-       აირჩიე ავტომობილი <JmcIcon name="arrow-up-right"/>
+       გადადით მოდელების არჩევაზე <JmcIcon name="arrow-up-right"/>
       </a>
       <Link href="/contact" className="jmc-td-text-link">
        შოურუმის მისამართი <JmcIcon name="arrow-up-right"/>
@@ -46,22 +46,22 @@ export default function TestDrive(){
     </div>
    </section>
 
+   <TestDriveForm ready={ready}/>
+
    <section className="jmc-td-process" aria-labelledby="jmc-td-process-title">
     <div className="jmc-td-process-heading">
-     <p className="eyebrow">როგორ მუშაობს</p>
-     <h2 id="jmc-td-process-title">სამი მარტივი ნაბიჯი</h2>
+     <p className="eyebrow">Test Drive / შემდეგი ნაბიჯები</p>
+     <h2 id="jmc-td-process-title">რა ხდება მოთხოვნის გაგზავნის შემდეგ?</h2>
     </div>
     <div className="jmc-td-process-grid">
-     <article><span>01</span><h3>აირჩიე მოდელი</h3>
-      <p>შეარჩიე VIGUS, Grand Avenue ან Grand Avenue PRO.</p></article>
-     <article><span>02</span><h3>გამოგვიგზავნე მოთხოვნა</h3>
-      <p>დატოვე საკონტაქტო ნომერი და სურვილისამებრ სასურველი დღე.</p></article>
-     <article><span>03</span><h3>შევათანხმოთ დრო</h3>
-      <p>ჩვენი წარმომადგენელი დაგიკავშირდება საცდელი მართვის დეტალების დასაზუსტებლად.</p></article>
+     <article><span>01</span><h3>მოთხოვნა მიიღება</h3>
+      <p>სისტემა დააფიქსირებს შენს განაცხადს და შერჩეულ მოდელს.</p></article>
+     <article><span>02</span><h3>დაგიკავშირდებით</h3>
+      <p>გაყიდვების წარმომადგენელი დააზუსტებს დეტალებს.</p></article>
+     <article><span>03</span><h3>შევათანხმებთ დროს</h3>
+      <p>ტესტ-დრაივის დრო დადასტურდება ჩვენს წარმომადგენელთან.</p></article>
     </div>
    </section>
-
-   <TestDriveForm ready={ready}/>
 
    <section className="jmc-td-visit" aria-labelledby="jmc-td-visit-title">
     <div>
