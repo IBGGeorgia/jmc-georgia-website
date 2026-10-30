@@ -118,7 +118,7 @@ export const grandAvenueHighlights=[
 
 export const grandAvenue:Vehicle={
  slug:'grand-avenue',
- name:'GRAND AVENUE',
+ name:'Grand Avenue',
  category:'pickup',
  publicationStatus:'approved',
  description:'JMC Grand Avenue — 4×4 პიკაპი 2.5-ლიტრიანი დიზელის ძრავით, 211 ც.ძ. სიმძლავრითა და 8-საფეხურიანი ავტომატური ტრანსმისიით.',
