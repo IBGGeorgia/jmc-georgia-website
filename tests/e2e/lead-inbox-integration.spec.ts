@@ -10,6 +10,11 @@ test('CMS Lead Inbox v2: access controls, 25-row pages, server filters and audit
  await page.getByLabel('პაროლი',{exact:true}).fill(process.env.CMS_BOOTSTRAP_PASSWORD!);
  await page.getByRole('button',{name:'შესვლა'}).click();
  await expect(page.getByRole('heading',{name:/გამარჯობა/})).toBeVisible();
+ await page.goto('/admin/settings');
+ await expect(page.getByRole('heading',{name:'სისტემის მდგომარეობა'})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'მონაცემთა ბაზის მიგრაცია'})).toBeVisible();
+ await expect(page.getByText('სქემა განახლებულია')).toBeVisible();
+ await expect(page.getByRole('heading',{name:'12-თვიანი შენახვა'})).toBeVisible();
  await page.goto('/admin/leads');
  await expect(page.getByRole('heading',{level:1,name:'Test Drive ლიდები'})).toBeVisible();
  await expect(page.locator('.jmc-lead-inbox-v2 tbody tr')).toHaveCount(25);
