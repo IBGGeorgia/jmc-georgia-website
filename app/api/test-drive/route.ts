@@ -3,10 +3,10 @@ import {createLead,getIp,isTestDriveReady,readLead,sameOrigin} from '../../../li
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 export async function GET(){
- return NextResponse.json({ready:isTestDriveReady()},{headers:{'Cache-Control':'no-store'}});
+ return NextResponse.json({ready:await isTestDriveReady()},{headers:{'Cache-Control':'no-store'}});
 }
 export async function POST(req:Request){
- if(!isTestDriveReady())return NextResponse.json({error:'NOT_ACTIVE'},{status:503});
+ if(!(await isTestDriveReady()))return NextResponse.json({error:'NOT_ACTIVE'},{status:503});
  if(!sameOrigin(req))return NextResponse.json({error:'ORIGIN'},{status:403});
  if(!(req.headers.get('content-type')||'').startsWith('application/json'))return NextResponse.json({error:'TYPE'},{status:415});
  if(Number(req.headers.get('content-length')||0)>8192)return NextResponse.json({error:'TOO_LARGE'},{status:413});
