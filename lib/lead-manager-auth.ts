@@ -1,5 +1,5 @@
 import 'server-only';
-import {createHash,randomBytes,scrypt as rawScrypt,timingSafeEqual} from 'node:crypto';
+import {createHmac,randomBytes,scrypt as rawScrypt,timingSafeEqual} from 'node:crypto';
 import {promisify} from 'node:util';
 import {cookies} from 'next/headers';
 import {db,fingerprint,isAdminReady} from './test-drive-server';
@@ -8,7 +8,7 @@ const scrypt=promisify(rawScrypt);
 const cookieName='jmc_cms_session';
 const lifetime=8*60*60;
 export type CMSUser={id:string;username:string;display_name:string;role:'admin'|'sales'|'editor'};
-const fingerprintSession=(value:string)=>createHash('sha256').update(value).digest('hex');
+const fingerprintSession=(value:string)=>createHmac('sha256',process.env.CMS_SESSION_SECRET||'').update(value).digest('hex');
 const dummyHash='scrypt:v1:7ff748a4f142788340587a72e35a1c19:8c44f8e7f0cf54dd6d8b5db72b6f0ea052862ad1e2d628b089ac86ae2a399394c5d61a2829f6a6830ea9cbd4c629e18d756414431b75d9825c20e0368479a16c';
 const safeEqual=(a:Buffer,b:Buffer)=>a.length===b.length&&timingSafeEqual(a,b);
 
