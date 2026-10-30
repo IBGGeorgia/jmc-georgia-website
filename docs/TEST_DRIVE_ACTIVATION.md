@@ -90,3 +90,35 @@ The integration test uses **ephemeral PostgreSQL** with randomly generated secre
 
 ### Operational blocker
 The Render connector currently does **not** provide the database's private connection URL/password, and its hosted SQL query function cannot connect to a database with an empty external IP allowlist. The missing `DATABASE_URL` must therefore be entered securely once in the Render Dashboard. We must not weaken the database's network security to get around this.
+
+
+## CMS operational handoff — authenticated admin created (reported 2026-10-30)
+The business owner confirmed they successfully created the first CMS administrator. The
+one-time initialization switch was subsequently disabled in Render by setting
+`CMS_SETUP_ENABLED=false` and the `CMS_SETUP_TOKEN` environment value was blanked.
+These changes redeploy without enabling public Test Drive intake.
+
+### Lead Operations v2
+- `/admin/leads` now loads records from a **permission-checked** server API instead of
+  rendering one unrefreshable 200-record snapshot.
+- `GET /api/lead-manager`: paginated 25 records per page with filters:
+  `status`, `model`, `days` (1, 7, 30, all), and search `q`.
+  Uses parameterized PostgreSQL queries and returns global status KPIs;
+  responses are private, no-store, admin/sales only.
+- `PATCH /api/lead-manager`: status and notes changes use a single transaction
+  for both lead mutation and `jmc_cms_audit_log` creation.
+- CMS UI includes refresh, last-updated timestamps, paginated results, model/status/
+  time filters, telephone action, accessible empty/error states and role-based CSV.
+- `/admin/settings`: now executes a real database health query and displays
+  actual CMS/Setup/Privacy readiness; never exposes credentials.
+- New CI workflow validates API filters, pagination, access restrictions, and
+  transaction audit against a **disposable PostgreSQL container** with synthetic
+  leads. CI data is not inserted into Production.
+- Public Test Drive collection remains **OFF** until a legally approved
+  and published privacy notice and explicit end-to-end validation.
+
+### Pending legal release gate
+Confirm data-controller registration number, personal-data rights contact,
+retention/deletion period, lawful processing basis, processors and international
+transfers. Obtain authorization to publish the finished Privacy policy, set its
+version and only then enable public submissions.
