@@ -42,13 +42,15 @@ In Render Dashboard, create a **Cron Job** with:
 - GitHub source: `IBGGeorgia/jmc-georgia-website`, branch `main`
 - Runtime: Node
 - Build: `npm install --no-audit --no-fund`
-- Command: `npm run db:retention:leads -- --execute`
+- Command: `node scripts/render-retention-cron.mjs` (**safe staged entrypoint**: no database access, no changes and an explicit PAUSED log until both private DATABASE_URL and JMC_RETENTION_EXECUTION_ENABLED=true are configured)
 - Schedule: `0 3 * * *` (**03:00 UTC = 07:00 in Tbilisi**), once daily
 - Internal `DATABASE_URL`: securely copy into this Cron Job's Environment settings from Render Postgres **Connect → Internal** (or use a managed Render Environment Group). Do not use the external URL or change the database IP allowlist.
 - `JMC_RETENTION_EXECUTION_ENABLED=true`: for **this Cron Job only** after backup, migration and deletion preview have been reviewed.
 - `PG_SSL`: only configure based on a verified working database TLS setup; the current app uses strict certificate verification when `PG_SSL=true`, which may not work with internal self-signed Render certificates.
 
 **Caution:** a Render Cron Job incurs compute charges, with a published minimum of USD $1 per month per cron service. Obtain billing authorization before provisioning.
+
+The paid Cron service may be created **before** legal/data-retention readiness. Its first runs intentionally log `JMC_RETENTION_PAUSED` without touching PostgreSQL. This is not equivalent to a functioning retention schedule; CMS Settings remains closed until successful execution + a verified fresh DB heartbeat. Do not set the execution flag until migration, backups, first dry-run review, and legal approvals are complete.
 
 Before the first **executing** run, use a trusted internal connection to run `npm run db:retention:leads -- --dry-run` and review the eligible count. The dry-run never updates the success heartbeat. A successful `--execute` run writes only the count and timestamp to `jmc_lead_retention_health` and never logs names/phones.
 
