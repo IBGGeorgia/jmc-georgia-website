@@ -283,7 +283,7 @@ test('Grand Avenue discovery: homepage, catalogue, drawer, footer and test-drive
    if(path==='/'){
     await page.locator('.home3-model-tabs button').filter({hasText:'Grand Avenue'}).first().click();
     await expect(page.locator('.home3-stage-copy a[href="'+grand+'"]').first()).toBeVisible();
-    await page.locator('.home3-model-tabs button').filter({hasText:'VIGUS'}).click();
+    await page.getByRole('group',{name:'აირჩიე JMC-ის მოდელი'}).getByRole('button',{name:'VIGUS'}).click();
     await expect(page.locator('.home3-stage-copy a[href="/vehicles/vigus"]').first()).toBeVisible();
    }else{
     await expect(page.locator('main a[href="'+grand+'"]').first()).toBeVisible();
