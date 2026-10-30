@@ -3,43 +3,77 @@ import {isTestDriveReady} from '../../lib/test-drive-server';
 import {TestDriveForm} from './test-drive-form';
 import {studioImageFor} from '../../lib/studio-images';
 import {JmcIcon} from '../jmc-icons';
-import type { Metadata } from 'next';
+import type {Metadata} from 'next';
 import Link from 'next/link';
-import { Header, Footer } from '../site-components';
+import {Header,Footer} from '../site-components';
 import {vehicles} from '../../lib/vehicles';
 
 export const metadata:Metadata={
- title:'ტესტ-დრაივი',
- description:'JMC Georgia — ტესტ-დრაივის დაჯავშნის ინფორმაცია და JMC Vigus-ის, Grand Avenue-ისა და Grand Avenue PRO-ის გაცნობა.'
+ title:'Test Drive — JMC Georgia',
+ description:'აირჩიე JMC VIGUS, Grand Avenue ან Grand Avenue PRO და გაიგე, როგორ დაგეგმო ტესტ-დრაივი JMC Georgia-სთან თბილისში.'
 };
-
 export const dynamic='force-dynamic';
+
 export default function TestDrive(){
+ const ready=isTestDriveReady();
+ const vehicle=vehicles.find(v=>v.slug==='grand-avenue-pro')??vehicles[0];
  return <>
   <Header/>
   <main className="container jmc-test-drive-page">
-   <header className="page-head jmc-page-intro">
-    <p className="eyebrow">JMC Georgia</p>
-    <h1>ტესტ-დრაივი</h1>
-    <p className="jmc-page-lead">აირჩიე სასურველი ავტომობილი და გაეცანი ტესტ-დრაივის მოთხოვნის პროცესს.</p>
-   </header>
-   <section className="jmc-test-drive-panel" aria-labelledby="test-drive-status">
-    <div className="jmc-test-drive-panel-copy">
-     <p className="jmc-test-drive-status-label">ონლაინ დაჯავშნა</p>
-     <h2 id="test-drive-status">{isTestDriveReady()?'Test Drive-ის მოთხოვნა აქტიურია':'Test Drive — დაჯავშნის სისტემა მზადდება'}</h2>
-     <p>{isTestDriveReady()?'აირჩიე სასურველი მოდელი და გამოგვიგზავნე მოთხოვნა. წარმომადგენელი დაგიკავშირდება თავისუფალი დროის შესათანხმებლად.':'სისტემის საბოლოო გამართვამდე ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება. მანამდე შეგიძლია შეარჩიო მოდელი, გაეცნო მოთხოვნის ფორმას და ნახო ჩვენი მისამართი.'}</p>
-     <div className="jmc-test-drive-actions">
-      <Link className="button" href="/vehicles">ნახე ყველა მოდელი <JmcIcon name="arrow-up-right"/></Link>
-      <Link className="jmc-test-drive-secondary" href="/contact">მისამართის ნახვა <JmcIcon name="arrow-up-right"/></Link>
+   <section className="jmc-td-hero" aria-labelledby="jmc-td-hero-title">
+    <div className="jmc-td-hero-copy">
+     <p className="eyebrow">JMC Georgia / Test Drive</p>
+     <h1 id="jmc-td-hero-title">შეიგრძენი JMC.<br/>საკუთარი გამოცდილებით.</h1>
+     <p className="jmc-td-hero-lead">აირჩიე სასურველი პიკაპი, გაეცანი მას ახლოდან და დაგეგმე საცდელი მართვა ჩვენს გუნდთან ერთად.</p>
+     <div className="jmc-td-hero-actions">
+      <a className="button jmc-td-hero-primary" href="#test-drive-request">
+       აირჩიე ავტომობილი <JmcIcon name="arrow-up-right"/>
+      </a>
+      <Link href="/contact" className="jmc-td-text-link">
+       დაგვიკავშირდი <JmcIcon name="arrow-up-right"/>
+      </Link>
      </div>
+     <p className="jmc-td-hero-caption">
+      <span className="jmc-td-hero-dot" aria-hidden="true"/>
+      {ready?'ტესტ-დრაივის მოთხოვნის ონლაინ გაგზავნა აქტიურია':'ონლაინ მოთხოვნის ფუნქცია მზადდება'}
+     </p>
     </div>
-    <div className="jmc-test-drive-panel-aside">
-     <span className="jmc-test-drive-aside-label">JMC Georgia</span>
-     <address>თბილისი, ბელიაშვილის 115</address>
+    <div className="jmc-td-hero-visual">
+     <img src={studioImageFor(vehicle.slug,vehicle.heroImage)}
+      alt="JMC Grand Avenue PRO — პიკაპი Studio გარემოში"
+      fetchPriority="high"/>
+     <span className="jmc-td-hero-visual-label">GRAND AVENUE PRO <span aria-hidden="true">↗</span></span>
     </div>
    </section>
-   <TestDriveForm ready={isTestDriveReady()}/>
-   <section className="jmc-test-drive-models" aria-label="აირჩიე მოდელი"><h2>გაიცანი მოდელები</h2><div className="jmc-home-model-grid">{vehicles.map(model=><article className="jmc-home-model-card" key={model.slug}><Link className="jmc-home-model-image jmc-studio-surface" href={`/vehicles/${model.slug}`}><img className={model.slug==='vigus'?'jmc-vigus-image jmc-vigus-image-test-drive':undefined} src={studioImageFor(model.slug,model.heroImage)} loading="lazy" alt={`JMC ${model.name}`}/></Link><div className="jmc-home-model-content"><h3>{model.name}</h3><Link href={`/vehicles/${model.slug}`} className="button">მახასიათებლების ნახვა <JmcIcon name="arrow-up-right"/></Link></div></article>)}</div></section>
+
+   <section className="jmc-td-process" aria-labelledby="jmc-td-process-title">
+    <div className="jmc-td-process-heading">
+     <p className="eyebrow">როგორ მუშაობს</p>
+     <h2 id="jmc-td-process-title">სამი მარტივი ნაბიჯი</h2>
+    </div>
+    <div className="jmc-td-process-grid">
+     <article><span>01</span><h3>აირჩიე მოდელი</h3>
+      <p>შეარჩიე VIGUS, Grand Avenue ან Grand Avenue PRO.</p></article>
+     <article><span>02</span><h3>გამოგვიგზავნე მოთხოვნა</h3>
+      <p>დატოვე საკონტაქტო ნომერი და სურვილისამებრ სასურველი დღე.</p></article>
+     <article><span>03</span><h3>შევათანხმოთ დრო</h3>
+      <p>ჩვენი წარმომადგენელი დაგიკავშირდება საცდელი მართვის დეტალების დასაზუსტებლად.</p></article>
+    </div>
+   </section>
+
+   <TestDriveForm ready={ready}/>
+
+   <section className="jmc-td-visit" aria-labelledby="jmc-td-visit-title">
+    <div>
+     <p className="eyebrow">JMC Georgia / Showroom</p>
+     <h2 id="jmc-td-visit-title">შეგვხვდი შოურუმში</h2>
+     <p>თბილისი, ბელიაშვილის 115</p>
+    </div>
+    <div className="jmc-td-visit-actions">
+     <Link href="/contact" className="button">კონტაქტი და მისამართი <JmcIcon name="arrow-up-right"/></Link>
+     <Link href="/vehicles" className="jmc-td-text-link">მოდელების გაცნობა <JmcIcon name="arrow-up-right"/></Link>
+    </div>
+   </section>
   </main>
   <Footer/>
  </>;
