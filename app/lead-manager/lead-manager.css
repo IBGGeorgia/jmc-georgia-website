@@ -42,3 +42,16 @@
  .jmc-lead-inbox-v2 .jmc-manager-actions .button{flex:1 1 125px}
  .jmc-lead-toolbar{flex-direction:column;align-items:flex-start}
 }
+
+/* Dedicated consent-withdrawal operation (not a new consent grant). */
+.jmc-marketing-consent{margin-top:12px;display:flex;align-items:flex-start;flex-direction:column;gap:7px}
+.jmc-marketing-consent small{margin:0}
+.jmc-marketing-opt-out{
+ display:inline-flex;align-items:center;min-height:40px;padding:9px 12px;
+ border:1px solid #d7d7dd;border-radius:10px;
+ background:#fff;color:#34343c;
+ font:600 12px/1.35 var(--font-ka);cursor:pointer;text-align:left
+}
+.jmc-marketing-opt-out:hover{border-color:#7c7c85;background:#f5f5f7}
+.jmc-marketing-opt-out:focus-visible{outline:2px solid #4c4c55;outline-offset:3px}
+.jmc-marketing-opt-out:disabled{opacity:.5;cursor:not-allowed}
