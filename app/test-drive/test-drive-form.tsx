@@ -47,9 +47,14 @@ export function TestDriveForm({ready}:{ready:boolean}){
  const [reference,setReference]=useState('');
  const started=useRef(false);
  const selected=vehicles.find(v=>v.slug===model)??vehicles[0];
+ // VIGUS uses two FLUX.2 Pro background-edit candidates, imported as local PNGs.
+ // The original black-background product angles stay retained elsewhere in the catalogue.
+ // Other models retain their source-backed galleries.
+ const verifiedVigusScenes=['/images/vigus/drive-front-20261030.png','/images/vigus/drive-side-20261030.png'];
  const views=[
-  {label:'Studio',src:studioImageFor(selected.slug,selected.heroImage)},
-  ...selected.gallery.slice(0,2).map((src,i)=>({label:'რაკურსი '+(i+2),src}))
+  {label:'Studio',src:studioImageFor(selected.slug,selected.heroImage),scene:false},
+  ...(selected.slug==='vigus'?verifiedVigusScenes:selected.gallery.slice(0,2))
+   .map((src,i)=>({label:'რაკურსი '+(i+2),src,scene:selected.slug==='vigus'}))
  ].filter(item=>Boolean(item.src));
  const selectedView=views[Math.min(view,views.length-1)]||views[0];
  const today=dateInGeorgia(new Date());
@@ -127,7 +132,7 @@ export function TestDriveForm({ready}:{ready:boolean}){
  return <section className="jmc-lead-flow" id="test-drive-request" aria-labelledby="jmc-lead-title">
   <div className="jmc-lead-flow-head">
    <div>
-    <p className="eyebrow">JMC / DRIVE STUDIO</p>
+    <p className="eyebrow">JMC / Drive Studio</p>
     <h2 id="jmc-lead-title">აირჩიე. გამოსცადე.</h2>
     <p>შეარჩიე სასურველი ავტომობილი და დაგვიტოვე საკონტაქტო ინფორმაცია — დანარჩენს ჩვენი გუნდი შეგითანხმებს.</p>
    </div>
@@ -159,15 +164,15 @@ export function TestDriveForm({ready}:{ready:boolean}){
     <div className="jmc-drive-studio-layout">
      <div className="jmc-drive-stage">
       <div className="jmc-drive-stage-heading">
-       <p className="jmc-drive-stage-index">01 / AUTOMOBILE</p>
+       <p className="jmc-drive-stage-index">01 / ავტომობილი</p>
        <h3>{selected.name}</h3>
        <p>გაეცანი ავტომობილს სხვადასხვა რაკურსიდან.</p>
       </div>
       <div className="jmc-drive-stage-media">
-       <img className="jmc-drive-stage-image" src={selectedView.src}
-        data-selected-model={selected.slug} data-view={view}
+       <img className={'jmc-drive-stage-image'+(selectedView.scene?' is-photo-scene':'')}
+        src={selectedView.src} data-selected-model={selected.slug} data-view={view}
         alt={'JMC '+selected.name+' — '+selectedView.label}/>
-       <span className="jmc-drive-stage-watermark" aria-hidden="true">JMC</span>
+       {!selectedView.scene&&<span className="jmc-drive-stage-watermark" aria-hidden="true">JMC</span>}
       </div>
       <div className="jmc-drive-view-controls" role="group" aria-label="ავტომობილის რაკურსები">
        {views.map((item,i)=><button key={item.label} type="button"
@@ -194,7 +199,7 @@ export function TestDriveForm({ready}:{ready:boolean}){
       </fieldset>
      </div>
      <div className="jmc-drive-form-panel">
-      <p className="jmc-drive-form-index">02 / YOUR DETAILS</p>
+      <p className="jmc-drive-form-index">02 / საკონტაქტო ინფორმაცია</p>
       <h3>მოითხოვე Test Drive</h3>
       <p className="jmc-drive-form-intro">შეავსე მოკლე ფორმა. ჩვენი წარმომადგენელი დაგიკავშირდება საცდელი მართვის დროის შესათანხმებლად.</p>
       <div className="jmc-drive-selected-summary" aria-live="polite">

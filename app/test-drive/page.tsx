@@ -19,7 +19,7 @@ export default async function TestDrive(){
   <main className="container jmc-test-drive-page">
    <section className="jmc-td-hero" aria-labelledby="jmc-td-hero-title">
     <div className="jmc-td-hero-copy">
-     <p className="eyebrow">JMC Georgia / Drive Studio</p>
+     <p className="eyebrow">JMC Georgia / Test Drive</p>
      <h1 id="jmc-td-hero-title">შეიგრძენი JMC.<br/>საკუთარი გამოცდილებით.</h1>
      <p className="jmc-td-hero-lead">შეარჩიე ავტომობილი, აღმოაჩინე მისი დეტალები და მოითხოვე Test Drive — ყველაფერი ერთ სივრცეში.</p>
      <div className="jmc-td-hero-actions">
@@ -30,12 +30,6 @@ export default async function TestDrive(){
        შოურუმის მისამართი <JmcIcon name="arrow-up-right"/>
       </Link>
      </div>
-    </div>
-    <div className="jmc-td-hero-aside" aria-hidden="true">
-     <span className="jmc-td-hero-aside-number">03</span>
-     <span className="jmc-td-hero-aside-rule"/>
-     <p>მოდელი. გამოცდილება. შენი არჩევანი.</p>
-     <span className="jmc-td-hero-aside-tag">JMC / DRIVE EXPERIENCE</span>
     </div>
    </section>
 
