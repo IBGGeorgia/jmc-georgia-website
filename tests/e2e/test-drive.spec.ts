@@ -32,8 +32,9 @@ test.describe('Test Drive staging safety contract',()=>{
  });
  test('Manager and export do not expose PII without credentials',async({page,request})=>{
   await page.goto('/lead-manager',{waitUntil:'domcontentloaded'});
-  await expect(page.getByRole('heading',{name:'Lead Manager'})).toBeVisible();
-  await expect(page.getByText('ადმინისტრაცია ჯერ არ არის გააქტიურებული')).toBeVisible();
+  await expect(page).toHaveURL(/\/admin$/);
+  await expect(page.getByRole('heading',{name:'JMC Admin',level:1})).toBeVisible();
+  await expect(page.getByText('მომხმარებლების დაცული ავტორიზაცია გააქტიურდება',{exact:false})).toBeVisible();
   const download=await request.get('/api/lead-manager/export');
   expect(download.status()).toBe(401);
   const patch=await request.patch('/api/lead-manager',{data:{id:'a',status:'new'}});
