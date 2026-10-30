@@ -86,7 +86,7 @@ test('Marketing opt-out: operator-only, CSRF protected, audited and idempotent',
   expect(found.rows).toHaveLength(1);
   const id=found.rows[0].id;
   await pool.query(`UPDATE jmc_test_drive_leads SET
-    marketing_opt_in=true,notes='Original QA note' WHERE id=$1`,[id]);
+    marketing_opt_in=true,notes='Original QA note',status='new' WHERE id=$1`,[id]);
 
   const invalid=await page.request.post(path,{
    headers:{Origin:'http://127.0.0.1:3000'},
@@ -99,7 +99,7 @@ test('Marketing opt-out: operator-only, CSRF protected, audited and idempotent',
   expect(csrf.status()).toBe(403);
 
   await page.goto('/admin/leads');
-  const row=page.locator('.jmc-lead-inbox-v2 tbody tr').filter({hasText:'QA Lead 1'});
+  const row=page.locator('.jmc-lead-inbox-v2 tbody tr').filter({has:page.getByText('QA Lead 1',{exact:true})});
   await expect(row).toBeVisible();
   await expect(row.getByText('მარკეტინგი: თანხმობა გაცემულია')).toBeVisible();
   page.once('dialog',d=>d.accept());
@@ -112,7 +112,7 @@ test('Marketing opt-out: operator-only, CSRF protected, audited and idempotent',
    FROM jmc_test_drive_leads WHERE id=$1`,[id]);
   expect(updated.rows[0].marketing_opt_in).toBe(false);
   expect(updated.rows[0].notes).toBe('Original QA note');
-  expect(['new','contacted']).toContain(updated.rows[0].status);
+  expect(updated.rows[0].status).toBe('new');
 
   const again=await page.request.post(path,{
    headers:{Origin:'http://127.0.0.1:3000'},
