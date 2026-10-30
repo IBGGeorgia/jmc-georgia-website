@@ -100,6 +100,23 @@ export function LeadManagerClient({role}:{role:'admin'|'sales'}){
   }catch{setError('შენახვა ვერ მოხერხდა. სცადე თავიდან.')}
   finally{setSaving('')}
  }
+ async function withdrawMarketing(item:Lead){
+  if(saving||!item.marketing_opt_in)return;
+  if(!window.confirm('დადასტურდეს მარკეტინგული თანხმობის გაუქმება? ეს მოქმედება არ ცვლის Test Drive-ის მოთხოვნას.'))return;
+  setSaving(item.id);setNotice('');setError('');
+  try{
+   const result=await fetch('/api/lead-manager/marketing-opt-out',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({id:item.id})
+   });
+   if(result.status===401){window.location.assign('/admin');return}
+   if(!result.ok)throw Error('WITHDRAWAL');
+   setNotice('მარკეტინგული თანხმობა გაუქმებულია და მოქმედება დაფიქსირებულია CMS-ის ისტორიაში.');
+   setRefresh(v=>v+1);
+  }catch{
+   setError('თანხმობის გაუქმება ვერ შესრულდა. გთხოვ, თავიდან სცადე.');
+  }finally{setSaving('')}
+ }
  const totalPages=Math.max(1,Math.ceil(total/25));
  const numbers=useMemo(()=>[
   {label:'ყველა ლიდი',value:stats.total},
@@ -154,7 +171,16 @@ export function LeadManagerClient({role}:{role:'admin'|'sales'}){
      return <tr key={item.id}>
       <td><strong>{item.full_name}</strong><a className="jmc-lead-phone" href={'tel:'+item.phone}>{item.phone}</a>
        <small>მიღებულია: {dates(item.created_at)}</small>
-       <small>განახლებულია: {dates(item.updated_at)}</small></td>
+       <small>განახლებულია: {dates(item.updated_at)}</small>
+       <div className="jmc-marketing-consent">
+        <small>მარკეტინგი: {item.marketing_opt_in?'თანხმობა გაცემულია':'თანხმობა არ არის'}</small>
+        {item.marketing_opt_in&&<button type="button" className="jmc-marketing-opt-out"
+         disabled={Boolean(saving)}
+         aria-label={'მარკეტინგული თანხმობის გაუქმება: '+item.full_name}
+         onClick={()=>void withdrawMarketing(item)}>
+         {saving===item.id?'მუშავდება…':'გააუქმე თანხმობა'}
+        </button>}
+       </div></td>
       <td><strong>{models.find(m=>m.value===item.model_slug)?.label||item.model_slug}</strong>
        <small>{item.preferred_date||'თარიღი შესათანხმებელია'}</small></td>
       <td>{item.source||'Direct'}<small>{item.campaign||item.medium||'—'}</small></td>
