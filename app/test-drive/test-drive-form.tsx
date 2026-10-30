@@ -47,9 +47,13 @@ export function TestDriveForm({ready}:{ready:boolean}){
  const [reference,setReference]=useState('');
  const started=useRef(false);
  const selected=vehicles.find(v=>v.slug===model)??vehicles[0];
+ // VIGUS uses previously approved first-party photographic assets rather than
+ // the older cutout-on-black front/side exports. Other models keep their verified galleries.
+ const verifiedVigusScenes=['/images/vigus/adventure-1.webp','/images/vigus/adventure-4.webp'];
  const views=[
-  {label:'Studio',src:studioImageFor(selected.slug,selected.heroImage)},
-  ...selected.gallery.slice(0,2).map((src,i)=>({label:'რაკურსი '+(i+2),src}))
+  {label:'Studio',src:studioImageFor(selected.slug,selected.heroImage),scene:false},
+  ...(selected.slug==='vigus'?verifiedVigusScenes:selected.gallery.slice(0,2))
+   .map((src,i)=>({label:'რაკურსი '+(i+2),src,scene:selected.slug==='vigus'}))
  ].filter(item=>Boolean(item.src));
  const selectedView=views[Math.min(view,views.length-1)]||views[0];
  const today=dateInGeorgia(new Date());
@@ -164,10 +168,10 @@ export function TestDriveForm({ready}:{ready:boolean}){
        <p>გაეცანი ავტომობილს სხვადასხვა რაკურსიდან.</p>
       </div>
       <div className="jmc-drive-stage-media">
-       <img className="jmc-drive-stage-image" src={selectedView.src}
-        data-selected-model={selected.slug} data-view={view}
+       <img className={'jmc-drive-stage-image'+(selectedView.scene?' is-photo-scene':'')}
+        src={selectedView.src} data-selected-model={selected.slug} data-view={view}
         alt={'JMC '+selected.name+' — '+selectedView.label}/>
-       <span className="jmc-drive-stage-watermark" aria-hidden="true">JMC</span>
+       {!selectedView.scene&&<span className="jmc-drive-stage-watermark" aria-hidden="true">JMC</span>}
       </div>
       <div className="jmc-drive-view-controls" role="group" aria-label="ავტომობილის რაკურსები">
        {views.map((item,i)=><button key={item.label} type="button"
