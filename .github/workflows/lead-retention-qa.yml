@@ -1,0 +1,41 @@
+name: JMC — 12-month Lead Retention QA
+on:
+  pull_request:
+    paths:
+      - 'db/test-drive.sql'
+      - 'lib/cms-schema.ts'
+      - 'scripts/purge-expired-leads.mjs'
+      - 'tests/retention-smoke.mjs'
+      - 'package.json'
+      - '.github/workflows/lead-retention-qa.yml'
+  push:
+    branches: [feature/lead-retention-12m-20261030]
+permissions:
+  contents: read
+jobs:
+  retention:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: jmc_test
+          POSTGRES_PASSWORD: jmc_test
+          POSTGRES_DB: jmc_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U jmc_test -d jmc_test"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      DATABASE_URL: postgresql://jmc_test:jmc_test@127.0.0.1:5432/jmc_test
+      TEST_RETENTION_CI: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm install
+      - run: npm run db:migrate:leads
+      - run: node tests/retention-smoke.mjs
