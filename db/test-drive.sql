@@ -15,11 +15,14 @@ CREATE TABLE IF NOT EXISTS jmc_test_drive_leads (
    CHECK (status IN ('new','contacted','scheduled','completed','cancelled')),
  notes varchar(1000) NOT NULL DEFAULT '',
  consent_version varchar(30) NOT NULL,
+ consented_at timestamptz NOT NULL DEFAULT now(),
  marketing_opt_in boolean NOT NULL DEFAULT false,
  ip_fingerprint varchar(64) NOT NULL,
  created_at timestamptz NOT NULL DEFAULT now(),
  updated_at timestamptz NOT NULL DEFAULT now()
 );
+-- Safe, idempotent upgrade for already-initialized databases.
+ALTER TABLE jmc_test_drive_leads ADD COLUMN IF NOT EXISTS consented_at timestamptz NOT NULL DEFAULT now();
 CREATE INDEX IF NOT EXISTS jmc_leads_created_idx ON jmc_test_drive_leads(created_at DESC);
 CREATE INDEX IF NOT EXISTS jmc_leads_ip_idx ON jmc_test_drive_leads(ip_fingerprint,created_at DESC);
 CREATE INDEX IF NOT EXISTS jmc_leads_phone_idx ON jmc_test_drive_leads(phone,created_at DESC);
