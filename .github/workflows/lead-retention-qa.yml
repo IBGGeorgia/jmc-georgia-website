@@ -5,11 +5,13 @@ on:
       - 'db/test-drive.sql'
       - 'lib/cms-schema.ts'
       - 'scripts/purge-expired-leads.mjs'
+      - 'scripts/render-retention-cron.mjs'
+      - 'tests/render-retention-cron.test.mjs'
       - 'tests/retention-smoke.mjs'
       - 'package.json'
       - '.github/workflows/lead-retention-qa.yml'
   push:
-    branches: [feature/lead-retention-12m-20261030]
+    branches: [feature/lead-retention-12m-20261030, feature/render-retention-cron-staged-20261030]
 permissions:
   contents: read
 jobs:
@@ -39,3 +41,4 @@ jobs:
       - run: npm install
       - run: npm run db:migrate:leads
       - run: node tests/retention-smoke.mjs
+      - run: node --test tests/render-retention-cron.test.mjs
