@@ -1,11 +1,14 @@
 name: JMC — Test Drive full journey QA
 on:
   push:
-    branches: [main, feature/test-drive-operational-readiness-20261030]
+    branches: [main, feature/test-drive-operational-readiness-20261030, feature/retention-secure-bridge-20261030]
     paths:
       - 'app/test-drive/**'
       - 'app/api/test-drive/**'
       - 'lib/test-drive-server.ts'
+      - 'lib/retention-bridge.ts'
+      - 'app/api/internal/retention/**'
+      - 'scripts/render-retention-cron.mjs'
       - 'tests/e2e/test-drive-full-journey.spec.ts'
       - '.github/workflows/test-drive-journey-qa.yml'
   pull_request:
@@ -14,6 +17,9 @@ on:
       - 'app/api/test-drive/**'
       - 'app/admin/settings/page.tsx'
       - 'lib/test-drive-server.ts'
+      - 'lib/retention-bridge.ts'
+      - 'app/api/internal/retention/**'
+      - 'scripts/render-retention-cron.mjs'
       - 'db/test-drive.sql'
       - 'lib/cms-schema.ts'
       - 'scripts/purge-expired-leads.mjs'
@@ -44,6 +50,7 @@ jobs:
       TEST_DRIVE_ENABLED: "true"
       PRIVACY_POLICY_APPROVED: "true"
       PRIVACY_POLICY_VERSION: "ci-test-only"
+      RETENTION_HTTP_EXECUTION_ENABLED: "true"
       RETENTION_SCHEDULE_CONFIRMED: "true"
       JMC_RETENTION_EXECUTION_ENABLED: "true"
     steps:
@@ -57,6 +64,7 @@ jobs:
           {
             echo "LEAD_HASH_SECRET=$(openssl rand -hex 32)"
             echo "CMS_SESSION_SECRET=$(openssl rand -hex 32)"
+            echo "JMC_RETENTION_BRIDGE_TOKEN=$(openssl rand -hex 48)"
           } >> "$GITHUB_ENV"
       - run: npm install
       - run: npm run db:migrate:leads
