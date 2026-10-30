@@ -77,8 +77,10 @@ export function readLead(body:unknown):LeadInput|null{
   if(!/^\d{4}-\d{2}-\d{2}$/.test(preferredDate))return null;
   const d=new Date(preferredDate+'T12:00:00Z');
   if(Number.isNaN(d.valueOf())||d.toISOString().slice(0,10)!==preferredDate)return null;
-  const today=new Date().toISOString().slice(0,10);
-  const maxDate=new Date(Date.now()+1000*60*60*24*90).toISOString().slice(0,10);
+  // The customer selects a date in Georgia local time, not UTC.
+  const inGeorgia=(d:Date)=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tbilisi',year:'numeric',month:'2-digit',day:'2-digit'}).format(d);
+  const today=inGeorgia(new Date());
+  const maxDate=inGeorgia(new Date(Date.now()+1000*60*60*24*90));
   if(preferredDate<today||preferredDate>maxDate)return null;
  }
  return {fullName,phone,model:model as ModelSlug,preferredDate:preferredDate||null,
