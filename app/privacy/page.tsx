@@ -20,6 +20,7 @@ export default function Privacy(){
     <div className="jmc-info-panel-copy">
      <p className="jmc-info-eyebrow">დოკუმენტის სტატუსი</p>
      <h2 id="privacy-status-title">პოლიტიკა მზადდება</h2>
+     <p><strong>იურიდიული პირი:</strong> Eastgate Automotive LLC</p>
      <p>საიტის კონფიდენციალურობის ოფიციალური პოლიტიკა ჯერ არ არის გამოქვეყნებული. ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება.</p>
      <p>პოლიტიკის სრული ტექსტი დაემატება შესაბამისი ინფორმაციის დადასტურების შემდეგ, მომხმარებლის მონაცემების შეგროვების ფუნქციის გააქტიურებამდე.</p>
      <div className="jmc-info-actions">
