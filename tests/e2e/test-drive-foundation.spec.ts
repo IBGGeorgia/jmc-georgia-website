@@ -30,7 +30,19 @@ test.describe('Test Drive pre-activation protections and UI',()=>{
   const response=await request.get('/api/lead-manager/export');
   expect(response.status()).toBe(401);
   await page.goto('/lead-manager',{waitUntil:'domcontentloaded'});
-  await expect(page.getByRole('heading',{level:1,name:'Lead Manager'})).toBeVisible();
-  await expect(page.getByText('ადმინისტრაცია ჯერ არ არის გააქტიურებული')).toBeVisible();
+  await expect(page).toHaveURL(/\/admin$/);
+  await expect(page.getByRole('heading',{level:1,name:'JMC Admin'})).toBeVisible();
+  await expect(page.getByText('მომხმარებლების დაცული ავტორიზაცია გააქტიურდება')).toBeVisible();
  });
+});
+
+test('JMC CMS does not expose private lead pages to anonymous visitors',async({request,page})=>{
+ const leads=await request.get('/admin/leads');
+ expect([200,307,308]).toContain(leads.status());
+ await page.goto('/admin/leads',{waitUntil:'domcontentloaded'});
+ await expect(page).toHaveURL(/\/admin$/);
+ const patch=await request.patch('/api/lead-manager',{data:{id:'00000000-0000-4000-8000-000000000000',status:'new',notes:''}});
+ expect(patch.status()).toBe(401);
+ const exportRequest=await request.get('/api/lead-manager/export');
+ expect(exportRequest.status()).toBe(401);
 });
