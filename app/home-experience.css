@@ -2,8 +2,9 @@
 .home3{--home3-ink:#212121;--home3-red:#e50012;font-family:var(--font-ka,"Google Sans",sans-serif)}
 .home3-shell{width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)));max-width:var(--jmc-content-max);margin-inline:auto}
 .home3-hero{height:var(--jmc-hero-height-desktop);min-height:var(--jmc-hero-height-desktop);position:relative;isolation:isolate;display:flex;align-items:center;overflow:hidden;background:#17191d;color:white}
-.home3-hero-backdrop{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 74% 42%,#35363a 0%,#212226 55%,#17181b 100%)}
-.home3-hero-backdrop:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),transparent 80%)}
+.home3-hero-backdrop{position:absolute;inset:0;z-index:-1;background:#17181b url("https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261030_195716_eab6abef-1e45-4f03-b4d3-486e11581045.png") center right/cover no-repeat}
+.home3-hero-backdrop:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.86) 0%,rgba(0,0,0,.57) 42%,rgba(0,0,0,.08) 80%)}
+@media(max-width:700px){.home3-hero-backdrop{background-position:67% center}.home3-hero-backdrop:after{background:linear-gradient(90deg,rgba(0,0,0,.79),rgba(0,0,0,.43))}}
 .home3-hero-copy{padding-block:80px 110px}
 .home3-kicker{font-size:12px;letter-spacing:.04em;font-weight:650;margin:0 0 21px}
 .home3-hero h1{font-weight:700;font-size:clamp(44px,5.8vw,94px);line-height:1.14;letter-spacing:-.04em;max-width:960px;margin:0 0 22px}
