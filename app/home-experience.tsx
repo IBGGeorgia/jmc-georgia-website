@@ -6,19 +6,19 @@ export default function HomeExperience({items}:{items:Item[]}) {
  const [active,setActive]=useState(0);
  const root=useRef<HTMLElement>(null);
  useEffect(()=>{
-   const media=window.matchMedia('(prefers-reduced-motion: reduce)');
-   if(media.matches || !root.current)return;
-   let disposed=false;
+   const rootNode=root.current;
+   if(!rootNode || window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+   let canceled=false;
    let cleanup=()=>{};
    import('gsap').then(({gsap})=>{
-     if(disposed || !root.current)return;
-     const ctx=gsap.context(()=>{
-       gsap.fromTo('.home3-hero-copy > *',{opacity:0,y:28},{opacity:1,y:0,duration:.85,stagger:.12,ease:'power2.out',clearProps:'transform'});
-       gsap.fromTo('.home3-reveal',{opacity:0,y:24},{opacity:1,y:0,duration:.6,stagger:.1,ease:'power2.out',scrollTrigger:undefined});
-     },root);
-     cleanup=()=>ctx.revert();
+     if(canceled)return;
+     const context=gsap.context(()=>{
+       gsap.fromTo('.home3-hero-copy > .home3-kicker, .home3-hero-copy > h1, .home3-hero-copy > p:not(.home3-kicker), .home3-hero-copy > .home3-actions',
+         {opacity:0,y:18},{opacity:1,y:0,duration:.72,stagger:.11,ease:'power2.out',clearProps:'all'});
+     },rootNode);
+     cleanup=()=>context.revert();
    }).catch(()=>{});
-   return ()=>{disposed=true;cleanup();};
+   return ()=>{canceled=true;cleanup()};
  },[]);
  const selected=items[active]??items[0];
  return <section className="home3" ref={root}>
