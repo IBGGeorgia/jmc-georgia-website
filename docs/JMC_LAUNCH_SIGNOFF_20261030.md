@@ -60,3 +60,35 @@ No outbound marketing sender or Zoho sync is connected yet. Future integrations
 MUST honor the current DB opt-in flag and suppress withdrawn records. Follow
 the approved response deadline; do not claim automated 7-day fulfillment until
 the organizational procedure and mailbox responsibilities are confirmed.
+
+## Automated live launch preflight — no customer records created
+
+Run `npm run qa:launch:live` to check the deployed JMC site from the
+command line. A manual workflow is also available under GitHub Actions:
+**JMC — Production launch preflight (read-only)**.
+
+This verifies five critical public endpoints without using Production
+credentials or submitting any lead:
+
+- GET `/api/test-drive`: responds with valid `ready:boolean`.
+- GET `/privacy`: the public policy page is reachable. If it still says
+  `პოლიტიკა მზადდება`, the intake API must report `ready=false`.
+- GET `/test-drive`: its visible status agrees with the API's readiness.
+- Unauthenticated POST `/api/internal/retention` (status only): HTTP 401.
+- Anonymous GET `/api/lead-manager`: HTTP 401.
+
+The default *observe* mode exits successfully when approval requirements
+are still pending and prints `BLOCKED_PENDING_APPROVALS` in the CI log.
+For **final go-live signoff**, set
+`JMC_PREFLIGHT_REQUIRE_READY=true npm run qa:launch:live` or select
+`require_ready=true` in the manual workflow; it fails until the real
+Production readiness endpoint reports `ready=true`.
+
+This only checks **observable public application behavior**. It does NOT
+verify the Postgres PITR recovery status, whether the legal controller
+has been registered correctly, or whether a signed policy was approved.
+Those require independent human/operator evidence, and must be reviewed
+before enabling any public intake flags.
+
+Never submit actual customer data in the preflight. Never use this job to
+perform or authorize cleanup execution.
