@@ -1,6 +1,7 @@
 import 'server-only';
 import crypto from 'node:crypto';
 import {Pool} from 'pg';
+import {isPrivacyPolicyPublished} from './privacy-policy';
 
 export const MODEL_SLUGS=['vigus','grand-avenue','grand-avenue-pro'] as const;
 export type ModelSlug=typeof MODEL_SLUGS[number];
@@ -34,7 +35,7 @@ export async function retentionHealth(){
 }
 export async function isTestDriveReady(){
  if(!(process.env.TEST_DRIVE_ENABLED==='true'
-  &&process.env.PRIVACY_POLICY_APPROVED==='true'
+  &&isPrivacyPolicyPublished()
   &&process.env.RETENTION_SCHEDULE_CONFIRMED==='true'
   &&configured(process.env.DATABASE_URL)
   &&(process.env.LEAD_HASH_SECRET?.length??0)>=32
