@@ -25,6 +25,7 @@ const pool=new pg.Pool({
 const predicate=`updated_at < now() - interval '12 months'
  AND (retention_hold_until IS NULL OR retention_hold_until <= now())`;
 let processed=0;
+let skipped=false;
 try{
  if(!execute){
   const result=await pool.query(`SELECT COUNT(*)::int AS total
@@ -41,7 +42,7 @@ try{
     const lock=await client.query('SELECT pg_try_advisory_xact_lock(20261030,12) AS obtained');
     if(!lock.rows[0].obtained){
      await client.query('ROLLBACK');
-     console.log('RETENTION_SKIPPED: another cleanup is active');
+     skipped=true;
      break;
     }
     const result=await client.query(`
@@ -64,6 +65,16 @@ try{
    processed+=count;
    if(count<500)break;
   }
+  if(skipped)throw Error('ANOTHER_CLEANUP_ACTIVE');
+  // A partial cleanup never counts as a successful daily run.
+  const check=await pool.query(`SELECT COUNT(*)::int AS remaining FROM jmc_test_drive_leads
+   WHERE ${predicate}`);
+  if(check.rows[0].remaining!==0)throw Error('RETENTION_BACKLOG_REMAINING');
+  await pool.query(`INSERT INTO jmc_lead_retention_health
+    (singleton,last_success_at,last_deleted_count) VALUES(true,now(),$1)
+    ON CONFLICT(singleton) DO UPDATE SET
+    last_success_at=EXCLUDED.last_success_at,
+    last_deleted_count=EXCLUDED.last_deleted_count`,[processed]);
   console.log('RETENTION_COMPLETE: deleted='+processed+'; no personal data logged');
  }
 }catch(e){
