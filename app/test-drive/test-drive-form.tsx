@@ -171,8 +171,8 @@ export function TestDriveForm({ready}:{ready:boolean}){
    </div>
    {!ready&&<div className="jmc-lead-hold" role="status">
     <strong>ონლაინ გაგზავნა მალე გახდება ხელმისაწვდომი.</strong>
-    <p>ფორმა მზადაა, მაგრამ მოთხოვნების მიღებამდე მონაცემთა დაცვის პირობების დამტკიცება მიმდინარეობს. მანამდე შეგიძლია ჩვენს გუნდს კონტაქტის გვერდიდან დაუკავშირდე.</p>
-    <Link href="/contact" className="button">კონტაქტი და მისამართი <JmcIcon name="arrow-up-right"/></Link>
+    <p>ფორმა მზადაა, მაგრამ მოთხოვნების მიღებამდე მონაცემთა დაცვის პირობების დამტკიცება მიმდინარეობს. მანამდე შეგიძლია ნახო შოურუმის მისამართი და გაეცნო ჩვენს მოდელებს.</p>
+    <Link href="/contact" className="button">შოურუმის მისამართი <JmcIcon name="arrow-up-right"/></Link>
    </div>}
    {error&&<p className="jmc-lead-error" role="alert">{error}</p>}
    <div className="jmc-lead-submit">
