@@ -18,7 +18,21 @@ export function CMSSetup(){
  },[]);
  async function submit(event:React.FormEvent){
   event.preventDefault();if(saving||!enabled)return;
-  if(password!==confirm){setMessage('პაროლები არ ემთხვევა.');return}
+  // The submit button must remain clickable; silently disabling it hid
+  // whether password length or the confirmation was the blocker.
+  if(setupToken.length<43||setupToken.length>512){
+   setMessage('Setup გასაღები უნდა შეიცავდეს მინიმუმ 43 სიმბოლოს.');return;
+  }
+  if(!/^[a-z][a-z0-9._-]{2,63}$/.test(username)){
+   setMessage('მომხმარებლის სახელი: 3–64 სიმბოლო, დაიწყე ლათინური ასოთი.');return;
+  }
+  if(displayName.trim().length<2||displayName.trim().length>120){
+   setMessage('შეიყვანე ადმინისტრატორის სახელი (2–120 სიმბოლო).');return;
+  }
+  if(password.length<16||password.length>256){
+   setMessage('პაროლი უნდა შეიცავდეს მინიმუმ 16 სიმბოლოს. ამჟამად: '+password.length+'.');return;
+  }
+  if(password!==confirm){setMessage('პაროლები ერთმანეთს არ ემთხვევა. გადაამოწმე ორივე ველი.');return}
   setSaving(true);setMessage('');
   try{
    const response=await fetch('/api/admin/setup',{
@@ -56,7 +70,7 @@ export function CMSSetup(){
  return <section className="jmc-cms-setup-card">
   <h2>CMS-ის ერთჯერადი გააქტიურება</h2>
   <p>ეს ფორმა გამოიყენება მხოლოდ პირველი ადმინისტრატორის შესაქმნელად. უკვე შექმნილ CMS-ზე ხელახალი ინიციალიზაცია დაიბლოკება.</p>
-  <form onSubmit={submit} className="jmc-cms-setup-fields">
+  <form onSubmit={submit} noValidate className="jmc-cms-setup-fields">
    <label>Render-ის ერთჯერადი Setup გასაღები
     <input type="password" autoComplete="off" required minLength={43} maxLength={512}
      value={setupToken} onChange={e=>setSetupToken(e.target.value)}/>
@@ -74,14 +88,22 @@ export function CMSSetup(){
    </label>
    <label>პაროლი — მინიმუმ 16 სიმბოლო
     <input type="password" autoComplete="new-password" required minLength={16} maxLength={256}
-     value={password} onChange={e=>setPassword(e.target.value)}/>
+     value={password} aria-describedby="cms-password-hint" aria-invalid={password.length>0&&password.length<16}
+     onChange={e=>{setPassword(e.target.value);setMessage('')}}/>
+    <span id="cms-password-hint" className={password.length>=16?'jmc-cms-validation is-valid':'jmc-cms-validation'} aria-live="polite">
+     {password.length===0?'მინიმუმ 16 სიმბოლო':password.length<16?'კიდევ '+(16-password.length)+' სიმბოლოა საჭირო':'✓ პაროლის მინიმალური სიგრძე შესრულებულია'}
+    </span>
    </label>
    <label>გაიმეორე პაროლი
     <input type="password" autoComplete="new-password" required minLength={16} maxLength={256}
-     value={confirm} onChange={e=>setConfirm(e.target.value)}/>
+     value={confirm} aria-describedby="cms-confirm-hint" aria-invalid={confirm.length>0&&password!==confirm}
+     onChange={e=>{setConfirm(e.target.value);setMessage('')}}/>
+    <span id="cms-confirm-hint" className={confirm.length>0&&password===confirm?'jmc-cms-validation is-valid':'jmc-cms-validation'} aria-live="polite">
+     {confirm.length===0?'გაიმეორე ზუსტად იგივე პაროლი':password===confirm?'✓ პაროლები ემთხვევა':'პაროლები ერთმანეთს არ ემთხვევა'}
+    </span>
    </label>
    {message&&<p className="jmc-cms-setup-error" role="alert">{message}</p>}
-   <button className="button" type="submit" disabled={saving||password.length<16||password!==confirm}>
+   <button className="button" type="submit" disabled={saving}>
     {saving?'მიმდინარეობს…':'CMS-ის გააქტიურება ↗'}
    </button>
   </form>
