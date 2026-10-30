@@ -243,7 +243,7 @@
 .jmc-drive-stage-media{position:relative;display:grid;place-items:center;
  width:100%;margin:13px 0 6px;min-width:0;overflow:hidden;
  background:#e9eaed;
- border-radius:var(--jmc-ui-radius-card);aspect-ratio:1.62}
+ border-radius:var(--jmc-ui-radius-card);aspect-ratio:16/9}
 .jmc-drive-stage-image{display:block;position:relative;z-index:1;
  width:100%;height:100%;object-fit:contain;object-position:center}
 .jmc-drive-stage-watermark{position:absolute;right:14px;top:0;
@@ -313,7 +313,7 @@
 .jmc-drive-success-grid .jmc-lead-success{border:0;border-radius:0;min-width:0;background:transparent}
 @media(max-width:1040px){
  .jmc-drive-studio-layout{grid-template-columns:minmax(0,1fr)}
- .jmc-drive-stage-media{aspect-ratio:2.05;max-height:450px}
+ .jmc-drive-stage-media{aspect-ratio:16/9;max-height:450px}
  .jmc-drive-form-panel{padding:clamp(23px,3.2vw,40px)}
 }
 @media(max-width:800px){
@@ -328,7 +328,7 @@
  .jmc-lead-flow-head h2{font-size:clamp(31px,7vw,42px)}
  .jmc-drive-stage{padding:18px 15px;border-radius:19px}
  .jmc-drive-stage-heading h3{font-size:clamp(27px,7vw,36px)}
- .jmc-drive-stage-media{aspect-ratio:1.65;min-height:0;margin:10px 0}
+ .jmc-drive-stage-media{aspect-ratio:16/9;min-height:0;margin:10px 0}
  .jmc-drive-view-controls{gap:5px;margin-bottom:22px}
  .jmc-drive-view{padding:10px 12px;font-size:11px;min-height:44px}
  .jmc-drive-stage .jmc-lead-model-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
@@ -358,7 +358,7 @@
 .jmc-test-drive-page .jmc-td-hero .jmc-td-hero-primary:hover{background:var(--jmc-ui-surface-hover);color:var(--jmc-ui-ink)}
 .jmc-drive-form-panel .jmc-lead-submit .button:hover{background:#3c3c41;color:#fff}
 .jmc-drive-stage .jmc-lead-model:focus-within{outline:2px solid var(--jmc-ui-focus);outline-offset:3px}
-.jmc-drive-stage-image.is-photo-scene{object-fit:cover}
+.jmc-drive-stage-image.is-photo-scene{object-fit:contain}
 .jmc-drive-form-panel .jmc-lead-details legend,.jmc-drive-stage .jmc-lead-models legend{letter-spacing:0;text-transform:none}
 .jmc-drive-stage-index,.jmc-drive-form-index{font-family:var(--font-ka);letter-spacing:0;text-transform:none}
 @media(prefers-reduced-motion:reduce){.jmc-drive-stage .jmc-lead-model,.jmc-drive-view{transition:none}}
