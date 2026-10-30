@@ -127,3 +127,15 @@
 .home3-tab{border-radius:var(--jmc-ui-radius-control);font-family:var(--font-ka)}
 @media(max-width:900px){.home3-vehicle-stage{grid-template-columns:minmax(0,1fr)}.home3-stage-image{min-height:340px}.home3-stage-copy{padding:clamp(24px,4vw,40px)}}
 @media(max-width:700px){.home3-lineup{padding-block:72px 84px}.home3-stage-image{min-height:250px}.home3-stage-image img{max-height:350px;padding:12px}.home3-stage-copy{padding:26px 24px 32px}.home3-heading{gap:18px}.home3-model-tabs{gap:8px}.home3-tab{min-height:44px}.home3-stage-buttons{width:100%;flex-direction:column}.home3-stage-buttons .home3-pill{width:100%}}
+
+/* Homepage performance: CSS entrance avoids loading GSAP on the landing page. */
+@media(prefers-reduced-motion:no-preference){
+ .home3-hero-copy > .home3-kicker,
+ .home3-hero-copy > h1,
+ .home3-hero-copy > p:not(.home3-kicker),
+ .home3-hero-copy > .home3-actions{animation:home3-copy-enter .68s var(--jmc-ui-ease) both}
+ .home3-hero-copy > h1{animation-delay:.1s}
+ .home3-hero-copy > p:not(.home3-kicker){animation-delay:.2s}
+ .home3-hero-copy > .home3-actions{animation-delay:.3s}
+}
+@keyframes home3-copy-enter{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}

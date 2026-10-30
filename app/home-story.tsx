@@ -24,7 +24,7 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
   </section>
   <section className="home3-story-grid home3-shell" aria-label="აღმოაჩინე JMC">
    {stories.map((story,i)=><article className="home3-story-tile" key={story.number}>
-    <div className="home3-story-photo"><img src={vehicles[i]?.gallery?.[0]||vehicles[i]?.image} alt={vehicles[i]?.name+' — ავტომობილის ფოტო'} loading="lazy"/></div>
+    <div className="home3-story-photo"><img src={vehicles[i]?.gallery?.[0]||vehicles[i]?.image} alt={vehicles[i]?.name+' — ავტომობილის ფოტო'} loading="lazy" decoding="async"/></div>
     <span>{story.number} / JMC</span><h3>{story.title}</h3><p>{story.body}</p>
     <Link className="home3-story-link" href={'/vehicles/'+(vehicles[i]?.slug||'vigus')}>გაიცანი მოდელი <span aria-hidden="true">↗</span></Link>
    </article>)}
@@ -37,14 +37,14 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
       </div>
       <div className="home3-detail-stage">
         <div className="home3-detail-media" onKeyDown={e=>{if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}if(e.key==='ArrowRight'){e.preventDefault();move(1)}}}>
-          {image?<img key={vehicle.slug+'-'+detail} src={image} alt={vehicle.name+' — რაკურსი '+(index+1)} loading="lazy"/>:<p>ფოტო მალე დაემატება.</p>}
+          {image?<img key={vehicle.slug+'-'+detail} src={image} alt={vehicle.name+' — რაკურსი '+(index+1)} loading="lazy" decoding="async"/>:<p>ფოტო მალე დაემატება.</p>}
           {photos.length>1&&<div className="home3-photo-controls"><button type="button" aria-label="წინა ფოტო" onClick={()=>move(-1)}>←</button><span aria-live="polite">{index+1} / {photos.length}</span><button type="button" aria-label="შემდეგი ფოტო" onClick={()=>move(1)}>→</button></div>}
         </div>
         <div className="home3-detail-side"><span className="home3-stage-index">JMC / DETAILS</span><h3>{vehicle.name}</h3><p>{vehicle.description}</p><Link href={'/vehicles/'+vehicle.slug} className="home3-pill home3-pill-dark">მოდელის დეტალები <span aria-hidden="true">↗</span></Link></div>
       </div>
       {photos.length>1&&<div className="home3-photo-thumbnails" role="group" aria-label="აირჩიე ფოტოს რაკურსი">
         {photos.map((src,i)=><button type="button" key={src+'-'+i} className={'home3-photo-thumb'+(index===i?' is-active':'')} aria-label={vehicle.name+' — ფოტო '+(i+1)} aria-pressed={index===i} onClick={()=>setDetail(i)}>
-          <img src={src} alt="" loading="lazy"/>
+          <img src={src} alt="" loading="lazy" decoding="async"/>
         </button>)}
       </div>}
     </div>
