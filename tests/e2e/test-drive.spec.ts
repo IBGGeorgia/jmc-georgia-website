@@ -9,6 +9,7 @@ test.describe('Test Drive staging safety contract',()=>{
    await expect(flow).toBeVisible();
    const radios=flow.getByRole('radio');
    await expect(radios).toHaveCount(3);
+   await expect(flow.locator('.jmc-lead-model-name')).toHaveText(['VIGUS','Grand Avenue','Grand Avenue PRO']);
    await expect(radios.first()).toBeChecked();
    await radios.nth(1).check();
    await expect(radios.nth(1)).toBeChecked();
