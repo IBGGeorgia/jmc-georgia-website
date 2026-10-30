@@ -115,3 +115,15 @@
 .home3-photo-controls{box-shadow:0 4px 16px rgba(0,0,0,.10)}
 .home3-detail-stage{border-radius:var(--jmc-ui-radius-card)}
 @media(max-width:700px){.home3-photo-thumb{flex-basis:112px}.home3-photo-thumbnails{gap:8px;padding-top:12px}}
+
+/* Homepage 3.5 — editorial model stage refinements, canonical Design Bible. */
+.home3-vehicle-stage{grid-template-columns:minmax(0,1.6fr) minmax(320px,.8fr);min-height:520px}
+.home3-stage-image{min-width:0;min-height:470px;background:linear-gradient(145deg,#eff0f2,#e5e6e9)}
+.home3-stage-image img{display:block;object-fit:contain;width:100%;height:100%;max-height:560px;padding:clamp(16px,2.1vw,36px)}
+.home3-stage-copy{min-width:0;background:var(--jmc-ui-surface)}
+.home3-stage-copy p{max-width:min(450px,var(--jmc-readable-max));color:var(--jmc-ui-secondary)}
+.home3-stage-buttons{gap:10px 12px}
+.home3-stage-buttons .home3-pill{min-height:48px}
+.home3-tab{border-radius:var(--jmc-ui-radius-control);font-family:var(--font-ka)}
+@media(max-width:900px){.home3-vehicle-stage{grid-template-columns:minmax(0,1fr)}.home3-stage-image{min-height:340px}.home3-stage-copy{padding:clamp(24px,4vw,40px)}}
+@media(max-width:700px){.home3-lineup{padding-block:72px 84px}.home3-stage-image{min-height:250px}.home3-stage-image img{max-height:350px;padding:12px}.home3-stage-copy{padding:26px 24px 32px}.home3-heading{gap:18px}.home3-model-tabs{gap:8px}.home3-tab{min-height:44px}.home3-stage-buttons{width:100%;flex-direction:column}.home3-stage-buttons .home3-pill{width:100%}}
