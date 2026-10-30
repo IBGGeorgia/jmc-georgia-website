@@ -76,3 +76,58 @@
  .jmc-admin-main{padding:24px 16px 60px}
  .jmc-admin-top-right{font-size:12px}
 }
+
+
+/* CMS Users & Permissions — private responsive account management */
+.jmc-admin-logout{margin-top:10px;min-height:40px;width:100%;background:#e6e6ea;border:0;
+ border-radius:999px;color:#34343a;font:600 13px/1.3 var(--font-ka);cursor:pointer}
+.jmc-admin-logout:hover{background:#dedee3}
+.jmc-admin-logout:disabled{opacity:.6;cursor:not-allowed}
+.jmc-cms-users{max-width:1250px;margin-top:38px}
+.jmc-cms-users-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:26px}
+.jmc-cms-users-summary>div{padding:22px;background:#fff;border:1px solid #e9e9ed;border-radius:18px;
+ display:flex;flex-direction:column;gap:8px;min-width:0}
+.jmc-cms-users-summary strong{font:650 clamp(26px,3vw,42px)/1 var(--font-latin)}
+.jmc-cms-users-summary span{font-size:13px;color:#777780}
+.jmc-cms-add-user,.jmc-cms-accounts{padding:clamp(20px,3vw,38px);background:#fff;
+ border:1px solid #e9e9ed;border-radius:22px;margin-bottom:22px}
+.jmc-cms-add-user h2,.jmc-cms-accounts h2{font-size:clamp(22px,2.5vw,32px);margin:0 0 12px}
+.jmc-cms-add-user>p{font-size:14px;color:#73737b;line-height:1.7;margin-bottom:27px}
+.jmc-cms-add-user form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:end;
+ gap:18px}
+.jmc-cms-add-user label,.jmc-cms-user-controls label,.jmc-cms-reset label{min-width:0;display:flex;
+ flex-direction:column;gap:9px;font-size:13px;font-weight:600;color:#494951}
+.jmc-cms-add-user input,.jmc-cms-add-user select,.jmc-cms-user-controls select,.jmc-cms-reset input{
+ width:100%;max-width:100%;min-height:48px;padding:11px 13px;
+ border:1px solid #d7d7dc;border-radius:12px;background:#fff;color:#1d1d1f;
+ font:500 14px/1.4 var(--font-ka)}
+.jmc-cms-add-user form>.button{grid-column:1/-1;justify-self:start}
+.jmc-cms-users-notice,.jmc-cms-users-error{border-radius:14px;padding:15px 20px;font-size:13px;
+ line-height:1.7;margin-bottom:20px}
+.jmc-cms-users-notice{background:#e8f1e9;color:#345c3c}
+.jmc-cms-users-error{background:#fff0ef;color:#912b2b}
+.jmc-cms-accounts-title{display:flex;justify-content:space-between;align-items:center;gap:20px;
+ flex-wrap:wrap;margin-bottom:20px}
+.jmc-cms-accounts-title h2{margin:0}
+.jmc-cms-accounts-title .button{min-height:44px;font-size:13px}
+.jmc-cms-users-list{display:flex;flex-direction:column;gap:12px}
+.jmc-cms-user-item{padding:20px;border:1px solid #e7e7eb;border-radius:17px;min-width:0}
+.jmc-cms-user-info{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:20px}
+.jmc-cms-user-info strong{color:#222228;font-size:15px}
+.jmc-cms-user-info span{font:500 13px var(--font-latin);color:#62626a}
+.jmc-cms-user-info small{color:#8b8b93;font-size:12px}
+.jmc-cms-user-controls{display:flex;flex-wrap:wrap;align-items:end;gap:10px}
+.jmc-cms-user-controls>label{width:min(195px,100%)}
+.jmc-cms-user-controls>.button{min-height:46px;padding:10px 16px;font-size:12px}
+.jmc-cms-user-controls :is(button,select):disabled{opacity:.5;cursor:not-allowed}
+.jmc-cms-reset{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin-top:20px;
+ padding:20px;border-radius:14px;background:#f5f5f7}
+.jmc-cms-reset label{flex:1;min-width:180px}
+.jmc-cms-reset .button{min-height:46px;font-size:12px}
+@media(max-width:650px){
+ .jmc-cms-users-summary{gap:8px}
+ .jmc-cms-users-summary>div{padding:15px;border-radius:14px}
+ .jmc-cms-add-user form{grid-template-columns:1fr}
+ .jmc-cms-user-controls>label{width:100%}
+ .jmc-cms-user-controls>.button{flex:1 1 150px}
+}
