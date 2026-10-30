@@ -26,8 +26,8 @@ export default function TestDrive(){
    <section className="jmc-test-drive-panel" aria-labelledby="test-drive-status">
     <div className="jmc-test-drive-panel-copy">
      <p className="jmc-test-drive-status-label">ონლაინ დაჯავშნა</p>
-     <h2 id="test-drive-status">Test Drive — დაჯავშნის სისტემა მზადდება</h2>
-     <p>სისტემის საბოლოო გამართვამდე ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება. მანამდე შეგიძლია შეარჩიო მოდელი, გაეცნო მოთხოვნის ფორმას და ნახო ჩვენი მისამართი.</p>
+     <h2 id="test-drive-status">{isTestDriveReady()?'Test Drive-ის მოთხოვნა აქტიურია':'Test Drive — დაჯავშნის სისტემა მზადდება'}</h2>
+     <p>{isTestDriveReady()?'აირჩიე სასურველი მოდელი და გამოგვიგზავნე მოთხოვნა. წარმომადგენელი დაგიკავშირდება თავისუფალი დროის შესათანხმებლად.':'სისტემის საბოლოო გამართვამდე ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება. მანამდე შეგიძლია შეარჩიო მოდელი, გაეცნო მოთხოვნის ფორმას და ნახო ჩვენი მისამართი.'}</p>
      <div className="jmc-test-drive-actions">
       <Link className="button" href="/vehicles">ნახე ყველა მოდელი <JmcIcon name="arrow-up-right"/></Link>
       <Link className="jmc-test-drive-secondary" href="/contact">მისამართის ნახვა <JmcIcon name="arrow-up-right"/></Link>
