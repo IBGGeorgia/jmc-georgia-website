@@ -281,7 +281,7 @@ test('Grand Avenue discovery: homepage, catalogue, drawer, footer and test-drive
    await expect(page.locator('main a[href="/vehicles/vigus"]')).toHaveCount(1);
   }else{
    await expect(page.locator('main a[href="'+grand+'"]')).toHaveCount(2);
-   await expect(page.locator('main a[href="/vehicles/vigus"]')).first().toBeVisible();
+   await expect(page.locator('main a[href="/vehicles/vigus"]').first()).toBeVisible();
   }
  }
  await page.goto('/');
