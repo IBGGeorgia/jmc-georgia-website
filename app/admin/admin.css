@@ -131,3 +131,21 @@
  .jmc-cms-user-controls>label{width:100%}
  .jmc-cms-user-controls>.button{flex:1 1 150px}
 }
+
+/* One-time secure CMS activation — never styled as a public lead intake form */
+.jmc-cms-setup-page{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,4vw,64px);align-items:start;padding-top:clamp(24px,4vw,60px)}
+.jmc-cms-setup-card{background:#fff;padding:clamp(23px,3vw,40px);border:1px solid #e9e9ed;border-radius:24px;min-width:0}
+.jmc-cms-setup-card h2{font-size:clamp(22px,2.7vw,30px);margin:0 0 15px}
+.jmc-cms-setup-card>p{font-size:14px;line-height:1.75;color:#72727b}
+.jmc-cms-setup-card>.button{margin-top:20px;display:inline-flex}
+.jmc-cms-setup-fields{display:flex;flex-direction:column;gap:15px;margin-top:26px}
+.jmc-cms-setup-fields label{display:flex;flex-direction:column;gap:8px;font-size:13px;font-weight:600;color:#45454c}
+.jmc-cms-setup-fields input{width:100%;height:49px;border:1px solid #d8d8dd;border-radius:13px;
+ padding:12px 14px;background:#fff;color:#1d1d1f;font:500 15px/1.4 var(--font-ka)}
+.jmc-cms-setup-fields input:focus-visible{outline:2px solid #5a5a62;outline-offset:3px}
+.jmc-cms-setup-fields .button{align-self:start;min-height:48px}
+.jmc-cms-setup-fields .button:disabled{opacity:.5;cursor:not-allowed}
+.jmc-cms-setup-error{color:#8d2929;background:#fff0ef;padding:14px 17px;border-radius:12px}
+.jmc-cms-setup-card .jmc-cms-setup-note{font-size:12px;margin-top:20px;line-height:1.6}
+@media(max-width:850px){.jmc-cms-setup-page{grid-template-columns:1fr;max-width:600px;padding-top:10px}}
+@media(prefers-reduced-motion:reduce){.jmc-cms-setup-fields button{transition:none}}
