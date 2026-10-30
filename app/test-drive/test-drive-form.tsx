@@ -50,8 +50,9 @@ export function TestDriveForm({ready}:{ready:boolean}){
    setStatus('error');
   }
  }
- const today=new Date().toISOString().slice(0,10);
- const maxDate=new Date(Date.now()+90*86400000).toISOString().slice(0,10);
+ const georgiaDate=(d:Date)=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tbilisi',year:'numeric',month:'2-digit',day:'2-digit'}).format(d);
+ const today=georgiaDate(new Date());
+ const maxDate=georgiaDate(new Date(Date.now()+90*86400000));
  return <section className="jmc-lead-flow" id="test-drive-request" aria-labelledby="jmc-lead-title">
   <div className="jmc-lead-flow-head">
    <div><p className="eyebrow">JMC Georgia / Test Drive</p>
