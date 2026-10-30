@@ -11,7 +11,7 @@ on:
       - 'package.json'
       - '.github/workflows/lead-retention-qa.yml'
   push:
-    branches: [feature/lead-retention-12m-20261030, feature/render-retention-cron-staged-20261030]
+    branches: [feature/lead-retention-12m-20261030, feature/render-retention-cron-staged-20261030, feature/retention-secure-bridge-20261030]
 permissions:
   contents: read
 jobs:
