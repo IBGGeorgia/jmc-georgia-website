@@ -104,3 +104,41 @@ test('Drive Studio V2 preserves data minimization and explicit opt-ins',async({p
  await expect(page.locator('.jmc-drive-view-controls button')).toHaveCount(3);
  await expect(page.locator('.jmc-lead-form')).toHaveAttribute('novalidate','');
 });
+
+
+test('Drive Studio V2.1 follows canonical pill/button and neutral selection tokens',async({page})=>{
+ for(const width of [1440,390,320]){
+  await page.setViewportSize({width,height:850});
+  await page.goto('/test-drive?model=vigus',{waitUntil:'domcontentloaded'});
+  const theme=await page.evaluate(()=>{
+   const primary=getComputedStyle(document.querySelector<HTMLElement>('.jmc-lead-submit .button')!);
+   const hero=getComputedStyle(document.querySelector<HTMLElement>('.jmc-td-hero-primary')!);
+   const angles=[...document.querySelectorAll<HTMLElement>('.jmc-drive-view')].map(el=>({
+    height:el.getBoundingClientRect().height,radius:getComputedStyle(el).borderRadius
+   }));
+   return {primary:primary.backgroundColor,hero:hero.backgroundColor,
+    primaryRadius:primary.borderRadius,heroRadius:hero.borderRadius,angles,
+    decorativeAside:!!document.querySelector('.jmc-td-hero-aside')};
+  });
+  expect(theme.primary).toBe('rgb(29, 29, 31)');
+  expect(theme.hero).toBe('rgb(255, 255, 255)');
+  expect(theme.primaryRadius).toBe('999px');
+  expect(theme.heroRadius).toBe('999px');
+  expect(theme.angles.every(x=>x.height>=44&&x.radius==='999px')).toBe(true);
+  expect(theme.decorativeAside).toBe(false);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth))
+   .toBeLessThanOrEqual(width+2);
+ }
+});
+
+test('New VIGUS angles are first-party and load without clipping',async({page})=>{
+ await page.goto('/test-drive?model=vigus',{waitUntil:'domcontentloaded'});
+ const image=page.locator('.jmc-drive-stage-image');
+ const controls=page.getByRole('group',{name:'ავტომობილის რაკურსები'});
+ for(const [index,part] of [[1,'drive-front-20261030.png'],[2,'drive-side-20261030.png']] as const){
+  await controls.getByRole('button').nth(index).click();
+  await expect(image).toHaveAttribute('src',new RegExp('/images/vigus/'+part.replace('.','\\.')));
+  await expect.poll(async()=>image.evaluate((node:HTMLImageElement)=>node.complete&&node.naturalWidth>=1000)).toBe(true);
+  await expect(image).toHaveCSS('object-fit','contain');
+ }
+});
