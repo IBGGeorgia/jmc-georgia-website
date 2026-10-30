@@ -52,6 +52,17 @@ async function run(){
  const holding=privacyHtml.includes('პოლიტიკა მზადდება');
  const publicText=privacyHtml.includes('კონფიდენციალურობა');
  ok(publicText,'PRIVACY_PUBLIC_CONTENT');
+ const approvedPolicy=privacyHtml.includes('თქვენი მონაცემების დამუშავების პირობები');
+ const correctController=privacyHtml.includes('204975376')&&
+  privacyHtml.includes('იბერია ბიზნეს ჯგუფი');
+ ok(correctController,'CONTROLLER_NAME_AND_ID');
+ if(!holding){
+  ok(approvedPolicy,'FULL_APPROVED_PRIVACY_POLICY_VISIBLE');
+  ok(privacyHtml.includes('1.3'),'APPROVED_PRIVACY_VERSION_VISIBLE');
+  ok(privacyHtml.includes('2026-10-30'),'PRIVACY_EFFECTIVE_DATE_VISIBLE');
+ }
+ // Intake is never permitted to be ready without the actual approved policy.
+ ok(!status.ready||(approvedPolicy&&!holding),'READY_REQUIRES_FULL_PUBLIC_POLICY');
 
  // The public privacy placeholder MUST NOT coexist with collecting real leads.
  ok(!(status.ready&&holding),'APPROVED_POLICY_REQUIRED_FOR_LIVE_INTAKE');

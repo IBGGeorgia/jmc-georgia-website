@@ -58,14 +58,15 @@ export default async function AdminSettings(){
    <div>
     <p className="eyebrow">Launch Readiness / Backup</p>
     <h2 id="jmc-pitr-review" style={{fontSize:'clamp(21px,2.3vw,30px)'}}>Recovery-ის შემოწმება</h2>
-    <p><strong>სტატუსი: დამოუკიდებლად არ არის დადასტურებული.</strong> PostgreSQL-ის ფასიანი გეგმა
-     და წარმატებული შიდა კავშირი არ ადასტურებს კონკრეტული აღდგენის წერტილის ხელმისაწვდომობას.</p>
-    <p>Render-ში გახსენი JMC PostgreSQL → Recovery და გადაამოწმე
-     Point-in-Time Recovery-ის აქტიური ფანჯარა. არ დააჭირო Restore Database-ს,
-     სანამ აღდგენის იზოლირებული ტესტი და დამატებითი ხარჯები არ იქნება შეთანხმებული.</p>
+    <p><strong>Recovery-ის ხელმისაწვდომობა დადასტურებულია.</strong> 2026 წლის 30 ოქტომბერს
+     უშუალოდ Render-ის PostgreSQL Recovery გვერდზე გამოჩნდა 7-დღიანი Point-in-Time Recovery-ის
+     ფანჯარა და Restore database ღილაკი.</p>
+    <p>ეს ადასტურებს აღდგენის შესაძლებლობის ხელმისაწვდომობას, მაგრამ არა რეალურად
+     შესრულებულ აღდგენის ტესტს. არ დააჭირო Restore Database-ს, სანამ იზოლირებული
+     ტესტი და დამატებითი ხარჯები ცალკე არ იქნება შეთანხმებული.</p>
     <p>Test Drive-ის მიღება და მონაცემთა ავტომატური წაშლა ამ შემოწმებით არ აქტიურდება.</p>
    </div>
-   <Link href="https://dashboard.render.com/d/dpg-dbi4ess9v7es738lu3c0-a" className="button" target="_blank" rel="noopener noreferrer">
+   <Link href="https://dashboard.render.com/d/dpg-dbi4ess9v7es738lu3c0-a/recovery" className="button" target="_blank" rel="noopener noreferrer">
     Render PostgreSQL ↗
    </Link>
   </section>}
