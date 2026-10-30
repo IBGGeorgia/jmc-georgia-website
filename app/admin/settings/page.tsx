@@ -1,18 +1,47 @@
 import {redirect} from 'next/navigation';
 import {currentCMSUser} from '../../../lib/lead-manager-auth';
-import {isAdminReady,isTestDriveReady} from '../../../lib/test-drive-server';
+import {db,isAdminReady,isTestDriveReady} from '../../../lib/test-drive-server';
 export const dynamic='force-dynamic';
 export default async function AdminSettings(){
- const user=await currentCMSUser();if(!user)redirect('/admin');
+ const user=await currentCMSUser();
+ if(!user)redirect('/admin');
+ let connection=false,accounts:number|null=null;
+ try{
+  const state=await db().query<{users:string}>(`SELECT
+   (SELECT COUNT(*)::text FROM jmc_cms_users WHERE is_active=true) AS users`);
+  connection=true;
+  if(user.role==='admin')accounts=Number(state.rows[0].users);
+ }catch{}
+ const setupDisabled=process.env.CMS_SETUP_ENABLED!=='true';
+ const privateIntake=isTestDriveReady();
+ const ready=isAdminReady()&&connection;
+ const privacyApproved=process.env.PRIVACY_POLICY_APPROVED==='true';
+ const items=[
+  {title:'PostgreSQL',value:connection?'კავშირი მუშაობს':'კავშირი შეფერხებულია',
+   detail:'პერსონალური მონაცემების დაცული შენახვა და სესიების მუშაობა'},
+  {title:'CMS ავტორიზაცია',value:ready?'აქტიურია':'შემოწმება საჭიროა',
+   detail:accounts!==null?accounts+' აქტიური თანამშრომლის ანგარიში':'ინდივიდუალური ანგარიშები და როლები'},
+  {title:'ერთჯერადი Setup',value:setupDisabled?'გამორთულია':'უნდა გამოირთოს',
+   detail:'პირველი ადმინისტრატორის შექმნის შემდეგ Setup ყოველთვის უნდა დაიხუროს'},
+  {title:'Test Drive',value:privateIntake?'აქტიურია':'მიღება გამორთულია',
+   detail:'ლიდები ჩაირთვება მხოლოდ Privacy-ის დამტკიცების შემდეგ'},
+  {title:'კონფიდენციალურობა',value:privacyApproved?'დადასტურებულია':'დასამტკიცებელია',
+   detail:'საჯარო სამართლებრივი დოკუმენტი და შენახვის წესები'},
+  {title:'Zoho CRM',value:'მომავალი ინტეგრაცია',
+   detail:'ლიდების სინქრონიზაცია დაგეგმილია, ადგილობრივი PostgreSQL რჩება საწყის წყაროდ'}
+ ];
  return <section className="jmc-admin-settings">
   <p className="eyebrow">Workspace / Settings</p>
-  <h1>სისტემის სტატუსი</h1>
-  <p>მოდულების მომზადება და ინტეგრაციების მზადყოფნა. უსაფრთხოების პარამეტრები აქ არ გამოჩნდება.</p>
+  <h1>სისტემის მდგომარეობა</h1>
+  <p>Production ინფრასტრუქტურისა და ფუნქციების მიმდინარე მდგომარეობა.
+   ეს გვერდი არ აჩვენებს პაროლებს, მონაცემთა ბაზის მისამართს ან საიდუმლო გასაღებებს.</p>
   <div className="jmc-admin-status-grid">
-   <article><h2>CMS ავტორიზაცია</h2><strong>{isAdminReady()?'კონფიგურირებულია':'გასამართია'}</strong><p>ინდივიდუალური ანგარიშები და როლები</p></article>
-   <article><h2>Test Drive</h2><strong>{isTestDriveReady()?'აქტიურია':'გამორთულია'}</strong><p>რეალური განაცხადების მიღება მხოლოდ მონაცემთა დაცვის პირობების შესრულების შემდეგ</p></article>
-   <article><h2>Zoho CRM</h2><strong>მომავალი ინტეგრაცია</strong><p>მზადდება მონაცემების სინქრონიზაციის მოდული</p></article>
-   <article><h2>საიტის კონტენტი</h2><strong>მომდევნო ეტაპი</strong><p>მოდელები, ფოტოები, ტექსტები და კამპანიები</p></article>
+   {items.map(item=><article key={item.title}>
+    <h2>{item.title}</h2><strong>{item.value}</strong><p>{item.detail}</p>
+   </article>)}
   </div>
+  {!setupDisabled&&<p role="alert" className="jmc-cms-users-error">
+   უსაფრთხოების რეკომენდაცია: პირველი Admin ანგარიშის შექმნის შემდეგ Render-ში გამორთე CMS_SETUP_ENABLED და წაშალე CMS_SETUP_TOKEN.
+  </p>}
  </section>;
 }
