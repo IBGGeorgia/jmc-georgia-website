@@ -1,6 +1,6 @@
 # JMC Georgia — Production Launch Signoff / 30.10.2026
 
-**State: technical infrastructure ready for preflight, NOT approved for public Test Drive lead intake or destructive daily cleanup.**
+**State (2026-10-30 ~20:28 Tbilisi): management authorization recorded; approved public Privacy Policy published. Retention execution enabled for the paid daily Cron, but real cleanup heartbeat NOT yet verified; Test Drive remains fail-closed until heartbeat exists.**
 
 ## Verified from Render (JMC-only resources)
 
@@ -12,9 +12,9 @@
 | External DB IP allowlist | Empty; leave it closed | Render instance metadata |
 | Retention schema | `leads=true legal_hold=true heartbeat=true` | Read-only startup probe 2026-10-30 12:49 UTC |
 | Aggregate records | `total=0 eligible=0 protected=0` at last probe only | No personal information logged |
-| Last successful daily destructive cleanup | `ever_run=false fresh=false` | No heartbeat yet; intake remains fail-closed |
+| Last successful daily retention cleanup | `ever_run=false fresh=false` at last read-only log | No production completion heartbeat yet; intake remains fail-closed until completed |
 | One-time schema migration | Disabled again | `JMC_RETENTION_SCHEMA_MIGRATION_ONCE=false` |
-| Cron destructive execution | Disabled | `JMC_RETENTION_EXECUTION_ENABLED=false`; status-only bridge |
+| Cron execution | **Enabled by management request 2026-10-30**, first scheduled run 2026-10-31 07:00 Asia/Tbilisi | `JMC_RETENTION_EXECUTION_ENABLED=true` on paid Cron; actual successful result still to be observed |
 
 ## Checklist to complete before enabling destructive cleanup or accepting customer data
 
@@ -22,11 +22,11 @@
 - [ ] **Recovery test decision:** a full restoration spins up a *new billable database*, not an in-place overwrite. Obtain approval for extra spend before a restore exercise. For critical production, test restoring to a disposable instance, then verify sample schema/rows and discard per retention rules.
 - [ ] **Optional export before production cleanup:** Recovery → **Create export**. Backups generated here are separate and can be downloaded, but contain sensitive personal data once lead intake starts; restrict, encrypt, and apply explicit backup retention.
 - [x] **Legal name and 9-digit company ID confirmed:** **შპს „იბერია ბიზნეს ჯგუფი“**, **204975376**. The project owner supplied these details 2026-10-30, and they match the [Geostat official statistical business register](https://www.br.geostat.ge/register_geo/index.php?Stat_ID=20753109&action=History). Official entrepreneurs-registry extract and any separate controller authorization/legal signoff remain matters for legal review; this does not approve the entire privacy policy.
-- [ ] **Controller responsibilities:** confirm that this entity is legally responsible for JMC Georgia lead requests, the `compliance@ibg.ge` mailbox is actually serviced, whether DPO is required, Render subprocessor/international transfer terms, opt-out process for optional marketing, and backup/log retention.
-- [ ] **Legal approval:** sign off draft [PR #44](https://github.com/IBGGeorgia/jmc-georgia-website/pull/44) and publish the complete public `/privacy` page with approved effective date and version. Until then, only a holding page should appear.
-- [ ] **First safe Cron run:** check scheduled 31 October 07:00 Tbilisi job log for `JMC_RETENTION_BRIDGE_CONNECTED: schemaReady=true; cleanup disabled`. The separate automated review is configured for 07:15.
-- [ ] **Active retention:** only with verified backup/recovery, legal signoff, dry-run, and explicit authorization, enable web `RETENTION_HTTP_EXECUTION_ENABLED=true` and Cron `JMC_RETENTION_EXECUTION_ENABLED=true` in a controlled, observed rollout. Then inspect true `RETENTION_COMPLETE` and fresh DB heartbeat. A `status` result **does not** count as a cleanup heartbeat.
-- [ ] **Lead intake:** only after all above and tested production readiness may web `RETENTION_SCHEDULE_CONFIRMED`, `PRIVACY_POLICY_APPROVED`, `PRIVACY_POLICY_VERSION`, `PRIVACY_POLICY_EFFECTIVE_DATE` and `TEST_DRIVE_ENABLED` be enabled.
+- [ ] **Controller operating procedures:** IBG management designated the controller (შპს „იბერია ბიზნეს ჯგუფი“, 204975376); still verify that `compliance@ibg.ge` is staffed, any DPO obligations, Render subprocessor/international transfer and backup/log-retention arrangements, and the internal request/identity verification SOP.
+- [x] **Management approval of public Privacy Policy and deployment:** authorized expressly on 2026-10-30 in project chat. Live JMC website web settings updated to `PRIVACY_POLICY_APPROVED=true`, `PRIVACY_POLICY_VERSION=1.3`, `PRIVACY_POLICY_EFFECTIVE_DATE=2026-10-30`. Final public `/privacy` copy exists in [PR #58](https://github.com/IBGGeorgia/jmc-georgia-website/pull/58). The prior [internal draft PR #44](https://github.com/IBGGeorgia/jmc-georgia-website/pull/44) remains a review artifact; this management decision is not external counsel certification.
+- [ ] **First actual Cron run:** check scheduled 31 October **07:00 Tbilisi** job log for `JMC_RETENTION_COMPLETE` and matching database heartbeat, instead of previous status-only result. The separate 07:15 automated review is configured. Do not count a deploy as a cleanup execution.
+- [ ] **Active retention completion evidence:** read-only Production probe showed `total=0 eligible=0 protected=0` on 2026-10-30. Authorized web `RETENTION_HTTP_EXECUTION_ENABLED=true` and paid Cron `JMC_RETENTION_EXECUTION_ENABLED=true` were staged for the **next scheduled run**; shared bridge token was rotated on both services (secret never recorded in docs). Confirm `JMC_RETENTION_COMPLETE` and fresh DB heartbeat after the scheduled run. A `status` result **does not** count as a cleanup heartbeat.
+- [ ] **Lead intake live verification:** web flags `RETENTION_SCHEDULE_CONFIRMED=true`, `TEST_DRIVE_ENABLED=true` were pre-staged on 2026-10-30 after management approval, but the actual `GET /api/test-drive` remains `ready:false` until **real** database cleanup success within 36 hours. On first successful Cron execution, server readiness should transition automatically; verify public form status, API and Lead Inbox before declaring publicly LIVE. If Cron fails, remain fail-closed and investigate; do not override the heartbeat requirement.
 
 ## Capability boundary
 
@@ -36,7 +36,7 @@ Render documentation:
 - [Recovery/PITR](https://render.com/docs/postgresql-backups): all paid Postgres, 3 days Hobby / 7 days Pro+, not within last 10 minutes; recovery spawns a new instance.
 - [Recovery status endpoint](https://api-docs.render.com/reference/retrieve-postgres-recovery-info): `AVAILABLE`, `BACKUP_NOT_READY`, `NOT_AVAILABLE`.
 
-**No environment variables should be switched to destructive mode on the basis of this checklist alone.**
+**Operational rule:** activation flags were changed only after explicit management approval and authenticated recovery verification; never manually write a synthetic cleanup heartbeat or override a failed retention execution.
 
 ## Marketing consent withdrawal — implemented, limited to authorized Sales/Admin
 
