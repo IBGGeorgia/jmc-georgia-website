@@ -67,3 +67,9 @@ test('Privacy page publishes approved contact while intake remains closed',async
  await expect(page.locator('a[href="mailto:compliance@ibg.ge"]')).toHaveCount(1);
  await expect(page.getByRole('heading',{name:'პოლიტიკა მზადდება'})).toBeVisible();
 });
+
+test('Optional marketing consent shows clear, direct withdrawal channel',async({page})=>{
+ await page.goto('/test-drive',{waitUntil:'domcontentloaded'});
+ await expect(page.locator('.jmc-lead-consent a[href="mailto:compliance@ibg.ge"]')).toHaveCount(1);
+ await expect(page.locator('.jmc-lead-consent input[type="checkbox"]').last()).not.toBeChecked();
+});

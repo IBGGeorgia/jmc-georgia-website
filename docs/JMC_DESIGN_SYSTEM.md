@@ -181,3 +181,9 @@ Read `docs/NEXT_MODEL_INTAKE.md` before adding any non-Vigus model. Only records
 - **Typography and Layout:** explicitly preserve previously approved fonts/type hierarchy and Width Bible (1680px / 760px; gutters 24px / 16px; Hero 748px desktop and 650px mobile). Do not redefine.
 - **Scope:** Header, Footer, Homepage, Catalogue, model pages, About, Contact, Test Drive and Privacy. Product-specific interactive controls retain intentional behavior, gallery scrolling and compact mobile navigation.
 - **Implementation:** shared styling in `app/design-system.css`; existing page-specific rules are superseded only where inconsistent with this standard. Remove superseded CSS opportunistically after visual regression comparison, not by broad deletion.
+
+## Approved Test Drive flow (2026-10-30)
+
+The public `/test-drive` route follows **Hero → vehicle selector and contact form → next steps → showroom**, with no full explanatory three-step section between the hero and selector. Keep the three existing model Studio assets, minimal white/neutral card treatment and 44px+ controls. On mobile shorten the route to model selection; avoid a second overlapping fixed CTA that obstructs form fields. After submission, clearly explain that the booking time still requires the sales team's confirmation.
+
+Approved privacy contact: **compliance@ibg.ge**. Approved Test Drive lead retention period: **12 calendar months since the last substantive lead update**. Deployment of the actual cleanup scheduler, policy publication and intake activation remain separate verified operations. See `docs/LEAD_RETENTION_OPERATIONS.md` and privacy draft PR #44.
