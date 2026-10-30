@@ -13,7 +13,8 @@
     "prebuild": "node scripts/sync-pro-media.mjs",
     "sync:pro-media": "node scripts/sync-pro-media.mjs",
     "qa:css": "node scripts/audit-css.mjs",
-    "db:migrate:leads": "node scripts/migrate-test-drive.mjs"
+    "db:migrate:leads": "node scripts/migrate-test-drive.mjs",
+    "cms:admin:create": "node scripts/create-cms-admin.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",
