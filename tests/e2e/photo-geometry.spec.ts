@@ -5,7 +5,7 @@ import {test,expect} from '@playwright/test';
 const studioSurfaces=[
  {route:'/',selector:'.jmc-lineup-secondary-visual.jmc-studio-surface',count:2},
  {route:'/vehicles',selector:'.jmc-home-model-image.jmc-studio-surface',count:3},
- {route:'/test-drive',selector:'.jmc-home-model-image.jmc-studio-surface',count:3},
+ {route:'/test-drive',selector:'.jmc-lead-model-photo',count:3},
  {route:'/compare',selector:'.jmc-compare-story-image.jmc-studio-surface',count:3},
  {route:'/compare',selector:'.jmc-compare-slot.jmc-studio-selector > img',count:2},
 ] as const;

@@ -14,7 +14,7 @@ test.describe('Test Drive staging safety contract',()=>{
    await expect(radios.nth(1)).toBeChecked();
    await expect(flow.getByRole('checkbox')).toHaveCount(2);
    await expect(flow.getByRole('button',{name:/გაგზავნე Test Drive მოთხოვნა/})).toBeDisabled();
-   await expect(flow).toContainText('განაცხადების მიღება ჯერ არ არის აქტიური');
+   await expect(flow).toContainText('ონლაინ განაცხადები ჯერ არ მიიღება');
    expect(await page.evaluate(()=>document.documentElement.scrollWidth))
     .toBeLessThanOrEqual(width+2);
   });
