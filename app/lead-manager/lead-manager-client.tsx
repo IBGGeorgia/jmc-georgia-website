@@ -73,7 +73,7 @@ export function LeadManagerClient({leads}:{leads:Lead[]}){
       <td>{item.model_slug}<small>{item.preferred_date||'შესათანხმებელი'}</small></td>
       <td>{item.source||'პირდაპირი'}<small>{item.campaign||'—'}</small></td>
       <td><select aria-label={'სტატუსი: '+item.full_name} value={draft.status}
-       onChange={e=>setDrafts(old=>({...old,[item.id], [item.id]:{...draft,status:e.target.value}}))}>
+       onChange={e=>setDrafts(old=>({...old,[item.id]:{...draft,status:e.target.value}}))}>
         {statuses.map(s=><option key={s.value} value={s.value}>{s.label}</option>)}</select></td>
       <td><textarea aria-label={'შენიშვნა: '+item.full_name} maxLength={1000} rows={2}
        value={draft.notes} onChange={e=>setDrafts(old=>({...old,[item.id]:{...draft,notes:e.target.value}}))}/></td>
