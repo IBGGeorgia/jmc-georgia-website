@@ -1,11 +1,22 @@
 name: JMC — Test Drive full journey QA
 on:
   push:
-    branches: [feature/test-drive-front-final-20261030]
+    branches: [main, feature/test-drive-operational-readiness-20261030]
     paths:
       - 'app/test-drive/**'
       - 'app/api/test-drive/**'
       - 'lib/test-drive-server.ts'
+      - 'tests/e2e/test-drive-full-journey.spec.ts'
+      - '.github/workflows/test-drive-journey-qa.yml'
+  pull_request:
+    paths:
+      - 'app/test-drive/**'
+      - 'app/api/test-drive/**'
+      - 'app/admin/settings/page.tsx'
+      - 'lib/test-drive-server.ts'
+      - 'db/test-drive.sql'
+      - 'lib/cms-schema.ts'
+      - 'scripts/purge-expired-leads.mjs'
       - 'tests/e2e/test-drive-full-journey.spec.ts'
       - '.github/workflows/test-drive-journey-qa.yml'
 permissions:
@@ -33,6 +44,8 @@ jobs:
       TEST_DRIVE_ENABLED: "true"
       PRIVACY_POLICY_APPROVED: "true"
       PRIVACY_POLICY_VERSION: "ci-test-only"
+      RETENTION_SCHEDULE_CONFIRMED: "true"
+      JMC_RETENTION_EXECUTION_ENABLED: "true"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -47,6 +60,8 @@ jobs:
           } >> "$GITHUB_ENV"
       - run: npm install
       - run: npm run db:migrate:leads
+      - name: Run actual retention cleanup on disposable CI database
+        run: npm run db:retention:leads -- --execute
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: npx playwright test tests/e2e/test-drive-full-journey.spec.ts --workers=1
