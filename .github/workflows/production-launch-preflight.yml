@@ -1,0 +1,35 @@
+name: JMC — Production launch preflight (read-only)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/jmc-production-launch-preflight.mjs'
+      - '.github/workflows/production-launch-preflight.yml'
+      - 'package.json'
+  workflow_dispatch:
+    inputs:
+      require_ready:
+        description: 'Require that public Test Drive intake is fully active (fails when approvals are outstanding)'
+        type: boolean
+        default: false
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  production-read-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      JMC_PREFLIGHT_REQUIRE_READY: ${{ inputs.require_ready || 'false' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check actual JMC Production without writing customer data
+        run: npm run qa:launch:live
