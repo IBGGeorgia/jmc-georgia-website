@@ -1,6 +1,6 @@
 import {redirect} from 'next/navigation';
 import {currentCMSUser} from '../../../lib/lead-manager-auth';
-import {db,isAdminReady,isTestDriveReady} from '../../../lib/test-drive-server';
+import {db,isAdminReady,isTestDriveReady,retentionHealth} from '../../../lib/test-drive-server';
 export const dynamic='force-dynamic';
 export default async function AdminSettings(){
  const user=await currentCMSUser();
@@ -13,7 +13,7 @@ export default async function AdminSettings(){
   if(user.role==='admin')accounts=Number(state.rows[0].users);
  }catch{}
  const setupDisabled=process.env.CMS_SETUP_ENABLED!=='true';
- const privateIntake=isTestDriveReady();
+ const [privateIntake,retention]=await Promise.all([isTestDriveReady(),retentionHealth()]);
  const ready=isAdminReady()&&connection;
  const privacyApproved=process.env.PRIVACY_POLICY_APPROVED==='true';
  const items=[
@@ -24,7 +24,11 @@ export default async function AdminSettings(){
   {title:'ერთჯერადი Setup',value:setupDisabled?'გამორთულია':'უნდა გამოირთოს',
    detail:'პირველი ადმინისტრატორის შექმნის შემდეგ Setup ყოველთვის უნდა დაიხუროს'},
   {title:'Test Drive',value:privateIntake?'აქტიურია':'მიღება გამორთულია',
-   detail:'ლიდები ჩაირთვება მხოლოდ Privacy-ის დამტკიცების შემდეგ'},
+   detail:'გააქტიურდება მხოლოდ Privacy-ის, სამუშაო ბაზისა და ავტომატური წაშლის დასტურის შემდეგ'},
+  {title:'12-თვიანი შენახვა',value:retention.fresh?'ავტომატური წმენდა დადასტურებულია':'ავტომატური წმენდა ვერ დადასტურდა',
+   detail:retention.lastSuccessAt?'ბოლო წარმატებული გაშვება: '+new Date(retention.lastSuccessAt).toLocaleString('ka-GE',{timeZone:'Asia/Tbilisi'}):'ჯერ არ არსებობს წარმატებული Production გაშვების ჩანაწერი'},
+  {title:'წაშლის განრიგი',value:process.env.RETENTION_SCHEDULE_CONFIRMED==='true'?'ოპერატორმა დაადასტურა':'დასადასტურებელია',
+   detail:'დადასტურება არ ცვლის ბოლო 36 საათის რეალური გაშვების შემოწმებას'},
   {title:'კონფიდენციალურობა',value:privacyApproved?'დადასტურებულია':'დასამტკიცებელია',
    detail:'საჯარო სამართლებრივი დოკუმენტი და შენახვის წესები'},
   {title:'Zoho CRM',value:'მომავალი ინტეგრაცია',
