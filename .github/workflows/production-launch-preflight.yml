@@ -1,6 +1,20 @@
 name: JMC — Production launch preflight (read-only)
 
 on:
+  # Read-only follow-up after the daily retention job scheduled 03:00 UTC.
+  # GitHub Actions scheduled jobs can be delayed; this is observability, not
+  # the mechanism that unlocks customer intake.
+  schedule:
+    - cron: '15 3 * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/production-launch-preflight.yml'
+      - 'scripts/jmc-production-launch-preflight.mjs'
+      - 'app/privacy/**'
+      - 'app/test-drive/**'
+      - 'lib/test-drive-server.ts'
+      - 'lib/privacy-policy.ts'
   pull_request:
     branches: [main]
     paths:
@@ -23,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     env:
-      JMC_PREFLIGHT_REQUIRE_READY: ${{ inputs.require_ready || 'false' }}
+      JMC_PREFLIGHT_REQUIRE_READY: ${{ (github.event_name == 'schedule' || inputs.require_ready == true) && 'true' || 'false' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
