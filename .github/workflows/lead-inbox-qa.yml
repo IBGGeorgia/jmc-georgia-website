@@ -1,7 +1,7 @@
 name: JMC — Lead Inbox PostgreSQL integration
 on:
   push:
-    branches: [feature/cms-lead-operations-v2-20261030, feature/jmc-production-readiness-diagnostics-20261030]
+    branches: [feature/cms-lead-operations-v2-20261030, feature/jmc-production-readiness-diagnostics-20261030, feature/jmc-marketing-consent-withdrawal-20261030]
     paths:
       - 'app/**'
       - 'lib/**'
@@ -9,6 +9,8 @@ on:
       - '.github/workflows/lead-inbox-qa.yml'
   pull_request:
     paths:
+      - 'app/api/lead-manager/**'
+      - 'app/lead-manager/**'
       - 'app/admin/settings/page.tsx'
       - 'tests/e2e/lead-inbox-integration.spec.ts'
       - '.github/workflows/lead-inbox-qa.yml'
