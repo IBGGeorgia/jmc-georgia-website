@@ -6,6 +6,8 @@ on:
       - 'lib/cms-schema.ts'
       - 'scripts/purge-expired-leads.mjs'
       - 'scripts/production-readiness-probe.mjs'
+      - 'scripts/apply-retention-schema-once.mjs'
+      - 'tests/retention-schema-migration.test.mjs'
       - 'tests/production-readiness-probe.test.mjs'
       - 'scripts/render-retention-cron.mjs'
       - 'tests/render-retention-cron.test.mjs'
@@ -13,7 +15,7 @@ on:
       - 'package.json'
       - '.github/workflows/lead-retention-qa.yml'
   push:
-    branches: [feature/lead-retention-12m-20261030, feature/render-retention-cron-staged-20261030, feature/retention-secure-bridge-20261030, feature/production-readonly-schema-probe-20261030]
+    branches: [feature/lead-retention-12m-20261030, feature/render-retention-cron-staged-20261030, feature/retention-secure-bridge-20261030, feature/production-readonly-schema-probe-20261030, feature/one-time-retention-additive-migration-20261030]
 permissions:
   contents: read
 jobs:
@@ -45,3 +47,4 @@ jobs:
       - run: node --test tests/production-readiness-probe.test.mjs
       - run: node tests/retention-smoke.mjs
       - run: node --test tests/render-retention-cron.test.mjs
+      - run: node --test tests/retention-schema-migration.test.mjs
