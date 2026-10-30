@@ -46,3 +46,28 @@ test('JMC CMS does not expose private lead pages to anonymous visitors',async({r
  const exportRequest=await request.get('/api/lead-manager/export');
  expect(exportRequest.status()).toBe(401);
 });
+
+
+test.describe('JMC Admin CMS shell: privacy and responsive layout',()=>{
+ for(const width of [1440,768,390,320]){
+  test('anonymous CMS entry at '+width,async({page})=>{
+   await page.setViewportSize({width,height:850});
+   await page.goto('/admin',{waitUntil:'domcontentloaded'});
+   await expect(page.getByRole('heading',{level:1,name:'JMC Admin'})).toBeVisible();
+   await expect(page.locator('.jmc-admin-sidebar')).toHaveCount(0);
+   const geometry=await page.evaluate(()=>({
+    viewport:document.documentElement.clientWidth,
+    width:document.documentElement.scrollWidth
+   }));
+   expect(geometry.width).toBeLessThanOrEqual(geometry.viewport+2);
+  });
+ }
+ test('CRM settings and leads redirect anonymous users to login',async({page,request})=>{
+  await page.goto('/admin/settings',{waitUntil:'domcontentloaded'});
+  await expect(page).toHaveURL(/\/admin$/);
+  await page.goto('/admin/leads',{waitUntil:'domcontentloaded'});
+  await expect(page).toHaveURL(/\/admin$/);
+  const exported=await request.get('/api/lead-manager/export');
+  expect(exported.status()).toBe(401);
+ });
+});
