@@ -18,6 +18,16 @@ test('Complete Test Drive journey: selected model -> validated form -> database 
   await expect(page.getByRole('heading',{name:'პოლიტიკა მზადდება'})).toHaveCount(0);
   await page.goto('/test-drive?model=grand-avenue-pro&utm_source=meta&utm_medium=paid_social&utm_campaign=qa');
   await expect(page.locator('.jmc-lead-model input[value="grand-avenue-pro"]')).toBeChecked();
+  // URL-selected model must drive the main vehicle image and the form summary.
+  await expect(page.locator('.jmc-drive-stage-image')).toHaveAttribute('data-selected-model','grand-avenue-pro');
+  await expect(page.locator('.jmc-drive-selected-summary')).toContainText('Grand Avenue PRO');
+  const views=page.getByRole('group',{name:'ავტომობილის რაკურსები'});
+  await expect(views.getByRole('button')).toHaveCount(3);
+  await views.getByRole('button',{name:/რაკურსი 2/}).click();
+  await expect(page.locator('.jmc-drive-stage-image')).toHaveAttribute('data-view','1');
+  await views.getByRole('button',{name:/Studio/}).click();
+  await expect(page.locator('.jmc-drive-stage-image')).toHaveAttribute('data-view','0');
+
   await expect(page.locator('.jmc-lead-model')).toHaveCount(3);
   await expect(page.locator('.jmc-td-process article')).toHaveCount(3);
   await expect(page.locator('.jmc-lead-submit button')).toBeEnabled();
@@ -33,6 +43,7 @@ test('Complete Test Drive journey: selected model -> validated form -> database 
   await page.locator('.jmc-lead-submit button').click();
   await expect(page.getByRole('heading',{name:'შენი მოთხოვნა მიღებულია'})).toBeVisible();
   await expect(page.locator('.jmc-lead-success')).toContainText('Grand Avenue PRO');
+  await expect(page.locator('.jmc-drive-success-photo img')).toHaveAttribute('alt',/Grand Avenue PRO/);
   const events=await page.evaluate(()=>{
    const w=window as Window&{dataLayer?:Record<string,unknown>[]};
    return w.dataLayer?.filter(x=>x.event==='generate_lead')||[];
@@ -79,7 +90,8 @@ test('Test Drive is readable and does not overflow at four viewport widths',asyn
   await page.setViewportSize({width,height:860});
   await page.goto('/test-drive?model=grand-avenue',{waitUntil:'domcontentloaded'});
   await expect(page.getByRole('heading',{level:1,name:/შეიგრძენი JMC/})).toBeVisible();
-  await expect(page.locator('.jmc-td-hero-visual img')).toHaveCount(1);
+  await expect(page.locator('.jmc-drive-stage-image')).toHaveCount(1);
+  await expect(page.locator('.jmc-drive-stage-image')).toHaveAttribute('data-selected-model','grand-avenue');
   await expect(page.locator('.jmc-lead-model-photo img')).toHaveCount(3);
   await expect(page.locator('.jmc-td-process article')).toHaveCount(3);
   await expect(page.locator('#test-drive-request')).toBeAttached();
