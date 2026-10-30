@@ -210,7 +210,7 @@ test('approved header and booking CTA layout, contact address in burger/footer',
   await drawer.getByRole('button',{name:'დახურვა'}).click();
   await cta.click();
   await expect(page).toHaveURL(/\/test-drive$/);
-  await expect(page.getByText('ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება.',{exact:false})).toBeVisible();
+  await expect(page.getByText('ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება.',{exact:false}).first()).toBeVisible();
  }
 });
 
