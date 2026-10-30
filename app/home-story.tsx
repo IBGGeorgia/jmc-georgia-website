@@ -22,8 +22,9 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
   </section>
   <section className="home3-story-grid home3-shell" aria-label="აღმოაჩინე JMC">
    {stories.map((story,i)=><article className="home3-story-tile" key={story.number}>
+    <div className="home3-story-photo"><img src={vehicles[i]?.gallery?.[0]||vehicles[i]?.image} alt={vehicles[i]?.name+' — ავტომობილის ფოტო'} loading="lazy"/></div>
     <span>{story.number} / JMC</span><h3>{story.title}</h3><p>{story.body}</p>
-    <div className="home3-story-rule" aria-hidden="true"/>
+    <Link className="home3-story-link" href={'/vehicles/'+(vehicles[i]?.slug||'vigus')}>გაიცანი მოდელი <span aria-hidden="true">↗</span></Link>
    </article>)}
   </section>
   <section className="home3-detail" aria-labelledby="home3-detail-title">
