@@ -10,7 +10,7 @@
     "audit": "npm audit",
     "qa:browser": "playwright test",
     "qa:browser:ui": "playwright test --ui",
-    "prebuild": "node scripts/import-vigus-drive-images.mjs && node scripts/sync-pro-media.mjs",
+    "prebuild": "node scripts/import-vigus-drive-images.mjs && node scripts/sync-pro-media.mjs && node scripts/import-homepage-hero.mjs",
     "sync:pro-media": "node scripts/sync-pro-media.mjs",
     "qa:css": "node scripts/audit-css.mjs",
     "db:migrate:leads": "node scripts/migrate-test-drive.mjs",
