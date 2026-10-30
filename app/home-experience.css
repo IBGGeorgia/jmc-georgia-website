@@ -104,3 +104,14 @@
 .home3-story-link{display:inline-flex;align-items:center;min-height:44px;gap:12px;margin-top:auto;margin-bottom:30px;font-weight:600;color:var(--jmc-ui-ink);text-decoration:none}
 .home3-story-link:focus-visible{outline:2px solid var(--jmc-ui-focus);outline-offset:3px}
 @media(max-width:950px){.home3-story-photo{height:340px}}
+
+/* Homepage 3.4 — photo explorer thumbnails, canonical neutral controls. */
+.home3-photo-thumbnails{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;padding:16px 0 8px;scrollbar-width:thin}
+.home3-photo-thumb{flex:0 0 clamp(102px,12vw,168px);aspect-ratio:16/9;min-height:58px;padding:4px;border:1px solid var(--jmc-ui-border);border-radius:12px;background:var(--jmc-ui-surface);cursor:pointer;scroll-snap-align:start}
+.home3-photo-thumb img{width:100%;height:100%;object-fit:contain;display:block}
+.home3-photo-thumb.is-active{border:2px solid var(--jmc-ui-ink);background:white}
+.home3-photo-thumb:focus-visible{outline:2px solid var(--jmc-ui-focus);outline-offset:3px}
+.home3-photo-controls button{min-width:44px;min-height:44px;width:44px;height:44px}
+.home3-photo-controls{box-shadow:0 4px 16px rgba(0,0,0,.10)}
+.home3-detail-stage{border-radius:var(--jmc-ui-radius-card)}
+@media(max-width:700px){.home3-photo-thumb{flex-basis:112px}.home3-photo-thumbnails{gap:8px;padding-top:12px}}
