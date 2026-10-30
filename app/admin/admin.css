@@ -149,3 +149,9 @@
 .jmc-cms-setup-card .jmc-cms-setup-note{font-size:12px;margin-top:20px;line-height:1.6}
 @media(max-width:850px){.jmc-cms-setup-page{grid-template-columns:1fr;max-width:600px;padding-top:10px}}
 @media(prefers-reduced-motion:reduce){.jmc-cms-setup-fields button{transition:none}}
+
+/* Inline validation: actionable feedback instead of an unexplained disabled CTA */
+.jmc-cms-validation{display:block;font-size:12px;font-weight:500;color:#9b3b35;line-height:1.5}
+.jmc-cms-validation.is-valid{color:#32663f}
+.jmc-cms-setup-fields input[aria-invalid="true"]{border-color:#b54d47}
+.jmc-cms-setup-fields .button:not(:disabled){cursor:pointer}
