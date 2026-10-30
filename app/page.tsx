@@ -1,8 +1,10 @@
+import HomeExperience from './home-experience';
 import {studioImageFor} from '../lib/studio-images';
 import {JmcIcon} from './jmc-icons';
 import Link from 'next/link';
 import { Header, Footer } from './site-components';
 import {vehicles} from '../lib/vehicles';
+import './home-experience.css';
 
 const steps = [
   { id: '01', title: 'აირჩიე ავტომობილი', text: 'გაეცანი JMC-ის მოდელებს და შეარჩიე შენი საჭიროებების შესაბამისი ავტომობილი.' },
@@ -12,25 +14,17 @@ const steps = [
 
 export default function Home() {
   return <><Header /><main>
-    <section className="hero hero-editorial" aria-labelledby="hero-title">
-      <div className="container hero-content">
-        <p className="eyebrow light">JMC Georgia · ოფიციალური წარმომადგენლობა</p>
-        <h1 id="hero-title">შენი გზა.<br/><span>ახალი შესაძლებლობები.</span></h1>
-        <p className="lead">აღმოაჩინე JMC საქართველოში — გაეცანი ავტომობილებს, შეადარე კომპლექტაციები და დაგეგმე მომავალი ტესტ-დრაივი.</p>
-        <div className="actions"><Link href="/vehicles/vigus" className="button">აღმოაჩინე Vigus <JmcIcon name="arrow-up-right"/></Link><Link href="/test-drive" className="button button-ghost">ტესტ-დრაივის ინფორმაცია <JmcIcon name="arrow-right"/></Link></div>
-      </div>
-      <div className="hero-bottom"><div className="container hero-bottom-inner"><span>JMC / Georgia</span><span>ავტომობილები საქართველოში</span><a href="#discover" aria-label="გადადით შემდეგ სექციაზე">აღმოაჩინე <JmcIcon name="arrow-down"/></a></div></div>
-    </section>
+    <HomeExperience items={vehicles.map(model=>({slug:model.slug,name:model.name,image:studioImageFor(model.slug,model.heroImage),description:model.description}))}/>
 
     <section id="discover" className="section introduction"><div className="container intro-grid">
       <div><p className="eyebrow">აღმოაჩინე JMC</p><h2>ავტომობილი, რომელიც შენს გეგმებს ერგება.</h2></div>
-      <div className="intro-copy"><p>ყოველდღიური მარშრუტებიდან ახალ გამოწვევებამდე — JMC Georgia-ს საიტზე შეძლებ მოდელების გაცნობას, კომპლექტაციების შედარებას და გადაწყვეტილების მიღებისთვის საჭირო ინფორმაციის მიღებას.</p><Link href="/vehicles" className="text-link">ნახე ყველა მოდელი <JmcIcon name="arrow-up-right"/></Link></div>
+      <div className="intro-copy"><p>ყოველდღიური მარშრუტებიდან ახალ გამოწვევებამდე — JMC Georgia-ს საიტზე შეძლებ მოდელების გაცნობას, კომპლექტაციების შედარებას და გადაწყვეტილების მიღებისთვის საჭირო ინფორმაციის მიღებას.</p><Link href="#models" className="text-link">აირჩიე მოდელი <JmcIcon name="arrow-up-right"/></Link></div>
     </div></section>
 
     <section className="jmc-editorial-lineup" aria-labelledby="lineup-title">
       <div className="container jmc-lineup-heading">
         <div><p className="eyebrow">JMC / MODEL RANGE</p><h2 id="lineup-title">სამი ხასიათი.<br/><span>ერთი მიმართულება.</span></h2></div>
-        <Link href="/vehicles" className="text-link">ყველა მოდელი <JmcIcon name="arrow-up-right"/></Link>
+        <Link href="#models" className="text-link">მოდელების არჩევა <JmcIcon name="arrow-up-right"/></Link>
       </div>
       {vehicles.filter(model=>model.slug==='grand-avenue-pro').map(model=>
         <article className="jmc-lineup-feature" key={model.slug}>
