@@ -162,7 +162,9 @@ export function TestDriveForm({ready}:{ready:boolean}){
     <label>
      <input type="checkbox" disabled={!ready||status==='sending'}
       checked={marketingOptIn} onChange={e=>setMarketingOptIn(e.target.checked)}/>
-     <span>მსურს მივიღო JMC-ის სიახლეები და შეთავაზებები (არასავალდებულო).</span>
+     <span>მსურს მივიღო JMC-ის სიახლეები და შეთავაზებები (არასავალდებულო).
+      თანხმობის გამოხმობა ნებისმიერ დროს შეგიძლია წერილით მისამართზე
+      <a href="mailto:compliance@ibg.ge"> compliance@ibg.ge</a>.</span>
     </label>
    </div>
    <div className="jmc-lead-trap" aria-hidden="true">
