@@ -76,3 +76,17 @@
 
 /* Canonical Homepage 3.0: use the exact approved hero breakpoint. */
 @media(max-width:700px){.home3-hero{height:var(--jmc-hero-height-mobile);min-height:var(--jmc-hero-height-mobile)}.home3-hero-copy{padding-block:65px 110px}}
+
+/* V3.1 restrained motion — existing imagery only, canonical controls unchanged. */
+@media (prefers-reduced-motion:no-preference){
+ .home3-stage-image img{transition:filter .35s var(--jmc-ui-ease)}
+ .home3-vehicle-stage:hover .home3-stage-image img{filter:contrast(1.035)}
+ .home3-story-tile{transition:background-color .22s var(--jmc-ui-ease)}
+ .home3-story-tile:not(:last-child):hover{background:#ebebee}
+ .home3-detail-media img{will-change:opacity,transform}
+}
+.home3-lineup .home3-tab:focus-visible,
+.home3-detail .home3-tab:focus-visible{outline:2px solid var(--jmc-ui-focus);outline-offset:4px}
+.home3-story-intro>p:last-child{max-width:var(--jmc-readable-max)}
+.home3-conversion-content>p:not(.home3-kicker){max-width:var(--jmc-readable-max)}
+.home3-hero-copy>p:not(.home3-kicker){max-width:min(590px,var(--jmc-readable-max))}
