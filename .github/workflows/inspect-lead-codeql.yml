@@ -1,0 +1,25 @@
+name: Inspect JMC lead scan warning
+on:
+  push:
+    branches: [feature/test-drive-lead-foundation-20261030]
+    paths:
+      - '.github/workflows/inspect-lead-codeql.yml'
+permissions:
+  contents: read
+  security-events: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Identify CodeQL high alert
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://api.github.com/repos/$REPOSITORY/code-scanning/alerts?state=open&per_page=100"
+          curl --fail --silent --show-error \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "$url" | jq -c '.[] | select(.tool.name=="CodeQL") | {number,rule:.rule.id,severity:.rule.security_severity_level,description:.rule.description,location:(.most_recent_instance.location//{}),state}'
