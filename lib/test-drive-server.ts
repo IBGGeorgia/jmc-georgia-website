@@ -22,6 +22,7 @@ export function isTestDriveReady(){
   &&process.env.PRIVACY_POLICY_APPROVED==='true'
   &&configured(process.env.DATABASE_URL)
   &&(process.env.LEAD_HASH_SECRET?.length??0)>=32
+  &&(process.env.PRIVACY_POLICY_VERSION?.length??0)>=3
   &&configured(process.env.RESEND_API_KEY)
   &&emailOk(process.env.RESEND_FROM||'')
   &&emailOk(process.env.SALES_NOTIFY_TO||'');
@@ -64,7 +65,8 @@ export function readLead(body:unknown):LeadInput|null{
  const v=body as Record<string,unknown>;
  const str=(k:string)=>typeof v[k]==='string'?String(v[k]).trim():'';
  const fullName=str('fullName');
- const phone=str('phone').replace(/[\s()-]/g,'');
+ const typedPhone=str('phone').replace(/[\s()-]/g,'');
+ const phone=/^5\d{8}$/.test(typedPhone)?'+995'+typedPhone:typedPhone;
  const model=str('model');
  const preferredDate=str('preferredDate');
  if(fullName.length<2||fullName.length>100||!/^\+?9955\d{8}$/.test(phone)
@@ -104,9 +106,9 @@ export async function createLead(input:LeadInput,ip:string){
   await client.query(`INSERT INTO jmc_test_drive_leads
     (id,full_name,phone,model_slug,preferred_date,source,medium,campaign,content,referrer,
      consent_version,marketing_opt_in,ip_fingerprint)
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'v1-pending-approval',$11,$12)`,
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$13,$11,$12)`,
    [id,input.fullName,input.phone,input.model,input.preferredDate,input.utmSource,
-    input.utmMedium,input.utmCampaign,input.utmContent,input.referrer,input.marketingOptIn,key]);
+    input.utmMedium,input.utmCampaign,input.utmContent,input.referrer,input.marketingOptIn,key,process.env.PRIVACY_POLICY_VERSION]);
   await client.query('COMMIT');
   return {limited:false,id} as const;
  }catch(e){await client.query('ROLLBACK').catch(()=>{});throw e}
