@@ -26,6 +26,14 @@ ALTER TABLE jmc_test_drive_leads ADD COLUMN IF NOT EXISTS consented_at timestamp
 -- Legal preservation is explicit, time-limited and must be recorded by an authorized operator.
 ALTER TABLE jmc_test_drive_leads ADD COLUMN IF NOT EXISTS retention_hold_until timestamptz;
 CREATE INDEX IF NOT EXISTS jmc_leads_retention_idx ON jmc_test_drive_leads(updated_at);
+-- A successful live cleanup heartbeat proves that scheduled retention is operational.
+-- This table stores no personal data and is not written by dry-run operations.
+CREATE TABLE IF NOT EXISTS jmc_lead_retention_health (
+ singleton boolean PRIMARY KEY DEFAULT true CHECK(singleton),
+ last_success_at timestamptz NOT NULL,
+ last_deleted_count integer NOT NULL DEFAULT 0
+);
+
 
 CREATE INDEX IF NOT EXISTS jmc_leads_created_idx ON jmc_test_drive_leads(created_at DESC);
 CREATE INDEX IF NOT EXISTS jmc_leads_ip_idx ON jmc_test_drive_leads(ip_fingerprint,created_at DESC);

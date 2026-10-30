@@ -88,3 +88,21 @@ test('Test Drive is readable and does not overflow at four viewport widths',asyn
   expect(values.button).toBeGreaterThan(100);
  }
 });
+
+test('Retention heartbeat is mandatory: stale cleanup disables form and POST',async({request})=>{
+ test.skip(process.env.TEST_DRIVE_E2E!=='1','Disposable CI database only.');
+ const pool=new pg.Pool({connectionString:process.env.DATABASE_URL!});
+ try{
+  await pool.query("UPDATE jmc_lead_retention_health SET last_success_at=now()-interval '48 hours' WHERE singleton=true");
+  const status=await request.get('/api/test-drive');
+  expect(await status.json()).toEqual({ready:false});
+  const attempt=await request.post('/api/test-drive',{headers:{Origin:'http://127.0.0.1:3000'},
+   data:{model:'vigus',fullName:'Synthetic QA',phone:'+995599123456',consent:true,
+    marketingOptIn:false,preferredDate:'',honeypot:''}});
+  expect(attempt.status()).toBe(503);
+  expect((await attempt.json()).error).toBe('NOT_ACTIVE');
+ }finally{
+  await pool.query("UPDATE jmc_lead_retention_health SET last_success_at=now() WHERE singleton=true");
+  await pool.end();
+ }
+});

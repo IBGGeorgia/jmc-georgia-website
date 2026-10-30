@@ -35,3 +35,5 @@ Before any page, component, content, CSS, animation, or new-model change, read:
 - Public Test Drive order: Hero → model selection + contact form → concise next steps → showroom. Preserve the customer-first flow and 3 approved Studio photos.
 - Privacy contact: **compliance@ibg.ge**. User-approved lead retention: **12 calendar months after last substantive update**; job execution requires authorized production scheduling and backup review.
 - Policy draft remains in PR #44 for legal validation; do not mark privacy approved, enable submission, or silently deploy scheduled deletion before operational gates are verified.
+
+- **Retention gate:** Test Drive intake now requires a real successful cleanup heartbeat newer than 36 hours, plus `RETENTION_SCHEDULE_CONFIRMED=true`; no bypass for production. Never set this flag as a shortcut. The guarded cleanup job never runs automatically on a build/deploy.

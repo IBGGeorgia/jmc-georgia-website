@@ -40,6 +40,10 @@ try{
  assert.ok(reject,'execute without guard must fail');
  const committed=await run(['--execute'],{JMC_RETENTION_EXECUTION_ENABLED:'true'});
  assert.match(committed.stdout,/deleted=1/);
+ const health=await pool.query('SELECT last_success_at,last_deleted_count FROM jmc_lead_retention_health WHERE singleton=true');
+ assert.equal(health.rows.length,1);
+ assert.equal(health.rows[0].last_deleted_count,1);
+ assert.ok(Date.now()-new Date(health.rows[0].last_success_at).getTime()<60_000);
  const result=await pool.query('SELECT id FROM jmc_test_drive_leads WHERE id=ANY($1::uuid[])',[ids]);
  assert.deepEqual(result.rows.map(r=>r.id).sort(),ids.slice(1).sort());
  console.log('RETENTION_CI_OK: expired synthetic record removed; recent and held records retained');

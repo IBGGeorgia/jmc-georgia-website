@@ -16,13 +16,31 @@ export type LeadRecord=LeadInput&{
 };
 const max=(s:string,n:number)=>s.trim().slice(0,n);
 const configured=(value?:string)=>Boolean(value&&value.trim());
-export function isTestDriveReady(){
- return process.env.TEST_DRIVE_ENABLED==='true'
+/** Health is based on an actual successful cleanup, never a hand-set timestamp. */
+export async function retentionHealth(){
+ if(!configured(process.env.DATABASE_URL))return {fresh:false,lastSuccessAt:null as string|null};
+ try{
+  const result=await db().query<{last_success_at:Date;fresh:boolean}>(
+   `SELECT last_success_at,
+    (last_success_at>=now()-interval '36 hours') AS fresh
+    FROM jmc_lead_retention_health WHERE singleton=true LIMIT 1`);
+  const row=result.rows[0];
+  return {fresh:row?.fresh===true,
+   lastSuccessAt:row?.last_success_at?new Date(row.last_success_at).toISOString():null};
+ }catch{
+  // Missing migration, unavailable database or unknown state always fail closed.
+  return {fresh:false,lastSuccessAt:null as string|null};
+ }
+}
+export async function isTestDriveReady(){
+ if(!(process.env.TEST_DRIVE_ENABLED==='true'
   &&process.env.PRIVACY_POLICY_APPROVED==='true'
+  &&process.env.RETENTION_SCHEDULE_CONFIRMED==='true'
   &&configured(process.env.DATABASE_URL)
   &&(process.env.LEAD_HASH_SECRET?.length??0)>=32
   &&(process.env.PRIVACY_POLICY_VERSION?.length??0)>=3
-  &&isAdminReady();
+  &&isAdminReady()))return false;
+ return (await retentionHealth()).fresh;
 }
 export function isAdminReady(){
  return configured(process.env.DATABASE_URL)
