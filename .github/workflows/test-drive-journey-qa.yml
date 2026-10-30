@@ -10,6 +10,8 @@ on:
       - 'app/api/internal/retention/**'
       - 'scripts/render-retention-cron.mjs'
       - 'tests/e2e/test-drive-full-journey.spec.ts'
+      - 'app/privacy/**'
+      - 'lib/privacy-policy.ts'
       - '.github/workflows/test-drive-journey-qa.yml'
   pull_request:
     paths:
@@ -50,6 +52,7 @@ jobs:
       TEST_DRIVE_ENABLED: "true"
       PRIVACY_POLICY_APPROVED: "true"
       PRIVACY_POLICY_VERSION: "ci-test-only"
+      PRIVACY_POLICY_EFFECTIVE_DATE: "2026-10-30"
       RETENTION_HTTP_EXECUTION_ENABLED: "true"
       RETENTION_SCHEDULE_CONFIRMED: "true"
       JMC_RETENTION_EXECUTION_ENABLED: "true"
