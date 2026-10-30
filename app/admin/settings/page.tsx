@@ -1,4 +1,5 @@
 import {redirect} from 'next/navigation';
+import Link from 'next/link';
 import {currentCMSUser} from '../../../lib/lead-manager-auth';
 import {db,isAdminReady,isTestDriveReady,retentionHealth} from '../../../lib/test-drive-server';
 export const dynamic='force-dynamic';
@@ -52,6 +53,21 @@ export default async function AdminSettings(){
     <h2>{item.title}</h2><strong>{item.value}</strong><p>{item.detail}</p>
    </article>)}
   </div>
+  {user.role==='admin'&&<section className="jmc-admin-feature-card" aria-labelledby="jmc-pitr-review" style={{marginTop:24}}>
+   <div>
+    <p className="eyebrow">Launch Readiness / Backup</p>
+    <h2 id="jmc-pitr-review" style={{fontSize:'clamp(21px,2.3vw,30px)'}}>Recovery-ის შემოწმება</h2>
+    <p><strong>სტატუსი: დამოუკიდებლად არ არის დადასტურებული.</strong> PostgreSQL-ის ფასიანი გეგმა
+     და წარმატებული შიდა კავშირი არ ადასტურებს კონკრეტული აღდგენის წერტილის ხელმისაწვდომობას.</p>
+    <p>Render-ში გახსენი JMC PostgreSQL → Recovery და გადაამოწმე
+     Point-in-Time Recovery-ის აქტიური ფანჯარა. არ დააჭირო Restore Database-ს,
+     სანამ აღდგენის იზოლირებული ტესტი და დამატებითი ხარჯები არ იქნება შეთანხმებული.</p>
+    <p>Test Drive-ის მიღება და მონაცემთა ავტომატური წაშლა ამ შემოწმებით არ აქტიურდება.</p>
+   </div>
+   <Link href="https://dashboard.render.com/d/dpg-dbi4ess9v7es738lu3c0-a" className="button" target="_blank" rel="noopener noreferrer">
+    Render PostgreSQL ↗
+   </Link>
+  </section>}
   <p className="jmc-info-footnote">სავალდებულო წარმოების ნაბიჯები: PostgreSQL-ის მიგრაციის შემოწმება,
    მონაცემთა დამტკიცებული პოლიტიკის გამოქვეყნება, უსაფრთხო ყოველდღიური Cron Job და
    სარეზერვო ასლების წესების დადასტურება. სტატუსის გვერდი თავად არ ცვლის ბაზას.</p>
