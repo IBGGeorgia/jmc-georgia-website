@@ -47,7 +47,7 @@
  .jmc-lead-form{padding:18px 14px;border-radius:17px}
  .jmc-lead-model-grid{grid-template-columns:1fr}
  .jmc-lead-model{display:grid;grid-template-columns:minmax(0,110px) 1fr;align-items:center;text-align:left;gap:16px;padding:10px}
- .jmc-lead-model input{position:static;grid-column:1;grid-row:1;margin:0 0 -22px 8px}
+ .jmc-lead-model input{position:absolute;top:18px;right:18px;left:auto;margin:0}
  .jmc-lead-model img{grid-column:1;grid-row:1;width:100%;height:auto}
  .jmc-lead-model span{grid-column:2;grid-row:1}
  .jmc-lead-fields{grid-template-columns:1fr;gap:15px}
