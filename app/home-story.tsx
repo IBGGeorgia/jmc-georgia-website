@@ -13,7 +13,9 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
  const [detail,setDetail]=useState(0);
  const vehicle=vehicles[current]||vehicles[0];
  const photos=[vehicle?.image,...(vehicle?.gallery||[])].filter((v):v is string=>Boolean(v));
- const image=photos[detail%Math.max(photos.length,1)];
+ const index=detail%Math.max(photos.length,1);
+ const image=photos[index];
+ const move=(step:number)=>setDetail(x=>(x+step+photos.length)%photos.length);
  return <div className="home3-story">
   <section className="home3-story-intro home3-shell" aria-labelledby="home3-story-title">
    <p className="home3-kicker">02 / DISCOVER MORE</p>
@@ -34,12 +36,17 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
        {vehicles.map((v,i)=><button key={v.slug} type="button" className={'home3-tab'+(current===i?' is-active':'')} aria-pressed={current===i} onClick={()=>{setCurrent(i);setDetail(0)}}>{v.name}</button>)}
       </div>
       <div className="home3-detail-stage">
-        <div className="home3-detail-media">
-          {image?<img key={vehicle.slug+'-'+detail} src={image} alt={vehicle.name+' — რაკურსი '+(detail+1)} loading="lazy"/>:<p>ფოტო მალე დაემატება.</p>}
-          {photos.length>1&&<div className="home3-photo-controls"><button type="button" aria-label="წინა ფოტო" onClick={()=>setDetail(x=>(x+photos.length-1)%photos.length)}>←</button><span aria-live="polite">{detail+1} / {photos.length}</span><button type="button" aria-label="შემდეგი ფოტო" onClick={()=>setDetail(x=>(x+1)%photos.length)}>→</button></div>}
+        <div className="home3-detail-media" onKeyDown={e=>{if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}if(e.key==='ArrowRight'){e.preventDefault();move(1)}}}>
+          {image?<img key={vehicle.slug+'-'+detail} src={image} alt={vehicle.name+' — რაკურსი '+(index+1)} loading="lazy"/>:<p>ფოტო მალე დაემატება.</p>}
+          {photos.length>1&&<div className="home3-photo-controls"><button type="button" aria-label="წინა ფოტო" onClick={()=>move(-1)}>←</button><span aria-live="polite">{index+1} / {photos.length}</span><button type="button" aria-label="შემდეგი ფოტო" onClick={()=>move(1)}>→</button></div>}
         </div>
         <div className="home3-detail-side"><span className="home3-stage-index">JMC / DETAILS</span><h3>{vehicle.name}</h3><p>{vehicle.description}</p><Link href={'/vehicles/'+vehicle.slug} className="home3-pill home3-pill-dark">მოდელის დეტალები <span aria-hidden="true">↗</span></Link></div>
       </div>
+      {photos.length>1&&<div className="home3-photo-thumbnails" role="group" aria-label="აირჩიე ფოტოს რაკურსი">
+        {photos.map((src,i)=><button type="button" key={src+'-'+i} className={'home3-photo-thumb'+(index===i?' is-active':'')} aria-label={vehicle.name+' — ფოტო '+(i+1)} aria-pressed={index===i} onClick={()=>setDetail(i)}>
+          <img src={src} alt="" loading="lazy"/>
+        </button>)}
+      </div>}
     </div>
   </section>
   <section className="home3-conversion home3-shell" aria-labelledby="home3-conversion-title">
