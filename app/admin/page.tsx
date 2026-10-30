@@ -9,7 +9,7 @@ export default async function AdminHome(){
  if(!user)return <section className="jmc-admin-auth"><div className="jmc-admin-auth-copy">
   <p className="eyebrow">JMC / Internal Workspace</p><h1>JMC Admin</h1>
   <p>დაცული სამუშაო სივრცე ლიდების, მომხმარებლებისა და სამომავლოდ საიტის ფუნქციების მართვისთვის.</p>
-  </div>{isAdminReady()?<div className="jmc-admin-auth-card"><h2>ავტორიზაცია</h2><p>შეიყვანე პირადი მომხმარებლის სახელი და პაროლი.</p><AdminLogin/></div>
+  </div>{isAdminReady()?<div className="jmc-admin-auth-card"><h2>ავტორიზაცია</h2><p>შეიყვანე პირადი მომხმარებლის სახელი და პაროლი.</p><AdminLogin/>{process.env.CMS_SETUP_ENABLED==='true'&&<Link href="/admin/setup" className="jmc-admin-setup-link">პირველი ადმინისტრატორის შექმნა ↗</Link>}</div>
    :<div className="jmc-admin-auth-card"><h2>სისტემა მზადდება</h2><p>მომხმარებლების დაცული ავტორიზაცია გააქტიურდება მონაცემთა ბაზის დაკავშირებისა და პირველი ადმინისტრატორის შექმნის შემდეგ.</p><Link href="/admin/setup" className="button">პირველი ადმინისტრატორის დაყენება ↗</Link></div>}</section>;
  let stats:Metrics|null=null;
  if(user.role!=='editor')try{
