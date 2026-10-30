@@ -1,7 +1,7 @@
 name: JMC — Secure CMS bootstrap integration
 on:
   push:
-    branches: [feature/jmc-cms-secure-setup-20261030]
+    branches: [feature/jmc-cms-secure-setup-20261030, fix/cms-setup-submit-validation-20261030]
     paths:
       - 'app/**'
       - 'lib/**'
