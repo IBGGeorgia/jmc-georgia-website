@@ -284,7 +284,7 @@
 .jmc-drive-stage .jmc-lead-model.is-selected{border-color:#e50012;
  background:#fff;box-shadow:0 2px 12px rgba(29,29,31,.055)}
 .jmc-drive-stage .jmc-lead-model-photo{border-radius:9px;background:#eceef0}
-.jmc-drive-stage .jmc-lead-model-photo img{aspect-ratio:1.8;object-fit:contain}
+.jmc-drive-stage .jmc-lead-model-photo img{aspect-ratio:16/9;object-fit:cover}
 .jmc-drive-stage .jmc-lead-model input{top:13px;right:13px;width:16px;height:16px;accent-color:#e50012}
 .jmc-drive-stage .jmc-lead-model-name{font-size:clamp(12px,1vw,15px);font-weight:650;
  padding:0 2px;white-space:normal;line-height:1.35}
