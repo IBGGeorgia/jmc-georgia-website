@@ -15,6 +15,30 @@ test('First-admin setup rejects unauthenticated initialization and is one-time o
  const status=await request.get('/api/admin/setup');
  expect(status.status()).toBe(200);
  expect((await status.json()).setupAvailable).toBe(true);
+ // Browser regression: invalid passwords must explain the problem;
+ // the submit control must no longer be silently disabled.
+ await page.goto('/admin/setup',{waitUntil:'domcontentloaded'});
+ const submit=page.getByRole('button',{name:/CMS-ის გააქტიურება/});
+ await expect(submit).toBeEnabled();
+ await page.getByLabel('Render-ის ერთჯერადი Setup გასაღები').fill(token);
+ await page.getByLabel('მომხმარებლის სახელი').fill(payload.username);
+ await page.getByLabel('ადმინისტრატორის სახელი').fill(payload.displayName);
+ const pass=page.getByLabel('პაროლი — მინიმუმ 16 სიმბოლო');
+ const repeated=page.getByLabel('გაიმეორე პაროლი');
+ await pass.fill('short-test-pass');
+ await repeated.fill('short-test-pass');
+ await expect(submit).toBeEnabled();
+ await submit.click();
+ await expect(page.getByRole('alert')).toContainText('მინიმუმ 16 სიმბოლოს');
+ await pass.fill(password);
+ await repeated.fill(password+'typo');
+ await expect(page.getByText('პაროლები ერთმანეთს არ ემთხვევა',{exact:true})).toBeVisible();
+ await expect(submit).toBeEnabled();
+ await submit.click();
+ await expect(page.getByRole('alert')).toContainText('პაროლები ერთმანეთს არ ემთხვევა');
+ await repeated.fill(password);
+ await expect(page.getByText('✓ პაროლები ემთხვევა')).toBeVisible();
+ await expect(submit).toBeEnabled();
  const denied=await request.post('/api/admin/setup',{headers:{Origin:origin},
   data:{...payload,setupToken:'bad-token'}});
  expect(denied.status()).toBe(403);
