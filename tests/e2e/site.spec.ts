@@ -210,7 +210,7 @@ test('approved header and booking CTA layout, contact address in burger/footer',
   await drawer.getByRole('button',{name:'დახურვა'}).click();
   await cta.click();
   await expect(page).toHaveURL(/\/test-drive$/);
-  await expect(page.getByText('ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება.',{exact:false}).first()).toBeVisible();
+  await expect(page.getByText('ონლაინ გაგზავნა მალე გახდება ხელმისაწვდომი.')).toBeVisible();
  }
 });
 
@@ -273,8 +273,16 @@ test('Grand Avenue discovery: homepage, catalogue, drawer, footer and test-drive
  const grand='/vehicles/grand-avenue';
  for(const path of ['/','/vehicles','/test-drive']){
   await page.goto(path,{waitUntil:'domcontentloaded'});
-  await expect(page.locator('main a[href="'+grand+'"]').first()).toBeVisible();
-  await expect(page.locator('main a[href="/vehicles/vigus"]').first()).toBeVisible();
+  if(path==='/test-drive'){
+   await expect(page.getByRole('radio',{name:/Grand Avenue/}).first()).toBeAttached();
+   await page.getByRole('radio',{name:'Grand Avenue',exact:true}).check();
+   await expect(page.locator('main a[href="'+grand+'"]')).toHaveCount(1);
+   await page.getByRole('radio',{name:'VIGUS',exact:true}).check();
+   await expect(page.locator('main a[href="/vehicles/vigus"]')).toHaveCount(1);
+  }else{
+   await expect(page.locator('main a[href="'+grand+'"]')).toHaveCount(2);
+   await expect(page.locator('main a[href="/vehicles/vigus"]')).toHaveCount(2);
+  }
  }
  await page.goto('/');
  const toggle=page.locator('.jmc-menu-trigger');
@@ -376,7 +384,8 @@ test('PRO is linked from catalogue and test drive',async({page})=>{
  await page.goto('/vehicles',{waitUntil:'domcontentloaded'});
  await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(2);
  await page.goto('/test-drive',{waitUntil:'domcontentloaded'});
- await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(2);
+ await page.getByRole('radio',{name:'Grand Avenue PRO',exact:true}).check();
+ await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(1);
 });
 
 test('PRO editorial media only points to original user photos, not AI candidate or other models',()=>{
