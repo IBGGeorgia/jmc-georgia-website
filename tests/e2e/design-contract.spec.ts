@@ -5,7 +5,7 @@ test.describe('JMC approved UI v2 design contracts',()=>{
   test('navigation and CTA geometry at '+width,async({page})=>{
    await page.setViewportSize({width,height:850});
    await page.goto('/',{waitUntil:'domcontentloaded'});
-   const primary=page.locator('main a.button').first();
+   const primary=page.locator('main a.home3-pill').first();
    await expect(primary).toHaveCSS('border-radius','999px');
    expect(await primary.evaluate(e=>e.getBoundingClientRect().height)).toBeGreaterThanOrEqual(44);
    await page.locator('.jmc-menu-trigger').click();
