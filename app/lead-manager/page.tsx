@@ -1,3 +1,4 @@
+import './lead-manager.css';
 import type {Metadata} from 'next';
 import {Header,Footer} from '../site-components';
 import {AdminLogin,LeadManagerClient} from './lead-manager-client';
