@@ -6,9 +6,9 @@
 
 | Component | Status | Evidence |
 |---|---|---|
-| Web application | Live, Frankfurt | `srv-dbge2kflk1mc73dq4lpg`; commit `b6c0bd6880dc5a879309f84a579539300827804d` |
+| Web application | Live, Frankfurt; paid `0.5c-512mb` plan | `srv-dbge2kflk1mc73dq4lpg`; commit `fdd9aa8cfb908bea24f0079c3979982a90d7f382`, Render 2026-10-30 |
 | Paid Cron | Live, Frankfurt, 03:00 UTC / 07:00 Tbilisi daily | `crn-dbi8i9ifngtc73cjspqg` |
-| PostgreSQL | `basic_256mb`, PostgreSQL 18, Frankfurt, available | `dpg-dbi4ess9v7es738lu3c0-a` |
+| PostgreSQL | `basic_256mb`, PostgreSQL 18, Frankfurt, available; Recovery UI advertises 7-day PITR | `dpg-dbi4ess9v7es738lu3c0-a`; read-only Recovery page 2026-10-30 |
 | External DB IP allowlist | Empty; leave it closed | Render instance metadata |
 | Retention schema | `leads=true legal_hold=true heartbeat=true` | Read-only startup probe 2026-10-30 12:49 UTC |
 | Aggregate records | `total=0 eligible=0 protected=0` at last probe only | No personal information logged |
@@ -18,7 +18,7 @@
 
 ## Checklist to complete before enabling destructive cleanup or accepting customer data
 
-- [ ] **Real backup availability:** open [JMC PostgreSQL on Render](https://dashboard.render.com/d/dpg-dbi4ess9v7es738lu3c0-a) → **Recovery** and inspect the *Point-in-Time Recovery* section. Confirm it shows a selectable recovery window (not merely that the plan is paid), and record the inspection date/time internally. **Do not click Restore Database** during this read-only check.
+- [x] **Recovery UI inspected, PITR window advertised:** on **2026-10-30 ~20:06 Tbilisi** the authenticated [JMC PostgreSQL Recovery page](https://dashboard.render.com/d/dpg-dbi4ess9v7es738lu3c0-a/recovery) for database `dpg-dbi4ess9v7es738lu3c0-a` explicitly displayed **“You can choose to restore from any timestamp in the past 7 days”** and a **Restore database** control. Read-only inspection only; **no restore executed**. Database was created 2026-10-30, so seven complete days of actual history are not yet available. The UI does not attest a successful restoration test or expose a specific programmatic `recoveryStatus=AVAILABLE` enum.
 - [ ] **Recovery test decision:** a full restoration spins up a *new billable database*, not an in-place overwrite. Obtain approval for extra spend before a restore exercise. For critical production, test restoring to a disposable instance, then verify sample schema/rows and discard per retention rules.
 - [ ] **Optional export before production cleanup:** Recovery → **Create export**. Backups generated here are separate and can be downloaded, but contain sensitive personal data once lead intake starts; restrict, encrypt, and apply explicit backup retention.
 - [x] **Legal name and 9-digit company ID confirmed:** **შპს „იბერია ბიზნეს ჯგუფი“**, **204975376**. The project owner supplied these details 2026-10-30, and they match the [Geostat official statistical business register](https://www.br.geostat.ge/register_geo/index.php?Stat_ID=20753109&action=History). Official entrepreneurs-registry extract and any separate controller authorization/legal signoff remain matters for legal review; this does not approve the entire privacy policy.
@@ -30,7 +30,7 @@
 
 ## Capability boundary
 
-Current Render connector can read database instance metadata, builds, events and logs. It **cannot** retrieve account-specific PITR availability from [Render's recovery status endpoint](https://api-docs.render.com/reference/retrieve-postgres-recovery-info) or click the authenticated **Recovery** dashboard. The paid database type makes PITR generally eligible, but does not prove `recoveryStatus=AVAILABLE` for this particular instance.
+The authenticated browser **read-only Recovery page** has now been inspected and shows a 7-day Point-in-Time Recovery selection statement and **Restore database** control for the specific JMC database. The Render connector still cannot retrieve the [Recovery status endpoint](https://api-docs.render.com/reference/retrieve-postgres-recovery-info) enum; **a restoration itself has not been tested**. Paid plan eligibility alone is not the evidence: the actual account's visible Recovery page is.
 
 Render documentation:
 - [Recovery/PITR](https://render.com/docs/postgresql-backups): all paid Postgres, 3 days Hobby / 7 days Pro+, not within last 10 minutes; recovery spawns a new instance.
