@@ -75,7 +75,7 @@ export function TestDriveForm({ready}:{ready:boolean}){
       <span>{v.name}</span>
      </label>)}</div>
    </fieldset>
-   <fieldset className="jmc-lead-details"><legend>02 / საკონტაქტო ინფორმაცია</legend>
+   <fieldset className="jmc-lead-details" disabled={!ready}><legend>02 / საკონტაქტო ინფორმაცია</legend>
     <div className="jmc-lead-fields">
      <label>სახელი და გვარი <span aria-hidden="true">*</span>
       <input required autoComplete="name" maxLength={100} minLength={2}
@@ -89,9 +89,9 @@ export function TestDriveForm({ready}:{ready:boolean}){
     </div>
    </fieldset>
    <div className="jmc-lead-consent">
-    <label><input type="checkbox" required checked={consent} onChange={e=>setConsent(e.target.checked)}/>
+    <label><input type="checkbox" required disabled={!ready} checked={consent} onChange={e=>setConsent(e.target.checked)}/>
      <span>ვეთანხმები ჩემი საკონტაქტო მონაცემების დამუშავებას ტესტ-დრაივის მოთხოვნაზე დასაკავშირებლად. <Link href="/privacy">კონფიდენციალურობა</Link> *</span></label>
-    <label><input type="checkbox" checked={marketingOptIn} onChange={e=>setMarketingOptIn(e.target.checked)}/>
+    <label><input type="checkbox" disabled={!ready} checked={marketingOptIn} onChange={e=>setMarketingOptIn(e.target.checked)}/>
      <span>მსურს მივიღო JMC-ის მარკეტინგული შეთავაზებები (არასავალდებულო).</span></label>
    </div>
    <div className="jmc-lead-trap" aria-hidden="true"><label>არ შეავსოთ <input tabIndex={-1} autoComplete="off"
