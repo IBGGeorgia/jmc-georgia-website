@@ -42,3 +42,28 @@ test.describe('Test Drive staging safety contract',()=>{
   expect(patch.status()).toBe(401);
  });
 });
+
+test('Customer journey puts model selector immediately after hero, before explanation',async({page})=>{
+ for(const width of [1440,390,320]){
+  await page.setViewportSize({width,height:860});
+  await page.goto('/test-drive',{waitUntil:'domcontentloaded'});
+  const sections=page.locator('main > section');
+  const classes=await sections.evaluateAll(nodes=>nodes.map(node=>node.className));
+  expect(classes.slice(0,4)).toEqual([
+   'jmc-td-hero','jmc-lead-flow','jmc-td-process','jmc-td-visit'
+  ]);
+  await expect(page.getByRole('heading',{name:'რა ხდება მოთხოვნის გაგზავნის შემდეგ?'})).toBeVisible();
+  const anchor=page.locator('.jmc-td-hero-primary');
+  await anchor.click();
+  await expect(page).toHaveURL(/#test-drive-request$/);
+  await expect(page.locator('.jmc-lead-model')).toHaveCount(3);
+  await expect(page.locator('.jmc-lead-submit button')).toBeDisabled();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width+2);
+ }
+});
+
+test('Privacy page publishes approved contact while intake remains closed',async({page})=>{
+ await page.goto('/privacy',{waitUntil:'domcontentloaded'});
+ await expect(page.locator('a[href="mailto:compliance@ibg.ge"]')).toHaveCount(1);
+ await expect(page.getByRole('heading',{name:'პოლიტიკა მზადდება'})).toBeVisible();
+});
