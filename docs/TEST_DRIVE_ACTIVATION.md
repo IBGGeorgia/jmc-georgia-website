@@ -70,3 +70,23 @@ Future modules should live under `/admin/*` and use the same identity, role auth
 - A real logout button is available in the CMS sidebar and revokes the logged-in session.
 - A dedicated GitHub Actions integration workflow uses **disposable CI PostgreSQL** and randomly generated test credentials to test admin login, account creation, role restrictions and session revocation. Its data and credentials are unrelated to the paid production database.
 - Before relying on the system operationally, connect the paid Render database's internal `DATABASE_URL`, apply `npm run db:migrate:leads`, and run `npm run cms:admin:create` in an authorized environment. Never enable public lead collection until the approved privacy notice is published.
+
+
+## Secure self-service first-admin setup (2026-10-30)
+A one-time setup wizard at `/admin/setup` replaces the previous need to run database migration and bootstrap CLI by hand.
+
+1. In **Render > Postgres > jmc-test-drive-leads > Connect**, copy the **Internal Database URL**, not the External URL. Keep the Postgres external IP allowlist empty.
+2. In **Render > jmc-georgia > Environment**, add `DATABASE_URL` as a **secret environment variable**, pasting that internal URL. Never place it in GitHub, a file, a screenshot or this chat.
+3. The same service must have `LEAD_HASH_SECRET` and `CMS_SESSION_SECRET` (independent, random 32+ characters). `NEXT_PUBLIC_SITE_URL` must match `https://jmc-georgia.onrender.com`.
+4. Set `CMS_SETUP_ENABLED=true` and `CMS_SETUP_TOKEN` to a cryptographically random **43+ character** secret that the authorized administrator can retrieve securely from Render. Do not reuse passwords or expose the token in messages. Render redeploys after env updates.
+5. Open `https://jmc-georgia.onrender.com/admin/setup`. Supply the one-time setup token and choose a unique first username, display name and password (16+ characters). The server runs canonical schema migrations and creates the first admin **in a single PostgreSQL transaction**.
+6. Return to `/admin`, log in, verify the dashboard and Users & Permissions.
+7. **Immediately set `CMS_SETUP_ENABLED=false` and remove `CMS_SETUP_TOKEN` from Render.** Even if a token remains configured, reinitialization is blocked once an account exists, but the setup surface should be disabled.
+8. Keep `TEST_DRIVE_ENABLED=false` and `PRIVACY_POLICY_APPROVED=false` until the company-approved data privacy policy has been published and a complete customer-lead end-to-end test succeeds.
+
+The form never exposes DB credentials or hashes to the browser. It uses strict origin, size and password validation and constant-time token verification. The migration rolls back completely if any step fails, and an advisory lock prevents simultaneous bootstrap requests.
+
+The integration test uses **ephemeral PostgreSQL** with randomly generated secrets and verifies invalid token/origin rejection, initial bootstrap, replay rejection, admin login and privacy-gated Test Drive behavior.
+
+### Operational blocker
+The Render connector currently does **not** provide the database's private connection URL/password, and its hosted SQL query function cannot connect to a database with an empty external IP allowlist. The missing `DATABASE_URL` must therefore be entered securely once in the Render Dashboard. We must not weaken the database's network security to get around this.
