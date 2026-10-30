@@ -30,7 +30,7 @@ export default function TestDrive(){
        აირჩიე ავტომობილი <JmcIcon name="arrow-up-right"/>
       </a>
       <Link href="/contact" className="jmc-td-text-link">
-       დაგვიკავშირდი <JmcIcon name="arrow-up-right"/>
+       შოურუმის მისამართი <JmcIcon name="arrow-up-right"/>
       </Link>
      </div>
      <p className="jmc-td-hero-caption">
@@ -70,7 +70,7 @@ export default function TestDrive(){
      <p>თბილისი, ბელიაშვილის 115</p>
     </div>
     <div className="jmc-td-visit-actions">
-     <Link href="/contact" className="button">კონტაქტი და მისამართი <JmcIcon name="arrow-up-right"/></Link>
+     <Link href="/contact" className="button">მისამართის ნახვა <JmcIcon name="arrow-up-right"/></Link>
      <Link href="/vehicles" className="jmc-td-text-link">მოდელების გაცნობა <JmcIcon name="arrow-up-right"/></Link>
     </div>
    </section>
