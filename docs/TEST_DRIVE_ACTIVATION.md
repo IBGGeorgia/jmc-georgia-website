@@ -60,3 +60,16 @@ authorization, processor transfer and retention policy are defined.
 HTTP origin, content size, strict input allowlists, honeypot, IP fingerprint and phone
 throttles are implemented. Consider Cloudflare Turnstile and independent edge limits
 before promoting to a high-traffic public campaign. Never put PII in analytics events.
+
+## Readiness review — 2026-10-30 (no charge / no PII enabled)
+- Connected workspace: `giorgi's workspace`, service `jmc-georgia`, Frankfurt.
+- No PostgreSQL instance was found in the workspace.
+- Production DB choice for approval: PostgreSQL `0.1c-256mb` (Render connector alias `basic_256mb`), `diskSizeGb:1`, Frankfurt.
+- Public Render pricing: **$6/month database compute + $0.30/month per GB storage**, subject to changes / billing.
+- IMPORTANT: Not provisioned until the user approves the ongoing charge. Free DB would expire in 30 days and has no managed backups.
+- An **internal, unapproved** Georgian privacy draft is at `docs/TEST_DRIVE_PRIVACY_DRAFT_KA.md`. Its placeholders must be filled by the legal owner. It is not public policy.
+- No authorized `SALES_NOTIFY_TO` recipient or verified `RESEND_FROM` sender has been supplied; no email address may be guessed.
+- After an approved paid DB exists, initialize it with `npm run db:migrate:leads` from an authorized admin environment where `DATABASE_URL` is available. This migration does **not** run on web builds.
+- Capture and verify exact consent timestamp `consented_at` and version `consent_version` with a test record before public activation.
+- Ensure site `/privacy` is replaced with legal-approved policy before flipping `PRIVACY_POLICY_APPROVED=true`.
+- Production is intentionally `TEST_DRIVE_ENABLED=false` until all gates pass; do not enable for preview or sample data.
