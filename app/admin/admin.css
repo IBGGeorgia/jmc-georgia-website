@@ -1,0 +1,78 @@
+/* JMC Admin Workspace — neutral editorial treatment; isolated from public model pages. */
+.jmc-admin-root{min-height:100vh;background:#f5f5f7;color:#1d1d1f;font-family:var(--font-ka),sans-serif}
+.jmc-admin-top{min-height:76px;background:#fff;border-bottom:1px solid #e8e8eb;
+ display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px clamp(16px,3vw,38px)}
+.jmc-admin-brand{font-family:var(--font-latin),sans-serif;font-size:24px;font-weight:750;
+ letter-spacing:-.055em;color:#1d1d1f;text-decoration:none}
+.jmc-admin-brand span{font-family:var(--font-ka),sans-serif;letter-spacing:-.03em;
+ font-size:17px;font-weight:550;color:#85858b;margin-left:8px}
+.jmc-admin-top-right{display:flex;align-items:center;gap:clamp(12px,2vw,26px);font-size:13px;color:#7a7a81}
+.jmc-admin-top-right a{color:#1d1d1f;font-weight:600;text-decoration:none}
+.jmc-admin-workspace{display:grid;grid-template-columns:260px minmax(0,1fr);
+ max-width:1780px;margin:0 auto;min-height:calc(100vh - 76px)}
+.jmc-admin-sidebar{padding:42px 20px 22px;display:flex;flex-direction:column;gap:8px;
+ border-right:1px solid #e5e5e9}
+.jmc-admin-menu-eyebrow{font-size:11px;color:#8b8b90;letter-spacing:.10em;
+ font-family:var(--font-latin),sans-serif;text-transform:uppercase;padding:0 12px 16px}
+.jmc-admin-sidebar>a{display:flex;min-height:48px;padding:12px 15px;align-items:center;
+ color:#29292e;text-decoration:none;font-weight:600;font-size:14px;border-radius:14px}
+.jmc-admin-sidebar>a:hover,.jmc-admin-sidebar>a:focus-visible{background:#e9e9ed}
+.jmc-admin-menu-future{margin-top:24px;border-top:1px solid #dedee3;
+ padding:28px 12px 22px;display:flex;flex-direction:column;gap:15px}
+.jmc-admin-menu-future p{font-size:12px;color:#73737b;font-weight:600;margin:0}
+.jmc-admin-menu-future span{color:#97979d;font-size:13px}
+.jmc-admin-menu-user{margin-top:auto;border-top:1px solid #dedee3;
+ padding:20px 12px;display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:14px}
+.jmc-admin-menu-user small{font-size:12px;color:#84848b;font-weight:500;text-transform:capitalize}
+.jmc-admin-main{min-width:0;max-width:100%;padding:clamp(24px,4vw,60px)}
+.jmc-admin-guest{display:block;max-width:1200px}
+.jmc-admin-guest .jmc-admin-main{padding:clamp(40px,6vw,90px) 24px}
+.jmc-admin-root h1{font-size:clamp(34px,4vw,56px);font-weight:650;letter-spacing:-.055em;line-height:1.1;margin:12px 0 18px}
+.jmc-admin-root h2{font-weight:650;letter-spacing:-.035em}
+.jmc-admin-description{font-size:clamp(15px,1.3vw,19px);max-width:730px;color:#686870;line-height:1.7}
+.jmc-admin-auth{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(30px,5vw,75px);align-items:center;padding:40px 0}
+.jmc-admin-auth-copy p:last-child,.jmc-admin-auth-card>p{color:#66666d;line-height:1.8}
+.jmc-admin-auth-copy h1{font-family:var(--font-latin),sans-serif;font-size:clamp(55px,7vw,110px)}
+.jmc-admin-auth-card{background:#fff;border:1px solid #e7e7eb;border-radius:24px;
+ padding:clamp(25px,3.6vw,45px)}
+.jmc-admin-auth-card h2{font-size:clamp(22px,2.4vw,34px);margin:0 0 16px}
+.jmc-admin-auth .jmc-manager-login{margin-top:24px}
+.jmc-admin-auth .jmc-manager-login label{font-size:14px;font-weight:600;line-height:1.5}
+.jmc-admin-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:40px 0}
+.jmc-admin-metrics>div{min-width:0;background:#fff;border:1px solid #ededf0;
+ border-radius:20px;padding:clamp(17px,2.1vw,32px);display:flex;flex-direction:column;gap:12px}
+.jmc-admin-metrics strong{font:650 clamp(28px,4vw,56px)/1 var(--font-latin),sans-serif}
+.jmc-admin-metrics span{font-size:13px;color:#65656d}
+.jmc-admin-feature-card{background:#fff;border:1px solid #eaeaed;border-radius:24px;
+ padding:clamp(23px,3vw,42px);display:flex;align-items:center;justify-content:space-between;
+ gap:25px;flex-wrap:wrap}
+.jmc-admin-feature-card h2{font-size:clamp(25px,3vw,42px);margin:12px 0}
+.jmc-admin-feature-card p:not(.eyebrow){font-size:15px;color:#62626b;max-width:550px;line-height:1.6}
+.jmc-admin-coming-soon{margin-top:45px;padding:30px 0;border-top:1px solid #dedee2;color:#73737b}
+.jmc-admin-coming-soon h2{font-size:20px;color:#35353b}
+.jmc-admin-settings>p{max-width:720px;line-height:1.7;color:#66666b}
+.jmc-admin-status-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:15px;margin-top:36px}
+.jmc-admin-status-grid article{background:#fff;border:1px solid #e8e8ec;border-radius:20px;padding:26px;min-width:0}
+.jmc-admin-status-grid h2{font-size:19px;margin:0 0 14px}
+.jmc-admin-status-grid strong{display:inline-block;font-size:13px;color:#65666f;margin-bottom:12px}
+.jmc-admin-status-grid p{font-size:14px;color:#77777e;line-height:1.6}
+.jmc-admin-leads>.jmc-manager{margin-top:28px;background:transparent}
+.jmc-admin-root :is(a,button,input,textarea,select):focus-visible{outline:2px solid #63636b;outline-offset:3px}
+@media(max-width:850px){
+ .jmc-admin-workspace{grid-template-columns:1fr}
+ .jmc-admin-sidebar{flex-direction:row;flex-wrap:wrap;gap:7px;border-right:0;border-bottom:1px solid #e5e5e9;padding:12px 16px}
+ .jmc-admin-sidebar>a{font-size:12px;min-height:44px;padding:10px 12px}
+ .jmc-admin-menu-eyebrow,.jmc-admin-menu-future,.jmc-admin-menu-user{display:none}
+ .jmc-admin-auth{grid-template-columns:1fr}
+ .jmc-admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .jmc-admin-main{padding:27px 16px 60px}
+ .jmc-admin-top-right span{display:none}
+}
+@media(max-width:420px){
+ .jmc-admin-metrics{gap:9px}
+ .jmc-admin-status-grid{grid-template-columns:1fr}
+ .jmc-admin-top{min-height:64px}
+ .jmc-admin-main{padding:24px 16px 60px}
+ .jmc-admin-top-right{font-size:12px}
+}

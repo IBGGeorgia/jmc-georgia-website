@@ -7,23 +7,25 @@ const statuses=[{value:'new',label:'ახალი'},{value:'contacted',label:'
  {value:'scheduled',label:'დაგეგმილი'},{value:'completed',label:'დასრულებული'},
  {value:'cancelled',label:'გაუქმებული'}];
 export function AdminLogin(){
- const [password,setPassword]=useState(''),[error,setError]=useState(''),[busy,setBusy]=useState(false);
+ const [username,setUsername]=useState(''),[password,setPassword]=useState(''),[error,setError]=useState(''),[busy,setBusy]=useState(false);
  return <form className="jmc-manager-login" onSubmit={async e=>{
   e.preventDefault();setBusy(true);setError('');
   try{
    const r=await fetch('/api/lead-manager/auth',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({password})});
+    body:JSON.stringify({username,password})});
    if(!r.ok)throw Error('invalid');
-   window.location.reload();
+   window.location.assign('/admin');
   }catch{setError('ავტორიზაცია ვერ მოხერხდა. გადაამოწმე პაროლი.');setBusy(false)}
  }}>
-  <label>ადმინისტრატორის პაროლი<input type="password" autoComplete="current-password" minLength={1}
+  <label>მომხმარებლის სახელი<input type="text" autoComplete="username" required minLength={3} maxLength={64}
+   value={username} onChange={e=>setUsername(e.target.value)}/></label>
+  <label>პაროლი<input type="password" autoComplete="current-password" minLength={1}
    required value={password} onChange={e=>setPassword(e.target.value)}/></label>
   {error&&<p role="alert">{error}</p>}
   <button className="button" disabled={busy}>{busy?'მოწმდება…':'შესვლა'}</button>
  </form>;
 }
-export function LeadManagerClient({leads}:{leads:Lead[]}){
+export function LeadManagerClient({leads,role='admin'}:{leads:Lead[];role?:'admin'|'sales'}){
  const [data,setData]=useState(leads);
  const [filter,setFilter]=useState('all');
  const [search,setSearch]=useState('');
@@ -49,9 +51,9 @@ export function LeadManagerClient({leads}:{leads:Lead[]}){
   <div className="jmc-manager-tools">
    <div><h2>განაცხადები</h2><p>ბოლო 200 ჩანაწერი · განახლებები ინახება მონაცემთა ბაზაში</p></div>
    <div className="jmc-manager-actions">
-    <a className="button" href="/api/lead-manager/export">CSV Export</a>
+    {role==='admin'&&<a className="button" href="/api/lead-manager/export">CSV Export</a>}
     <button className="button button-ghost" type="button" onClick={async()=>{
-     await fetch('/api/lead-manager/auth',{method:'DELETE'});window.location.reload();
+     await fetch('/api/lead-manager/auth',{method:'DELETE'});window.location.assign('/admin');
     }}>გამოსვლა</button>
    </div>
   </div>

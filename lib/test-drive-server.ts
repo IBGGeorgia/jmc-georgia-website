@@ -15,7 +15,6 @@ export type LeadRecord=LeadInput&{
  id:string;status:LeadStatus;notes:string;createdAt:string;updatedAt:string;
 };
 const max=(s:string,n:number)=>s.trim().slice(0,n);
-const emailOk=(s:string)=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 const configured=(value?:string)=>Boolean(value&&value.trim());
 export function isTestDriveReady(){
  return process.env.TEST_DRIVE_ENABLED==='true'
@@ -23,15 +22,12 @@ export function isTestDriveReady(){
   &&configured(process.env.DATABASE_URL)
   &&(process.env.LEAD_HASH_SECRET?.length??0)>=32
   &&(process.env.PRIVACY_POLICY_VERSION?.length??0)>=3
-  &&configured(process.env.RESEND_API_KEY)
-  &&emailOk(process.env.RESEND_FROM||'')
-  &&emailOk(process.env.SALES_NOTIFY_TO||'');
+  &&isAdminReady();
 }
 export function isAdminReady(){
  return configured(process.env.DATABASE_URL)
   &&(process.env.LEAD_HASH_SECRET?.length??0)>=32
-  &&(process.env.ADMIN_PASSWORD?.length??0)>=16
-  &&(process.env.ADMIN_SESSION_SECRET?.length??0)>=32;
+  &&(process.env.CMS_SESSION_SECRET?.length??0)>=32;
 }
 let pool:Pool|undefined;
 export function db(){
@@ -115,18 +111,4 @@ export async function createLead(input:LeadInput,ip:string){
   return {limited:false,id} as const;
  }catch(e){await client.query('ROLLBACK').catch(()=>{});throw e}
  finally{client.release()}
-}
-export async function notifySales(id:string,input:LeadInput){
- const k=process.env.RESEND_API_KEY||'';
- const from=process.env.RESEND_FROM||'';
- const to=process.env.SALES_NOTIFY_TO||'';
- if(!k||!from||!to)throw Error('NOTIFY_NOT_CONFIGURED');
- const response=await fetch('https://api.resend.com/emails',{
-  method:'POST',headers:{Authorization:'Bearer '+k,'Content-Type':'application/json'},
-  body:JSON.stringify({from,to:[to],subject:'JMC • ახალი Test Drive მოთხოვნა',
-   text:['ახალი მოთხოვნა', 'ID: '+id,'მოდელი: '+input.model,'სახელი: '+input.fullName,
-    'ტელეფონი: '+input.phone,'სასურველი დღე: '+(input.preferredDate||'შესათანხმებელი')].join('\n')}),
-  signal:AbortSignal.timeout(8000)
- });
- if(!response.ok)throw Error('NOTIFICATION_FAILED');
 }

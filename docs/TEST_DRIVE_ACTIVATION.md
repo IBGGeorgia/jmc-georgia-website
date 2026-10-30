@@ -1,86 +1,62 @@
-# JMC Test Drive / Lead Manager — production activation checklist
+# JMC Admin — CMS foundation & Test Drive lead collection
 
-The code is deployed fail-closed by default. No public leads are accepted until ALL
-required environment variables, approved policy and database provisioning exist.
-Do not set TEST_DRIVE_ENABLED=true earlier.
+## Architecture — 2026-10-30
+The public Next.js website and the internal CMS coexist in the same deployment:
+- `/admin`: protected dashboard and user login
+- `/admin/leads`: protected Test Drive lead list (admin, sales)
+- `/admin/settings`: system readiness and future module roadmap
+- `/lead-manager`: legacy redirect to `/admin/leads`
+- `/api/test-drive`: public lead intake, **disabled until privacy and infrastructure approval**
+- `/api/lead-manager/auth`: username/password login + session revocation
+- `/api/lead-manager`: protected lead status/notes updates
+- `/api/lead-manager/export`: admin-only CSV export
 
-## 1. Persistent database
-Provision **managed paid PostgreSQL** on Render in Frankfurt or a vetted comparable
-provider with backups, access controls and a documented retention schedule.
-The existing web instance is free and its ephemeral disk is NOT a database.
-Run `db/test-drive.sql` on the database using a dedicated least-privilege credential.
-Verify table and indexes were created; verify a successful read/write in a restricted role.
-Configure `DATABASE_URL` as a Render secret; `PG_SSL` only as appropriate for trusted
-provider CA and cert chain. Never commit credentials or customer data.
+## User management and security
+`jmc_cms_users` stores individual account records, display names, scrypt-hashed passwords and roles:
+- `admin`: dashboard, leads, status edits, CSV
+- `sales`: dashboard, leads, status edits, no CSV export
+- `editor`: dashboard and readiness; no access to lead data
 
-## 2. Internal lead manager, before public submissions
-Set:
-- `DATABASE_URL`
-- `LEAD_HASH_SECRET` — random 32+ bytes (separate from session secret)
-- `ADMIN_PASSWORD` — unique 16+ characters, stored only as a secret
-- `ADMIN_SESSION_SECRET` — random 32+ bytes
-- `NEXT_PUBLIC_SITE_URL` — the exact published origin
+Authentication uses per-user salted scrypt hashes, DB-stored hash-only eight-hour sessions, HttpOnly Secure SameSite=Strict cookie, login throttling, request origin validation and authorization checks on every protected API.
+Logout revokes the active session. CMS access is deliberately **fail-closed** until the database and required secrets exist. Never publish username/password or DB URLs in a repository, public frontend variables or chat.
 
-Use `/lead-manager` for login and reviewing leads. Admin login rate limited in DB.
-On access, validate HTTP-only SameSite=Strict cookie and 8-hour session; verify that
-unauthorized users cannot get a CSV or change status. CSV exports contain personal data:
-staff with authorization only; securely store/delete exports.
+## Paid Render PostgreSQL
+The approved PostgreSQL 18 instance `jmc-test-drive-leads` (`dpg-dbi4ess9v7es738lu3c0-a`) was created in Frankfurt with Basic 256MB and 1GB disk.
+The connector cannot read its **internal connection string** or password; do not attempt to replace it with an external URL or open its IP allowlist. Connect the JMC web service `srv-dbge2kflk1mc73dq4lpg` to the database using Render's Internal Database URL in a secure service environment variable named `DATABASE_URL`. Keep credentials off GitHub and chat.
 
-## 3. Privacy policy and consent (MUST precede activation)
-Have legal/privacy owner approve and publish a specific policy identifying controller,
-purposes, legal bases, processors, security measures, data retention, rights/contact,
-international transfers if applicable, and any separate marketing opt-in.
-Update `/privacy` from placeholder, update `consent_version` in backend to approved
-version, set `PRIVACY_POLICY_VERSION`, and only then set
-`PRIVACY_POLICY_APPROVED=true`.
-No marketing consent should be mandatory for a Test Drive request.
+Required service environment values:
+- `DATABASE_URL`: internal Render Postgres connection string (secret)
+- `LEAD_HASH_SECRET`: cryptographically random 32+ characters (secret)
+- `CMS_SESSION_SECRET`: independent cryptographically random 32+ characters (secret)
+- `NEXT_PUBLIC_SITE_URL`: public site origin `https://jmc-georgia.onrender.com`
+- `TEST_DRIVE_ENABLED=false` and `PRIVACY_POLICY_APPROVED=false` until fully approved
+- `PRIVACY_POLICY_VERSION`: approved published policy version before launch
 
-## 4. Notifications
-Verify a domain and sender with Resend, confirm authorized sales email recipient and
-access rights, and securely configure:
-- `RESEND_API_KEY`
-- `RESEND_FROM` (verified email)
-- `SALES_NOTIFY_TO` (authorized sales inbox)
-Email failures are logged without personal data; the DB is the source of truth.
-Sales must check the Lead Manager even if email provider is unavailable.
+No email inbox, sender, Resend, or `SALES_NOTIFY_TO` is necessary in this design. A successful lead is written to PostgreSQL and becomes visible immediately in the dashboard. The DB is the source of truth.
 
-## 5. Go-live
-Set `TEST_DRIVE_ENABLED=true` only after all above steps and E2E smoke tests are
-approved. Check `GET /api/test-drive` returns `{"ready":true}`, test one
-consented lead, verify database insert, admin workflow, notification, source UTM,
-and download. Confirm user sees an acknowledgement, NOT an auto-confirmed slot.
+## Initialize the database (after internal connection is available)
+From a trusted and authorized execution environment that can reach the database:
+
+1. Set `DATABASE_URL` securely.
+2. Run `npm run db:migrate:leads` to create/upgrade `jmc_test_drive_leads`, `jmc_cms_users`, `jmc_cms_sessions`, throttling and audit tables.
+3. Verify migrations and access using a least-privilege DB user where supported.
+
+**Bootstrap the first CMS administrator explicitly:** from a trusted environment, supply `CMS_BOOTSTRAP_USERNAME`, `CMS_BOOTSTRAP_DISPLAY_NAME` and `CMS_BOOTSTRAP_PASSWORD` (unique 16+ characters) and run `npm run cms:admin:create`. The password is salted/scrypt-hashed; no default password is shipped. The command refuses to overwrite an existing username.
+
+Subsequent accounts can be provisioned via a vetted users-management flow; never share an administrator password between multiple employees. Retention periods, backups and user access must be approved before activating public submissions.
+
+## Privacy / go-live gate
+Data controller: **Eastgate Automotive LLC**.
+The draft `docs/TEST_DRIVE_PRIVACY_DRAFT_KA.md` is not approved. Confirm company registration identifier, designated data/privacy contact, lawful basis, processors, international transfers, access rights, retention and deletion before publishing `/privacy`.
+Only after public policy approval, server secrets, DB migrations, a real admin account, tested lead intake, and permission checks:
+- Set `PRIVACY_POLICY_APPROVED=true`
+- Set `TEST_DRIVE_ENABLED=true`
+- Verify `GET /api/test-drive` returns `{"ready":true}`.
+- Verify one **synthetic** test lead in PostgreSQL and its visibility in `/admin/leads`, plus status updates and appropriate role restrictions. Remove synthetic data after tests.
+- Never put name, phone number, session secrets or lead identifiers in GA4/GTM events.
 
 ## Zoho later
-Retain UUID IDs, source/medium/campaign/content, status, optional date, created_at,
-marketing opt-in; add `zoho_id` and sync state with a migration, implement
-idempotent upsert and backfill. Do not send or duplicate existing leads until
-authorization, processor transfer and retention policy are defined.
+Preserve local UUIDs, CRM status, opt-in, UTM attribution and timestamps. Introduce `zoho_id`, `sync_state`, `last_synced_at` and a retry-safe idempotent sync queue in a migration. Initially write locally, then push to Zoho. Avoid silent duplicate creation and keep status ownership rules explicit.
 
-## Abuse and access protections
-HTTP origin, content size, strict input allowlists, honeypot, IP fingerprint and phone
-throttles are implemented. Consider Cloudflare Turnstile and independent edge limits
-before promoting to a high-traffic public campaign. Never put PII in analytics events.
-
-## Readiness review — 2026-10-30 (no charge / no PII enabled)
-- Connected workspace: `giorgi's workspace`, service `jmc-georgia`, Frankfurt.
-- No PostgreSQL instance was found in the workspace.
-- Production DB choice for approval: PostgreSQL `0.1c-256mb` (Render connector alias `basic_256mb`), `diskSizeGb:1`, Frankfurt.
-- Public Render pricing: **$6/month database compute + $0.30/month per GB storage**, subject to changes / billing.
-- IMPORTANT: Not provisioned until the user approves the ongoing charge. Free DB would expire in 30 days and has no managed backups.
-- An **internal, unapproved** Georgian privacy draft is at `docs/TEST_DRIVE_PRIVACY_DRAFT_KA.md`. Its placeholders must be filled by the legal owner. It is not public policy.
-- No authorized `SALES_NOTIFY_TO` recipient or verified `RESEND_FROM` sender has been supplied; no email address may be guessed.
-- After an approved paid DB exists, initialize it with `npm run db:migrate:leads` from an authorized admin environment where `DATABASE_URL` is available. This migration does **not** run on web builds.
-- Capture and verify exact consent timestamp `consented_at` and version `consent_version` with a test record before public activation.
-- Ensure site `/privacy` is replaced with legal-approved policy before flipping `PRIVACY_POLICY_APPROVED=true`.
-- Production is intentionally `TEST_DRIVE_ENABLED=false` until all gates pass; do not enable for preview or sample data.
-
-## Render paid DB provisioned — 2026-10-30
-
-- **Database:** `jmc-test-drive-leads` / `dpg-dbi4ess9v7es738lu3c0-a` (PostgreSQL 18, Frankfurt, basic_256mb, 1 GB disk). This incurs the user-approved recurring charge. Check account billing for exact invoicing.
-- External IP allowlist is empty (blocked). Keep it restricted; same-region Render services may connect via the **internal database URL**.
-- **Lead recipient:** `g.kalandia@eastgateautomotive.ge`. Set on the JMC Render service as `SALES_NOTIFY_TO`.
-- **Data controller named by business:** `Eastgate Automotive LLC`, stored in `JMC_DATA_CONTROLLER_NAME`; registration identifier and privacy/rights contact still require approval.
-- **Connection is not yet wired**: Render DB connection strings are only available through the database `Connect` control or credentials-capable API/CLI. The current integration cannot retrieve the password/internal URL. Assign `DATABASE_URL` in JMC service Environment using the **internal** Postgres connection string without sharing it in chat.
-- Execute `npm run db:migrate:leads` only from a trusted environment with database access; verify tables and test using non-customer fake data.
-- **Email is not active:** `RESEND_API_KEY` and domain-verified `RESEND_FROM` are not configured; do not confuse the SALES_NOTIFY_TO destination with a verified sender.
-- **Do not enable real submissions** until the public legal privacy policy, consent version, retention, authorized roles and production end-to-end validation are approved.
+## CMS expansion
+Future modules should live under `/admin/*` and use the same identity, role authorization, audit log, navigation and style system. Next candidates are vehicle catalog management, editable text/images, campaign banners and analytics. Do not expose fake editing controls before their backing APIs exist.

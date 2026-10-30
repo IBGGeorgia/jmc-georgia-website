@@ -16,6 +16,8 @@ if(!process.env.DATABASE_URL){
   await client.query('COMMIT');
   const x=await client.query("SELECT COUNT(*)::int AS total FROM information_schema.columns WHERE table_name='jmc_test_drive_leads' AND column_name IN ('id','consent_version','consented_at','status','phone')");
   if(x.rows[0].total!==5)throw Error('REQUIRED_COLUMNS_MISSING');
+  const cms=await client.query("SELECT COUNT(*)::int AS total FROM information_schema.tables WHERE table_schema='public' AND table_name IN ('jmc_cms_users','jmc_cms_sessions','jmc_cms_audit_log')");
+  if(cms.rows[0].total!==3)throw Error('CMS_TABLES_MISSING');
   console.log('MIGRATION_OK: JMC Test Drive schema verified, with consent timestamp.');
  }catch(e){
   await client.query('ROLLBACK').catch(()=>{});

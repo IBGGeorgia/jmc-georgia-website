@@ -1,5 +1,5 @@
 import {NextResponse} from 'next/server';
-import {createLead,getIp,isTestDriveReady,notifySales,readLead,sameOrigin} from '../../../lib/test-drive-server';
+import {createLead,getIp,isTestDriveReady,readLead,sameOrigin} from '../../../lib/test-drive-server';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
 export async function GET(){
@@ -17,8 +17,6 @@ export async function POST(req:Request){
   if(!payload)return NextResponse.json({error:'INVALID'},{status:400});
   const result=await createLead(payload,getIp(req));
   if(result.limited)return NextResponse.json({error:'RATE_LIMIT'},{status:429});
-  try{await notifySales(result.id,payload)}
-  catch{console.error('JMC Lead email notification unavailable. Review Resend logs.')}
   return NextResponse.json({id:result.id,accepted:true},{status:201,headers:{'Cache-Control':'no-store'}});
  }catch(e){if(e instanceof SyntaxError)return NextResponse.json({error:'INVALID'},{status:400});
   console.error('JMC lead submission failed (no personal data logged).');
