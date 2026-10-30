@@ -1,10 +1,12 @@
 import {test,expect} from '@playwright/test';
 
-test('Public privacy holding page does not assert an unverified legal entity',async({page})=>{
+test('Public privacy holding page states verified legal controller but not approved policy',async({page})=>{
  await page.goto('/privacy');
  await expect(page.getByRole('heading',{level:1,name:'კონფიდენციალურობა'})).toBeVisible();
  await expect(page.getByText('compliance@ibg.ge')).toBeVisible();
  await expect(page.locator('.jmc-privacy-panel')).not.toContainText('Eastgate Automotive LLC');
+ await expect(page.locator('.jmc-privacy-panel')).toContainText('შპს „იბერია ბიზნეს ჯგუფი“');
+ await expect(page.locator('.jmc-privacy-panel')).toContainText('204975376');
  await expect(page.locator('.jmc-privacy-panel')).toContainText('პოლიტიკა მზადდება');
 });
 
