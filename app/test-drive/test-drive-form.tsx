@@ -47,9 +47,10 @@ export function TestDriveForm({ready}:{ready:boolean}){
  const [reference,setReference]=useState('');
  const started=useRef(false);
  const selected=vehicles.find(v=>v.slug===model)??vehicles[0];
- // VIGUS uses previously approved first-party photographic assets rather than
- // the older cutout-on-black front/side exports. Other models keep their verified galleries.
- const verifiedVigusScenes=['/images/vigus/adventure-1.webp','/images/vigus/adventure-4.webp'];
+ // VIGUS uses two FLUX.2 Pro background-edit candidates, imported as local PNGs.
+ // The original black-background product angles stay retained elsewhere in the catalogue.
+ // Other models retain their source-backed galleries.
+ const verifiedVigusScenes=['/images/vigus/drive-front-20261030.png','/images/vigus/drive-side-20261030.png'];
  const views=[
   {label:'Studio',src:studioImageFor(selected.slug,selected.heroImage),scene:false},
   ...(selected.slug==='vigus'?verifiedVigusScenes:selected.gallery.slice(0,2))
