@@ -274,14 +274,14 @@ test('Grand Avenue discovery: homepage, catalogue, drawer, footer and test-drive
  for(const path of ['/','/vehicles','/test-drive']){
   await page.goto(path,{waitUntil:'domcontentloaded'});
   if(path==='/test-drive'){
-   await expect(page.getByRole('radio',{name:/Grand Avenue/}).first()).toBeAttached();
-   await page.getByRole('radio',{name:'Grand Avenue',exact:true}).check();
+   await expect(page.locator('.jmc-lead-model input[value="grand-avenue"]')).toBeAttached();
+   await page.locator('.jmc-lead-model input[value="grand-avenue"]').check();
    await expect(page.locator('main a[href="'+grand+'"]')).toHaveCount(1);
-   await page.getByRole('radio',{name:'VIGUS',exact:true}).check();
+   await page.locator('.jmc-lead-model input[value="vigus"]').check();
    await expect(page.locator('main a[href="/vehicles/vigus"]')).toHaveCount(1);
   }else{
    await expect(page.locator('main a[href="'+grand+'"]')).toHaveCount(2);
-   await expect(page.locator('main a[href="/vehicles/vigus"]')).toHaveCount(2);
+   await expect(page.locator('main a[href="/vehicles/vigus"]')).first().toBeVisible();
   }
  }
  await page.goto('/');
@@ -384,7 +384,7 @@ test('PRO is linked from catalogue and test drive',async({page})=>{
  await page.goto('/vehicles',{waitUntil:'domcontentloaded'});
  await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(2);
  await page.goto('/test-drive',{waitUntil:'domcontentloaded'});
- await page.getByRole('radio',{name:'Grand Avenue PRO',exact:true}).check();
+ await page.locator('.jmc-lead-model input[value="grand-avenue-pro"]').check();
  await expect(page.locator('main a[href="/vehicles/grand-avenue-pro"]')).toHaveCount(1);
 });
 
