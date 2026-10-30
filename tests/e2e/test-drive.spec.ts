@@ -73,3 +73,34 @@ test('Optional marketing consent shows clear, direct withdrawal channel',async({
  await expect(page.locator('.jmc-lead-consent a[href="mailto:compliance@ibg.ge"]')).toHaveCount(1);
  await expect(page.locator('.jmc-lead-consent input[type="checkbox"]').last()).not.toBeChecked();
 });
+
+
+test('Drive Studio V2 syncs main photography with selected models and view controls',async({page})=>{
+ for(const width of [1440,768,390,320]){
+  await page.setViewportSize({width,height:870});
+  await page.goto('/test-drive?model=grand-avenue-pro',{waitUntil:'domcontentloaded'});
+  const hero=page.locator('.jmc-drive-stage-image');
+  await expect(hero).toHaveAttribute('data-selected-model','grand-avenue-pro');
+  await expect(page.locator('.jmc-drive-selected-summary')).toContainText('Grand Avenue PRO');
+  const angle=page.getByRole('group',{name:'ავტომობილის რაკურსები'});
+  await expect(angle.getByRole('button')).toHaveCount(3);
+  await angle.getByRole('button',{name:/რაკურსი 2/}).click();
+  await expect(hero).toHaveAttribute('data-view','1');
+  await page.locator('.jmc-lead-model input[value="vigus"]').check();
+  await expect(hero).toHaveAttribute('data-selected-model','vigus');
+  await expect(hero).toHaveAttribute('data-view','0');
+  await expect(page.locator('.jmc-drive-selected-summary')).toContainText('VIGUS');
+  await expect(page.locator('.jmc-lead-submit button')).toBeDisabled();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth))
+   .toBeLessThanOrEqual(width+2);
+ }
+});
+
+test('Drive Studio V2 preserves data minimization and explicit opt-ins',async({page})=>{
+ await page.goto('/test-drive');
+ await expect(page.locator('.jmc-lead-consent input[type="checkbox"]')).toHaveCount(2);
+ await expect(page.locator('.jmc-lead-consent input[type="checkbox"]').last()).not.toBeChecked();
+ await expect(page.locator('.jmc-drive-stage-image')).toHaveAttribute('data-selected-model','vigus');
+ await expect(page.locator('.jmc-drive-view-controls button')).toHaveCount(3);
+ await expect(page.locator('.jmc-lead-form')).toHaveAttribute('novalidate','');
+});
