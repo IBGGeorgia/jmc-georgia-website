@@ -24,8 +24,8 @@ if(process.env.JMC_RETENTION_SCHEMA_MIGRATION_ONCE==='true'){
     'SELECT pg_try_advisory_xact_lock(20261030,99) AS obtained');
    if(lock.rows[0]?.obtained!==true)throw Error('BUSY');
    const table=await client.query(
-    "SELECT to_regclass('public.jmc_test_drive_leads') IS NOT NULL AS exists");
-   if(table.rows[0]?.exists!==true)throw Error('LEADS_TABLE_MISSING');
+    "SELECT to_regclass('public.jmc_test_drive_leads') IS NOT NULL AS present");
+   if(table.rows[0]?.present!==true)throw Error('LEADS_TABLE_MISSING');
    await client.query(`ALTER TABLE jmc_test_drive_leads
     ADD COLUMN IF NOT EXISTS retention_hold_until timestamptz`);
    await client.query(`CREATE INDEX IF NOT EXISTS jmc_leads_retention_idx
