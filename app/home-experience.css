@@ -2,7 +2,7 @@
 .home3{--home3-ink:#212121;--home3-red:#e50012;font-family:var(--font-ka,"Google Sans",sans-serif)}
 .home3-shell{width:min(var(--jmc-content-max),calc(100% - 2 * var(--jmc-page-gutter)));max-width:var(--jmc-content-max);margin-inline:auto}
 .home3-hero{height:var(--jmc-hero-height-desktop);min-height:var(--jmc-hero-height-desktop);position:relative;isolation:isolate;display:flex;align-items:center;overflow:hidden;background:#17191d;color:white}
-.home3-hero-backdrop{position:absolute;inset:0;z-index:-1;background:#17181b url("/images/homepage/grand-avenue-pro-hero.png") center right/cover no-repeat}
+.home3-hero-backdrop{position:absolute;inset:0;z-index:-1;background:#17181b url("/images/homepage/grand-avenue-pro-hero.webp") center right/cover no-repeat}
 .home3-hero-backdrop:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.86) 0%,rgba(0,0,0,.57) 42%,rgba(0,0,0,.08) 80%)}
 @media(max-width:700px){.home3-hero-backdrop{background-position:67% center}.home3-hero-backdrop:after{background:linear-gradient(90deg,rgba(0,0,0,.79),rgba(0,0,0,.43))}}
 .home3-hero-copy{padding-block:80px 110px}
@@ -139,3 +139,12 @@
  .home3-hero-copy > .home3-actions{animation-delay:.3s}
 }
 @keyframes home3-copy-enter{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* Mastered 4:3 studio photo geometry and consistent optical scale. */
+.home3-stage-image{aspect-ratio:4/3;min-height:0;background:#e9eaed;overflow:hidden}
+.home3-stage-image img{width:100%;height:100%;max-height:none;object-fit:contain;object-position:50% 50%;padding:clamp(12px,2vw,30px)}
+.home3-story-photo{aspect-ratio:4/3;height:auto;background:#e9eaed}
+.home3-story-photo img{height:100%;width:100%;object-fit:contain;object-position:center;padding:clamp(10px,1.6vw,20px)}
+.home3-photo-thumb img{object-fit:contain}
+@media(max-width:900px){.home3-stage-image{aspect-ratio:4/3;min-height:0}}
+@media(max-width:700px){.home3-stage-image{aspect-ratio:4/3;min-height:0}.home3-stage-image img{padding:10px}.home3-story-photo{aspect-ratio:4/3;height:auto}}
