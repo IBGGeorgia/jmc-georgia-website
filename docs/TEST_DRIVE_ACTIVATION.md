@@ -73,3 +73,14 @@ before promoting to a high-traffic public campaign. Never put PII in analytics e
 - Capture and verify exact consent timestamp `consented_at` and version `consent_version` with a test record before public activation.
 - Ensure site `/privacy` is replaced with legal-approved policy before flipping `PRIVACY_POLICY_APPROVED=true`.
 - Production is intentionally `TEST_DRIVE_ENABLED=false` until all gates pass; do not enable for preview or sample data.
+
+## Render paid DB provisioned — 2026-10-30
+
+- **Database:** `jmc-test-drive-leads` / `dpg-dbi4ess9v7es738lu3c0-a` (PostgreSQL 18, Frankfurt, basic_256mb, 1 GB disk). This incurs the user-approved recurring charge. Check account billing for exact invoicing.
+- External IP allowlist is empty (blocked). Keep it restricted; same-region Render services may connect via the **internal database URL**.
+- **Lead recipient:** `g.kalandia@eastgateautomotive.ge`. Set on the JMC Render service as `SALES_NOTIFY_TO`.
+- **Data controller named by business:** `Eastgate Automotive LLC`, stored in `JMC_DATA_CONTROLLER_NAME`; registration identifier and privacy/rights contact still require approval.
+- **Connection is not yet wired**: Render DB connection strings are only available through the database `Connect` control or credentials-capable API/CLI. The current integration cannot retrieve the password/internal URL. Assign `DATABASE_URL` in JMC service Environment using the **internal** Postgres connection string without sharing it in chat.
+- Execute `npm run db:migrate:leads` only from a trusted environment with database access; verify tables and test using non-customer fake data.
+- **Email is not active:** `RESEND_API_KEY` and domain-verified `RESEND_FROM` are not configured; do not confuse the SALES_NOTIFY_TO destination with a verified sender.
+- **Do not enable real submissions** until the public legal privacy policy, consent version, retention, authorized roles and production end-to-end validation are approved.
