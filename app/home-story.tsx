@@ -42,6 +42,11 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
         </div>
         <div className="home3-detail-side"><span className="home3-stage-index">JMC / DETAILS</span><h3>{vehicle.name}</h3><p>{vehicle.description}</p><Link href={'/vehicles/'+vehicle.slug} className="home3-pill home3-pill-dark">მოდელის დეტალები <span aria-hidden="true">↗</span></Link></div>
       </div>
+      {photos.length>1&&<div className="home3-photo-thumbnails" role="group" aria-label="აირჩიე ფოტოს რაკურსი">
+        {photos.map((src,i)=><button type="button" key={src+'-'+i} className={'home3-photo-thumb'+(index===i?' is-active':'')} aria-label={vehicle.name+' — ფოტო '+(i+1)} aria-pressed={index===i} onClick={()=>setDetail(i)}>
+          <img src={src} alt="" loading="lazy"/>
+        </button>)}
+      </div>}
     </div>
   </section>
   <section className="home3-conversion home3-shell" aria-labelledby="home3-conversion-title">
