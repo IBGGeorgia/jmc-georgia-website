@@ -30,3 +30,8 @@ Before any page, component, content, CSS, animation, or new-model change, read:
 - Model sticky navigation: `დაჯავშნე Test Drive` -> `/test-drive`, with the Vigus red progress bar retained.
 - Address access: Contact, Footer, and Burger menu address block. Keep model-page actions oriented to verified content/test-drive information instead.
 - Booking is **not live**: the target page must clearly state applications are not accepted. No false confirmation or enabled lead form.
+
+## Approved Test Drive customer-flow and privacy decisions (2026-10-30)
+- Public Test Drive order: Hero → model selection + contact form → concise next steps → showroom. Preserve the customer-first flow and 3 approved Studio photos.
+- Privacy contact: **compliance@ibg.ge**. User-approved lead retention: **12 calendar months after last substantive update**; job execution requires authorized production scheduling and backup review.
+- Policy draft remains in PR #44 for legal validation; do not mark privacy approved, enable submission, or silently deploy scheduled deletion before operational gates are verified.
