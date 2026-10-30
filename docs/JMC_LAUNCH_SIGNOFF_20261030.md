@@ -37,3 +37,26 @@ Render documentation:
 - [Recovery status endpoint](https://api-docs.render.com/reference/retrieve-postgres-recovery-info): `AVAILABLE`, `BACKUP_NOT_READY`, `NOT_AVAILABLE`.
 
 **No environment variables should be switched to destructive mode on the basis of this checklist alone.**
+
+## Marketing consent withdrawal — implemented, limited to authorized Sales/Admin
+
+The user-facing Test Drive form contains a **separate optional marketing consent**
+checkbox and explains that requests can be emailed to `compliance@ibg.ge`.
+Once public lead intake is legally enabled, authorized Sales/Admin staff can use
+**Admin → Test Drive ლიდები → Marketing consent → გააუქმე თანხმობა** after
+verifying the request from the data subject. This action:
+
+- changes only the selected `marketing_opt_in` from true to false;
+- records `lead.marketing_withdrawn` with actor and timestamp in
+  `jmc_cms_audit_log`;
+- preserves the lead's service-request status and its sales notes;
+- is idempotent under concurrent clicks and cannot reinstate consent;
+- requires a valid CMS session and same-origin protected POST.
+
+Support staff must first **verify the requester's identity**, then carry out
+the withdrawal. The website does **not** automatically parse emails or verify
+requester ownership, and the legal team must approve the formal request SOP.
+No outbound marketing sender or Zoho sync is connected yet. Future integrations
+MUST honor the current DB opt-in flag and suppress withdrawn records. Follow
+the approved response deadline; do not claim automated 7-day fulfillment until
+the organizational procedure and mailbox responsibilities are confirmed.
