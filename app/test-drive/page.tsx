@@ -27,7 +27,7 @@ export default function TestDrive(){
      <p className="jmc-td-hero-lead">შეარჩიე მოდელი და დატოვე მოთხოვნა. ჩვენი გუნდი დაგიკავშირდება საცდელი მართვის დროის შესათანხმებლად.</p>
      <div className="jmc-td-hero-actions">
       <a className="button jmc-td-hero-primary" href="#test-drive-request">
-       გადადით მოდელების არჩევაზე <JmcIcon name="arrow-up-right"/>
+       აირჩიე ავტომობილი <JmcIcon name="arrow-up-right"/>
       </a>
       <Link href="/contact" className="jmc-td-text-link">
        შოურუმის მისამართი <JmcIcon name="arrow-up-right"/>
