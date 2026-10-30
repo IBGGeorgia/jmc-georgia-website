@@ -38,3 +38,14 @@ For a documented legal reason, an authorized database operator may set `retentio
 - Publish legally reviewed, factually verified policy at `/privacy`.
 - Implement and verify actual daily retention scheduling, backup lifecycle and data-subject request handling.
 - Complete sandbox-to-production full journey check before setting `TEST_DRIVE_ENABLED=true` and `PRIVACY_POLICY_APPROVED=true`.
+
+## Operational intake gate (additional mandatory protection)
+
+The public form, `GET /api/test-drive` and `POST /api/test-drive` will refuse intake unless all existing privacy/database/admin conditions hold **and**:
+- `RETENTION_SCHEDULE_CONFIRMED=true` has been set only after an authorized operator has verified the daily cron job's actual Render workspace, database target, command and deployment.
+- The database table `jmc_lead_retention_health` contains a `last_success_at` from a real `--execute` cleanup completed within the **last 36 hours**. A dry run can never update this heartbeat.
+- Missing migrations, database connectivity failure, stale heartbeat or a cleanup that left an expired backlog cause intake to fail closed. Admin → Settings reports these conditions without exposing connection strings or other secrets.
+
+A daily schedule is recommended; the 36-hour margin provides a limited allowance for timing jitter while making missed jobs visible. A one-time operator execution is **not** a substitute for the daily scheduled job. Monitor and alert on a failed cleanup. The heartbeat is also added to the embedded CMS migration schema. Do not activate production intake until this check is demonstrated with a real scheduled run.
+
+The disposable CI PostgreSQL journey runs the same cleanup job with synthetic data and confirms both accepted submission with fresh heartbeat and rejection with a stale heartbeat.
