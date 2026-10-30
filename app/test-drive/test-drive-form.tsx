@@ -97,7 +97,7 @@ export function TestDriveForm({ready}:{ready:boolean}){
    </div>
    <div className="jmc-lead-trap" aria-hidden="true"><label>არ შეავსოთ <input tabIndex={-1} autoComplete="off"
     value={honeypot} onChange={e=>setHoneypot(e.target.value)}/></label></div>
-   {!ready&&<p className="jmc-lead-hold" role="status">ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება. ფორმა მზად არის, მაგრამ ჩართვამდე უნდა დასრულდეს მონაცემთა დაცვისა და გაყიდვების შეტყობინებების კონფიგურაცია.</p>}
+   {!ready&&<p className="jmc-lead-hold" role="status">ტესტ-დრაივის ონლაინ განაცხადები ამ ეტაპზე არ მიიღება. ფორმა მზად არის, მაგრამ ჩართვამდე უნდა დასრულდეს მონაცემთა დაცვისა და დაცული ადმინისტრაციული სისტემის კონფიგურაცია.</p>}
    {error&&<p className="jmc-lead-error" role="alert">{error}</p>}
    <div className="jmc-lead-submit"><button className="button" type="submit" disabled={!ready||status==='sending'}>
     {status==='sending'?'მოთხოვნა იგზავნება…':'გაგზავნე Test Drive მოთხოვნა'} <span aria-hidden="true">↗</span>
