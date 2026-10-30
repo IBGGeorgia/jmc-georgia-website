@@ -61,7 +61,9 @@ Render-ის მოქმედი Production კონფიგურაცი
 ### შიდა დასამტკიცებელი საკითხები — საჯარო გვერდზე არ გამოქვეყნდეს
 1. Eastgate Automotive LLC-ის ზუსტი რეგისტრირებული დასახელება/კოდი და მისი, როგორც პასუხისმგებელი პირის, სტატუსი.
 2. **დადასტურებულია:** Render Web Service და PostgreSQL ორივე Frankfurt რეგიონშია; **კვლავ შესამოწმებელია:** ქვეპროცესორები, სარეზერვო ასლების მდებარეობა და საერთაშორისო გადაცემის გარანტიები.
-3. **12 თვე შეთანხმებულია; წაშლის კოდი და სატესტო ინტეგრაცია მზადაა.** Production-ის დღიური Cron ჯერ არ არის შექმნილი/დადასტურებული; უნდა გაიაროს უსაფრთხო, დადასტურებული გაშვება, სარეზერვო ასლებისა და მარკეტინგული თანხმობის არქივის წესების დაცვით.
+3. **12 თვე შეთანხმებულია.** ყოველდღიური Render Cron Job `jmc-lead-retention-daily` შექმნილია (07:00, თბილისი); PostgreSQL-ის `retention_hold_until` სვეტი და `jmc_lead_retention_health` ცხრილი Production-ში დამატებულია და გადამოწმებულია 2026-10-30. **მონაცემების რეალური წაშლა ჯერ გამორთულია:** Cron მხოლოდ უსაფრთხო status-შემოწმებას შეასრულებს, სანამ Backup/Recovery და სამართლებრივი პირობები არ დადასტურდება; პირველი დაგეგმილი გაშვების შედეგი ჯერ არ გვაქვს. 2026-10-30-ის read-only შემოწმებით ბაზაში 0 ლიდი იყო.
+
+**Recovery/backup-ის დაზუსტება:** Render ადასტურებს უწყვეტ PITR-ს ფასიანი PostgreSQL-ისთვის; Hobby workspace-ის აღდგენის ფანჯარაა 3 დღე, Pro+-ისთვის — 7 დღე. ეს არ ადასტურებს კონკრეტული ბაზის აღდგენის ტესტირებას. საჭიროა `jmc-test-drive-leads` → Recovery პანელში რეალური ფანჯრისა და აღდგენის შესაძლებლობის დათვალიერება. წყარო: https://render.com/docs/postgresql-backups. დამატებითი გრძელვადიანი ლოგიკური Backup-ის საჭიროება ცალკე გადაწყდეს.
 4. რეალური unsubscribe/opt-out პროცესი მარკეტინგისთვის და DPO-ს საჭიროება.
 5. იურიდიული განხილვა, შემდეგ `/privacy`-ზე გამოცემა; მხოლოდ ამის შემდეგ უფლებამოსილი პირის თანხმობით შესაბამისი ფუნქციის გააქტიურება.
 
@@ -69,4 +71,4 @@ Render-ის მოქმედი Production კონფიგურაცი
 
 **სამართლებრივი წყარო:** https://matsne.gov.ge/ka/document/view/5827307 (მოქმედი კონსოლიდირებული რედაქცია, მუხლები 4, 5, 12, 13–20, 24, 37). **საზედამხედველო ორგანო:** სახელმწიფო აუდიტის სამსახური — 2026 წლის 2 მარტიდან, https://www.matsne.gov.ge/ka/document/view/6699148. 
 
-**ინფრასტრუქტურის მტკიცებულება (შიდა):** Render Web Service `srv-dbge2kflk1mc73dq4lpg` — Frankfurt, live commit `a6c265a69d9a7df0edcb70bf5937eef876ac3a9a` (30.10.2026, 11:52 UTC); PostgreSQL `dpg-dbi4ess9v7es738lu3c0-a` — Frankfurt, plan basic_256mb, External IP allowlist empty. არცერთი საიდუმლო მონაცემი ამ დოკუმენტში არ ინახება.
+**ინფრასტრუქტურის მტკიცებულება (შიდა):** 2026-10-30 — Render Web Service `srv-dbge2kflk1mc73dq4lpg`, Cron `crn-dbi8i9ifngtc73cjspqg` და PostgreSQL `dpg-dbi4ess9v7es738lu3c0-a` ერთი workspace/Frankfurt რეგიონში. Web Live commit `b6c0bd6880dc5a879309f84a579539300827804d`; Render startup logs: `leads=true legal_hold=true heartbeat=true`, `total=0 eligible=0 protected=0`, `ever_run=false fresh=false` (12:49 UTC). DB external IP allowlist ცარიელია. საიდუმლო მონაცემები აქ არ იწერება.
