@@ -92,3 +92,34 @@ schema before planning a migration.
 or `heartbeat=false`, check recovery/backup readiness before performing the
 idempotent migration using the authorized internal database connection. The
 paid Cron remains in status-only mode until independent legal and backup review.
+
+## Verified 2026-10-30 Production schema deficiency and safe one-time fix
+
+At 12:37:36 UTC, the read-only web start probe on actual paid PostgreSQL reported:
+`JMC_PRODUCTION_SCHEMA: db=connected leads=true legal_hold=false heartbeat=false`.
+The basic leads table works, but the two 12-month retention additions are absent.
+
+The one-time migration script `scripts/apply-retention-schema-once.mjs` is
+**disabled by default**. It runs at `npm prestart` only when the Render web
+service environment has `JMC_RETENTION_SCHEMA_MIGRATION_ONCE=true`. The script
+uses a bounded transaction, advisory lock, limited lock/statement timeouts,
+and performs **only** `ADD COLUMN IF NOT EXISTS`, `CREATE INDEX IF NOT EXISTS`
+and `CREATE TABLE IF NOT EXISTS` for the retention objects. It neither reads
+customer records nor deletes/updates them. It is idempotent; failures roll
+back and do not prevent the public site from booting. Next, the read-only
+probe prints the verified resulting schema status.
+
+Before enabling that variable, verify the real recovery point or logical
+export in the authorized Render Postgres **Recovery** tab. Render documents
+automatic PITR on paid databases, but this alone does not independently prove
+that a specific restore point has been tested.
+
+Once a backup is verified, execute with a deliberate Render environment update,
+watch the web service's new deploy logs for
+`JMC_RETENTION_MIGRATION_OK` and
+`JMC_PRODUCTION_SCHEMA: db=connected leads=true legal_hold=true heartbeat=true`,
+then **remove or set `JMC_RETENTION_SCHEMA_MIGRATION_ONCE=false`**.
+The script must not be left configured to execute on every restart.
+
+This migration does **not** activate the Cron cleanup or Test Drive intake.
+Those remain subject to the independent privacy, backup, and operational gates.

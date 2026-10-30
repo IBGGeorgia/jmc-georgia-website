@@ -16,7 +16,7 @@
     "db:migrate:leads": "node scripts/migrate-test-drive.mjs",
     "cms:admin:create": "node scripts/create-cms-admin.mjs",
     "db:retention:leads": "node scripts/purge-expired-leads.mjs",
-    "prestart": "node scripts/production-readiness-probe.mjs"
+    "prestart": "node scripts/apply-retention-schema-once.mjs && node scripts/production-readiness-probe.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",
