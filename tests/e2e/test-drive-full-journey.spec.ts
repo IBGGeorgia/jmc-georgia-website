@@ -10,6 +10,12 @@ test('Complete Test Drive journey: selected model -> validated form -> database 
   const ready=await request.get('/api/test-drive');
   expect(await ready.json()).toEqual({ready:true});
   await page.addInitScript(()=>{(window as Window&{dataLayer?:unknown[]}).dataLayer=[]});
+  await page.goto('/privacy');
+  await expect(page.getByRole('heading',{name:/თქვენი მონაცემების დამუშავების პირობები/})).toBeVisible();
+  await expect(page.locator('.jmc-privacy-approved')).toContainText('შპს „იბერია ბიზნეს ჯგუფი“');
+  await expect(page.locator('.jmc-privacy-approved')).toContainText('204975376');
+  await expect(page.locator('.jmc-privacy-approved')).toContainText('2026-10-30');
+  await expect(page.getByRole('heading',{name:'პოლიტიკა მზადდება'})).toHaveCount(0);
   await page.goto('/test-drive?model=grand-avenue-pro&utm_source=meta&utm_medium=paid_social&utm_campaign=qa');
   await expect(page.locator('.jmc-lead-model input[value="grand-avenue-pro"]')).toBeChecked();
   await expect(page.locator('.jmc-lead-model')).toHaveCount(3);
