@@ -20,8 +20,10 @@ test('compare two models, switch trims, add third, and filter differences',async
  await page.getByRole('button',{name:'მესამე მოდელის ამოღება'}).click();
  await expect(page.locator('.jmc-compare-slot')).toHaveCount(2);
 });
-test('lead generation remains under construction without intake form',async({page})=>{
+test('Test Drive shows a staged form but cannot accept data before activation',async({page})=>{
  await page.goto('/test-drive');
- await expect(page.getByText(/Under Construction/)).toBeVisible();
- await expect(page.locator('main form')).toHaveCount(0);
+ await expect(page.getByRole('heading',{name:'ტესტ-დრაივი',exact:true})).toBeVisible();
+ await expect(page.locator('main form.jmc-lead-form')).toHaveCount(1);
+ await expect(page.locator('.jmc-lead-submit button')).toBeDisabled();
+ await expect(page.getByText('განაცხადების მიღება ჯერ არ არის აქტიური')).toBeVisible();
 });
