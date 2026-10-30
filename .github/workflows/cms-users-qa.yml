@@ -1,0 +1,59 @@
+name: JMC — CMS permissions integration
+on:
+  push:
+    branches: [feature/jmc-admin-users-permissions-20261030]
+    paths:
+      - 'app/**'
+      - 'lib/**'
+      - 'db/**'
+      - 'scripts/**'
+      - 'tests/e2e/cms-users.spec.ts'
+      - '.github/workflows/cms-users-qa.yml'
+permissions:
+  contents: read
+jobs:
+  cms-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: jmc_test
+          POSTGRES_PASSWORD: jmc_test
+          POSTGRES_DB: jmc_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U jmc_test -d jmc_test"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      DATABASE_URL: postgresql://jmc_test:jmc_test@127.0.0.1:5432/jmc_test
+      NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3000
+      CMS_E2E_ENABLED: "1"
+      TEST_DRIVE_ENABLED: "false"
+      PRIVACY_POLICY_APPROVED: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Prepare ephemeral security keys and test credentials
+        shell: bash
+        run: |
+          {
+            echo "LEAD_HASH_SECRET=$(openssl rand -hex 32)"
+            echo "CMS_SESSION_SECRET=$(openssl rand -hex 32)"
+            echo "CMS_BOOTSTRAP_USERNAME=qa-owner"
+            echo "CMS_BOOTSTRAP_DISPLAY_NAME=QA Administrator"
+            echo "CMS_BOOTSTRAP_PASSWORD=$(openssl rand -hex 32)"
+            echo "CMS_TEST_SALES_PASSWORD=$(openssl rand -hex 32)"
+          } >> "$GITHUB_ENV"
+      - run: npm install
+      - name: Migrate disposable DB and bootstrap admin
+        run: |
+          npm run db:migrate:leads
+          npm run cms:admin:create
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npx playwright test tests/e2e/cms-users.spec.ts --workers=1
