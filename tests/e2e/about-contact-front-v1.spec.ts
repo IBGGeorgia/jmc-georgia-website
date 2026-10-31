@@ -14,7 +14,7 @@ test.describe('About and Contact Frontend closure',()=>{
   test('Contact shows verified location and route actions at '+width,async({page})=>{
    await page.setViewportSize({width,height:850});
    await page.goto('/contact');
-   await expect(page.locator('address')).toContainText(['თბილისი, ბელიაშვილის 115']);
+   await expect(page.locator('.jmc-contact-location-address')).toContainText('თბილისი, ბელიაშვილის 115');
    await expect(page.getByRole('link',{name:/რუკაზე ნახვა/})).toHaveAttribute('href',/google.com\/maps\/search/);
    await expect(page.getByRole('link',{name:/დაჯავშნე Test Drive/})).toHaveAttribute('href','/test-drive');
    expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
