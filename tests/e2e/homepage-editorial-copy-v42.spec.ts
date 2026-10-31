@@ -11,6 +11,12 @@ test.describe('Homepage 4.2 editorial copy and typography',()=>{
    await expect(page.getByRole('heading',{name:'დაათვალიერე დეტალურად.'})).toBeVisible();
    await expect(page.getByRole('heading',{name:'გამოსცადე შენი JMC.'})).toBeVisible();
    await expect(page.locator('.home3-scroll')).toHaveCount(0);
+   await expect(page.locator('.home3-hero .home3-kicker')).toHaveCount(0);
+   await expect(page.locator('.home3-lineup .home3-kicker')).toHaveText('01 / მოდელები');
+   await expect(page.locator('.home3-story-intro .home3-kicker')).toHaveText('02 / ჩვენი მოდელები');
+   await expect(page.locator('.home3-detail-heading .home3-kicker')).toHaveText('03 / ფოტოგალერეა');
+   await expect(page.locator('.home3-conversion .home3-kicker')).toHaveText('04 / ტესტ-დრაივი');
+   expect((await page.locator('.home3, .home3-story').allTextContents()).join('')).not.toContain('—');
    const cards=page.locator('.home3-story-tile');
    await expect(cards).toHaveCount(3);
    for(const [i,name] of ['VIGUS','Grand Avenue','Grand Avenue PRO'].entries()){
