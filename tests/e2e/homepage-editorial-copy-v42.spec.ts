@@ -15,7 +15,7 @@ test.describe('Homepage 4.2 editorial copy and typography',()=>{
    await expect(cards).toHaveCount(3);
    for(const [i,name] of ['VIGUS','Grand Avenue','Grand Avenue PRO'].entries()){
     await expect(cards.nth(i).getByRole('heading',{name,exact:true})).toBeVisible();
-    await expect(cards.nth(i).getByRole('link',{name:/მოდელის დეტალები/})).toHaveAttribute('href',/\\/vehicles\\//);
+    await expect(cards.nth(i).getByRole('link',{name:/მოდელის დეტალები/})).toHaveAttribute('href',/vehicles/);
    }
    const font=await page.locator('.home3-story-intro h2').evaluate(el=>({family:getComputedStyle(el).fontFamily,weight:getComputedStyle(el).fontWeight}));
    expect(font.family).toBeTruthy();
