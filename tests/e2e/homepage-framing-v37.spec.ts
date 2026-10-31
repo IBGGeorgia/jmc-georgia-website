@@ -10,6 +10,10 @@ test.describe('Homepage 3.7 photo composition contract',()=>{
    if(width<=700){
     const size=await backdrop.evaluate(el=>getComputedStyle(el).backgroundSize);
     expect(size).not.toBe('cover');
+    const headline=page.locator('.home3-headline-word');
+    const word=await headline.evaluate(el=>({rect:el.getBoundingClientRect().toJSON(),lines:el.getClientRects().length}));
+    expect(word.lines).toBe(1);
+    expect(word.rect.right).toBeLessThanOrEqual(width-12);
    }
    await expect(page.locator('.home3-hero .home3-actions a').first()).toBeVisible();
    const stage=page.locator('.home3-stage-image');
@@ -27,6 +31,12 @@ test.describe('Homepage 3.7 photo composition contract',()=>{
    }
    expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
    if(width===1440||width===390){
+    const photographs=page.locator('.home3-stage-image img, .home3-story-photo img, .home3-detail-media img');
+    for(const photo of await photographs.all()){
+      await photo.scrollIntoViewIfNeeded();
+      await expect.poll(()=>photo.evaluate((el:HTMLImageElement)=>el.complete&&el.naturalWidth>0)).toBe(true);
+    }
+    await page.locator('.home3-hero').scrollIntoViewIfNeeded();
     await test.info().attach('homepage-photo-composition-'+width,{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
    }
   });
