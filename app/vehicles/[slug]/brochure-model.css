@@ -434,3 +434,76 @@
 .grand-equipment-toggle-icon::after{transform:rotate(90deg)}
 .grand-equipment details[open] .grand-equipment-toggle-icon::after{transform:rotate(0)}
 @media(prefers-reduced-motion:reduce){.grand-equipment-toggle-icon::before,.grand-equipment-toggle-icon::after{transition:none}}
+
+
+/* Grand Avenue 1.2 - approved editorial proportions and touch-first polish.
+   Page-specific only: Homepage, VIGUS and PRO are not modified. */
+.grand-vigus-page .vigus-hero-bottom h1{
+ font-family:var(--font-latin,"Switzer",sans-serif);
+ font-weight:650;
+ font-size:clamp(48px,7vw,108px);
+ line-height:1.08;
+ letter-spacing:-.045em;
+ text-transform:none;
+}
+.grand-vigus-page .vigus-hero-bottom>p{
+ font-family:var(--font-ka,"Google Sans",sans-serif);
+ line-height:1.6;
+ max-width:680px;
+}
+.grand-vigus-page .grand-gallery-grid{gap:clamp(14px,2vw,28px)}
+.grand-vigus-page .grand-gallery-open{
+ border-radius:var(--jmc-ui-radius-card);
+ overflow:hidden;
+ isolation:isolate;
+}
+.grand-vigus-page .grand-gallery-open img{
+ width:100%;
+ aspect-ratio:4/3;
+ object-fit:contain;
+ object-position:center;
+ background:#e9eaed;
+ border-radius:0;
+}
+.grand-vigus-page .grand-gallery-grid figcaption{
+ font-family:var(--font-ka);
+ color:var(--jmc-ui-secondary);
+ line-height:1.6;
+}
+.grand-vigus-page .grand-specification-grid{gap:0 clamp(16px,2vw,30px)}
+.grand-vigus-page .grand-specification-grid>div{min-width:0}
+.grand-vigus-page .grand-equipment summary{
+ font-family:var(--font-ka);
+ line-height:1.35;
+}
+.grand-vigus-page .grand-equipment summary span{
+ color:var(--jmc-ui-secondary);
+}
+@media(max-width:960px){
+ .grand-vigus-page .brochure-story-visual{aspect-ratio:4/3;height:auto;min-height:0}
+ .grand-vigus-page .brochure-story-tabs button{min-height:88px}
+}
+@media(max-width:700px){
+ .grand-vigus-page .vigus-hero-bottom h1{
+  font-size:clamp(37px,8.5vw,58px);
+  line-height:1.12;
+ }
+ .grand-vigus-page .grand-gallery-grid figure{
+  flex:0 0 min(84%,340px);
+ }
+ .grand-vigus-page .grand-gallery-open img{aspect-ratio:4/3}
+ .grand-vigus-page .grand-specification-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .grand-vigus-page .grand-equipment summary{
+  padding-block:20px;
+ }
+}
+@media(max-width:390px){
+ .grand-vigus-page .grand-equipment summary{
+  flex-wrap:wrap;
+  gap:8px;
+ }
+ .grand-vigus-page .grand-equipment summary span{white-space:normal}
+}
+@media(prefers-reduced-motion:reduce){
+ .grand-vigus-page .grand-gallery-open img{transform:none!important;transition:none!important}
+}
