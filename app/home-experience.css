@@ -307,3 +307,35 @@
  .home3-story-tile h3{margin-top:16px}
  .home3-conversion h2{font-size:clamp(32px,8vw,48px)}
 }
+
+
+/* Homepage 4.3 - motion as progressive enhancement, no layout shifts. */
+@media(prefers-reduced-motion:no-preference){
+ .home3-motion-pending{
+  opacity:0;
+  transform:translate3d(0,32px,0);
+  transition:opacity .72s var(--jmc-ui-ease),transform .72s var(--jmc-ui-ease);
+ }
+ .home3-motion-pending.home3-motion-visible{opacity:1;transform:translate3d(0,0,0)}
+ .home3-story-tile:nth-child(2){transition-delay:.08s}
+ .home3-story-tile:nth-child(3){transition-delay:.16s}
+ .home3-hero-backdrop{animation:home3-hero-drift 11s ease-out both}
+ .home3-lineup .home3-stage-image{animation:home3-photo-enter .55s var(--jmc-ui-ease) both}
+ .home3-lineup .home3-stage-copy{animation:home3-copy-swap .48s var(--jmc-ui-ease) both}
+ .home3-detail-media .home3-gallery-image{animation:home3-gallery-swap .48s var(--jmc-ui-ease) both}
+ .home3-pill span[aria-hidden="true"],.home3-story-link span[aria-hidden="true"]{
+  display:inline-block;transition:transform .2s var(--jmc-ui-ease)
+ }
+ .home3-pill:hover span[aria-hidden="true"],.home3-story-link:hover span[aria-hidden="true"]{transform:translate3d(3px,-3px,0)}
+ .home3-story-photo img{transition:transform .7s var(--jmc-ui-ease)}
+ .home3-story-tile:hover .home3-story-photo img{transform:scale(1.025)}
+ .home3-tab{transition:background-color .2s,color .2s,border-color .2s}
+}
+@keyframes home3-hero-drift{from{transform:scale(1.035)}to{transform:scale(1)}}
+@keyframes home3-copy-swap{from{opacity:.35;transform:translate3d(0,12px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes home3-gallery-swap{from{opacity:.28;transform:scale(1.012)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){
+ .home3-motion-pending{opacity:1!important;transform:none!important;transition:none!important}
+ .home3-hero-backdrop,.home3-gallery-image,.home3-stage-copy{animation:none!important}
+ .home3-story-photo img{transform:none!important;transition:none!important}
+}
