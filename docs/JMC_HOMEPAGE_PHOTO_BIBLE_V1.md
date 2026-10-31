@@ -12,8 +12,8 @@ Status: implementation specification subordinate to `docs/JMC_DESIGN_SYSTEM.md` 
 | --- | --- | --- |
 | Homepage Hero | 1920 × 1080 WebP, 16:9, derived from approved 1920 × 1088 original without enlargement | Desktop: full-bleed cover with left reading zone; mobile: whole scene visible on a dark stage |
 | Model Lineup, 3 vehicles | 1600 × 1200 WebP, 4:3 for all | Equal source canvas; centered contain, preserve vehicle proportions |
-| Storytelling cards | Existing 4:3 first-party master image | Desktop three-column; tablet image-left/editorial-right; mobile single column |
-| Photo Explorer | Original first-party source photos | Contain, real numbered angles, touch and keyboard; no invented views |
+| Storytelling cards | VIGUS: approved 1440 × 1080 WebP; remaining models: existing first-party photos | Desktop three-column; tablet image-left/editorial-right; mobile single column |
+| Photo Explorer | VIGUS: 4 approved 1440 × 1080 WebP studio angles + preserved cockpit/seats; remaining models: original photos | Contain, real numbered angles, touch and keyboard; no invented views |
 
 ## Rendering scale
 - Above 900px, the Model Lineup media stage is capped at 600px tall. Below 900px its frame stays 4:3.
@@ -28,4 +28,11 @@ Status: implementation specification subordinate to `docs/JMC_DESIGN_SYSTEM.md` 
 - Build success and screenshot tests do **not** replace human review for AI-generated grille/headlight/wheel authenticity.
 
 ## Dependency note
-Production pages serve generated WebP under `/images/homepage/` from the app itself. Source imports currently occur at build time from Higgsfield URLs; the repo does **not** yet retain immutable binary originals. A fully offline/reproducible build requires committing or storing vetted source binaries in owned durable storage.
+Production pages serve generated WebP under `/images/homepage/` from the app itself. All Homepage master assets, including VIGUS four-angle editorial views, are stored as immutable first-party WebP binaries under `public/images/homepage` and SHA-256 pinned in `assets/homepage/media-lock.json`. Model-page source galleries are unchanged; other product-page import dependencies are tracked separately.
+
+## Homepage 3.8 VIGUS editorial composition
+- Storytelling's first card uses the approved VIGUS **front-three-quarter** angle, replacing the dark front-on legacy image.
+- Homepage Explorer VIGUS sequence: three-quarter front, straight front, side profile, three-quarter rear, then the existing cockpit and seats. This is not a 360-degree view.
+- The four exterior photographs share the same clean architectural studio, illumination and neutral 4:3 canvas. They are intentionally Homepage-only; do not overwrite canonical VIGUS galleries on model detail pages.
+- Main Explorer exterior frame uses a controlled wide editorial crop on desktop and exact 4:3 framing on mobile. Non-VIGUS/interior photos retain contain treatment to protect image content.
+- Photo thumbnail edges, stage height and storytelling image slots use consistent design tokens and radius.
