@@ -3,6 +3,13 @@ import {useState} from 'react';
 import Link from 'next/link';
 
 type StoryVehicle={slug:string;name:string;image:string;gallery:string[];description:string};
+// Homepage-only approved VIGUS artwork. Original model-page galleries are untouched.
+const VIGUS_HOME_ANGLES=[
+ '/images/homepage/vigus-front-three-quarter.webp',
+ '/images/homepage/vigus-front.webp',
+ '/images/homepage/vigus-side.webp',
+ '/images/homepage/vigus-rear-three-quarter.webp'
+] as const;
 const stories=[
  {number:'02',title:'დიზაინი, რომელიც პირველივე შეხედვით გამოირჩევა.',body:'აღმოაჩინე JMC-ის მოდელების ხასიათი — ექსტერიერის ხაზებიდან ყოველდღიურ პრაქტიკულობამდე.'},
  {number:'03',title:'შეარჩიე შენი შესაძლებლობები.',body:'შეისწავლე თითოეული მოდელი, დაათვალიერე ფოტოები და გაეცანი კომპლექტაციებს.'},
@@ -12,7 +19,9 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
  const [current,setCurrent]=useState(0);
  const [detail,setDetail]=useState(0);
  const vehicle=vehicles[current]||vehicles[0];
- const photos=[vehicle?.image,...(vehicle?.gallery||[])].filter((v):v is string=>Boolean(v));
+ const photos=(vehicle?.slug==='vigus'
+   ? [...VIGUS_HOME_ANGLES,...(vehicle?.gallery||[]).slice(3)]
+   : [vehicle?.image,...(vehicle?.gallery||[])]).filter((v):v is string=>Boolean(v));
  const index=detail%Math.max(photos.length,1);
  const image=photos[index];
  const move=(step:number)=>setDetail(x=>(x+step+photos.length)%photos.length);
@@ -24,7 +33,7 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
   </section>
   <section className="home3-story-grid home3-shell" aria-label="აღმოაჩინე JMC">
    {stories.map((story,i)=><article className="home3-story-tile" key={story.number}>
-    <div className="home3-story-photo"><img src={vehicles[i]?.gallery?.[0]||vehicles[i]?.image} alt={vehicles[i]?.name+' — ავტომობილის ფოტო'} loading="lazy" decoding="async"/></div>
+    <div className="home3-story-photo"><img src={vehicles[i]?.slug==='vigus'?VIGUS_HOME_ANGLES[0]:(vehicles[i]?.gallery?.[0]||vehicles[i]?.image)} alt={vehicles[i]?.name+' — ავტომობილის ფოტო'} loading="lazy" decoding="async"/></div>
     <span>{story.number} / JMC</span><h3>{story.title}</h3><p>{story.body}</p>
     <Link className="home3-story-link" href={'/vehicles/'+(vehicles[i]?.slug||'vigus')}>გაიცანი მოდელი <span aria-hidden="true">↗</span></Link>
    </article>)}
@@ -36,14 +45,14 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
        {vehicles.map((v,i)=><button key={v.slug} type="button" className={'home3-tab'+(current===i?' is-active':'')} aria-pressed={current===i} onClick={()=>{setCurrent(i);setDetail(0)}}>{v.name}</button>)}
       </div>
       <div className="home3-detail-stage">
-        <div className="home3-detail-media" onKeyDown={e=>{if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}if(e.key==='ArrowRight'){e.preventDefault();move(1)}}}>
+        <div className={'home3-detail-media'+(vehicle.slug==='vigus'&&index<4?' is-studio':'')} onKeyDown={e=>{if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}if(e.key==='ArrowRight'){e.preventDefault();move(1)}}}>
           {image?<img key={vehicle.slug+'-'+detail} src={image} alt={vehicle.name+' — რაკურსი '+(index+1)} loading="lazy" decoding="async"/>:<p>ფოტო მალე დაემატება.</p>}
           {photos.length>1&&<div className="home3-photo-controls"><button type="button" aria-label="წინა ფოტო" onClick={()=>move(-1)}>←</button><span aria-live="polite">{index+1} / {photos.length}</span><button type="button" aria-label="შემდეგი ფოტო" onClick={()=>move(1)}>→</button></div>}
         </div>
         <div className="home3-detail-side"><span className="home3-stage-index">JMC / DETAILS</span><h3>{vehicle.name}</h3><p>{vehicle.description}</p><Link href={'/vehicles/'+vehicle.slug} className="home3-pill home3-pill-dark">მოდელის დეტალები <span aria-hidden="true">↗</span></Link></div>
       </div>
       {photos.length>1&&<div className="home3-photo-thumbnails" role="group" aria-label="აირჩიე ფოტოს რაკურსი">
-        {photos.map((src,i)=><button type="button" key={src+'-'+i} className={'home3-photo-thumb'+(index===i?' is-active':'')} aria-label={vehicle.name+' — ფოტო '+(i+1)} aria-pressed={index===i} onClick={()=>setDetail(i)}>
+        {photos.map((src,i)=><button type="button" key={src+'-'+i} className={'home3-photo-thumb'+(index===i?' is-active':'')+(vehicle.slug==='vigus'&&i<4?' is-studio':'')} aria-label={vehicle.name+' — ფოტო '+(i+1)} aria-pressed={index===i} onClick={()=>setDetail(i)}>
           <img src={src} alt="" loading="lazy" decoding="async"/>
         </button>)}
       </div>}
