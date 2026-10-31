@@ -2,6 +2,7 @@
 import {useEffect,useRef,useState} from 'react';
 import Link from 'next/link';
 import {JmcIcon} from '../jmc-icons';
+import {TestDriveCalendar} from './test-drive-calendar';
 import {studioImageFor} from '../../lib/studio-images';
 import {vehicles} from '../../lib/vehicles';
 
@@ -229,8 +230,7 @@ export function TestDriveForm({ready}:{ready:boolean}){
          </span>
         </label>
         <label>სასურველი დღე <small>(არასავალდებულო)</small>
-         <input type="date" min={today} max={maxDate} value={preferredDate}
-          onChange={e=>setDate(e.target.value)}/>
+         <TestDriveCalendar value={preferredDate} min={today} max={maxDate} onChange={setDate}/>
          <span className="jmc-lead-field-help">დრო საბოლოოდ შეთანხმდება ჩვენს წარმომადგენელთან.</span>
         </label>
        </div>
