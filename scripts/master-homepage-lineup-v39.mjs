@@ -12,8 +12,8 @@ const root=process.cwd();
 const dir=join(root,'public/images/homepage');
 const sources=[
  ['vigus',null],
- ['grand-avenue','https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261031_091741_dfa3aadb-f00c-45dd-bd8d-7790e6f69d74.png'],
- ['grand-avenue-pro','https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261031_091742_5b3905dd-f669-4263-af89-2b36547f01aa.png'],
+ ['grand-avenue','https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261031_092451_6181176b-e953-4377-8d1c-4ca4f7bf2a3c.png'],
+ ['grand-avenue-pro','https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261031_092451_5997ffb3-2c28-4119-931a-0e0fd7286465.png'],
 ];
 await mkdir(dir,{recursive:true});
 const lockFile=join(root,'assets/homepage/media-lock.json');
