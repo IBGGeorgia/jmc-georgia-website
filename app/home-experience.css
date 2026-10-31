@@ -4,14 +4,7 @@
 .home3-hero{height:var(--jmc-hero-height-desktop);min-height:var(--jmc-hero-height-desktop);position:relative;isolation:isolate;display:flex;align-items:center;overflow:hidden;background:#17191d;color:white}
 .home3-hero-backdrop{position:absolute;inset:0;z-index:-1;background:#17181b url("/images/homepage/grand-avenue-pro-hero.webp") center right/cover no-repeat}
 .home3-hero-backdrop:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.86) 0%,rgba(0,0,0,.57) 42%,rgba(0,0,0,.08) 80%)}
-@media(max-width:700px){
- .home3-hero{align-items:flex-start}
- .home3-hero-backdrop{background-size:min(100%,520px) auto;background-position:right 12px bottom 32px}
- .home3-hero-backdrop:after{background:linear-gradient(180deg,#17181b 0%,rgba(23,24,27,.96) 38%,rgba(23,24,27,.42) 74%,rgba(23,24,27,.16) 100%)}
- .home3-hero-copy{padding-top:clamp(44px,9vw,66px);padding-bottom:0}
- .home3-hero h1{font-size:clamp(40px,8.5vw,54px);line-height:1.15}
- .home3-hero-copy>p:not(.home3-kicker){line-height:1.6}
-}
+
 .home3-hero-copy{padding-block:80px 110px}
 .home3-kicker{font-size:12px;letter-spacing:.04em;font-weight:650;margin:0 0 21px}
 .home3-hero h1{font-weight:700;font-size:clamp(44px,5.8vw,94px);line-height:1.14;letter-spacing:-.04em;max-width:960px;margin:0 0 22px}
@@ -42,7 +35,7 @@
 .home3-stage-copy p{max-width:450px;color:#58585a;line-height:1.75;font-size:15px}
 @keyframes home3-photo-enter{from{opacity:.2;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:900px){.home3-vehicle-stage{grid-template-columns:1fr}.home3-stage-image{min-height:330px}.home3-stage-copy{padding:28px 32px 42px}.home3-heading{align-items:start;flex-direction:column}}
-@media(max-width:600px){.home3-hero{height:var(--jmc-hero-height-mobile);min-height:var(--jmc-hero-height-mobile)}.home3-hero-copy{padding-block:95px 135px}.home3-actions{flex-direction:column;align-items:stretch}.home3-lineup{padding-block:75px}.home3-stage-image{min-height:240px}.home3-stage-image img{max-height:330px;padding:12px}.home3-stage-copy{padding:24px}.home3-stage-buttons{flex-direction:column;width:100%}.home3-scroll{left:16px}.home3-model-tabs{gap:7px}.home3-tab{padding:11px 14px}}
+@media(max-width:600px){.home3-hero{height:var(--jmc-hero-height-mobile);min-height:var(--jmc-hero-height-mobile)}.home3-actions{flex-direction:column;align-items:stretch}.home3-lineup{padding-block:75px}.home3-stage-image{min-height:240px}.home3-stage-image img{max-height:330px;padding:12px}.home3-stage-copy{padding:24px}.home3-stage-buttons{flex-direction:column;width:100%}.home3-scroll{left:16px}.home3-model-tabs{gap:7px}.home3-tab{padding:11px 14px}}
 @media(prefers-reduced-motion:reduce){.home3 *, .home3 *:before, .home3 *:after{animation:none!important;transition:none!important}.home3-pill:hover{transform:none}}
 
 /* Homepage 3.0 — editorial storytelling / interactive gallery / conversion */
@@ -83,7 +76,7 @@
 @media(prefers-reduced-motion:reduce){.home3-detail-media img{animation:none}}
 
 /* Canonical Homepage 3.0: use the exact approved hero breakpoint. */
-@media(max-width:700px){.home3-hero{height:var(--jmc-hero-height-mobile);min-height:var(--jmc-hero-height-mobile)}.home3-hero-copy{padding-block:65px 110px}}
+@media(max-width:700px){.home3-hero{height:var(--jmc-hero-height-mobile);min-height:var(--jmc-hero-height-mobile)}}
 
 /* V3.1 restrained motion — existing imagery only, canonical controls unchanged. */
 @media (prefers-reduced-motion:no-preference){
@@ -165,4 +158,14 @@
  .home3-story-tile>span{margin-top:24px}
  .home3-story-tile h3{margin-top:10px}
  .home3-story-link{align-self:end;margin-bottom:22px}
+}
+
+/* Final mobile art direction wins over legacy 3.0 mobile declarations. */
+@media(max-width:700px){
+ .home3-hero{align-items:flex-start}
+ .home3-hero-backdrop{background-size:min(100%,520px) auto;background-position:right 12px bottom 32px}
+ .home3-hero-backdrop:after{background:linear-gradient(180deg,#17181b 0%,rgba(23,24,27,.96) 38%,rgba(23,24,27,.42) 74%,rgba(23,24,27,.16) 100%)}
+ .home3-hero-copy{padding-top:clamp(44px,9vw,66px);padding-bottom:0}
+ .home3-hero h1{font-size:clamp(40px,8.5vw,54px);line-height:1.15}
+ .home3-hero-copy>p:not(.home3-kicker){line-height:1.6}
 }
