@@ -261,3 +261,49 @@
 @media (max-width:700px){
  .home3-lineup .home3-stage-copy{padding:26px 24px 32px}
 }
+
+
+/* Homepage 4.2 — canonical type hierarchy and copy rhythm.
+ * Source: JMC Design System v2 and Global Width Bible. */
+.home3,.home3-story{font-family:var(--font-ka,"Google Sans",sans-serif);letter-spacing:normal}
+.home3 .home3-kicker,.home3-story .home3-kicker{
+ font-family:var(--font-latin,"Switzer",sans-serif);
+ font-size:12px;line-height:1.45;font-weight:650;letter-spacing:.045em;
+ text-transform:none;
+}
+.home3-hero h1{font-family:var(--font-ka);font-weight:650;max-width:840px;letter-spacing:-.038em;line-height:1.15}
+.home3-hero-copy>p:not(.home3-kicker){max-width:530px;line-height:1.65;margin:0}
+.home3-hero .home3-actions{margin-top:27px}
+.home3-heading{align-items:end;gap:clamp(24px,4vw,64px)}
+.home3-heading h2,.home3-story-intro h2,.home3-conversion h2{
+ font-family:var(--font-ka);font-weight:650;letter-spacing:-.035em;line-height:1.18;
+}
+.home3-heading>p{max-width:340px;font-size:15px;line-height:1.65;color:var(--jmc-ui-secondary)}
+.home3-lineup .home3-stage-copy h3{font-family:var(--font-latin);font-weight:650;letter-spacing:-.035em;line-height:1.12;margin:18px 0 14px}
+.home3-lineup .home3-stage-copy p{font-family:var(--font-ka);font-size:clamp(15px,1.05vw,17px);line-height:1.65;color:var(--jmc-ui-secondary);margin:0}
+.home3-lineup .home3-stage-buttons{margin-top:26px}
+.home3-story-intro{padding-block:72px 38px}
+.home3-story-intro h2{max-width:780px;margin-bottom:14px}
+.home3-story-intro>p:last-child{max-width:560px;font-size:15px;line-height:1.65}
+.home3-story-tile h3{font-family:var(--font-latin);font-weight:650;letter-spacing:-.025em;font-size:clamp(24px,2.4vw,36px);line-height:1.2;margin-top:22px;margin-bottom:11px}
+.home3-story-tile p{font-size:15px;line-height:1.65;color:var(--jmc-ui-secondary)}
+.home3-detail-side h3{font-family:var(--font-latin);font-weight:650;letter-spacing:-.035em;margin:17px 0 14px}
+.home3-detail-side p{font-size:15px;line-height:1.65;margin:0 0 26px}
+.home3-conversion h2{max-width:760px;margin-bottom:14px}
+.home3-conversion-content>p:not(.home3-kicker){font-size:16px;line-height:1.65;max-width:620px}
+@media(max-width:900px){
+ .home3-heading{align-items:flex-start}
+ .home3-heading>p{max-width:550px}
+ .home3-story-intro{padding-block:60px 32px}
+}
+@media(max-width:700px){
+ .home3-hero-copy>p:not(.home3-kicker){font-size:15px;line-height:1.55;max-width:440px}
+ .home3-hero .home3-actions{margin-top:22px}
+ .home3-heading h2{font-size:clamp(32px,8vw,46px)}
+ .home3-heading>p{font-size:14px}
+ .home3-story-intro{padding-block:54px 28px}
+ .home3-story-intro h2{font-size:clamp(31px,8vw,44px)}
+ .home3-lineup .home3-stage-copy h3{font-size:clamp(32px,8vw,44px)}
+ .home3-story-tile h3{margin-top:16px}
+ .home3-conversion h2{font-size:clamp(32px,8vw,48px)}
+}
