@@ -23,12 +23,12 @@ async function acquire(name,url){
  const out=await sharp(bytes).rotate().resize(1600,1200,{fit:'contain',background:'#e9eaed',withoutEnlargement:false}).webp({quality:84,effort:5}).toBuffer();
  await writeFile(target,out);return out;
 }
-const report={generatedAt:new Date().toISOString(),specification:{lineup:'1600x1200 WebP, 4:3',hero:'2560x1440 WebP, 16:9',story:'existing first-party original; constrained layout'},images:[]};
+const report={generatedAt:new Date().toISOString(),specification:{lineup:'1600x1200 WebP, 4:3',hero:'1920x1080 WebP, 16:9 (native-resolution, no upscaling)',story:'existing first-party original; constrained layout'},images:[]};
 for(const [name,url] of lineup){const buf=await acquire('lineup-'+name,url);const m=await sharp(buf).metadata();report.images.push({name:'lineup-'+name,role:'model-lineup',width:m.width,height:m.height,format:m.format,bytes:buf.length,kib:Math.round(buf.length/1024),aspectRatio:Number((m.width/m.height).toFixed(4))});}
 const heroSrc=join(dir,'grand-avenue-pro-hero.png'),hero=await readFile(heroSrc),original=await sharp(hero).metadata();
-const optimizedHero=await sharp(hero).rotate().resize(2560,1440,{fit:'cover',position:'centre'}).webp({quality:83,effort:5}).toBuffer();
+const optimizedHero=await sharp(hero).rotate().resize(1920,1080,{fit:'cover',position:'centre',withoutEnlargement:true}).webp({quality:88,effort:5}).toBuffer();
 await writeFile(join(dir,'grand-avenue-pro-hero.webp'),optimizedHero);
-report.images.push({name:'grand-avenue-pro-hero',role:'hero',originalWidth:original.width,originalHeight:original.height,originalBytes:hero.length,width:2560,height:1440,format:'webp',bytes:optimizedHero.length,kib:Math.round(optimizedHero.length/1024),aspectRatio:16/9});
+report.images.push({name:'grand-avenue-pro-hero',role:'hero',originalWidth:original.width,originalHeight:original.height,originalBytes:hero.length,width:1920,height:1080,format:'webp',bytes:optimizedHero.length,kib:Math.round(optimizedHero.length/1024),aspectRatio:16/9});
 for(const name of ['vigus','grand-avenue','grand-avenue-pro']){
  const path=join(root,'public/images/studio',name+'-studio.webp');
  const bytes=await readFile(path),m=await sharp(bytes).metadata();
