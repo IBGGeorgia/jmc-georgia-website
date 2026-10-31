@@ -215,3 +215,41 @@
 @media(max-width:700px){
  .home3-lineup .home3-stage-image{height:auto;aspect-ratio:4/3}
 }
+
+/* Homepage 4.0 — actual crop fix.
+ * A replaced image sized as a normal CSS-grid item could keep its intrinsic
+ * 4:3 min-content height inside the fixed landscape stage; overflow:hidden
+ * then cuts the tires. Position the image against the measured stage instead,
+ * allowing object-fit:contain to operate on an explicit containing rectangle.
+ * No image data is edited or stretched. */
+.home3-lineup .home3-stage-image{
+ position:relative;
+ display:block;
+ height:clamp(520px,36vw,600px);
+ aspect-ratio:auto;
+ min-width:0;
+ min-height:0;
+ overflow:hidden;
+ background:#e9eaed;
+}
+.home3-lineup .home3-stage-image img{
+ position:absolute;
+ inset:0;
+ box-sizing:border-box;
+ display:block;
+ width:100%;
+ height:100%;
+ min-width:0;
+ min-height:0;
+ max-height:none;
+ padding:0;
+ object-fit:contain;
+ object-position:center;
+ transform:none;
+}
+@media(max-width:900px){
+ .home3-lineup .home3-stage-image{
+  height:auto;
+  aspect-ratio:4/3;
+ }
+}
