@@ -52,7 +52,7 @@ test.describe('Approved image-size audit',()=>{
    expect(geo!.x).toBeGreaterThanOrEqual(0);
    expect(geo!.x+geo!.width).toBeLessThanOrEqual(width+2);
    await cta.click();
-   await expect(page).toHaveURL(/\/vehicles$/);
+   await expect(page).toHaveURL(/\/test-drive$/);
   });
  }
  test('Image geometry stays separate from large model-page hero art direction',async({page})=>{
