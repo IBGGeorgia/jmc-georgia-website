@@ -22,7 +22,7 @@ export default function HomeExperience({items}:{items:Item[]}) {
         {items.map((item,i)=><button key={item.slug} className={'home3-tab'+(active===i?' is-active':'')} onClick={()=>setActive(i)} aria-pressed={active===i}>{item.name}</button>)}
       </div>
       <div className="home3-vehicle-stage" aria-live="polite">
-        <div className="home3-stage-image" key={selected.slug}><img src={selected.image} alt={`JMC ${selected.name}`} loading="lazy" decoding="async"/></div>
+        <div className="home3-stage-image" key={selected.slug}><img src={selected.image} alt={`JMC ${selected.name} — სტუდიური სამი მეოთხედი რაკურსი`} width={1600} height={1200} loading="lazy" decoding="async"/></div>
         <div className="home3-stage-copy"><span className="home3-stage-index">{String(active+1).padStart(2,'0')} / 03</span><h3>{selected.name}</h3><p>{selected.description}</p><div className="home3-stage-buttons"><Link className="home3-pill home3-pill-dark" href={`/vehicles/${selected.slug}`}>გაიცანი მოდელი <span aria-hidden="true">↗</span></Link><Link className="home3-pill home3-pill-light" href="/test-drive">დაჯავშნე Test Drive</Link></div></div>
       </div>
    </section>

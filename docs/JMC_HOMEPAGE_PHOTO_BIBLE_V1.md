@@ -36,3 +36,14 @@ Production pages serve generated WebP under `/images/homepage/` from the app its
 - The four exterior photographs share the same clean architectural studio, illumination and neutral 4:3 canvas. They are intentionally Homepage-only; do not overwrite canonical VIGUS galleries on model detail pages.
 - Main Explorer exterior frame uses a controlled wide editorial crop on desktop and exact 4:3 framing on mobile. Non-VIGUS/interior photos retain contain treatment to protect image content.
 - Photo thumbnail edges, stage height and storytelling image slots use consistent design tokens and radius.
+
+## Homepage 3.9 Model Lineup final art direction
+- All three model tabs use separate, first-party **1600 × 1200** SHA-256-pinned WebP masters.
+- Matching image family: bright neutral architectural studio, three-quarter FRONT camera, vehicle pointing camera-left, gentle directional daylight and floor shadow.
+- VIGUS remains the previously approved four-angle studio reference (only its master is converted to the required lineup canvas); its existing model page is untouched.
+- Grand Avenue uses its documented official model-page hero and front photo as identity references; inaccurate door copy was removed in the final candidate.
+- Grand Avenue PRO uses its original official model photography as identity references; the distinctive black grille with DADAO styling and rugged body are preserved in the reviewed image.
+- Human visual comparison with source images is required for every future replacement, even after all Playwright image tests pass.
+- `object-fit:contain`, no extra media padding, and a fixed media-stage height avoid clipping the bumpers/wheels or shifting layout across tab changes.
+- No Homepage models' source galleries, trims, Hero banner, editorial cards or Photo Explorer are changed by this milestone.
+- Prebuilt media binaries are in Git; no production request to external AI generation/CDN is needed.

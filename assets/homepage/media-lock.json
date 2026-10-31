@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "source": "Approved JMC Homepage 3.6-3.7 outputs; see image audit and GitHub history",
+  "version": 3,
+  "source": "Homepage 3.9 unified editorial composition; VIGUS approved 3/4 studio, Grand Avenue and PRO reference-led FLUX.2 Pro; retained source provenance in Git history.",
   "heroOriginal": {
     "width": 1920,
     "height": 1088,
@@ -9,24 +9,24 @@
   "images": [
     {
       "path": "public/images/homepage/lineup-vigus.webp",
-      "sha256": "0214c488441bd0e7295f2e647307167b92786ad25ceba06f5abf4e88d92da486",
-      "bytes": 92164,
+      "sha256": "30647f417ea7bd80335a5a0b9ba3cad71a15d1ac667f5e6a1851473942713cbb",
+      "bytes": 120134,
       "width": 1600,
       "height": 1200,
       "format": "webp"
     },
     {
       "path": "public/images/homepage/lineup-grand-avenue.webp",
-      "sha256": "3770fc52a7f7a8482403c0e6feb42ee13f5ff7c817c305e98bdff6cbd8c37541",
-      "bytes": 88942,
+      "sha256": "6b6dd7ca7ea094709df63e748cd3316216cdac8693cf31e23713eaf04494c85c",
+      "bytes": 166306,
       "width": 1600,
       "height": 1200,
       "format": "webp"
     },
     {
       "path": "public/images/homepage/lineup-grand-avenue-pro.webp",
-      "sha256": "cb2554ed70ef292c8f67152f5ea6d965290a43f78350c107c3b757d86176aaad",
-      "bytes": 101744,
+      "sha256": "e5431052d8febfe3a6a5036ba8135bc794e01f1d605151ac60c6a67c6b6c4519",
+      "bytes": 178626,
       "width": 1600,
       "height": 1200,
       "format": "webp"
