@@ -5,6 +5,8 @@
 import sharp from 'sharp';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {join} from 'node:path';
+import {existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 const root=process.cwd(),dir=join(root,'public/images/homepage');
 await mkdir(dir,{recursive:true});
 const lineup=[
@@ -23,12 +25,39 @@ async function acquire(name,url){
  const out=await sharp(bytes).rotate().resize(1600,1200,{fit:'contain',background:'#e9eaed',withoutEnlargement:false}).webp({quality:84,effort:5}).toBuffer();
  await writeFile(target,out);return out;
 }
-const report={generatedAt:new Date().toISOString(),specification:{lineup:'1600x1200 WebP, 4:3',hero:'1920x1080 WebP, 16:9 (native-resolution, no upscaling)',story:'existing first-party original; constrained layout'},images:[]};
-for(const [name,url] of lineup){const buf=await acquire('lineup-'+name,url);const m=await sharp(buf).metadata();report.images.push({name:'lineup-'+name,role:'model-lineup',width:m.width,height:m.height,format:m.format,bytes:buf.length,kib:Math.round(buf.length/1024),aspectRatio:Number((m.width/m.height).toFixed(4))});}
-const heroSrc=join(dir,'grand-avenue-pro-hero.png'),hero=await readFile(heroSrc),original=await sharp(hero).metadata();
-const optimizedHero=await sharp(hero).rotate().resize(1920,1080,{fit:'cover',position:'centre',withoutEnlargement:true}).webp({quality:88,effort:5}).toBuffer();
-await writeFile(join(dir,'grand-avenue-pro-hero.webp'),optimizedHero);
-report.images.push({name:'grand-avenue-pro-hero',role:'hero',originalWidth:original.width,originalHeight:original.height,originalBytes:hero.length,width:1920,height:1080,format:'webp',bytes:optimizedHero.length,kib:Math.round(optimizedHero.length/1024),aspectRatio:16/9});
+const lockPath=join(root,'assets/homepage/media-lock.json');
+const pinned=existsSync(lockPath);
+if(!pinned&&process.env.HOMEPAGE_ASSET_BOOTSTRAP!=='1')throw Error('Homepage SHA-256 manifest missing; no CDN fetch allowed in ordinary builds.');
+const lock=pinned?JSON.parse(await readFile(lockPath,'utf8')):null;
+const report={generatedAt:new Date().toISOString(),mode:pinned?'immutable-local':'one-time-bootstrap',specification:{lineup:'1600x1200 WebP, 4:3',hero:'1920x1080 WebP, 16:9',story:'existing first-party original; constrained layout'},images:[]};
+async function pinnedAsset(file,width,height){
+ const rel='public/images/homepage/'+file,entry=lock?.images?.find(i=>i.path===rel);
+ if(!entry||entry.width!==width||entry.height!==height||entry.format!=='webp')throw Error('Pinned image manifest entry invalid: '+rel);
+ const buf=await readFile(join(root,rel));
+ const sha=createHash('sha256').update(buf).digest('hex');
+ if(sha!==entry.sha256||buf.length!==entry.bytes)throw Error('Homepage image digest mismatch: '+rel);
+ const m=await sharp(buf).metadata();
+ if(m.format!=='webp'||m.width!==width||m.height!==height)throw Error('Pinned image dimensions invalid: '+rel);
+ return buf;
+}
+for(const [name,url] of lineup){
+ const buf=pinned?await pinnedAsset('lineup-'+name+'.webp',1600,1200):await acquire('lineup-'+name,url);
+ const m=await sharp(buf).metadata();
+ report.images.push({name:'lineup-'+name,role:'model-lineup',width:m.width,height:m.height,format:m.format,bytes:buf.length,kib:Math.round(buf.length/1024),aspectRatio:Number((m.width/m.height).toFixed(4))});
+}
+let heroOriginal,optimizedHero;
+if(pinned){
+ optimizedHero=await pinnedAsset('grand-avenue-pro-hero.webp',1920,1080);
+ heroOriginal=lock.heroOriginal;
+ if(!heroOriginal||heroOriginal.width<1920||heroOriginal.height<1080)throw Error('Pinned Hero source metadata invalid');
+}else{
+ const hero=await readFile(join(dir,'grand-avenue-pro-hero.png'));
+ const meta=await sharp(hero).metadata();
+ heroOriginal={width:meta.width,height:meta.height,bytes:hero.length};
+ optimizedHero=await sharp(hero).rotate().resize(1920,1080,{fit:'cover',position:'centre',withoutEnlargement:true}).webp({quality:88,effort:5}).toBuffer();
+ await writeFile(join(dir,'grand-avenue-pro-hero.webp'),optimizedHero);
+}
+report.images.push({name:'grand-avenue-pro-hero',role:'hero',originalWidth:heroOriginal.width,originalHeight:heroOriginal.height,originalBytes:heroOriginal.bytes,width:1920,height:1080,format:'webp',bytes:optimizedHero.length,kib:Math.round(optimizedHero.length/1024),aspectRatio:16/9});
 for(const name of ['vigus','grand-avenue','grand-avenue-pro']){
  const path=join(root,'public/images/studio',name+'-studio.webp');
  const bytes=await readFile(path),m=await sharp(bytes).metadata();

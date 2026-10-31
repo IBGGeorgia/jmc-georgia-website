@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "source": "Approved JMC Homepage 3.6-3.7 outputs; see image audit and GitHub history",
+  "heroOriginal": {
+    "width": 1920,
+    "height": 1088,
+    "bytes": 3014140
+  },
+  "images": [
+    {
+      "path": "public/images/homepage/lineup-vigus.webp",
+      "sha256": "0214c488441bd0e7295f2e647307167b92786ad25ceba06f5abf4e88d92da486",
+      "bytes": 92164,
+      "width": 1600,
+      "height": 1200,
+      "format": "webp"
+    },
+    {
+      "path": "public/images/homepage/lineup-grand-avenue.webp",
+      "sha256": "3770fc52a7f7a8482403c0e6feb42ee13f5ff7c817c305e98bdff6cbd8c37541",
+      "bytes": 88942,
+      "width": 1600,
+      "height": 1200,
+      "format": "webp"
+    },
+    {
+      "path": "public/images/homepage/lineup-grand-avenue-pro.webp",
+      "sha256": "cb2554ed70ef292c8f67152f5ea6d965290a43f78350c107c3b757d86176aaad",
+      "bytes": 101744,
+      "width": 1600,
+      "height": 1200,
+      "format": "webp"
+    },
+    {
+      "path": "public/images/homepage/grand-avenue-pro-hero.webp",
+      "sha256": "00a890a63ed5d3b5b01541937b48d084c5e3f5f1e2aef5b5d8548af9910d041e",
+      "bytes": 91462,
+      "width": 1920,
+      "height": 1080,
+      "format": "webp"
+    }
+  ]
+}

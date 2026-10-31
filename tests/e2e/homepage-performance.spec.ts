@@ -1,12 +1,14 @@
 import {test,expect} from '@playwright/test';
 test.describe('Homepage media and motion smoke checks',()=>{
- test('approved hero is served first-party and has PNG bytes',async({request})=>{
-  const response=await request.get('/images/homepage/grand-avenue-pro-hero.png');
+ test('approved Hero is served first-party as immutable WebP',async({request})=>{
+  const response=await request.get('/images/homepage/grand-avenue-pro-hero.webp');
   expect(response.status()).toBe(200);
-  expect(response.headers()['content-type']).toContain('image/png');
+  expect(response.headers()['content-type']).toContain('image/webp');
   const body=await response.body();
-  expect(body.length).toBeGreaterThan(100000);
-  expect([...body.subarray(0,8)]).toEqual([137,80,78,71,13,10,26,10]);
+  expect(body.length).toBeGreaterThan(10000);
+  expect(body.length).toBeLessThan(1300000);
+  expect(body.toString('ascii',0,4)).toBe('RIFF');
+  expect(body.toString('ascii',8,12)).toBe('WEBP');
  });
  for(const width of [1440,390,320]){
   test('homepage media and reduced motion at '+width,async({page})=>{
