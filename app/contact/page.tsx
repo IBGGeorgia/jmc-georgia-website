@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Header, Footer } from '../site-components';
+import {JmcIcon} from '../jmc-icons';
+import Link from 'next/link';
 
 export const metadata: Metadata = { title: 'კონტაქტი' };
 
@@ -19,6 +21,7 @@ export default function Contact() {
     </div>
     <p className="jmc-contact-location-note">ტელეფონი და სამუშაო საათები დაემატება ინფორმაციის დადასტურების შემდეგ.</p>
    </section>
+   <p className="jmc-contact-footnote">საკონტაქტო ტელეფონი და სამუშაო საათები გამოქვეყნდება ოფიციალური ინფორმაციის დადასტურების შემდეგ.</p>
   </main>
   <Footer/>
  </>;
