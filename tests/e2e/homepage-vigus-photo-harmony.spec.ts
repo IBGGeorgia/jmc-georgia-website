@@ -30,6 +30,9 @@ test.describe('Homepage 3.8 VIGUS approved photo family',()=>{
    await expect.poll(()=>storyImg.evaluate((i:HTMLImageElement)=>[i.naturalWidth,i.naturalHeight])).toEqual([1440,1080]);
    const storyRect=await story.locator('.home3-story-photo').boundingBox();
    expect(storyRect!.height).toBeGreaterThan(200);
+   if(width===1440||width===390){
+    await test.info().attach('vigus-story-card-'+width,{body:await story.screenshot(),contentType:'image/png'});
+   }
    const modelTabs=page.getByRole('group',{name:'გალერეის მოდელი'});
    await modelTabs.getByRole('button',{name:'VIGUS',exact:true}).click();
    const previews=page.getByRole('group',{name:'აირჩიე ფოტოს რაკურსი'}).getByRole('button');
@@ -56,8 +59,16 @@ test.describe('Homepage 3.8 VIGUS approved photo family',()=>{
     expect(photoBounds!.height).toBeLessThanOrEqual(681);
    }
    expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
+   if(width===1440){
+    const first=await previews.first().boundingBox();
+    const last=await previews.last().boundingBox();
+    const rail=await page.locator('.home3-photo-thumbnails').boundingBox();
+    expect(first&&last&&rail).toBeTruthy();
+    expect(last!.x+last!.width).toBeLessThanOrEqual(rail!.x+rail!.width+2);
+   }
    if(width===1440||width===390){
     await page.locator('.home3-detail-media').scrollIntoViewIfNeeded();
+    await expect.poll(()=>image.evaluate(el=>getComputedStyle(el).opacity)).toBe('1');
     await test.info().attach('vigus-explorer-'+width,{body:await page.screenshot(),contentType:'image/png'});
    }
   });
