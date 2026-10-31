@@ -9,7 +9,7 @@ test.describe('Homepage lineup 3.5 layout',()=>{
    await expect(page.locator('.home3-stage-copy h3')).toHaveText('Grand Avenue PRO');
    const image=page.locator('.home3-stage-image img');
    await expect(image).toBeVisible();
-   await expect(image).toHaveCSS('object-fit','contain');
+   await expect(image).toHaveCSS('object-fit','cover');
    const button=page.locator('.home3-stage-copy a.home3-pill').first();
    await expect(button).toHaveCSS('border-radius','999px');
    expect((await button.boundingBox())!.height).toBeGreaterThanOrEqual(44);

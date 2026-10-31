@@ -36,7 +36,7 @@ test.describe('Homepage 3.9 consistent Model Lineup images',()=>{
         await stage.scrollIntoViewIfNeeded();
         const image=stage.locator('img');
         await expect(image).toHaveAttribute('src','/images/homepage/lineup-'+model.slug+'.webp');
-        await expect(image).toHaveCSS('object-fit','contain');
+        await expect(image).toHaveCSS('object-fit','cover');
         await expect(image).toHaveCSS('padding-top','0px');
         await expect.poll(()=>image.evaluate((i:HTMLImageElement)=>[i.naturalWidth,i.naturalHeight])).toEqual([1600,1200]);
         const bounds=await stage.boundingBox();
@@ -44,8 +44,7 @@ test.describe('Homepage 3.9 consistent Model Lineup images',()=>{
         if(referenceHeight)expect(Math.abs(bounds!.height-referenceHeight)).toBeLessThan(2);
         referenceHeight=bounds!.height;
         const ratio=bounds!.width/bounds!.height;
-        if(width<=900){expect(ratio).toBeGreaterThan(1.28);expect(ratio).toBeLessThan(1.39);}
-        else{expect(bounds!.height).toBeGreaterThanOrEqual(519);expect(bounds!.height).toBeLessThanOrEqual(601);}
+        expect(ratio).toBeGreaterThan(1.32);expect(ratio).toBeLessThan(1.35);
       }
       expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
       if(width===1440||width===390){

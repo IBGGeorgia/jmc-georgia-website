@@ -201,55 +201,63 @@
  .home3-photo-thumbnails{gap:8px}
 }
 
-/* Homepage 3.9 — unified 1600x1200 showroom photo language.
-   Contain is intentional: never cut the real grille, wheels or vehicle silhouette. */
-.home3-lineup .home3-stage-image{background:#e9eaed;overflow:hidden;min-width:0}
-.home3-lineup .home3-stage-image img{
- display:block;width:100%;height:100%;max-height:none;padding:0;
- object-fit:contain;object-position:center center;
+/* Homepage 4.1 — editorial photo/text composition.
+ * 54/46 layout matches the native 4:3 image instead of centering a portrait-ish
+ * picture inside a much wider, short media panel. This removes the gray
+ * letterbox bands WITHOUT zooming or cutting the actual vehicle.
+ * Scope is limited to Homepage Model Lineup; no model-page gallery changes. */
+.home3-lineup .home3-vehicle-stage{
+ grid-template-columns:minmax(0,54%) minmax(0,46%);
+ min-height:0;
+ align-items:stretch;
 }
-@media(max-width:900px){
- .home3-lineup .home3-stage-image{height:auto;aspect-ratio:4/3;min-height:0}
- .home3-lineup .home3-stage-image img{padding:0}
-}
-@media(max-width:700px){
- .home3-lineup .home3-stage-image{height:auto;aspect-ratio:4/3}
-}
-
-/* Homepage 4.0 — actual crop fix.
- * A replaced image sized as a normal CSS-grid item could keep its intrinsic
- * 4:3 min-content height inside the fixed landscape stage; overflow:hidden
- * then cuts the tires. Position the image against the measured stage instead,
- * allowing object-fit:contain to operate on an explicit containing rectangle.
- * No image data is edited or stretched. */
 .home3-lineup .home3-stage-image{
  position:relative;
  display:block;
- height:clamp(520px,36vw,600px);
- aspect-ratio:auto;
- min-width:0;
+ width:100%;
+ height:auto;
+ aspect-ratio:4/3;
  min-height:0;
+ min-width:0;
+ align-self:start;
  overflow:hidden;
  background:#e9eaed;
 }
 .home3-lineup .home3-stage-image img{
  position:absolute;
  inset:0;
- box-sizing:border-box;
  display:block;
+ box-sizing:border-box;
  width:100%;
  height:100%;
  min-width:0;
  min-height:0;
  max-height:none;
  padding:0;
- object-fit:contain;
- object-position:center;
+ object-fit:cover;
+ object-position:50% 50%;
  transform:none;
 }
-@media(max-width:900px){
- .home3-lineup .home3-stage-image{
-  height:auto;
-  aspect-ratio:4/3;
- }
+.home3-lineup .home3-stage-copy{
+ min-width:0;
+ align-self:stretch;
+ padding:clamp(28px,3.8vw,64px);
+}
+.home3-lineup .home3-stage-copy p{
+ max-width:min(520px,var(--jmc-readable-max));
+}
+@media (min-width:901px) and (max-width:1100px){
+ .home3-lineup .home3-stage-copy{padding:clamp(22px,2.4vw,34px)}
+ .home3-lineup .home3-stage-copy h3{font-size:clamp(32px,3.6vw,46px);margin:16px 0 12px}
+ .home3-lineup .home3-stage-copy p{font-size:14px;line-height:1.55}
+ .home3-lineup .home3-stage-buttons{gap:6px;margin-top:18px}
+ .home3-lineup .home3-stage-buttons .home3-pill{padding-inline:14px;font-size:14px}
+}
+@media (max-width:900px){
+ .home3-lineup .home3-vehicle-stage{grid-template-columns:minmax(0,1fr)}
+ .home3-lineup .home3-stage-image{width:100%;height:auto;aspect-ratio:4/3;min-height:0}
+ .home3-lineup .home3-stage-copy{padding:clamp(24px,4vw,40px)}
+}
+@media (max-width:700px){
+ .home3-lineup .home3-stage-copy{padding:26px 24px 32px}
 }

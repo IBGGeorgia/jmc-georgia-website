@@ -25,11 +25,10 @@ test.describe('Homepage photo sizing master',()=>{
     await group.getByRole('button',{name,exact:true}).click();
     const image=page.locator('.home3-stage-image img');
     await expect(image).toBeVisible();
-    await expect(image).toHaveCSS('object-fit','contain');
+    await expect(image).toHaveCSS('object-fit','cover');
     await expect.poll(async()=>image.evaluate((el:HTMLImageElement)=>[el.naturalWidth,el.naturalHeight])).toEqual([1600,1200]);
     const ratio=await page.locator('.home3-stage-image').evaluate(el=>el.getBoundingClientRect().width/el.getBoundingClientRect().height);
-    if(width<=900){expect(ratio).toBeGreaterThan(1.28);expect(ratio).toBeLessThan(1.39);}
-    else {const height=await page.locator('.home3-stage-image').evaluate(el=>el.getBoundingClientRect().height);expect(height).toBeLessThanOrEqual(601);expect(height).toBeGreaterThanOrEqual(519);}
+    expect(ratio).toBeGreaterThan(1.32);expect(ratio).toBeLessThan(1.35);
    }
    expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
   });
