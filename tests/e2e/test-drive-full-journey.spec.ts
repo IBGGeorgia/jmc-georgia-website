@@ -89,7 +89,7 @@ test('Test Drive is readable and does not overflow at four viewport widths',asyn
  for(const width of [1440,768,390,320]){
   await page.setViewportSize({width,height:860});
   await page.goto('/test-drive?model=grand-avenue',{waitUntil:'domcontentloaded'});
-  await expect(page.getByRole('heading',{level:1,name:/შეიგრძენი JMC/})).toBeVisible();
+  await expect(page.getByRole('heading',{level:1,name:/გამოსცადე JMC/})).toBeVisible();
   await expect(page.locator('.jmc-drive-stage-image')).toHaveCount(1);
   await expect(page.locator('.jmc-drive-stage-image')).toHaveAttribute('data-selected-model','grand-avenue');
   await expect(page.locator('.jmc-lead-model-photo img')).toHaveCount(3);
