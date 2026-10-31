@@ -83,7 +83,7 @@ export function Header(){
      {modelLinks.map(item=><Link key={item.href} className="jmc-drawer-model-link" href={item.href} aria-current={pathname===item.href?'page':undefined} onClick={()=>setOpen(false)}><span>{item.number}</span><span>{item.label}</span><JmcIcon name="arrow-up-right"/></Link>)}
     </nav>
     <Link href="/test-drive" className="button jmc-drawer-drive" onClick={()=>setOpen(false)}>
-     ტესტ-დრაივის ინფორმაცია <JmcIcon name="arrow-up-right"/>
+     დაჯავშნე Test Drive <JmcIcon name="arrow-up-right"/>
     </Link>
     <div className="jmc-drawer-address">
      <span>მისამართი</span>
@@ -101,8 +101,9 @@ type FooterSocial = {
 const footerNavigation = [
  {href:'/vehicles/vigus',label:'JMC Vigus'},
  {href:'/vehicles/grand-avenue',label:'JMC Grand Avenue'},
+ {href:'/vehicles/grand-avenue-pro',label:'JMC Grand Avenue PRO'},
  {href:'/compare',label:'მოდელების შედარება'},
- {href:'/test-drive',label:'ტესტ-დრაივის ინფორმაცია'},
+ {href:'/test-drive',label:'დაჯავშნე Test Drive'},
  {href:'/about',label:'ჩვენ შესახებ'},
  {href:'/contact',label:'კონტაქტი'}
 ] as const;
@@ -129,8 +130,8 @@ export function Footer(){
       <span>Georgia</span>
      </div>
      <p className="jmc-footer-description">JMC-ის ოფიციალური წარმომადგენლობა საქართველოში.</p>
-     <Link href="/vehicles" className="button jmc-footer-cta">
-      აღმოაჩინე JMC-ის მოდელები <JmcIcon name="arrow-up-right"/>
+     <Link href="/test-drive" className="button jmc-footer-cta">
+      დაჯავშნე Test Drive <JmcIcon name="arrow-up-right"/>
      </Link>
     </div>
     <nav className="jmc-footer-column jmc-footer-navigation" aria-label="ქვედა ნავიგაცია">
