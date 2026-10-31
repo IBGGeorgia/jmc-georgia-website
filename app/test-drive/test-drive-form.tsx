@@ -230,7 +230,7 @@ export function TestDriveForm({ready}:{ready:boolean}){
          </span>
         </label>
         <label>სასურველი დღე <small>(არასავალდებულო)</small>
-         <TestDriveCalendar value={preferredDate} min={today} max={maxDate} onChange={setDate}/>
+         <TestDriveCalendar value={preferredDate} min={today} max={maxDate} disabled={!ready||status==='sending'} onChange={setDate}/>
          <span className="jmc-lead-field-help">დრო საბოლოოდ შეთანხმდება ჩვენს წარმომადგენელთან.</span>
         </label>
        </div>
