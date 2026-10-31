@@ -16,7 +16,7 @@ Status: implementation specification subordinate to `docs/JMC_DESIGN_SYSTEM.md` 
 | Photo Explorer | VIGUS: 4 approved 1440 × 1080 WebP studio angles + preserved cockpit/seats; remaining models: original photos | Contain, real numbered angles, touch and keyboard; no invented views |
 
 ## Rendering scale
-- Above 900px, the Model Lineup media stage is capped at 600px tall. Below 900px its frame stays 4:3.
+- Homepage Model Lineup (4.1): above 900px, a 54% photo / 46% text editorial grid; the media stage always retains the native 4:3 ratio (height follows width; no arbitrary 600px cap). At or below 900px, photo and copy stack vertically, and the image stays 4:3. No side letterboxing.
 - At or below 700px, the Hero stays exactly 650px high. Use a bottom-anchored full image (`background-size:min(100%,520px) auto`) instead of 16:9 cover cropping; place readable text above it.
 - Georgian punctuation must not become its own orphaned line; constrain only the last word when necessary and test 320px.
 - Use JMC Width Bible tokens, graphite/white pill controls, no additional red flourishes.
@@ -47,3 +47,10 @@ Production pages serve generated WebP under `/images/homepage/` from the app its
 - `object-fit:contain`, no extra media padding, and a fixed media-stage height avoid clipping the bumpers/wheels or shifting layout across tab changes.
 - No Homepage models' source galleries, trims, Hero banner, editorial cards or Photo Explorer are changed by this milestone.
 - Prebuilt media binaries are in Git; no production request to external AI generation/CDN is needed.
+
+## Homepage 4.1 image and copy proportion contract
+- The stage has a 54% media / 46% copy split on desktop; the copy column is deliberately larger than in the older 2:1 layout.
+- The image occupies the entire 4:3 media frame (matching the immutable 1600 × 1200 asset); `object-fit:cover` cannot crop a correctly proportioned 4:3 source inside a 4:3 frame. Source-file safe margins protect truck geometry.
+- The photo must not gain gray pillarbox strips or be vertically cropped. Camera framing, vehicle source, and asset SHA-256 lock remain unchanged.
+- All three model tabs preserve identical stage dimensions and the same photo/copy proportions. Test at 1920, 1440, 1200, 1024, 900, 768, 430, 390, and 320 CSS px.
+- On narrow desktop widths (901–1100px), reduce copy padding/type size rather than squeezing the image or overflowing the copy.
