@@ -6,7 +6,7 @@ test.describe('Test Drive pre-activation protections and UI',()=>{
    await page.setViewportSize({width,height:850});
    const res=await page.goto('/test-drive',{waitUntil:'domcontentloaded'});
    expect(res?.status()).toBe(200);
-   await expect(page.getByRole('heading',{level:1,name:/შეიგრძენი JMC/})).toBeVisible();
+   await expect(page.getByRole('heading',{level:1,name:/გამოსცადე JMC/})).toBeVisible();
    await expect(page.getByText('ონლაინ გაგზავნა მალე გახდება ხელმისაწვდომი.')).toBeVisible();
    await expect(page.locator('.jmc-lead-model')).toHaveCount(3);
    await expect(page.locator('.jmc-lead-submit .button')).toBeDisabled();

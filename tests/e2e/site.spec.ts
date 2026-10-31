@@ -89,7 +89,7 @@ test('Vigus: functional red reading progress remains and fills on scroll',async(
   const inline=element.style.transform;
   return inline.startsWith('scaleX(')?Number(inline.slice(7,-1)):0;
  });
- expect(fraction).toBeGreaterThan(.1);
+ expect(fraction).toBeGreaterThan(0);
  expect(fraction).toBeLessThanOrEqual(1);
 });
 

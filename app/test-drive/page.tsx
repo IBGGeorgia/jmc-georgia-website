@@ -20,8 +20,8 @@ export default async function TestDrive(){
    <section className="jmc-td-hero" aria-labelledby="jmc-td-hero-title">
     <div className="jmc-td-hero-copy">
      <p className="eyebrow">JMC Georgia / Test Drive</p>
-     <h1 id="jmc-td-hero-title">შეიგრძენი JMC.<br/>საკუთარი გამოცდილებით.</h1>
-     <p className="jmc-td-hero-lead">შეარჩიე ავტომობილი, აღმოაჩინე მისი დეტალები და მოითხოვე Test Drive — ყველაფერი ერთ სივრცეში.</p>
+     <h1 id="jmc-td-hero-title">გამოსცადე JMC.<br/>შეარჩიე შენი მოდელი.</h1>
+     <p className="jmc-td-hero-lead">შეარჩიე ავტომობილი, დაათვალიერე დეტალები და დატოვე მოთხოვნა ტესტ-დრაივზე.</p>
      <div className="jmc-td-hero-actions">
       <a className="button jmc-td-hero-primary" href="#test-drive-request">
        დაიწყე არჩევა <JmcIcon name="arrow-up-right"/>
@@ -35,7 +35,7 @@ export default async function TestDrive(){
 
    <TestDriveForm ready={ready}/>
 
-   <section className="jmc-td-process" aria-labelledby="jmc-td-process-title">
+   {ready&&<section className="jmc-td-process" aria-labelledby="jmc-td-process-title">
     <div className="jmc-td-process-heading">
      <p className="eyebrow">Test Drive / შემდეგი ნაბიჯები</p>
      <h2 id="jmc-td-process-title">რა ხდება მოთხოვნის გაგზავნის შემდეგ?</h2>
@@ -48,7 +48,7 @@ export default async function TestDrive(){
      <article><span>03</span><h3>შევათანხმებთ დროს</h3>
       <p>ტესტ-დრაივის დრო დადასტურდება ჩვენს წარმომადგენელთან.</p></article>
     </div>
-   </section>
+   </section>}
 
    <section className="jmc-td-visit" aria-labelledby="jmc-td-visit-title">
     <div>
@@ -58,7 +58,7 @@ export default async function TestDrive(){
     </div>
     <div className="jmc-td-visit-actions">
      <Link href="/contact" className="button">მისამართის ნახვა <JmcIcon name="arrow-up-right"/></Link>
-     <Link href="/vehicles" className="jmc-td-text-link">მოდელების გაცნობა <JmcIcon name="arrow-up-right"/></Link>
+     <Link href="/vehicles" className="jmc-td-text-link">მოდელების ნახვა <JmcIcon name="arrow-up-right"/></Link>
     </div>
    </section>
   </main>

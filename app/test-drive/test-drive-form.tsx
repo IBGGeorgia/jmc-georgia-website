@@ -60,7 +60,7 @@ export function TestDriveForm({ready}:{ready:boolean}){
  const today=dateInGeorgia(new Date());
  const maxDate=dateInGeorgia(new Date(Date.now()+90*86400000));
  const invalidName=nameTouched&&fullName.trim().length<2;
- const invalidPhone=phoneTouched&&phone.length>0&&!validPhone(phone);
+ const invalidPhone=phoneTouched&&!validPhone(phone);
 
  useEffect(()=>{
   const slug=new URLSearchParams(window.location.search).get('model');

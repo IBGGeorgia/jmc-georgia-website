@@ -22,7 +22,7 @@ test('compare two models, switch trims, add third, and filter differences',async
 });
 test('Test Drive shows a staged form but cannot accept data before activation',async({page})=>{
  await page.goto('/test-drive');
- await expect(page.getByRole('heading',{name:/შეიგრძენი JMC/})).toBeVisible();
+ await expect(page.getByRole('heading',{name:/გამოსცადე JMC/})).toBeVisible();
  await expect(page.locator('main form.jmc-lead-form')).toHaveCount(1);
  await expect(page.locator('.jmc-lead-submit button')).toBeDisabled();
  await expect(page.getByText('ონლაინ განაცხადები ჯერ არ მიიღება')).toBeVisible();
