@@ -18,10 +18,9 @@ test.describe('Homepage 3.7 photo composition contract',()=>{
    await expect(page.locator('.home3-hero .home3-actions a').first()).toBeVisible();
    const stage=page.locator('.home3-stage-image');
    const ratio=await stage.evaluate(el=>el.getBoundingClientRect().width/el.getBoundingClientRect().height);
-   if(width>900){
-    const height=await stage.evaluate(el=>el.getBoundingClientRect().height);
-    expect(height).toBeLessThanOrEqual(601);
-   }else{expect(ratio).toBeGreaterThan(1.28);expect(ratio).toBeLessThan(1.4);}
+   // The v4.1 native 4:3 stage follows width instead of the obsolete 600px cap.
+   expect(ratio).toBeGreaterThan(1.32);
+   expect(ratio).toBeLessThan(1.35);
    if(width>=701&&width<=950){
     const photo=page.locator('.home3-story-photo').first();
     const card=page.locator('.home3-story-tile').first();
