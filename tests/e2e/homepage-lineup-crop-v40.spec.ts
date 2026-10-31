@@ -21,7 +21,7 @@ test.describe('Homepage 4.0 photograph crop prevention',()=>{
      return {stage:[a.width,a.height],image:[b.width,b.height],offset:[b.left-a.left,b.top-a.top],position:cs.position,fit:cs.objectFit,padding:cs.paddingTop,scale:cs.transform};
     });
     expect(result.position).toBe('absolute');
-    expect(result.fit).toBe('contain');
+    expect(result.fit).toBe('cover');
     expect(result.padding).toBe('0px');
     expect(result.image[0]).toBeCloseTo(result.stage[0],0);
     expect(result.image[1]).toBeCloseTo(result.stage[1],0);
@@ -29,8 +29,7 @@ test.describe('Homepage 4.0 photograph crop prevention',()=>{
     expect(Math.abs(result.offset[1])).toBeLessThan(2);
     if(prevStageHeight)expect(Math.abs(result.stage[1]-prevStageHeight)).toBeLessThan(2);
     prevStageHeight=result.stage[1];
-    if(width>900){expect(result.stage[1]).toBeGreaterThanOrEqual(519);expect(result.stage[1]).toBeLessThanOrEqual(601);}
-    else{expect(result.stage[0]/result.stage[1]).toBeGreaterThan(1.28);expect(result.stage[0]/result.stage[1]).toBeLessThan(1.39);}
+    expect(result.stage[0]/result.stage[1]).toBeGreaterThan(1.32);expect(result.stage[0]/result.stage[1]).toBeLessThan(1.35);
     if(width===1440||width===390)await test.info().attach('lineup-no-crop-'+slug+'-'+width,{body:await stage.screenshot({animations:'disabled'}),contentType:'image/png'});
    }
    expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
