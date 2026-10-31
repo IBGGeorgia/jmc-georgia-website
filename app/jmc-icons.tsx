@@ -1,11 +1,13 @@
 import type {SVGProps} from 'react';
-export type IconName='arrow-up-right'|'arrow-right'|'arrow-down'|'chevron-down'|'menu'|'x'|'map-pin'|'calendar-days'|'car-front'|'check'|'plus';
+export type IconName='arrow-up-right'|'arrow-right'|'arrow-down'|'chevron-down'|'chevron-left'|'chevron-right'|'menu'|'x'|'map-pin'|'calendar-days'|'car-front'|'check'|'plus';
 export function JmcIcon({name,size=20,...props}:{name:IconName;size?:number}&SVGProps<SVGSVGElement>){
  const paths:Record<IconName,React.ReactNode>={
  'arrow-up-right':<><path d="M7 7h10v10"/><path d="M7 17 17 7"/></>,
  'arrow-right':<><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></>,
  'arrow-down':<><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></>,
  'chevron-down':<path d="m6 9 6 6 6-6"/>,
+ 'chevron-left':<path d="m15 18-6-6 6-6"/>,
+ 'chevron-right':<path d="m9 18 6-6-6-6"/>,
  'menu':<><path d="M4 8h16"/><path d="M4 16h16"/></>,
  'x':<><path d="M18 6 6 18"/><path d="m6 6 12 12"/></>,
  'map-pin':<><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></>,
