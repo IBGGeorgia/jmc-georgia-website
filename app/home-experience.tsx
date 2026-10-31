@@ -10,7 +10,7 @@ export default function HomeExperience({items}:{items:Item[]}) {
      <div className="home3-hero-backdrop" aria-hidden="true" />
      <div className="home3-shell home3-hero-copy">
        <p className="home3-kicker">JMC Georgia / ოფიციალური წარმომადგენლობა</p>
-       <h1 id="home3-title">შენი გზა.<br/><span>ახალი შესაძლებლობები.</span></h1>
+       <h1 id="home3-title">შენი გზა.<br/><span>ახალი <span className="home3-headline-word">შესაძლებლობები.</span></span></h1>
        <p>აღმოაჩინე JMC-ის პიკაპები, შეარჩიე შენთვის სასურველი მოდელი და დაჯავშნე Test Drive.</p>
        <div className="home3-actions"><a className="home3-pill home3-pill-red" href="#models">აღმოაჩინე მოდელები <span aria-hidden="true">↗</span></a><Link className="home3-pill home3-pill-outline" href="/test-drive">დაჯავშნე Test Drive <span aria-hidden="true">↗</span></Link></div>
      </div>

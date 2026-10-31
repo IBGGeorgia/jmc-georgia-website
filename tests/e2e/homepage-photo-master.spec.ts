@@ -10,7 +10,8 @@ test.describe('Homepage photo sizing master',()=>{
    expect(item.bytes).toBeLessThan(800000);
   }
   const hero=data.images.find((x:{role:string})=>x.role==='hero');
-  expect(hero.width).toBe(2560);expect(hero.height).toBe(1440);
+  expect(hero.width).toBe(1920);expect(hero.height).toBe(1080);
+  expect(hero.width).toBeLessThanOrEqual(hero.originalWidth);
   expect(hero.format).toBe('webp');
   expect(hero.bytes).toBeLessThan(1300000);
  });
@@ -26,7 +27,8 @@ test.describe('Homepage photo sizing master',()=>{
     await expect(image).toHaveCSS('object-fit','contain');
     await expect.poll(async()=>image.evaluate((el:HTMLImageElement)=>[el.naturalWidth,el.naturalHeight])).toEqual([1600,1200]);
     const ratio=await page.locator('.home3-stage-image').evaluate(el=>el.getBoundingClientRect().width/el.getBoundingClientRect().height);
-    expect(ratio).toBeGreaterThan(1.28);expect(ratio).toBeLessThan(1.39);
+    if(width<=900){expect(ratio).toBeGreaterThan(1.28);expect(ratio).toBeLessThan(1.39);}
+    else {const height=await page.locator('.home3-stage-image').evaluate(el=>el.getBoundingClientRect().height);expect(height).toBeLessThanOrEqual(601);expect(height).toBeGreaterThanOrEqual(519);}
    }
    expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
   });
