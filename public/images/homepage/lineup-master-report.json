@@ -15,27 +15,27 @@
   {
     "slug": "grand-avenue",
     "original": [
-      1920,
-      1440
+      2352,
+      1760
     ],
     "output": [
       1600,
       1200
     ],
-    "bytes": 161570,
-    "sha256": "9788acae57c10d3e222b282ad0ebbfedbad2b401d3b184b349a8026172b4209a"
+    "bytes": 166306,
+    "sha256": "6b6dd7ca7ea094709df63e748cd3316216cdac8693cf31e23713eaf04494c85c"
   },
   {
     "slug": "grand-avenue-pro",
     "original": [
-      1920,
-      1440
+      2352,
+      1760
     ],
     "output": [
       1600,
       1200
     ],
-    "bytes": 180484,
-    "sha256": "3fabf4633893e19b552cb5a66c5c08ceee5745cafc8da55dd09a31d01e8d950f"
+    "bytes": 178626,
+    "sha256": "e5431052d8febfe3a6a5036ba8135bc794e01f1d605151ac60c6a67c6b6c4519"
   }
 ]
