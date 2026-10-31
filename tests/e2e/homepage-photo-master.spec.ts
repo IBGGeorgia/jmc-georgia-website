@@ -4,6 +4,7 @@ test.describe('Homepage photo sizing master',()=>{
   const report=await request.get('/images/homepage/audit.json');
   expect(report.status()).toBe(200);
   const data=await report.json();
+  expect(data.mode).toBe('immutable-local');
   for(const item of data.images.filter((x:{role:string})=>x.role==='model-lineup')){
    expect(item.width).toBe(1600);expect(item.height).toBe(1200);
    expect(item.format).toBe('webp');expect(item.bytes).toBeGreaterThan(10000);
