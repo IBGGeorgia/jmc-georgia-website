@@ -1,0 +1,48 @@
+name: JMC — One-time Homepage Media Pin
+
+on:
+  push:
+    branches:
+      - feature/homepage-assets-immutable
+    paths:
+      - '.github/workflows/pin-homepage-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  pin-approved-media:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout controlled feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/homepage-assets-immutable
+          persist-credentials: true
+      - name: Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install project packages
+        run: npm install
+      - name: One-time mastering from approved original image URLs
+        run: HOMEPAGE_ASSET_BOOTSTRAP=1 npm run prebuild
+      - name: Generate verifiable SHA-256 media lock
+        run: node scripts/pin-homepage-assets.mjs
+      - name: Commit approved WebP binaries and checksum lock
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f \
+            public/images/homepage/lineup-vigus.webp \
+            public/images/homepage/lineup-grand-avenue.webp \
+            public/images/homepage/lineup-grand-avenue-pro.webp \
+            public/images/homepage/grand-avenue-pro-hero.webp \
+            assets/homepage/media-lock.json
+          git diff --cached --stat
+          test -n "$(git diff --cached --name-only)"
+          git commit -m "Pin approved Homepage photography binaries and SHA-256 lock"
+          git push origin HEAD:feature/homepage-assets-immutable
