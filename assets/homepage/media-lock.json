@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "source": "Approved JMC Homepage 3.6-3.7 outputs; see image audit and GitHub history",
   "heroOriginal": {
     "width": 1920,
@@ -36,6 +36,38 @@
       "sha256": "00a890a63ed5d3b5b01541937b48d084c5e3f5f1e2aef5b5d8548af9910d041e",
       "bytes": 91462,
       "width": 1920,
+      "height": 1080,
+      "format": "webp"
+    },
+    {
+      "path": "public/images/homepage/vigus-front-three-quarter.webp",
+      "sha256": "a9c193472ee4450aeea7be204a7c527dce3ad8838336437eaa3a2f4c9a845a87",
+      "bytes": 117054,
+      "width": 1440,
+      "height": 1080,
+      "format": "webp"
+    },
+    {
+      "path": "public/images/homepage/vigus-front.webp",
+      "sha256": "a7994dd112ca7cadd7a7a1eaa9f1dd2d01f55230f169718032a9180d32a0ed9a",
+      "bytes": 86126,
+      "width": 1440,
+      "height": 1080,
+      "format": "webp"
+    },
+    {
+      "path": "public/images/homepage/vigus-side.webp",
+      "sha256": "2b0ab8f79bc56d4591f94bce5bd39dce63d646b9c19350f1124b1a1d971ffa93",
+      "bytes": 96434,
+      "width": 1440,
+      "height": 1080,
+      "format": "webp"
+    },
+    {
+      "path": "public/images/homepage/vigus-rear-three-quarter.webp",
+      "sha256": "5b5b889544a9b311d0600c76fbd460a7e2516fa9ffcb08555d157c93dd0c1425",
+      "bytes": 106160,
+      "width": 1440,
       "height": 1080,
       "format": "webp"
     }

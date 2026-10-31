@@ -58,6 +58,12 @@ if(pinned){
  await writeFile(join(dir,'grand-avenue-pro-hero.webp'),optimizedHero);
 }
 report.images.push({name:'grand-avenue-pro-hero',role:'hero',originalWidth:heroOriginal.width,originalHeight:heroOriginal.height,originalBytes:heroOriginal.bytes,width:1920,height:1080,format:'webp',bytes:optimizedHero.length,kib:Math.round(optimizedHero.length/1024),aspectRatio:16/9});
+// Additional approved Homepage-only 4-angle studio set; no external image requests.
+for(const angle of ['front-three-quarter','front','side','rear-three-quarter']){
+ const filename='vigus-'+angle+'.webp';
+ const buf=await pinnedAsset(filename,1440,1080);
+ report.images.push({name:'vigus-'+angle,role:'homepage-vigus-editorial',width:1440,height:1080,format:'webp',bytes:buf.length,kib:Math.round(buf.length/1024),aspectRatio:4/3});
+}
 for(const name of ['vigus','grand-avenue','grand-avenue-pro']){
  const path=join(root,'public/images/studio',name+'-studio.webp');
  const bytes=await readFile(path),m=await sharp(bytes).metadata();
