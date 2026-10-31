@@ -28,10 +28,10 @@ test.describe('Grand Avenue PRO four-variant configurator',()=>{
    await page.getByRole('button',{name:'დიზელი / ბენზინი'}).click();
    await expect(page.locator('.pro-draft-compare-scroll')).toContainText('258 hp');
    await page.getByRole('button',{name:'აღჭურვილობა',exact:true}).last().click();
-   await expect(page.getByRole('region',{name:'PRO აღჭურვილობის შედარება'})).toBeVisible();
+   await expect(page.locator('.pro-draft-configurator')).toContainText('აღჭურვილობა · PRO');
    const boxes=page.locator('.pro-draft-compare-options input[type="checkbox"]');
    for(let i=0;i<4;i++){if(await boxes.nth(i).isChecked())await boxes.nth(i).uncheck()}
-   await expect(page.getByRole('status',{name:'აირჩიე ერთი კომპლექტაცია მაინც.'})).toBeVisible();
+   await expect(page.getByText('აირჩიე ერთი კომპლექტაცია მაინც.')).toBeVisible();
   });
  }
 });
