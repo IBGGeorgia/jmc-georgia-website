@@ -1,0 +1,34 @@
+import {test,expect} from '@playwright/test';
+test.describe('Homepage 3.7 photo composition contract',()=>{
+ for(const width of [1920,1440,950,768,700,430,390,320]){
+  test('Hero framing, text/CTAs and editorial images at '+width,async({page})=>{
+   await page.setViewportSize({width,height:900});
+   await page.goto('/',{waitUntil:'domcontentloaded'});
+   const hero=page.locator('.home3-hero');
+   const backdrop=page.locator('.home3-hero-backdrop');
+   await expect(hero).toHaveCSS('height',width<=700?'650px':'748px');
+   if(width<=700){
+    const size=await backdrop.evaluate(el=>getComputedStyle(el).backgroundSize);
+    expect(size).not.toBe('cover');
+   }
+   await expect(page.locator('.home3-hero .home3-actions a').first()).toBeVisible();
+   const stage=page.locator('.home3-stage-image');
+   const ratio=await stage.evaluate(el=>el.getBoundingClientRect().width/el.getBoundingClientRect().height);
+   if(width>900){
+    const height=await stage.evaluate(el=>el.getBoundingClientRect().height);
+    expect(height).toBeLessThanOrEqual(601);
+   }else{expect(ratio).toBeGreaterThan(1.28);expect(ratio).toBeLessThan(1.4);}
+   if(width>=701&&width<=950){
+    const photo=page.locator('.home3-story-photo').first();
+    const card=page.locator('.home3-story-tile').first();
+    const [p,c]=await Promise.all([photo.boundingBox(),card.boundingBox()]);
+    expect(p&&c).toBeTruthy();
+    expect(p!.width).toBeLessThan(c!.width*.60);
+   }
+   expect(await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth)).toBeLessThanOrEqual(2);
+   if(width===1440||width===390){
+    await test.info().attach('homepage-photo-composition-'+width,{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
+   }
+  });
+ }
+});
