@@ -1,0 +1,22 @@
+name: JMC — temporary model-fidelity photo references
+on:
+  push:
+    branches: [feature/homepage-lineup-studio-v39]
+    paths: ['.github/workflows/model-reference-review-v39.yml']
+permissions: {contents: read}
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Include approved source photos for strict product QC
+        uses: actions/upload-artifact@v4
+        with:
+          name: jmc-source-vehicle-identity-review
+          path: |
+            public/images/grand-avenue/hero.webp
+            public/images/grand-avenue/front.webp
+            public/images/grand-avenue-pro/hero.jpg
+            public/images/grand-avenue-pro/front-detail.jpg
+            public/images/homepage/vigus-front-three-quarter.webp
+          retention-days: 2
