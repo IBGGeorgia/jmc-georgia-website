@@ -19,6 +19,7 @@ test.describe('Grand Avenue PRO gallery and configurator UX',()=>{
   });
  }
  test('gallery strip controls respect reduced motion',async({page})=>{
+  await page.setViewportSize({width:390,height:850});
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/vehicles/grand-avenue-pro');
   const strip=page.locator('.pro-draft-gallery-grid');
