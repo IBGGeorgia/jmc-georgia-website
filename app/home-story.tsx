@@ -46,7 +46,7 @@ export default function HomeStory({vehicles}:{vehicles:StoryVehicle[]}){
       </div>
       <div className="home3-detail-stage">
         <div className={'home3-detail-media'+(vehicle.slug==='vigus'&&index<4?' is-studio':'')} onKeyDown={e=>{if(e.key==='ArrowLeft'){e.preventDefault();move(-1)}if(e.key==='ArrowRight'){e.preventDefault();move(1)}}}>
-          {image?<img key={vehicle.slug+'-'+detail} src={image} alt={vehicle.name+' - რაკურსი '+(index+1)} loading="lazy" decoding="async"/>:<p>ფოტო მალე დაემატება.</p>}
+          {image?<img key={vehicle.slug+'-'+detail} className="home3-gallery-image" src={image} alt={vehicle.name+' - რაკურსი '+(index+1)} loading="lazy" decoding="async"/>:<p>ფოტო მალე დაემატება.</p>}
           {photos.length>1&&<div className="home3-photo-controls"><button type="button" aria-label="წინა ფოტო" onClick={()=>move(-1)}>←</button><span aria-live="polite">{index+1} / {photos.length}</span><button type="button" aria-label="შემდეგი ფოტო" onClick={()=>move(1)}>→</button></div>}
         </div>
         <div className="home3-detail-side"><span className="home3-stage-index">ფოტოგალერეა · {String(index+1).padStart(2,'0')} / {String(photos.length).padStart(2,'0')}</span><h3>{vehicle.name}</h3><p>დაათვალიერე ავტომობილი სხვადასხვა რაკურსიდან. ტექნიკური მონაცემები და კომპლექტაციები მოცემულია მოდელის გვერდზე.</p><Link href={'/vehicles/'+vehicle.slug} className="home3-pill home3-pill-dark">მოდელის დეტალები <span aria-hidden="true">↗</span></Link></div>
