@@ -699,3 +699,19 @@ main.container:is(.jmc-models-page,.jmc-about-page,.jmc-contact-page,.jmc-test-d
 @media(prefers-reduced-motion:reduce){
  .jmc-footer .jmc-footer-cta.button{transition:none!important}
 }
+
+/* About / Contact editorial closure - Global Width Bible v1. */
+.jmc-about-model-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:clamp(20px,3vw,38px) 0}
+.jmc-about-model-card{display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-width:0;min-height:220px;padding:clamp(20px,2.6vw,36px);border:1px solid var(--jmc-ui-border,#e2e2e6);border-radius:var(--jmc-card-radius,20px);background:#f6f6f7;color:#1d1d1f;text-decoration:none;transition:background .2s ease,transform .2s ease}
+.jmc-about-model-card>span{font-size:13px;line-height:1.5;color:#65656c}
+.jmc-about-model-card>span:last-child{display:flex;align-items:center;gap:8px;color:#1d1d1f}
+.jmc-about-model-card h2{margin:0;font:650 clamp(24px,2.6vw,39px)/1.15 var(--font-latin,sans-serif);letter-spacing:-.035em;overflow-wrap:anywhere}
+.jmc-about-model-card:hover{background:#ededf0;transform:translateY(-2px)}
+.jmc-about-model-card:focus-visible,.jmc-contact-actions a:focus-visible{outline:2px solid var(--jmc-ui-focus,#52525b);outline-offset:3px}
+.jmc-about-contact{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;padding:clamp(26px,4vw,55px) 0;border-top:1px solid var(--jmc-ui-border,#e3e3e6)}
+.jmc-about-contact h2{margin:9px 0 12px;font:650 clamp(27px,3.2vw,44px)/1.2 var(--font-ka);letter-spacing:-.04em}
+.jmc-about-contact p:last-child{color:#66676e}
+.jmc-contact-actions{display:flex;align-items:center;flex-wrap:wrap;gap:18px}
+.jmc-contact-footnote{max-width:var(--jmc-readable-max,760px);margin:24px 0;color:#6b6d74;font-size:13px;line-height:1.7}
+@media(max-width:700px){.jmc-about-model-grid{grid-template-columns:1fr;gap:11px}.jmc-about-model-card{min-height:170px;padding:23px}.jmc-about-contact{align-items:flex-start}.jmc-contact-actions{align-items:stretch;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.jmc-about-model-card{transition:none}.jmc-about-model-card:hover{transform:none}}
