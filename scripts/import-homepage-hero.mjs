@@ -4,6 +4,10 @@
 import {mkdir,readFile,writeFile,rename,rm} from 'node:fs/promises';
 import {join} from 'node:path';
 const target=join(process.cwd(),'public','images','homepage','grand-avenue-pro-hero.png');
+const {existsSync}=await import('node:fs');
+const lockPath=join(process.cwd(),'assets/homepage/media-lock.json');
+if(existsSync(lockPath)){console.log('HOMEPAGE_HERO_PINNED: no external download');process.exit(0)}
+if(process.env.HOMEPAGE_ASSET_BOOTSTRAP!=='1')throw Error('Homepage media lock missing. Run the one-time image pin workflow; never fetch remote images during ordinary builds.');
 const source='https://d8j0ntlcm91z4.cloudfront.net/user_39RQYoSaWBG5Rv9RmVqvLICsOMX/hf_20261030_195716_eab6abef-1e45-4f03-b4d3-486e11581045.png';
 const valid=b=>b.byteLength>100_000&&b.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));
 try{const existing=await readFile(target);if(valid(existing)){console.log('Verified existing first-party Homepage hero');process.exit(0)}}catch{}
