@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "vigus",
+    "original": [
+      1440,
+      1080
+    ],
+    "output": [
+      1600,
+      1200
+    ],
+    "bytes": 120134,
+    "sha256": "30647f417ea7bd80335a5a0b9ba3cad71a15d1ac667f5e6a1851473942713cbb"
+  },
+  {
+    "slug": "grand-avenue",
+    "original": [
+      1920,
+      1440
+    ],
+    "output": [
+      1600,
+      1200
+    ],
+    "bytes": 161570,
+    "sha256": "9788acae57c10d3e222b282ad0ebbfedbad2b401d3b184b349a8026172b4209a"
+  },
+  {
+    "slug": "grand-avenue-pro",
+    "original": [
+      1920,
+      1440
+    ],
+    "output": [
+      1600,
+      1200
+    ],
+    "bytes": 180484,
+    "sha256": "3fabf4633893e19b552cb5a66c5c08ceee5745cafc8da55dd09a31d01e8d950f"
+  }
+]
