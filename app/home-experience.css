@@ -186,7 +186,7 @@
 .home3-detail-media.is-studio img{object-fit:cover;object-position:center center}
 .home3-detail-side{min-width:0}
 .home3-photo-thumbnails{max-width:68%;padding-block:14px 8px}
-.home3-photo-thumb{aspect-ratio:4/3;min-height:70px;padding:3px;background:#e9eaed;overflow:hidden}
+.home3-photo-thumb{flex:0 0 clamp(104px,9.4vw,142px);aspect-ratio:4/3;min-height:70px;padding:3px;background:#e9eaed;overflow:hidden}
 .home3-photo-thumb.is-studio img{object-fit:cover;object-position:center}
 @media(max-width:950px){
  .home3-detail-stage{grid-template-columns:minmax(0,1fr)}
