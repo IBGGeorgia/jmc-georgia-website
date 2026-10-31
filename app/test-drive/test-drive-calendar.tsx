@@ -8,7 +8,7 @@ const parse=(value:string)=>{const [y,m,d]=value.split('-').map(Number);return n
 const iso=(date:Date)=>date.toISOString().slice(0,10);
 const moveMonth=(date:Date,offset:number)=>new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth()+offset,1));
 
-export function TestDriveCalendar({value,onChange,min,max}:{value:string;onChange:(value:string)=>void;min:string;max:string}){
+export function TestDriveCalendar({value,onChange,min,max,disabled=false}:{value:string;onChange:(value:string)=>void;min:string;max:string;disabled?:boolean}){
  const [open,setOpen]=useState(false);
  const [month,setMonth]=useState(()=>parse(value||min));
  const root=useRef<HTMLDivElement>(null);
@@ -37,7 +37,7 @@ export function TestDriveCalendar({value,onChange,min,max}:{value:string;onChang
   if(event.key==='Home'||event.key==='End'){event.preventDefault();const d=parse(day);const weekday=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()+(event.key==='Home'?-weekday:6-weekday));focusDate(iso(d))}
  }
  return <div className="jmc-calendar" ref={root}>
-  <button ref={trigger} type="button" className="jmc-calendar-trigger" aria-expanded={open} aria-haspopup="dialog" aria-controls="jmc-calendar-popover" onClick={()=>{
+  <button ref={trigger} type="button" className="jmc-calendar-trigger" disabled={disabled} aria-expanded={open} aria-haspopup="dialog" aria-controls="jmc-calendar-popover" onClick={()=>{
    if(!open){const current=value||min;setMonth(moveMonth(parse(current),0));setFocusDay(current)}
    setOpen(v=>!v);
   }}>
