@@ -478,3 +478,37 @@
 @media(max-width:700px){
  .pro-draft-page .pro-draft-hero{height:var(--jmc-hero-height-mobile);min-height:var(--jmc-hero-height-mobile);max-height:var(--jmc-hero-height-mobile)}
 }
+
+
+/* Grand Avenue PRO editorial v1.1 - scoped to this model only. */
+.pro-draft-page .pro-premium-hero-content h1{
+ font-family:var(--font-latin,"Switzer",sans-serif);
+ font-weight:650;
+ text-transform:none;
+ letter-spacing:-.045em;
+ line-height:1.08;
+ text-wrap:balance;
+ max-width:1100px;
+}
+.pro-draft-page .pro-premium-hero-content h1 em{font-style:normal}
+.pro-draft-page .pro-premium-hero-content>p:not(.pro-premium-overline){
+ font-family:var(--font-ka,"Google Sans",sans-serif);
+ line-height:1.6;
+ max-width:640px;
+}
+.pro-draft-page .pro-premium-intro-copy h2,
+.pro-draft-page .pro-draft-chapter-heading h2{
+ font-family:var(--font-ka,"Google Sans",sans-serif);
+ line-height:1.18;
+ text-wrap:balance;
+}
+.pro-draft-page .pro-premium-intro-copy p,
+.pro-draft-page .pro-draft-chapter-heading p{line-height:1.7}
+.pro-draft-page .pro-draft-metrics>div{min-width:0}
+@media(max-width:700px){
+ .pro-draft-page .pro-premium-hero-content h1{
+  font-size:clamp(38px,8.3vw,60px);
+  line-height:1.12;
+ }
+ .pro-draft-page .pro-premium-hero-content>p:not(.pro-premium-overline){font-size:15px}
+}
